@@ -76,16 +76,24 @@ namespace SamhwaInspectionNeo.Schemas
 
         public async void Load(DateTime 시작, DateTime 종료)
         {
-            this.Clear();
-            this.RaiseListChangedEvents = false;
-            List<로그정보> 자료 = null;
-            using (로그테이블 Table = new 로그테이블())
-                자료 = await Table.Select(시작, 종료);
-            if (자료 == null) return;
+            try
+            {
+                this.Clear();
+                this.RaiseListChangedEvents = false;
+                List<로그정보> 자료 = null;
+                using (로그테이블 Table = new 로그테이블())
+                    자료 = await Table.Select(시작, 종료);
+                if (자료 == null) return;
 
-            자료.ForEach(e => this.Add(e));
-            this.RaiseListChangedEvents = true;
-            this.ResetBindings();
+                자료.ForEach(e => this.Add(e));
+                this.RaiseListChangedEvents = true;
+                this.ResetBindings();
+            }
+            catch (Exception ex)
+            {
+
+            }
+           
         }
 
         public void Close()

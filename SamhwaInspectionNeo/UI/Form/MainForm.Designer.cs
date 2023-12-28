@@ -36,9 +36,11 @@
             this.skinPaletteDropDownButtonItem1 = new DevExpress.XtraBars.SkinPaletteDropDownButtonItem();
             this.p검사하기 = new DevExpress.XtraBars.TabFormPage();
             this.tabFormContentContainer1 = new DevExpress.XtraBars.TabFormContentContainer();
+            this.e상태뷰어 = new SamhwaInspectionNeo.UI.Controls.State();
             this.p환경설정 = new DevExpress.XtraBars.TabFormPage();
             this.tabFormContentContainer2 = new DevExpress.XtraBars.TabFormContentContainer();
             ((System.ComponentModel.ISupportInitialize)(this.tabFormControl1)).BeginInit();
+            this.tabFormContentContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabFormControl1
@@ -101,11 +103,24 @@
             // 
             // tabFormContentContainer1
             // 
+            this.tabFormContentContainer1.Controls.Add(this.e상태뷰어);
             this.tabFormContentContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabFormContentContainer1.Location = new System.Drawing.Point(0, 31);
             this.tabFormContentContainer1.Name = "tabFormContentContainer1";
             this.tabFormContentContainer1.Size = new System.Drawing.Size(1918, 1008);
             this.tabFormContentContainer1.TabIndex = 1;
+            // 
+            // e상태뷰어
+            // 
+            this.e상태뷰어.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.e상태뷰어.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.e상태뷰어.Appearance.Options.UseBackColor = true;
+            this.e상태뷰어.Appearance.Options.UseForeColor = true;
+            this.e상태뷰어.Dock = System.Windows.Forms.DockStyle.Top;
+            this.e상태뷰어.Location = new System.Drawing.Point(0, 0);
+            this.e상태뷰어.Name = "e상태뷰어";
+            this.e상태뷰어.Size = new System.Drawing.Size(1918, 104);
+            this.e상태뷰어.TabIndex = 0;
             // 
             // p환경설정
             // 
@@ -141,6 +156,7 @@
             this.TabFormControl = this.tabFormControl1;
             this.Text = "Busbar 검사기";
             ((System.ComponentModel.ISupportInitialize)(this.tabFormControl1)).EndInit();
+            this.tabFormContentContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -155,6 +171,7 @@
         private DevExpress.XtraBars.TabFormContentContainer tabFormContentContainer2;
         private DevExpress.XtraBars.BarStaticItem e프로젝트;
         private DevExpress.XtraBars.SkinPaletteDropDownButtonItem skinPaletteDropDownButtonItem1;
+        private UI.Controls.State e상태뷰어;
     }
 }
 

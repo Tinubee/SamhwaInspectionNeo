@@ -12,7 +12,7 @@ namespace SamhwaInspectionNeo
 {
     public static class Localization
     {
-        public static TranslationAttribute 제목 = new TranslationAttribute("LGES VDA590 TPA Total Inspection");
+        public static TranslationAttribute 제목 = new TranslationAttribute("Samhwa Busbar Inspection");
         public static TranslationAttribute 취소 = new TranslationAttribute("Cancel", "취소", "Zrušiť");
         public static TranslationAttribute 닫기 = new TranslationAttribute("Close", "닫기", "Zavrieť");
         public static TranslationAttribute 저장 = new TranslationAttribute("Save", "저장", "Uložiť");

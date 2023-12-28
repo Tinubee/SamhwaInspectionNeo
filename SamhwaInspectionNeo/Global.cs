@@ -37,10 +37,10 @@ namespace SamhwaInspectionNeo
             {
                 get { return true; }
             }
-            public static Boolean 카메라1 { get { return Global.그랩제어.카메라1.상태; } }
-            public static Boolean 카메라2 { get { return Global.그랩제어.카메라2.상태; } }
-            public static Boolean 카메라3 { get { return Global.그랩제어.카메라3.상태; } }
-            public static Boolean 카메라4 { get { return Global.그랩제어.카메라4.상태; } }
+            public static Boolean 카메라1 { get { return Global.그랩제어.카메라1 == null ? false : Global.그랩제어.카메라1.상태; } }
+            public static Boolean 카메라2 { get { return Global.그랩제어.카메라2 == null ? false : Global.그랩제어.카메라2.상태; } }
+            public static Boolean 카메라3 { get { return Global.그랩제어.카메라3 == null ? false : Global.그랩제어.카메라3.상태; } }
+            public static Boolean 카메라4 { get { return Global.그랩제어.카메라4 == null ? false : Global.그랩제어.카메라4.상태; } }
             //public static Boolean 조명장치 { get { return 조명제어.정상여부; } }
         }
 
@@ -53,11 +53,13 @@ namespace SamhwaInspectionNeo
                 조명제어 = new 조명제어();
                 VM제어 = new VM제어();
                 그랩제어 = new 그랩제어();
+                모델자료 = new 모델자료();
 
                 로그자료.Init();
-                그랩제어.Init();
+                //그랩제어.Init();
                 환경설정.Init();
                 VM제어.Init();
+                모델자료.Init();
 
                 Global.정보로그(로그영역, "초기화", "시스템을 초기화 합니다.", false);
                 Initialized?.Invoke(null, true);
@@ -79,6 +81,7 @@ namespace SamhwaInspectionNeo
                 로그자료?.Close();
                 환경설정?.Close();
                 //조명제어?.Close();
+                모델자료?.Close();
                 VM제어?.Close();
                 그랩제어?.Close();
                 Properties.Settings.Default.Save();
