@@ -1,16 +1,9 @@
-﻿using MvUtils;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
-using OpenCvSharp;
-using System.Drawing;
 using System.IO;
 using System.Security.Cryptography;
 using System.Diagnostics;

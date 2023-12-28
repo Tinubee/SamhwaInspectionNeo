@@ -34,6 +34,46 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.BonusSkins.v22.2" />
     <Reference Include="DevExpress.Data.Desktop.v22.2" />
@@ -49,6 +89,10 @@
     <Reference Include="DevExpress.XtraGrid.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraPrinting.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="GlobalScriptUI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e823fa1154066cf0, processorArchitecture=AMD64" />
+    <Reference Include="GlobalVariableModuleCs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=df9beaf7c020f858, processorArchitecture=MSIL" />
+    <Reference Include="GraphicsSetModuleCs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=969f13d2d78c3370, processorArchitecture=MSIL" />
+    <Reference Include="ImageSourceModuleCs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6a03c4a48a6df5e6, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -120,6 +164,7 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="ShellModuleCs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a88b3f19f0240810, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -174,6 +219,16 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="VM.Controls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=48472957e1d7b05f, processorArchitecture=MSIL" />
+    <Reference Include="VM.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=61600122bc9264b9, processorArchitecture=MSIL" />
+    <Reference Include="VM.ModuleControl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6903f2164b1b4178, processorArchitecture=MSIL" />
+    <Reference Include="VM.PlatformSDKCS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c1484a72052ee3d4, processorArchitecture=MSIL" />
+    <Reference Include="VMBaseControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=71707d2e549a163e, processorArchitecture=MSIL" />
+    <Reference Include="VMControls.BaseInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=14444b8df74b6e6a, processorArchitecture=MSIL" />
+    <Reference Include="VMControls.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d3a6b40f3e34b5af, processorArchitecture=MSIL" />
+    <Reference Include="VMControls.Interface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cb41614600cf774b, processorArchitecture=MSIL" />
+    <Reference Include="VMControls.RenderInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bcfc50547abbb24, processorArchitecture=MSIL" />
+    <Reference Include="VMControls.Winform.Release, Version=1.0.0.0, Culture=neutral, PublicKeyToken=2efa940dfee4dc7e, processorArchitecture=MSIL" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>

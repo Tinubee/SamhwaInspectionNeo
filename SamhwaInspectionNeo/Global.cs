@@ -57,6 +57,7 @@ namespace SamhwaInspectionNeo
                 로그자료.Init();
                 그랩제어.Init();
                 환경설정.Init();
+                VM제어.Init();
 
                 Global.정보로그(로그영역, "초기화", "시스템을 초기화 합니다.", false);
                 Initialized?.Invoke(null, true);
@@ -78,8 +79,8 @@ namespace SamhwaInspectionNeo
                 로그자료?.Close();
                 환경설정?.Close();
                 //조명제어?.Close();
-                //VM제어?.Close();
-                //그랩제어?.Close();
+                VM제어?.Close();
+                그랩제어?.Close();
                 Properties.Settings.Default.Save();
                 return true;
             }
