@@ -147,17 +147,17 @@ namespace SamhwaInspectionNeo.Schemas
 
     public class 조명정보
     {
-        [JsonProperty("Camera"), Translation("Camera", "카메라", "Fotoaparát")]
+        [JsonProperty("Camera"), Translation("Camera", "카메라")]
         public 카메라구분 카메라 { get; set; } = 카메라구분.None;
-        [JsonProperty("Port"), Translation("Port", "포트", "Port")]
+        [JsonProperty("Port"), Translation("Port", "포트")]
         public 조명포트 포트 { get; set; } = 조명포트.None;
-        [JsonProperty("Channel"), Translation("Channel", "채널", "Channel")]
+        [JsonProperty("Channel"), Translation("Channel", "채널")]
         public 조명채널 채널 { get; set; } = 조명채널.CH01;
-        [JsonProperty("Brightness"), Translation("Brightness", "밝기", "Jas")]
+        [JsonProperty("Brightness"), Translation("Brightness", "밝기")]
         public Int32 밝기 { get; set; } = 100;
-        [JsonProperty("Description"), Translation("Description", "설명", "Popis")]
+        [JsonProperty("Description"), Translation("Description", "설명")]
         public String 설명 { get; set; } = String.Empty;
-        [JsonIgnore, Translation("TurnOn", "켜짐", "Zapnúť")]
+        [JsonIgnore, Translation("TurnOn", "켜짐")]
         public Boolean 켜짐 { get; set; } = false;
         [JsonIgnore]
         public 조명컨트롤러 컨트롤러;

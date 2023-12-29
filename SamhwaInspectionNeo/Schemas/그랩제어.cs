@@ -102,48 +102,57 @@ namespace SamhwaInspectionNeo.Schemas
 
         public Boolean Init()
         {
-            MC.OpenDriver();
-            //Debug.WriteLine("OpenDriver");
-
-            this.카메라1 = new EuresysLink(카메라구분.Cam01) { 코드 = "" };
-            this.카메라2 = new HikeGigE() { 구분 = 카메라구분.Cam02, 코드 = "" };
-            this.카메라3 = new HikeGigE() { 구분 = 카메라구분.Cam03, 코드 = "" };
-            this.카메라4 = new HikeGigE() { 구분 = 카메라구분.Cam04, 코드 = "" };
-            this.Add(카메라구분.Cam01, this.카메라1);
-            this.Add(카메라구분.Cam02, this.카메라2);
-            this.Add(카메라구분.Cam03, this.카메라3);
-            this.Add(카메라구분.Cam04, this.카메라4);
-
-            // 카메라 설정 저장정보 로드
-            카메라장치 정보;
-            List<카메라장치> 자료 = Load();
-            if (자료 != null)
+            try
             {
-                foreach (카메라장치 설정 in 자료)
+                MC.OpenDriver();
+                //Debug.WriteLine("OpenDriver");
+
+                this.카메라1 = new EuresysLink(카메라구분.Cam01) { 코드 = "" };
+                this.카메라2 = new HikeGigE() { 구분 = 카메라구분.Cam02, 코드 = "" };
+                this.카메라3 = new HikeGigE() { 구분 = 카메라구분.Cam03, 코드 = "" };
+                this.카메라4 = new HikeGigE() { 구분 = 카메라구분.Cam04, 코드 = "" };
+                this.Add(카메라구분.Cam01, this.카메라1);
+                this.Add(카메라구분.Cam02, this.카메라2);
+                this.Add(카메라구분.Cam03, this.카메라3);
+                this.Add(카메라구분.Cam04, this.카메라4);
+
+                // 카메라 설정 저장정보 로드
+                카메라장치 정보;
+                List<카메라장치> 자료 = Load();
+                if (자료 != null)
                 {
-                    정보 = this.GetItem(설정.구분);
-                    if (정보 == null) continue;
-                    정보.Set(설정);
+                    foreach (카메라장치 설정 in 자료)
+                    {
+                        정보 = this.GetItem(설정.구분);
+                        if (정보 == null) continue;
+                        정보.Set(설정);
+                    }
                 }
+
+                List<CCameraInfo> 카메라들 = new List<CCameraInfo>();
+                Int32 nRet = CSystem.EnumDevices(CSystem.MV_GIGE_DEVICE, ref 카메라들);// | CSystem.MV_USB_DEVICE
+                if (!Validate("Enumerate devices fail!", nRet, true)) return false;
+
+                for (int i = 0; i < 카메라들.Count; i++)
+                {
+                    CGigECameraInfo gigeInfo = 카메라들[i] as CGigECameraInfo;
+                    HikeGigE gige = this.GetItem(gigeInfo.chSerialNumber) as HikeGigE;
+                    if (gige == null) continue;
+                    //Debug.WriteLine(gigeInfo.chSerialNumber, "시리얼");
+                    gige.Init(gigeInfo);
+                    //if (gige.상태) gige.Start();
+                }
+
+                Debug.WriteLine($"카메라 갯수: {this.Count}");
+                GC.Collect();
+                return true;
             }
-
-            List<CCameraInfo> 카메라들 = new List<CCameraInfo>();
-            Int32 nRet = CSystem.EnumDevices(CSystem.MV_GIGE_DEVICE, ref 카메라들);// | CSystem.MV_USB_DEVICE
-            if (!Validate("Enumerate devices fail!", nRet, true)) return false;
-
-            for (int i = 0; i < 카메라들.Count; i++)
+            catch (Exception ex)
             {
-                CGigECameraInfo gigeInfo = 카메라들[i] as CGigECameraInfo;
-                HikeGigE gige = this.GetItem(gigeInfo.chSerialNumber) as HikeGigE;
-                if (gige == null) continue;
-                //Debug.WriteLine(gigeInfo.chSerialNumber, "시리얼");
-                gige.Init(gigeInfo);
-                //if (gige.상태) gige.Start();
+                Global.오류로그(로그영역, "카메라 연결 실패", "카메라 연결 작업에 실패하였습니다.", true);
+                return false;
             }
-
-            Debug.WriteLine($"카메라 갯수: {this.Count}");
-            GC.Collect();
-            return true;
+          
         }
 
         private List<카메라장치> Load()
@@ -190,6 +199,7 @@ namespace SamhwaInspectionNeo.Schemas
             //}
             //else this.그랩완료보고?.Invoke(카메라, 이미지);
             //Global.조명제어?.TurnOff(카메라);
+            this.그랩완료보고?.Invoke(카메라, 이미지);
         }
 
 
@@ -258,25 +268,25 @@ namespace SamhwaInspectionNeo.Schemas
 
     public class 카메라장치
     {
-        [JsonProperty("Camera"), Translation("Camera", "카메라", "Fotoaparát")]
+        [JsonProperty("Camera"), Translation("Camera", "카메라")]
         public virtual 카메라구분 구분 { get; set; } = 카메라구분.None;
-        [JsonIgnore, Translation("Index", "번호", "Index")]
+        [JsonIgnore, Translation("Index", "번호")]
         public virtual Int32 번호 { get; set; } = 0;
-        [JsonProperty("Serial"), Translation("Serial", "Serial", "Serial")]
+        [JsonProperty("Serial"), Translation("Serial", "Serial")]
         public virtual String 코드 { get; set; } = String.Empty;
-        [JsonIgnore, Translation("Name", "명칭", "Názov")]
+        [JsonIgnore, Translation("Name", "명칭")]
         public virtual String 명칭 { get; set; } = String.Empty;
-        [JsonProperty("Description"), Translation("Description", "설명", "Popis")]
+        [JsonProperty("Description"), Translation("Description", "설명")]
         public virtual String 설명 { get; set; } = String.Empty;
-        [JsonProperty("IpAddress"), Translation("IP", "IP", "IP")]
+        [JsonProperty("IpAddress"), Translation("IP", "IP")]
         public virtual String 주소 { get; set; } = String.Empty;
-        [JsonProperty("Timeout"), Description("Timeout"), Translation("Timeout", "제한시간", "Čas vypršal")]
+        [JsonProperty("Timeout"), Description("Timeout"), Translation("Timeout", "제한시간")]
         public virtual Double 시간 { get; set; } = 1000;
-        [JsonProperty("Exposure"), Description("Exposure"), Translation("Exposure", "노출", "Vystavenie")]
+        [JsonProperty("Exposure"), Description("Exposure"), Translation("Exposure", "노출")]
         public virtual Single 노출 { get; set; } = 300;
-        [JsonProperty("BlackLevel"), Description("Black Level"), Translation("BlackLevel", "밝기", "Úroveň čiernej")]
+        [JsonProperty("BlackLevel"), Description("Black Level"), Translation("BlackLevel", "밝기")]
         public virtual UInt32 밝기 { get; set; } = 0;
-        [JsonProperty("Contrast"), Description("Contrast"), Translation("Contrast", "대비", "Kontrast")]
+        [JsonProperty("Contrast"), Description("Contrast"), Translation("Contrast", "대비")]
         public virtual Single 대비 { get; set; } = 10;
         [JsonProperty("Width"), Description("Width"), Translation("Width", "가로")]
         public virtual Int32 가로 { get; set; } = 0;
@@ -285,7 +295,7 @@ namespace SamhwaInspectionNeo.Schemas
         [JsonProperty("OffsetX"), Description("OffsetX"), Translation("OffsetX", "OffsetX")]
         public virtual Int32 OffsetX { get; set; } = 0;
 
-        [JsonIgnore, Description("카메라 초기화 상태"), Translation("Live", "상태", "Naživo")]
+        [JsonIgnore, Description("카메라 초기화 상태"), Translation("Live", "상태")]
         public virtual Boolean 상태 { get; set; } = false;
 
         [JsonIgnore]

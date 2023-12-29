@@ -86,7 +86,7 @@ namespace SamhwaInspectionNeo
             this.SetLocalization();
             //this.e결과뷰어.Init();
             //this.e검사설정.Init();
-            //this.e장치설정.Init();
+            this.e장치설정.Init();
             //this.e검사내역.Init();
             //this.e검사피봇.Init();
             this.e상태뷰어.Init();
@@ -122,7 +122,7 @@ namespace SamhwaInspectionNeo
        
         private void CloseForm()
         {
-            //this.e장치설정.Close();
+            this.e장치설정.Close();
             this.e로그내역.Close();
             this.e상태뷰어.Close();
             Global.Close();
@@ -170,21 +170,21 @@ namespace SamhwaInspectionNeo
         {
             private enum Items
             {
-                [Translation("Inspection", "검사하기", "Inšpekcia")]
+                [Translation("Inspection", "검사하기")]
                 검사하기,
-                [Translation("History", "검사내역", "História")]
+                [Translation("History", "검사내역")]
                 검사내역,
-                [Translation("Preferences", "환경설정", "Predvoľby")]
+                [Translation("Preferences", "환경설정")]
                 환경설정,
-                [Translation("Settings", "검사설정", "Nastavenie")]
+                [Translation("Settings", "검사설정")]
                 검사설정,
-                [Translation("Devices", "장치설정", "Zariadenia")]
+                [Translation("Devices", "장치설정")]
                 장치설정,
-                [Translation("Cameras", "카메라", "Kamery")]
+                [Translation("Cameras", "카메라")]
                 카메라,
-                [Translation("Logs", "로그내역", "Denníky")]
+                [Translation("Logs", "로그내역")]
                 로그내역,
-                [Translation("Are you want to exit the program?", "프로그램을 종료하시겠습나까?", "Naozaj chcete ukončiť program?")]
+                [Translation("Are you want to exit the program?", "프로그램을 종료하시겠습나까?")]
                 종료확인,
             }
             private String GetString(Items item) { return Localization.GetString(item); }

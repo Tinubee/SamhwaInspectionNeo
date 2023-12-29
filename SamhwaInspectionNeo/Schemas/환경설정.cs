@@ -49,9 +49,7 @@ namespace SamhwaInspectionNeo.Schemas
         [Description("마스터 이미지"), JsonIgnore]
         public String 마스터사진 { get { return Path.Combine(기본경로, "Masters"); } }
         [JsonIgnore]
-        public Boolean 강제배출 { get; set; } = false;
-        [JsonIgnore]
-        public Boolean 양품불량 { get; set; } = true;
+        public Boolean 강제배출 { get; set; } = true;
         [JsonIgnore]
         public String Format { get { return "#,0." + String.Empty.PadLeft(this.결과자릿수, '0'); } }
         [JsonIgnore]
@@ -137,11 +135,11 @@ namespace SamhwaInspectionNeo.Schemas
 
         public Boolean Load()
         {
-            //if (!CanDbConnect())
-            //{
-            //    Global.오류로그(로그영역.GetString(), "데이터베이스 연결실패", "데이터베이스에 연결할 수 없습니다.", true);
-            //    return false;
-            //}
+            if (!CanDbConnect())
+            {
+                Global.오류로그(로그영역.GetString(), "데이터베이스 연결실패", "데이터베이스에 연결할 수 없습니다.", true);
+                return false;
+            }
 
             Common.DirectoryExists(Path.Combine(Application.StartupPath, @"Views"), true);
             if (!Common.DirectoryExists(기본경로, true))

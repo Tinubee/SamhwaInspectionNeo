@@ -77,7 +77,7 @@
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(850, 40);
+            this.layoutControl1.Size = new System.Drawing.Size(850, 42);
             this.layoutControl1.TabIndex = 3;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -87,7 +87,7 @@
             this.b검색.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
             this.b검색.Location = new System.Drawing.Point(337, 9);
             this.b검색.Name = "b검색";
-            this.b검색.Size = new System.Drawing.Size(112, 22);
+            this.b검색.Size = new System.Drawing.Size(112, 24);
             this.b검색.StyleController = this.layoutControl1;
             this.b검색.TabIndex = 5;
             this.b검색.Text = "조  회";
@@ -95,28 +95,28 @@
             // e종료
             // 
             this.e종료.EditValue = null;
-            this.e종료.Location = new System.Drawing.Point(225, 9);
+            this.e종료.Location = new System.Drawing.Point(233, 9);
             this.e종료.Name = "e종료";
             this.e종료.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.e종료.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.e종료.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.e종료.Size = new System.Drawing.Size(104, 20);
+            this.e종료.Size = new System.Drawing.Size(96, 22);
             this.e종료.StyleController = this.layoutControl1;
             this.e종료.TabIndex = 4;
             // 
             // e시작
             // 
             this.e시작.EditValue = null;
-            this.e시작.Location = new System.Drawing.Point(61, 9);
+            this.e시작.Location = new System.Drawing.Point(69, 9);
             this.e시작.Name = "e시작";
             this.e시작.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.e시작.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.e시작.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.e시작.Size = new System.Drawing.Size(104, 20);
+            this.e시작.Size = new System.Drawing.Size(96, 22);
             this.e시작.StyleController = this.layoutControl1;
             this.e시작.TabIndex = 0;
             // 
@@ -131,52 +131,52 @@
             this.layoutControlItem3});
             this.Root.Name = "Root";
             this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
-            this.Root.Size = new System.Drawing.Size(850, 40);
+            this.Root.Size = new System.Drawing.Size(850, 42);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.e시작;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.MaxSize = new System.Drawing.Size(164, 26);
-            this.layoutControlItem1.MinSize = new System.Drawing.Size(164, 26);
+            this.layoutControlItem1.MaxSize = new System.Drawing.Size(164, 28);
+            this.layoutControlItem1.MinSize = new System.Drawing.Size(164, 28);
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 4, 4);
-            this.layoutControlItem1.Size = new System.Drawing.Size(164, 30);
+            this.layoutControlItem1.Size = new System.Drawing.Size(164, 32);
             this.layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem1.Text = "시작일자";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(40, 14);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(48, 15);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.e종료;
             this.layoutControlItem2.Location = new System.Drawing.Point(164, 0);
-            this.layoutControlItem2.MaxSize = new System.Drawing.Size(164, 26);
-            this.layoutControlItem2.MinSize = new System.Drawing.Size(164, 26);
+            this.layoutControlItem2.MaxSize = new System.Drawing.Size(164, 28);
+            this.layoutControlItem2.MinSize = new System.Drawing.Size(164, 28);
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 4, 4);
-            this.layoutControlItem2.Size = new System.Drawing.Size(164, 30);
+            this.layoutControlItem2.Size = new System.Drawing.Size(164, 32);
             this.layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem2.Text = "종료일자";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(40, 14);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(48, 15);
             // 
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
             this.emptySpaceItem1.Location = new System.Drawing.Point(448, 0);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(392, 30);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(392, 32);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.b검색;
             this.layoutControlItem3.Location = new System.Drawing.Point(328, 0);
-            this.layoutControlItem3.MaxSize = new System.Drawing.Size(120, 30);
-            this.layoutControlItem3.MinSize = new System.Drawing.Size(120, 30);
+            this.layoutControlItem3.MaxSize = new System.Drawing.Size(120, 32);
+            this.layoutControlItem3.MinSize = new System.Drawing.Size(120, 32);
             this.layoutControlItem3.Name = "layoutControlItem3";
             this.layoutControlItem3.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 4, 4);
-            this.layoutControlItem3.Size = new System.Drawing.Size(120, 30);
+            this.layoutControlItem3.Size = new System.Drawing.Size(120, 32);
             this.layoutControlItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
@@ -185,10 +185,10 @@
             // 
             this.GridControl1.DataSource = this.bind로그자료;
             this.GridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.GridControl1.Location = new System.Drawing.Point(0, 40);
+            this.GridControl1.Location = new System.Drawing.Point(0, 42);
             this.GridControl1.MainView = this.GridView1;
             this.GridControl1.Name = "GridControl1";
-            this.GridControl1.Size = new System.Drawing.Size(850, 630);
+            this.GridControl1.Size = new System.Drawing.Size(850, 675);
             this.GridControl1.TabIndex = 4;
             this.GridControl1.UseDirectXPaint = DevExpress.Utils.DefaultBoolean.True;
             this.GridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -216,9 +216,10 @@
             this.col제목,
             this.col내용,
             this.col작업자});
-            this.GridView1.FooterPanelHeight = 21;
+            this.GridView1.DetailHeight = 375;
+            this.GridView1.FooterPanelHeight = 22;
             this.GridView1.GridControl = this.GridControl1;
-            this.GridView1.GroupRowHeight = 21;
+            this.GridView1.GroupRowHeight = 22;
             this.GridView1.IndicatorWidth = 44;
             this.GridView1.MinColumnRowHeight = 24;
             this.GridView1.MinRowHeight = 16;
@@ -231,7 +232,7 @@
             this.GridView1.OptionsPrint.UsePrintStyles = false;
             this.GridView1.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.False;
             this.GridView1.OptionsView.ShowAutoFilterRow = true;
-            this.GridView1.RowHeight = 20;
+            this.GridView1.RowHeight = 21;
             // 
             // colID
             // 
@@ -302,12 +303,12 @@
             // 
             // LogViewer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.GridControl1);
             this.Controls.Add(this.layoutControl1);
             this.Name = "LogViewer";
-            this.Size = new System.Drawing.Size(850, 670);
+            this.Size = new System.Drawing.Size(850, 717);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.e종료.Properties.CalendarTimeProperties)).EndInit();

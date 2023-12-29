@@ -91,7 +91,7 @@ namespace SamhwaInspectionNeo.Schemas
             }
             catch (Exception ex)
             {
-
+                Global.오류로그(로그영역.GetString(), "LogData Load Error", ex.Message, true);
             }
            
         }

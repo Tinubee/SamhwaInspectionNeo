@@ -188,8 +188,6 @@ namespace SamhwaInspectionNeo.Schemas
         public DateTime 검사일시 { get; set; } = DateTime.Now;
         [Column("ilmcd"), JsonProperty("ilmcd"), Translation("Model", "모델")]
         public 모델구분 모델구분 { get; set; } = 모델구분.None;
-        [Column("ilser"), JsonProperty("ilser"), Translation("Serial", "Serial")]
-        public String 큐알코드 { get; set; } = String.Empty;
         [Column("ilnum"), JsonProperty("ilnum"), Translation("Index", "번호")]
         public Int32 검사코드 { get; set; } = 0;
         [Column("ilres"), JsonProperty("ilres"), Translation("Result", "판정")]
@@ -198,10 +196,6 @@ namespace SamhwaInspectionNeo.Schemas
         public 결과구분 CTQ결과 { get; set; } = 결과구분.NO;
         [Column("ilsuf"), JsonProperty("ilapp"), Translation("Suface", "외관결과")]
         public 결과구분 외관결과 { get; set; } = 결과구분.NO;
-        [Column("ilqrg"), JsonProperty("ilqrg"), Translation("QR Quility", "QR품질")]
-        public 큐알등급 큐알등급 { get; set; } = 큐알등급.X;
-        [Column("ilqrs"), JsonProperty("ilqrs"), Translation("QR Info.", "QR내용")]
-        public String 큐알내용 { get; set; } = String.Empty;
         [Column("ilngs"), JsonProperty("ilngs"), Translation("NG Info.", "불량정보")]
         public String 불량정보 { get; set; } = String.Empty;
 

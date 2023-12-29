@@ -29,6 +29,7 @@ namespace SamhwaInspectionNeo
         public static 유저자료 유저자료;
         public static 조명제어 조명제어;
         public static 그랩제어 그랩제어;
+        public static 신호제어 신호제어;
         public static VM제어 VM제어;
         public static 모델자료 모델자료;
 
@@ -53,16 +54,19 @@ namespace SamhwaInspectionNeo
                 환경설정 = new 환경설정();
                 유저자료 = new 유저자료();
                 조명제어 = new 조명제어();
-                VM제어 = new VM제어();
+                신호제어 = new 신호제어();
                 그랩제어 = new 그랩제어();
                 모델자료 = new 모델자료();
+                VM제어 = new VM제어();
 
                 로그자료.Init();
-                //그랩제어.Init();
                 환경설정.Init();
                 유저자료.Init();
-                VM제어.Init();
+                조명제어.Init();
+                신호제어.Init();
+                그랩제어.Init();
                 모델자료.Init();
+                VM제어.Init();
 
                 Global.정보로그(로그영역, "초기화", "시스템을 초기화 합니다.", false);
                 Initialized?.Invoke(null, true);

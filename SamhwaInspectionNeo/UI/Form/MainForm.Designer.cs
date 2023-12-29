@@ -39,11 +39,20 @@
             this.e상태뷰어 = new SamhwaInspectionNeo.UI.Controls.State();
             this.p환경설정 = new DevExpress.XtraBars.TabFormPage();
             this.tabFormContentContainer2 = new DevExpress.XtraBars.TabFormContentContainer();
+            this.t환경설정 = new DevExpress.XtraTab.XtraTabControl();
+            this.t검사설정 = new DevExpress.XtraTab.XtraTabPage();
+            this.t변수설정 = new DevExpress.XtraTab.XtraTabPage();
+            this.t장치설정 = new DevExpress.XtraTab.XtraTabPage();
+            this.e장치설정 = new SamhwaInspectionNeo.UI.Controls.DeviceSettings();
             this.tabFormPage1 = new DevExpress.XtraBars.TabFormPage();
             this.tabFormContentContainer3 = new DevExpress.XtraBars.TabFormContentContainer();
             this.e로그내역 = new SamhwaInspectionNeo.UI.Controls.LogViewer();
             ((System.ComponentModel.ISupportInitialize)(this.tabFormControl1)).BeginInit();
             this.tabFormContentContainer1.SuspendLayout();
+            this.tabFormContentContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.t환경설정)).BeginInit();
+            this.t환경설정.SuspendLayout();
+            this.t장치설정.SuspendLayout();
             this.tabFormContentContainer3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,7 +77,7 @@
             this.tabFormControl1.Pages.Add(this.p검사하기);
             this.tabFormControl1.Pages.Add(this.p환경설정);
             this.tabFormControl1.Pages.Add(this.tabFormPage1);
-            this.tabFormControl1.SelectedPage = this.tabFormPage1;
+            this.tabFormControl1.SelectedPage = this.p검사하기;
             this.tabFormControl1.ShowAddPageButton = false;
             this.tabFormControl1.ShowTabCloseButtons = false;
             this.tabFormControl1.ShowTabsInTitleBar = DevExpress.XtraBars.ShowTabsInTitleBar.True;
@@ -123,8 +132,9 @@
             this.e상태뷰어.Appearance.Options.UseForeColor = true;
             this.e상태뷰어.Dock = System.Windows.Forms.DockStyle.Top;
             this.e상태뷰어.Location = new System.Drawing.Point(0, 0);
+            this.e상태뷰어.Margin = new System.Windows.Forms.Padding(4);
             this.e상태뷰어.Name = "e상태뷰어";
-            this.e상태뷰어.Size = new System.Drawing.Size(1920, 104);
+            this.e상태뷰어.Size = new System.Drawing.Size(1920, 111);
             this.e상태뷰어.TabIndex = 0;
             // 
             // p환경설정
@@ -136,11 +146,53 @@
             // 
             // tabFormContentContainer2
             // 
+            this.tabFormContentContainer2.Controls.Add(this.t환경설정);
             this.tabFormContentContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabFormContentContainer2.Location = new System.Drawing.Point(0, 30);
             this.tabFormContentContainer2.Name = "tabFormContentContainer2";
             this.tabFormContentContainer2.Size = new System.Drawing.Size(1920, 1010);
             this.tabFormContentContainer2.TabIndex = 2;
+            // 
+            // t환경설정
+            // 
+            this.t환경설정.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.t환경설정.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom;
+            this.t환경설정.Location = new System.Drawing.Point(0, 0);
+            this.t환경설정.Name = "t환경설정";
+            this.t환경설정.SelectedTabPage = this.t검사설정;
+            this.t환경설정.Size = new System.Drawing.Size(1920, 1010);
+            this.t환경설정.TabIndex = 2;
+            this.t환경설정.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.t검사설정,
+            this.t변수설정,
+            this.t장치설정});
+            // 
+            // t검사설정
+            // 
+            this.t검사설정.Name = "t검사설정";
+            this.t검사설정.Size = new System.Drawing.Size(1918, 979);
+            this.t검사설정.Text = "검사설정";
+            // 
+            // t변수설정
+            // 
+            this.t변수설정.Name = "t변수설정";
+            this.t변수설정.Size = new System.Drawing.Size(1918, 979);
+            this.t변수설정.Text = "변수설정";
+            // 
+            // t장치설정
+            // 
+            this.t장치설정.Controls.Add(this.e장치설정);
+            this.t장치설정.Name = "t장치설정";
+            this.t장치설정.Size = new System.Drawing.Size(1918, 979);
+            this.t장치설정.Text = "장치설정";
+            // 
+            // e장치설정
+            // 
+            this.e장치설정.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.e장치설정.Location = new System.Drawing.Point(0, 0);
+            this.e장치설정.Name = "e장치설정";
+            this.e장치설정.Size = new System.Drawing.Size(1918, 979);
+            this.e장치설정.TabIndex = 1;
             // 
             // tabFormPage1
             // 
@@ -162,6 +214,7 @@
             // 
             this.e로그내역.Dock = System.Windows.Forms.DockStyle.Fill;
             this.e로그내역.Location = new System.Drawing.Point(0, 0);
+            this.e로그내역.Margin = new System.Windows.Forms.Padding(4);
             this.e로그내역.Name = "e로그내역";
             this.e로그내역.Size = new System.Drawing.Size(1920, 1010);
             this.e로그내역.TabIndex = 0;
@@ -176,7 +229,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1920, 1040);
-            this.Controls.Add(this.tabFormContentContainer3);
+            this.Controls.Add(this.tabFormContentContainer1);
             this.Controls.Add(this.tabFormControl1);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -186,6 +239,10 @@
             this.Text = "Busbar 검사기";
             ((System.ComponentModel.ISupportInitialize)(this.tabFormControl1)).EndInit();
             this.tabFormContentContainer1.ResumeLayout(false);
+            this.tabFormContentContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.t환경설정)).EndInit();
+            this.t환경설정.ResumeLayout(false);
+            this.t장치설정.ResumeLayout(false);
             this.tabFormContentContainer3.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -205,6 +262,11 @@
         private DevExpress.XtraBars.TabFormPage tabFormPage1;
         private DevExpress.XtraBars.TabFormContentContainer tabFormContentContainer3;
         private UI.Controls.LogViewer e로그내역;
+        private DevExpress.XtraTab.XtraTabControl t환경설정;
+        private DevExpress.XtraTab.XtraTabPage t검사설정;
+        private DevExpress.XtraTab.XtraTabPage t변수설정;
+        private DevExpress.XtraTab.XtraTabPage t장치설정;
+        private UI.Controls.DeviceSettings e장치설정;
     }
 }
 
