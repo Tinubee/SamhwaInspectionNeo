@@ -26,6 +26,7 @@ namespace SamhwaInspectionNeo
         private const String 로그영역 = "프로그램";
         public static 환경설정 환경설정;
         public static 로그자료 로그자료;
+        public static 유저자료 유저자료;
         public static 조명제어 조명제어;
         public static 그랩제어 그랩제어;
         public static VM제어 VM제어;
@@ -50,6 +51,7 @@ namespace SamhwaInspectionNeo
             {
                 로그자료 = new 로그자료();
                 환경설정 = new 환경설정();
+                유저자료 = new 유저자료();
                 조명제어 = new 조명제어();
                 VM제어 = new VM제어();
                 그랩제어 = new 그랩제어();
@@ -58,6 +60,7 @@ namespace SamhwaInspectionNeo
                 로그자료.Init();
                 //그랩제어.Init();
                 환경설정.Init();
+                유저자료.Init();
                 VM제어.Init();
                 모델자료.Init();
 

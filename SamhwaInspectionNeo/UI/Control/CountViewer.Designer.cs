@@ -62,9 +62,9 @@
             this.e현재값.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.e현재값.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.e현재값.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.e현재값.Location = new System.Drawing.Point(2, 23);
+            this.e현재값.Location = new System.Drawing.Point(2, 27);
             this.e현재값.Name = "e현재값";
-            this.e현재값.Size = new System.Drawing.Size(146, 45);
+            this.e현재값.Size = new System.Drawing.Size(146, 41);
             this.e현재값.TabIndex = 0;
             this.e현재값.Text = "100.0";
             // 

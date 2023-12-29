@@ -371,11 +371,17 @@
     <EmbeddedResource Include="UI\Control\CiView.resx">
       <DependentUpon>CiView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Control\Config.resx">
+      <DependentUpon>Config.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\CountViewer.resx">
       <DependentUpon>CountViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\DeviceLamp.resx">
       <DependentUpon>DeviceLamp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Control\LogViewer.resx">
+      <DependentUpon>LogViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\State.resx">
       <DependentUpon>State.cs</DependentUpon>
@@ -401,6 +407,7 @@
     </EmbeddedResource>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\SamhwaInspectionNeo.Schemas.로그자료.datasource" />
     <None Include="Properties\DataSources\SamhwaInspectionNeo.Schemas.모델자료.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

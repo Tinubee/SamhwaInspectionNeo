@@ -103,7 +103,7 @@ namespace SamhwaInspectionNeo.Schemas
 
         public static NpgsqlConnection CreateDbConnection()
         {
-            NpgsqlConnectionStringBuilder b = new NpgsqlConnectionStringBuilder() { Host = "localhost", Port = 5432, Username = "postgres", Password = "ivmadmin", Database = "samhwaNeo" };
+            NpgsqlConnectionStringBuilder b = new NpgsqlConnectionStringBuilder() { Host = "localhost", Port = 5432, Username = "postgres", Password = "ivmadmin", Database = "Samhwa" };
             return new NpgsqlConnection(b.ConnectionString);
         }
 
