@@ -24,15 +24,15 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.e강제배출.EditValueChanged += 배출구분Changed;
 
             this.e카메라.Init();
-            //this.e기본설정.Init();
-            //this.e유저관리.Init();
+            this.e기본설정.Init();
+            this.e유저관리.Init();
         }
 
         public void Close()
         {
             this.e카메라.Close();
-            //this.e기본설정.Close();
-            //this.e유저관리.Close();
+            this.e기본설정.Close();
+            this.e유저관리.Close();
         }
 
         public void Shown(Boolean shown)

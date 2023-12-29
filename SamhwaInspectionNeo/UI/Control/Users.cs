@@ -25,7 +25,7 @@ namespace SamhwaInspectionNeo.UI.Controls
 
         public void Init()
         {
-            //this.GridView1.Init(this.barManager1);
+            this.GridView1.Init(this.barManager1);
             this.GridView1.OptionsBehavior.Editable = true;
             this.GridView1.AddDeleteMenuItem(유저삭제_Click);
             this.GridControl1.DataSource = Global.유저자료;

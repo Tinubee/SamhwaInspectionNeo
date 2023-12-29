@@ -387,6 +387,9 @@
     <EmbeddedResource Include="UI\Control\DeviceLamp.resx">
       <DependentUpon>DeviceLamp.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Control\DeviceSettings.resx">
+      <DependentUpon>DeviceSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\LogViewer.resx">
       <DependentUpon>LogViewer.cs</DependentUpon>
     </EmbeddedResource>
@@ -395,6 +398,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\TitleView.resx">
       <DependentUpon>TitleView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Control\Users.resx">
+      <DependentUpon>Users.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Form\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

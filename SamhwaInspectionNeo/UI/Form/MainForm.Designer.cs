@@ -77,7 +77,7 @@
             this.tabFormControl1.Pages.Add(this.p검사하기);
             this.tabFormControl1.Pages.Add(this.p환경설정);
             this.tabFormControl1.Pages.Add(this.tabFormPage1);
-            this.tabFormControl1.SelectedPage = this.p검사하기;
+            this.tabFormControl1.SelectedPage = this.p환경설정;
             this.tabFormControl1.ShowAddPageButton = false;
             this.tabFormControl1.ShowTabCloseButtons = false;
             this.tabFormControl1.ShowTabsInTitleBar = DevExpress.XtraBars.ShowTabsInTitleBar.True;
@@ -134,7 +134,7 @@
             this.e상태뷰어.Location = new System.Drawing.Point(0, 0);
             this.e상태뷰어.Margin = new System.Windows.Forms.Padding(4);
             this.e상태뷰어.Name = "e상태뷰어";
-            this.e상태뷰어.Size = new System.Drawing.Size(1920, 111);
+            this.e상태뷰어.Size = new System.Drawing.Size(1920, 104);
             this.e상태뷰어.TabIndex = 0;
             // 
             // p환경설정
@@ -170,20 +170,20 @@
             // t검사설정
             // 
             this.t검사설정.Name = "t검사설정";
-            this.t검사설정.Size = new System.Drawing.Size(1918, 979);
+            this.t검사설정.Size = new System.Drawing.Size(1918, 980);
             this.t검사설정.Text = "검사설정";
             // 
             // t변수설정
             // 
             this.t변수설정.Name = "t변수설정";
-            this.t변수설정.Size = new System.Drawing.Size(1918, 979);
+            this.t변수설정.Size = new System.Drawing.Size(1918, 980);
             this.t변수설정.Text = "변수설정";
             // 
             // t장치설정
             // 
             this.t장치설정.Controls.Add(this.e장치설정);
             this.t장치설정.Name = "t장치설정";
-            this.t장치설정.Size = new System.Drawing.Size(1918, 979);
+            this.t장치설정.Size = new System.Drawing.Size(1918, 980);
             this.t장치설정.Text = "장치설정";
             // 
             // e장치설정
@@ -191,7 +191,7 @@
             this.e장치설정.Dock = System.Windows.Forms.DockStyle.Fill;
             this.e장치설정.Location = new System.Drawing.Point(0, 0);
             this.e장치설정.Name = "e장치설정";
-            this.e장치설정.Size = new System.Drawing.Size(1918, 979);
+            this.e장치설정.Size = new System.Drawing.Size(1918, 980);
             this.e장치설정.TabIndex = 1;
             // 
             // tabFormPage1
@@ -229,7 +229,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1920, 1040);
-            this.Controls.Add(this.tabFormContentContainer1);
+            this.Controls.Add(this.tabFormContentContainer2);
             this.Controls.Add(this.tabFormControl1);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);

@@ -42,6 +42,7 @@
             this.col비고 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col권한 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col허용 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bind유저정보)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.g유저관리)).BeginInit();
             this.g유저관리.SuspendLayout();
@@ -50,6 +51,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.GridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e암호)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             this.SuspendLayout();
             // 
             // bind유저정보
@@ -63,7 +65,7 @@
             this.g유저관리.Dock = System.Windows.Forms.DockStyle.Fill;
             this.g유저관리.Location = new System.Drawing.Point(0, 0);
             this.g유저관리.Name = "g유저관리";
-            this.g유저관리.Size = new System.Drawing.Size(650, 396);
+            this.g유저관리.Size = new System.Drawing.Size(650, 370);
             this.g유저관리.TabIndex = 11;
             this.g유저관리.Text = "사용자 관리";
             // 
@@ -72,10 +74,10 @@
             this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl1.Controls.Add(this.b유저저장);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl1.Location = new System.Drawing.Point(2, 358);
+            this.panelControl1.Location = new System.Drawing.Point(2, 334);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Padding = new System.Windows.Forms.Padding(3);
-            this.panelControl1.Size = new System.Drawing.Size(646, 36);
+            this.panelControl1.Size = new System.Drawing.Size(646, 34);
             this.panelControl1.TabIndex = 5;
             // 
             // b유저저장
@@ -85,9 +87,9 @@
             this.b유저저장.Dock = System.Windows.Forms.DockStyle.Right;
             this.b유저저장.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("b유저저장.ImageOptions.SvgImage")));
             this.b유저저장.ImageOptions.SvgImageSize = new System.Drawing.Size(24, 24);
-            this.b유저저장.Location = new System.Drawing.Point(463, 3);
+            this.b유저저장.Location = new System.Drawing.Point(1, 3);
             this.b유저저장.Name = "b유저저장";
-            this.b유저저장.Size = new System.Drawing.Size(180, 30);
+            this.b유저저장.Size = new System.Drawing.Size(642, 28);
             this.b유저저장.TabIndex = 1;
             this.b유저저장.Text = "저  장";
             // 
@@ -100,7 +102,7 @@
             this.GridControl1.Name = "GridControl1";
             this.GridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.e암호});
-            this.GridControl1.Size = new System.Drawing.Size(646, 367);
+            this.GridControl1.Size = new System.Drawing.Size(646, 341);
             this.GridControl1.TabIndex = 0;
             this.GridControl1.UseDirectXPaint = DevExpress.Utils.DefaultBoolean.True;
             this.GridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -122,10 +124,9 @@
             this.col비고,
             this.col권한,
             this.col허용});
-            this.GridView1.DetailHeight = 375;
-            this.GridView1.FooterPanelHeight = 22;
+            this.GridView1.FooterPanelHeight = 21;
             this.GridView1.GridControl = this.GridControl1;
-            this.GridView1.GroupRowHeight = 22;
+            this.GridView1.GroupRowHeight = 21;
             this.GridView1.IndicatorWidth = 44;
             this.GridView1.MinColumnRowHeight = 24;
             this.GridView1.MinRowHeight = 16;
@@ -143,7 +144,7 @@
             this.GridView1.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.False;
             this.GridView1.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom;
             this.GridView1.OptionsView.ShowGroupPanel = false;
-            this.GridView1.RowHeight = 21;
+            this.GridView1.RowHeight = 20;
             // 
             // col성명
             // 
@@ -198,13 +199,18 @@
             this.col허용.Visible = true;
             this.col허용.VisibleIndex = 4;
             // 
+            // barManager1
+            // 
+            this.barManager1.DockingEnabled = false;
+            this.barManager1.Form = this;
+            // 
             // Users
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.g유저관리);
             this.Name = "Users";
-            this.Size = new System.Drawing.Size(650, 396);
+            this.Size = new System.Drawing.Size(650, 370);
             ((System.ComponentModel.ISupportInitialize)(this.bind유저정보)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.g유저관리)).EndInit();
             this.g유저관리.ResumeLayout(false);
@@ -213,6 +219,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.GridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e암호)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -231,5 +238,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn col비고;
         private DevExpress.XtraGrid.Columns.GridColumn col권한;
         private DevExpress.XtraGrid.Columns.GridColumn col허용;
+        private DevExpress.XtraBars.BarManager barManager1;
     }
 }
