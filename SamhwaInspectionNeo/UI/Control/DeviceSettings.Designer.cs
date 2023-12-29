@@ -162,7 +162,6 @@
             // 
             this.b캠트리거리셋.Appearance.Font = new System.Drawing.Font("맑은 고딕", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.b캠트리거리셋.Appearance.Options.UseFont = true;
-            this.b캠트리거리셋.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("b캠트리거리셋.ImageOptions.SvgImage")));
             this.b캠트리거리셋.Location = new System.Drawing.Point(3, 75);
             this.b캠트리거리셋.Name = "b캠트리거리셋";
             this.b캠트리거리셋.Size = new System.Drawing.Size(302, 49);

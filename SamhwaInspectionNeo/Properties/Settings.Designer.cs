@@ -37,7 +37,7 @@ namespace SamhwaInspectionNeo.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Office Black")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string SkinName {
             get {
                 return ((string)(this["SkinName"]));

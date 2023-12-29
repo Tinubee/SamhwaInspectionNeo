@@ -86,9 +86,10 @@
             // 
             this.panelControl1.Controls.Add(this.b저장);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl1.Location = new System.Drawing.Point(0, 826);
+            this.panelControl1.Location = new System.Drawing.Point(0, 681);
+            this.panelControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(940, 54);
+            this.panelControl1.Size = new System.Drawing.Size(940, 44);
             this.panelControl1.TabIndex = 9;
             // 
             // b저장
@@ -99,8 +100,9 @@
             this.b저장.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("b저장.ImageOptions.SvgImage")));
             this.b저장.ImageOptions.SvgImageSize = new System.Drawing.Size(24, 24);
             this.b저장.Location = new System.Drawing.Point(787, 2);
+            this.b저장.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.b저장.Name = "b저장";
-            this.b저장.Size = new System.Drawing.Size(151, 50);
+            this.b저장.Size = new System.Drawing.Size(151, 40);
             this.b저장.TabIndex = 7;
             this.b저장.Text = "설정저장";
             // 
@@ -108,22 +110,25 @@
             // 
             this.groupControl3.Controls.Add(this.GridControl2);
             this.groupControl3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupControl3.Location = new System.Drawing.Point(0, 447);
+            this.groupControl3.Location = new System.Drawing.Point(0, 369);
+            this.groupControl3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(940, 379);
+            this.groupControl3.Size = new System.Drawing.Size(940, 312);
             this.groupControl3.TabIndex = 10;
             this.groupControl3.Text = "Lights";
             // 
             // GridControl2
             // 
             this.GridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.GridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.GridControl2.Location = new System.Drawing.Point(2, 27);
             this.GridControl2.MainView = this.GridView2;
+            this.GridControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.GridControl2.Name = "GridControl2";
             this.GridControl2.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.e조명켜짐,
             this.e조명밝기});
-            this.GridControl2.Size = new System.Drawing.Size(936, 350);
+            this.GridControl2.Size = new System.Drawing.Size(936, 283);
             this.GridControl2.TabIndex = 12;
             this.GridControl2.UseDirectXPaint = DevExpress.Utils.DefaultBoolean.True;
             this.GridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -146,9 +151,10 @@
             this.col광량,
             this.col설명,
             this.col켜짐});
-            this.GridView2.FooterPanelHeight = 21;
+            this.GridView2.DetailHeight = 288;
+            this.GridView2.FooterPanelHeight = 17;
             this.GridView2.GridControl = this.GridControl2;
-            this.GridView2.GroupRowHeight = 21;
+            this.GridView2.GroupRowHeight = 17;
             this.GridView2.IndicatorWidth = 44;
             this.GridView2.MinColumnRowHeight = 24;
             this.GridView2.MinRowHeight = 16;
@@ -166,7 +172,7 @@
             this.GridView2.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.False;
             this.GridView2.OptionsView.ShowGroupPanel = false;
             this.GridView2.OptionsView.ShowIndicator = false;
-            this.GridView2.RowHeight = 20;
+            this.GridView2.RowHeight = 16;
             // 
             // col카메라
             // 
@@ -259,22 +265,25 @@
             this.groupControl2.Controls.Add(this.GridControl1);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl2.Location = new System.Drawing.Point(0, 0);
+            this.groupControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(940, 447);
+            this.groupControl2.Size = new System.Drawing.Size(940, 369);
             this.groupControl2.TabIndex = 11;
             this.groupControl2.Text = "Cameras";
             // 
             // GridControl1
             // 
             this.GridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.GridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.GridControl1.Location = new System.Drawing.Point(2, 27);
             this.GridControl1.MainView = this.GridView1;
+            this.GridControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.GridControl1.Name = "GridControl1";
             this.GridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.e상태,
             this.e대비,
             this.e밝기});
-            this.GridControl1.Size = new System.Drawing.Size(936, 418);
+            this.GridControl1.Size = new System.Drawing.Size(936, 340);
             this.GridControl1.TabIndex = 8;
             this.GridControl1.UseDirectXPaint = DevExpress.Utils.DefaultBoolean.True;
             this.GridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -303,9 +312,10 @@
             this.colOffsetX,
             this.col주소,
             this.col상태});
-            this.GridView1.FooterPanelHeight = 21;
+            this.GridView1.DetailHeight = 288;
+            this.GridView1.FooterPanelHeight = 17;
             this.GridView1.GridControl = this.GridControl1;
-            this.GridView1.GroupRowHeight = 21;
+            this.GridView1.GroupRowHeight = 17;
             this.GridView1.IndicatorWidth = 44;
             this.GridView1.MinColumnRowHeight = 24;
             this.GridView1.MinRowHeight = 16;
@@ -326,7 +336,7 @@
             this.GridView1.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom;
             this.GridView1.OptionsView.ShowGroupPanel = false;
             this.GridView1.OptionsView.ShowIndicator = false;
-            this.GridView1.RowHeight = 20;
+            this.GridView1.RowHeight = 16;
             // 
             // col구분
             // 
@@ -498,13 +508,14 @@
             // 
             // CamSettings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupControl2);
             this.Controls.Add(this.groupControl3);
             this.Controls.Add(this.panelControl1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "CamSettings";
-            this.Size = new System.Drawing.Size(940, 880);
+            this.Size = new System.Drawing.Size(940, 725);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
