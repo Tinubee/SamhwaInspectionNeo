@@ -32,6 +32,7 @@ namespace SamhwaInspectionNeo
         public static 신호제어 신호제어;
         public static VM제어 VM제어;
         public static 모델자료 모델자료;
+        public static 검사자료 검사자료;
 
         public static class 장치상태
         {
@@ -57,6 +58,7 @@ namespace SamhwaInspectionNeo
                 신호제어 = new 신호제어();
                 그랩제어 = new 그랩제어();
                 모델자료 = new 모델자료();
+                검사자료 = new 검사자료();
                 VM제어 = new VM제어();
 
                 로그자료.Init();
@@ -66,6 +68,7 @@ namespace SamhwaInspectionNeo
                 신호제어.Init();
                 그랩제어.Init();
                 모델자료.Init();
+                검사자료.Init();
                 VM제어.Init();
 
                 Global.정보로그(로그영역, "초기화", "시스템을 초기화 합니다.", false);
@@ -98,12 +101,12 @@ namespace SamhwaInspectionNeo
             {
                 return MvUtils.Utils.ErrorMsg("프로그램 종료 중 오류가 발생하였습니다.\n" + ex.Message);
             }
-            
+
         }
 
         public static void Start()
         {
-                
+
         }
 
         public static void DxLocalization()

@@ -41,15 +41,15 @@ namespace SamhwaInspectionNeo.Schemas
             [Address("W0020")]
             결과값요청트리거,
             [Address("W0021")]
-            제품확인카메라트리거1,
+            제품확인카메라트리거,
             [Address("W0022")]
-            하부표면검사카메라트리거1,
+            하부표면검사카메라트리거,
             [Address("W0028")]
-            F상부치수검사카메라트리거1,
+            상부표면검사카메라트리거,
             [Address("W002E")]
-            R상부치수검사카메라트리거1,
-            [Address("W003A")]
-            R상부표면검사카메라트리거1,
+            상부치수검사카메라트리거,
+            //[Address("W003A")]
+            //상부표면검사카메라트리거,
             //변위센서 트리거
             [Address("W0040")]
             상부변위센서확인트리거,
@@ -60,9 +60,9 @@ namespace SamhwaInspectionNeo.Schemas
             [Address("B1010")]
             Heartbit_PLC,
             [Address("B1018")]
-            FrontJIG,
+            Front지그,
             [Address("B1019")]
-            RearJIC,
+            Rear지그,
             //[Address("B1020")]
             //수동모드,
             [Address("B1030")]
@@ -135,24 +135,24 @@ namespace SamhwaInspectionNeo.Schemas
 
         public int 마스터모드여부 { get { return 신호읽기(주소구분.마스터모드); } }
         //B1018,1819
-        public int Front지그 { get { return 신호읽기(주소구분.FrontJIG); } }
-        public int Rear지그 { get { return 신호읽기(주소구분.RearJIC); } }
+        public int Front지그 { get { return 신호읽기(주소구분.Front지그); } }
+        public int Rear지그 { get { return 신호읽기(주소구분.Rear지그); } }
         public int Heartbit_PLC { get { return 신호읽기(주소구분.Heartbit_PLC); } }
 
         //Output Part
-        public short 제품확인카메라트리거1 { get { return 신호읽기(주소구분.제품확인카메라트리거1); } set { 신호쓰기(주소구분.제품확인카메라트리거1, value); } }
+        public short 제품확인카메라트리거 { get { return 신호읽기(주소구분.제품확인카메라트리거); } set { 신호쓰기(주소구분.제품확인카메라트리거, value); } }
 
-        public short 하부표면검사카메라트리거1 { get { return 신호읽기(주소구분.하부표면검사카메라트리거1); } set { 신호쓰기(주소구분.하부표면검사카메라트리거1, value); } }
+        public short 하부표면검사카메라트리거 { get { return 신호읽기(주소구분.하부표면검사카메라트리거); } set { 신호쓰기(주소구분.하부표면검사카메라트리거, value); } }
 
-        public short F상부치수검사카메라트리거1 { get { return 신호읽기(주소구분.F상부치수검사카메라트리거1); } set { 신호쓰기(주소구분.F상부치수검사카메라트리거1, value); } }
+        public short 상부치수검사카메라트리거 { get { return 신호읽기(주소구분.상부치수검사카메라트리거); } set { 신호쓰기(주소구분.상부치수검사카메라트리거, value); } }
 
-        public short R상부치수검사카메라트리거1 { get { return 신호읽기(주소구분.R상부치수검사카메라트리거1); } set { 신호쓰기(주소구분.R상부치수검사카메라트리거1, value); } }
+        //public short R상부치수검사카메라트리거1 { get { return 신호읽기(주소구분.R상부치수검사카메라트리거); } set { 신호쓰기(주소구분.R상부치수검사카메라트리거, value); } }
 
         public short 상부변위센서확인트리거 { get { return 신호읽기(주소구분.상부변위센서확인트리거); } set { 신호쓰기(주소구분.상부변위센서확인트리거, value); } }
 
         public short 하부변위센서확인트리거 { get { return 신호읽기(주소구분.하부변위센서확인트리거); } set { 신호쓰기(주소구분.하부변위센서확인트리거, value); } }
 
-        public short R상부표면검사카메라트리거1 { get { return 신호읽기(주소구분.R상부표면검사카메라트리거1); } set { 신호쓰기(주소구분.R상부표면검사카메라트리거1, value); } }
+        //public short R상부표면검사카메라트리거1 { get { return 신호읽기(주소구분.상부표면검사카메라트리거); } set { 신호쓰기(주소구분.상부표면검사카메라트리거, value); } }
 
         public short 결과값요청트리거 { get { return 신호읽기(주소구분.결과값요청트리거); } set { 신호쓰기(주소구분.결과값요청트리거, value); } }
 
@@ -173,11 +173,11 @@ namespace SamhwaInspectionNeo.Schemas
 
             if (error != 0)
             {
-                Debug.WriteLine("PLC 연결안됨");
+                Global.오류로그(로그영역, "PLC 연결 오류", "PLC 연결에 실패하였습니다.\n" + error, true);
                 return;
             }
 
-            Debug.WriteLine("PLC 연결됨");
+            Global.정보로그(로그영역, "PLC 연결 완료", "PLC 연결에 성공하였습니다.", false);
             cclink_thred = new BackgroundWorker();
             cclink_thred.DoWork += cclink_thred_DoWork;
             cclink_thred.RunWorkerAsync(0);
@@ -199,7 +199,19 @@ namespace SamhwaInspectionNeo.Schemas
             PLC.SetDevice(주소, 값);
             return Task.CompletedTask;
         }
-
+        //public List<Int32> 검사중인항목()
+        //{
+        //    List<Int32> 대상 = new List<Int32>();
+        //    Int32 시작 = (Int32)정보주소.인덱스01;
+        //    Int32 종료 = (Int32)정보주소.인덱스06;
+        //    for (Int32 i = 종료; i >= 시작; i--)
+        //    {
+        //        정보주소 구분 = (정보주소)i;
+        //        if (this.입출자료[구분].정보 <= 0) continue;
+        //        대상.Add(this.입출자료[구분].정보);
+        //    }
+        //    return 대상;
+        //}
         private void cclink_thred_DoWork(object sender, DoWorkEventArgs e)
         {
             try
@@ -230,7 +242,7 @@ namespace SamhwaInspectionNeo.Schemas
                             Global.그랩제어.카메라2.TrigForce();
                         }
 
-                        if (정보.주소 == "W0022" & 정보.값 == 1) // 표면검사뒷면 트리거신호
+                        if (정보.주소 == "W0022" & 정보.값 == 1) // 표면검사하부 트리거신호
                         {
                             //Global.그랩제어.카메라3.MatImage.Clear();
                             //Global.조명제어.TurnOn(조명구분.후면검사조명);

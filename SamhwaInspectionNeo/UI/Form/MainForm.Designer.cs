@@ -44,9 +44,11 @@
             this.t변수설정 = new DevExpress.XtraTab.XtraTabPage();
             this.t장치설정 = new DevExpress.XtraTab.XtraTabPage();
             this.e장치설정 = new SamhwaInspectionNeo.UI.Controls.DeviceSettings();
-            this.tabFormPage1 = new DevExpress.XtraBars.TabFormPage();
+            this.p로그내역 = new DevExpress.XtraBars.TabFormPage();
             this.tabFormContentContainer3 = new DevExpress.XtraBars.TabFormContentContainer();
             this.e로그내역 = new SamhwaInspectionNeo.UI.Controls.LogViewer();
+            this.tabFormContentContainer4 = new DevExpress.XtraBars.TabFormContentContainer();
+            this.p검사내역 = new DevExpress.XtraBars.TabFormPage();
             ((System.ComponentModel.ISupportInitialize)(this.tabFormControl1)).BeginInit();
             this.tabFormContentContainer1.SuspendLayout();
             this.tabFormContentContainer2.SuspendLayout();
@@ -76,7 +78,8 @@
             this.tabFormControl1.Name = "tabFormControl1";
             this.tabFormControl1.Pages.Add(this.p검사하기);
             this.tabFormControl1.Pages.Add(this.p환경설정);
-            this.tabFormControl1.Pages.Add(this.tabFormPage1);
+            this.tabFormControl1.Pages.Add(this.p검사내역);
+            this.tabFormControl1.Pages.Add(this.p로그내역);
             this.tabFormControl1.SelectedPage = this.p환경설정;
             this.tabFormControl1.ShowAddPageButton = false;
             this.tabFormControl1.ShowTabCloseButtons = false;
@@ -156,7 +159,6 @@
             // t환경설정
             // 
             this.t환경설정.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.t환경설정.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom;
             this.t환경설정.Location = new System.Drawing.Point(0, 0);
             this.t환경설정.Name = "t환경설정";
             this.t환경설정.SelectedTabPage = this.t검사설정;
@@ -194,12 +196,12 @@
             this.e장치설정.Size = new System.Drawing.Size(1918, 980);
             this.e장치설정.TabIndex = 1;
             // 
-            // tabFormPage1
+            // p로그내역
             // 
-            this.tabFormPage1.ContentContainer = this.tabFormContentContainer3;
-            this.tabFormPage1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tabFormPage1.ImageOptions.SvgImage")));
-            this.tabFormPage1.Name = "tabFormPage1";
-            this.tabFormPage1.Text = "로그내역";
+            this.p로그내역.ContentContainer = this.tabFormContentContainer3;
+            this.p로그내역.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tabFormPage1.ImageOptions.SvgImage")));
+            this.p로그내역.Name = "p로그내역";
+            this.p로그내역.Text = "로그내역";
             // 
             // tabFormContentContainer3
             // 
@@ -218,6 +220,21 @@
             this.e로그내역.Name = "e로그내역";
             this.e로그내역.Size = new System.Drawing.Size(1920, 1010);
             this.e로그내역.TabIndex = 0;
+            // 
+            // tabFormContentContainer4
+            // 
+            this.tabFormContentContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabFormContentContainer4.Location = new System.Drawing.Point(0, 30);
+            this.tabFormContentContainer4.Name = "tabFormContentContainer4";
+            this.tabFormContentContainer4.Size = new System.Drawing.Size(1920, 1010);
+            this.tabFormContentContainer4.TabIndex = 3;
+            // 
+            // p검사내역
+            // 
+            this.p검사내역.ContentContainer = this.tabFormContentContainer4;
+            this.p검사내역.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tabFormPage2.ImageOptions.SvgImage")));
+            this.p검사내역.Name = "p검사내역";
+            this.p검사내역.Text = "검사내역";
             // 
             // MainForm
             // 
@@ -259,7 +276,7 @@
         private DevExpress.XtraBars.BarStaticItem e프로젝트;
         private DevExpress.XtraBars.SkinPaletteDropDownButtonItem skinPaletteDropDownButtonItem1;
         private UI.Controls.State e상태뷰어;
-        private DevExpress.XtraBars.TabFormPage tabFormPage1;
+        private DevExpress.XtraBars.TabFormPage p로그내역;
         private DevExpress.XtraBars.TabFormContentContainer tabFormContentContainer3;
         private UI.Controls.LogViewer e로그내역;
         private DevExpress.XtraTab.XtraTabControl t환경설정;
@@ -267,6 +284,8 @@
         private DevExpress.XtraTab.XtraTabPage t변수설정;
         private DevExpress.XtraTab.XtraTabPage t장치설정;
         private UI.Controls.DeviceSettings e장치설정;
+        private DevExpress.XtraBars.TabFormPage p검사내역;
+        private DevExpress.XtraBars.TabFormContentContainer tabFormContentContainer4;
     }
 }
 

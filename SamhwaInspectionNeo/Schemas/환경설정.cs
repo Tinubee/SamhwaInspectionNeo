@@ -204,15 +204,14 @@ namespace SamhwaInspectionNeo.Schemas
             this.모델변경알림?.Invoke(this.선택모델);
         }
 
-        //[Description("결과별 표현색상")]
-        //public static Color ResultColor(결과구분 구분)
-        //{
-        //    if (구분 == 결과구분.IN) return DevExpress.LookAndFeel.DXSkinColors.ForeColors.DisabledText;
-        //    if (구분 == 결과구분.ER) return DevExpress.LookAndFeel.DXSkinColors.ForeColors.Question;
-        //    if (구분 == 결과구분.OK) return DevExpress.LookAndFeel.DXSkinColors.ForeColors.Information;
-        //    if (구분 == 결과구분.NG) return DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical;
-        //    return DevExpress.LookAndFeel.DXSkinColors.ForeColors.ControlText;
-        //}
+        public static Color 결과표현색상(결과구분 구분)
+        {
+            if (구분 == 결과구분.IN) return DevExpress.LookAndFeel.DXSkinColors.ForeColors.DisabledText;
+            if (구분 == 결과구분.ER) return DevExpress.LookAndFeel.DXSkinColors.ForeColors.Question;
+            if (구분 == 결과구분.OK) return DevExpress.LookAndFeel.DXSkinColors.ForeColors.Information;
+            if (구분 == 결과구분.NG) return DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical;
+            return DevExpress.LookAndFeel.DXSkinColors.ForeColors.ControlText;
+        }
 
         #region 드라이브 용량계산
         private DriveInfo ImageSaveDrive = null;

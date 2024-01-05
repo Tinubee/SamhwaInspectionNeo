@@ -152,7 +152,7 @@ namespace SamhwaInspectionNeo.Schemas
                 Global.오류로그(로그영역, "카메라 연결 실패", "카메라 연결 작업에 실패하였습니다.", true);
                 return false;
             }
-          
+
         }
 
         private List<카메라장치> Load()
@@ -178,9 +178,12 @@ namespace SamhwaInspectionNeo.Schemas
 
         public void 그랩완료(카메라구분 카메라, Mat 이미지)
         {
-            if(카메라 == 카메라구분.Cam01)
+            if (카메라 == 카메라구분.Cam01)
             {
-
+                Task.Run(() =>
+                {
+                    Global.VM제어.GetItem(카메라).Run(이미지, null);
+                });
             }
             //if (Global.장치통신.자동수동여부)
             //{
@@ -588,7 +591,7 @@ namespace SamhwaInspectionNeo.Schemas
                 MC.GetParam(currentSurface, "SurfaceAddr", out BufferAddress);
 
                 Mat image = new Mat(ImageSizeY, ImageSizeX, MatType.CV_8U, BufferAddress);
-                
+
                 Global.그랩제어.그랩완료(this.구분, image);
             }
             catch (Euresys.MultiCamException ex)

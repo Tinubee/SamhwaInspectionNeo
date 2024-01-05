@@ -21,6 +21,12 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.bind환경설정.DataSource = Global.환경설정;
             this.d기본경로.SelectedPath = Global.환경설정.기본경로;
             this.d문서저장.SelectedPath = Global.환경설정.문서저장;
+            this.d사진저장.SelectedPath = Global.환경설정.사진저장;
+
+            this.e기본경로.Text = this.d기본경로.SelectedPath;
+            this.e문서저장.Text = this.d문서저장.SelectedPath;
+            this.e사진저장.Text = this.d사진저장.SelectedPath;
+
             this.e기본경로.ButtonClick += E기본경로_ButtonClick;
             this.e문서저장.ButtonClick += E문서저장_ButtonClick;
             this.e사진저장.ButtonClick += E사진저장_ButtonClick;
