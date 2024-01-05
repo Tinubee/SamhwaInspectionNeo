@@ -49,12 +49,9 @@
             this.col검사시간 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col모델구분 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col검사코드 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.col큐알코드 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col측정결과 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCTQ결과 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col외관결과 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.col큐알등급 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.col큐알내용 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col불량정보 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.e종료일자 = new DevExpress.XtraEditors.DateEdit();
@@ -303,12 +300,9 @@
             this.col검사시간,
             this.col모델구분,
             this.col검사코드,
-            this.col큐알코드,
             this.col측정결과,
             this.colCTQ결과,
             this.col외관결과,
-            this.col큐알등급,
-            this.col큐알내용,
             this.col불량정보});
             this.GridView1.FooterPanelHeight = 21;
             this.GridView1.GridControl = this.GridControl1;
@@ -386,16 +380,6 @@
             this.col검사코드.Visible = true;
             this.col검사코드.VisibleIndex = 2;
             // 
-            // col큐알코드
-            // 
-            this.col큐알코드.AppearanceHeader.Options.UseTextOptions = true;
-            this.col큐알코드.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.col큐알코드.Caption = "Serial";
-            this.col큐알코드.FieldName = "큐알코드";
-            this.col큐알코드.Name = "col큐알코드";
-            this.col큐알코드.Visible = true;
-            this.col큐알코드.VisibleIndex = 3;
-            // 
             // col측정결과
             // 
             this.col측정결과.AppearanceCell.Options.UseTextOptions = true;
@@ -406,7 +390,7 @@
             this.col측정결과.FieldName = "측정결과";
             this.col측정결과.Name = "col측정결과";
             this.col측정결과.Visible = true;
-            this.col측정결과.VisibleIndex = 4;
+            this.col측정결과.VisibleIndex = 3;
             // 
             // colCTQ결과
             // 
@@ -416,7 +400,7 @@
             this.colCTQ결과.FieldName = "CTQ결과";
             this.colCTQ결과.Name = "colCTQ결과";
             this.colCTQ결과.Visible = true;
-            this.colCTQ결과.VisibleIndex = 5;
+            this.colCTQ결과.VisibleIndex = 4;
             // 
             // col외관결과
             // 
@@ -426,29 +410,7 @@
             this.col외관결과.FieldName = "외관결과";
             this.col외관결과.Name = "col외관결과";
             this.col외관결과.Visible = true;
-            this.col외관결과.VisibleIndex = 6;
-            // 
-            // col큐알등급
-            // 
-            this.col큐알등급.AppearanceCell.Options.UseTextOptions = true;
-            this.col큐알등급.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.col큐알등급.AppearanceHeader.Options.UseTextOptions = true;
-            this.col큐알등급.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.col큐알등급.Caption = "QR Quility";
-            this.col큐알등급.FieldName = "큐알등급";
-            this.col큐알등급.Name = "col큐알등급";
-            this.col큐알등급.Visible = true;
-            this.col큐알등급.VisibleIndex = 8;
-            // 
-            // col큐알내용
-            // 
-            this.col큐알내용.AppearanceHeader.Options.UseTextOptions = true;
-            this.col큐알내용.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.col큐알내용.Caption = "QR Code";
-            this.col큐알내용.FieldName = "큐알내용";
-            this.col큐알내용.Name = "col큐알내용";
-            this.col큐알내용.Visible = true;
-            this.col큐알내용.VisibleIndex = 9;
+            this.col외관결과.VisibleIndex = 5;
             // 
             // col불량정보
             // 
@@ -458,7 +420,7 @@
             this.col불량정보.FieldName = "불량정보";
             this.col불량정보.Name = "col불량정보";
             this.col불량정보.Visible = true;
-            this.col불량정보.VisibleIndex = 7;
+            this.col불량정보.VisibleIndex = 6;
             // 
             // layoutControl1
             // 
@@ -684,12 +646,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn col검사시간;
         private DevExpress.XtraGrid.Columns.GridColumn col모델구분;
         private DevExpress.XtraGrid.Columns.GridColumn col검사코드;
-        private DevExpress.XtraGrid.Columns.GridColumn col큐알코드;
         private DevExpress.XtraGrid.Columns.GridColumn col측정결과;
         private DevExpress.XtraGrid.Columns.GridColumn colCTQ결과;
         private DevExpress.XtraGrid.Columns.GridColumn col외관결과;
-        private DevExpress.XtraGrid.Columns.GridColumn col큐알등급;
-        private DevExpress.XtraGrid.Columns.GridColumn col큐알내용;
         private DevExpress.XtraGrid.Columns.GridColumn col불량정보;
         private DevExpress.XtraBars.BarManager barManager1;
         private System.Windows.Forms.BindingSource Bind검사자료;

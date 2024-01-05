@@ -1,17 +1,17 @@
-﻿using DevExpress.XtraWaitForm;
-using MvUtils;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SamhwaInspectionNeo.Schemas;
 using DevExpress.XtraBars;
+using SamhwaInspectionNeo.UI.Form;
+using DevExpress.XtraWaitForm;
 
 namespace SamhwaInspectionNeo
 {
     public partial class MainForm : TabForm
     {
         private LocalizationMain 번역 = new LocalizationMain();
-        private WaitForm WaitForm;
+        private UI.Form.WaitForm WaitForm;
         //private FlowForm flowForm = null;
         //private StateForm stateForm = null;
         public MainForm()
@@ -33,7 +33,7 @@ namespace SamhwaInspectionNeo
 
         private void ShowWaitForm()
         {
-            WaitForm = new WaitForm() { ShowOnTopMode = ShowFormOnTopMode.AboveAll };
+            WaitForm = new UI.Form.WaitForm() { ShowOnTopMode = ShowFormOnTopMode.AboveAll };
             WaitForm.Show(this);
         }
         private void HideWaitForm()
@@ -85,9 +85,9 @@ namespace SamhwaInspectionNeo
         {
             this.SetLocalization();
             //this.e결과뷰어.Init();
-            //this.e검사설정.Init();
+            this.e검사설정.Init();
             this.e장치설정.Init();
-            //this.e검사내역.Init();
+            this.e검사내역.Init();
             //this.e검사피봇.Init();
             this.e상태뷰어.Init();
             this.e로그내역.Init();

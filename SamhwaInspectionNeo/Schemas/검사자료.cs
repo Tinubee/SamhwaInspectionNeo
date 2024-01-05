@@ -158,8 +158,8 @@ namespace SamhwaInspectionNeo.Schemas
 
         public 검사결과 검사결과계산(Int32 검사코드)
         {
-            검사결과 검사 = null;
-            if (true/*Global.장치통신.자동수동여부*/)
+            검사결과 검사;
+            if (Global.신호제어.자동모드여부 == 1)
             {
                 검사 = this.검사항목찾기(검사코드);
                 if (검사 == null)

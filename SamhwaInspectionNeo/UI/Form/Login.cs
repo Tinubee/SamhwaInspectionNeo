@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace SamhwaInspectionNeo.UI.Form
 {
-    public partial class Login : DevExpress.XtraEditors.XtraForm
+    public partial class Login : XtraForm
     {
         public Login()
         {

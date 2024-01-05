@@ -44,17 +44,21 @@
             this.t변수설정 = new DevExpress.XtraTab.XtraTabPage();
             this.t장치설정 = new DevExpress.XtraTab.XtraTabPage();
             this.e장치설정 = new SamhwaInspectionNeo.UI.Controls.DeviceSettings();
+            this.p검사내역 = new DevExpress.XtraBars.TabFormPage();
+            this.tabFormContentContainer4 = new DevExpress.XtraBars.TabFormContentContainer();
+            this.e검사내역 = new SamhwaInspectionNeo.UI.Controls.Results();
             this.p로그내역 = new DevExpress.XtraBars.TabFormPage();
             this.tabFormContentContainer3 = new DevExpress.XtraBars.TabFormContentContainer();
             this.e로그내역 = new SamhwaInspectionNeo.UI.Controls.LogViewer();
-            this.tabFormContentContainer4 = new DevExpress.XtraBars.TabFormContentContainer();
-            this.p검사내역 = new DevExpress.XtraBars.TabFormPage();
+            this.e검사설정 = new SamhwaInspectionNeo.UI.Control.SetInspection();
             ((System.ComponentModel.ISupportInitialize)(this.tabFormControl1)).BeginInit();
             this.tabFormContentContainer1.SuspendLayout();
             this.tabFormContentContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.t환경설정)).BeginInit();
             this.t환경설정.SuspendLayout();
+            this.t검사설정.SuspendLayout();
             this.t장치설정.SuspendLayout();
+            this.tabFormContentContainer4.SuspendLayout();
             this.tabFormContentContainer3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -171,6 +175,7 @@
             // 
             // t검사설정
             // 
+            this.t검사설정.Controls.Add(this.e검사설정);
             this.t검사설정.Name = "t검사설정";
             this.t검사설정.Size = new System.Drawing.Size(1918, 980);
             this.t검사설정.Text = "검사설정";
@@ -196,10 +201,34 @@
             this.e장치설정.Size = new System.Drawing.Size(1918, 980);
             this.e장치설정.TabIndex = 1;
             // 
+            // p검사내역
+            // 
+            this.p검사내역.ContentContainer = this.tabFormContentContainer4;
+            this.p검사내역.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("p검사내역.ImageOptions.SvgImage")));
+            this.p검사내역.Name = "p검사내역";
+            this.p검사내역.Text = "검사내역";
+            // 
+            // tabFormContentContainer4
+            // 
+            this.tabFormContentContainer4.Controls.Add(this.e검사내역);
+            this.tabFormContentContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabFormContentContainer4.Location = new System.Drawing.Point(0, 30);
+            this.tabFormContentContainer4.Name = "tabFormContentContainer4";
+            this.tabFormContentContainer4.Size = new System.Drawing.Size(1920, 1010);
+            this.tabFormContentContainer4.TabIndex = 3;
+            // 
+            // e검사내역
+            // 
+            this.e검사내역.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.e검사내역.Location = new System.Drawing.Point(0, 0);
+            this.e검사내역.Name = "e검사내역";
+            this.e검사내역.Size = new System.Drawing.Size(1920, 1010);
+            this.e검사내역.TabIndex = 0;
+            // 
             // p로그내역
             // 
             this.p로그내역.ContentContainer = this.tabFormContentContainer3;
-            this.p로그내역.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tabFormPage1.ImageOptions.SvgImage")));
+            this.p로그내역.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("p로그내역.ImageOptions.SvgImage")));
             this.p로그내역.Name = "p로그내역";
             this.p로그내역.Text = "로그내역";
             // 
@@ -221,20 +250,13 @@
             this.e로그내역.Size = new System.Drawing.Size(1920, 1010);
             this.e로그내역.TabIndex = 0;
             // 
-            // tabFormContentContainer4
+            // e검사설정
             // 
-            this.tabFormContentContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabFormContentContainer4.Location = new System.Drawing.Point(0, 30);
-            this.tabFormContentContainer4.Name = "tabFormContentContainer4";
-            this.tabFormContentContainer4.Size = new System.Drawing.Size(1920, 1010);
-            this.tabFormContentContainer4.TabIndex = 3;
-            // 
-            // p검사내역
-            // 
-            this.p검사내역.ContentContainer = this.tabFormContentContainer4;
-            this.p검사내역.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("tabFormPage2.ImageOptions.SvgImage")));
-            this.p검사내역.Name = "p검사내역";
-            this.p검사내역.Text = "검사내역";
+            this.e검사설정.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.e검사설정.Location = new System.Drawing.Point(0, 0);
+            this.e검사설정.Name = "e검사설정";
+            this.e검사설정.Size = new System.Drawing.Size(1918, 980);
+            this.e검사설정.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -259,7 +281,9 @@
             this.tabFormContentContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.t환경설정)).EndInit();
             this.t환경설정.ResumeLayout(false);
+            this.t검사설정.ResumeLayout(false);
             this.t장치설정.ResumeLayout(false);
+            this.tabFormContentContainer4.ResumeLayout(false);
             this.tabFormContentContainer3.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -286,6 +310,8 @@
         private UI.Controls.DeviceSettings e장치설정;
         private DevExpress.XtraBars.TabFormPage p검사내역;
         private DevExpress.XtraBars.TabFormContentContainer tabFormContentContainer4;
+        private UI.Controls.Results e검사내역;
+        private UI.Control.SetInspection e검사설정;
     }
 }
 

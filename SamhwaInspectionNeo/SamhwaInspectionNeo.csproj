@@ -397,6 +397,9 @@
     <EmbeddedResource Include="UI\Control\Results.resx">
       <DependentUpon>Results.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Control\SetInspection.resx">
+      <DependentUpon>SetInspection.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\State.resx">
       <DependentUpon>State.cs</DependentUpon>
     </EmbeddedResource>
@@ -424,6 +427,7 @@
     </EmbeddedResource>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\SamhwaInspectionNeo.Schemas.검사설정자료.datasource" />
     <None Include="Properties\DataSources\SamhwaInspectionNeo.Schemas.로그자료.datasource" />
     <None Include="Properties\DataSources\SamhwaInspectionNeo.Schemas.모델자료.datasource" />
     <None Include="Properties\Settings.settings">
@@ -440,7 +444,7 @@
     <None Include="Icon\samhwa.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\MvUtils\MvUtils\MvUtils.csproj">
+    <ProjectReference Include="D:\MvUtils\MvUtils\MvUtils.csproj">
       <Project>{bdb2ed5c-4a7f-4116-b5a0-1831a1ec0624}</Project>
       <Name>MvUtils</Name>
     </ProjectReference>
