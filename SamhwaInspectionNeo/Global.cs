@@ -40,10 +40,10 @@ namespace SamhwaInspectionNeo
             {
                 get { return true; }
             }
-            public static Boolean 카메라1 { get { return Global.그랩제어.카메라1 == null ? false : Global.그랩제어.카메라1.상태; } }
-            public static Boolean 카메라2 { get { return Global.그랩제어.카메라2 == null ? false : Global.그랩제어.카메라2.상태; } }
-            public static Boolean 카메라3 { get { return Global.그랩제어.카메라3 == null ? false : Global.그랩제어.카메라3.상태; } }
-            public static Boolean 카메라4 { get { return Global.그랩제어.카메라4 == null ? false : Global.그랩제어.카메라4.상태; } }
+            public static Boolean 카메라1 { get { return (그랩제어.카메라1) != null && 그랩제어.카메라1.상태; } }
+            public static Boolean 카메라2 { get { return (그랩제어?.카메라2) != null && 그랩제어.카메라2.상태; } }
+            public static Boolean 카메라3 { get { return (그랩제어?.카메라3) != null && 그랩제어.카메라3.상태; } }
+            public static Boolean 카메라4 { get { return (그랩제어?.카메라4) != null && 그랩제어.카메라4.상태; } }
             //public static Boolean 조명장치 { get { return 조명제어.정상여부; } }
         }
 

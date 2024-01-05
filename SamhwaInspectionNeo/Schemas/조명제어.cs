@@ -88,7 +88,7 @@ namespace SamhwaInspectionNeo.Schemas
 
         public virtual void ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
         {
-            Debug.WriteLine($"ErrorReceived 포트={this.포트}, {e.EventType.ToString()}", this.로그영역);
+            Debug.WriteLine($"ErrorReceived 포트={this.포트}, {e.EventType}", this.로그영역);
             Debug.WriteLine(e.ToString());
         }
         public virtual void DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -119,29 +119,40 @@ namespace SamhwaInspectionNeo.Schemas
         }
     }
 
-    // LCP FA-LCP24
-    public class FALCP24 : 조명컨트롤러
+    // LCP24-100PS  //FA-LCP24
+    public class LCP24100PS : 조명컨트롤러
     {
-        public override String 로그영역 { get; set; } = nameof(FALCP24);
+        public override String 로그영역 { get; set; } = nameof(LCP24100PS);
         public override 조명포트 포트 { get; set; } = 조명포트.COM3;
         public override Int32 통신속도 { get; set; } = 9600;
         public override Int32 최대밝기 { get; } = 1023;
         public override String STX { get; set; } = $"{Convert.ToChar(2)}";
         public override String ETX { get; set; } = $"{Convert.ToChar(3)}";
-        public override Boolean Set(조명정보 정보) => SendCommand($"{정보.카메라} Set", $"{(Int32)정보.채널 - 1}w{this.밝기변환(정보.밝기).ToString("d4")}");
+        public override Boolean Set(조명정보 정보) => SendCommand($"{정보.카메라} Set", $"{(Int32)정보.채널 - 1}w{this.밝기변환(정보.밝기):d4}");
         public override Boolean Save(조명정보 정보) => false; // 커맨드가 있는지 모름
         public override Boolean TurnOn(조명정보 정보) => SendCommand($"{정보.카메라} On", $"{(Int32)정보.채널 - 1}o");//{this.밝기변환(정보.밝기).ToString("d4")}
         public override Boolean TurnOff(조명정보 정보) => SendCommand($"{정보.카메라} Off", $"{(Int32)정보.채널 - 1}f");//0000
     }
 
     // LCP100DC
-    public class LCP100DC : FALCP24
+    public class LCP100DC : LCP24100PS
     {
         public override String 로그영역 { get; set; } = nameof(LCP100DC);
         public override Int32 통신속도 { get; set; } = 19200;
         public override Int32 최대밝기 { get; } = 100;
         public override Boolean Set(조명정보 정보) => false;
-        public override Boolean TurnOn(조명정보 정보) => SendCommand($"{정보.카메라} On", $"{(Int32)정보.채널}o{this.밝기변환(정보.밝기).ToString("d4")}");
+        public override Boolean TurnOn(조명정보 정보) => SendCommand($"{정보.카메라} On", $"{(Int32)정보.채널}o{this.밝기변환(정보.밝기):d4}");
+        public override Boolean TurnOff(조명정보 정보) => SendCommand($"{정보.카메라} Off", $"{(Int32)정보.채널}f0000");
+    }
+
+    //LCP24100Q
+    public class LCP24100Q : LCP24100PS
+    {
+        public override String 로그영역 { get; set; } = nameof(LCP24100Q);
+        public override Int32 통신속도 { get; set; } = 19200;
+        public override Int32 최대밝기 { get; } = 100;
+        public override Boolean Set(조명정보 정보) => false;
+        public override Boolean TurnOn(조명정보 정보) => SendCommand($"{정보.카메라} On", $"{(Int32)정보.채널}o{this.밝기변환(정보.밝기):d4}");
         public override Boolean TurnOff(조명정보 정보) => SendCommand($"{정보.카메라} Off", $"{(Int32)정보.채널}f0000");
     }
 
@@ -210,22 +221,27 @@ namespace SamhwaInspectionNeo.Schemas
         [JsonIgnore]
         private LCP100DC 컨트롤러1;
         [JsonIgnore]
-        private LCP100DC 컨트롤러2;
+        private LCP24100PS 컨트롤러2;
+        [JsonIgnore]
+        private LCP24100Q 컨트롤러3;
 
         [JsonIgnore]
-        public Boolean 정상여부 { get { return this.컨트롤러1.IsOpen() && this.컨트롤러2.IsOpen(); } }
+        public Boolean 정상여부 { get { return this.컨트롤러1.IsOpen() && this.컨트롤러2.IsOpen() && this.컨트롤러3.IsOpen(); } }
 
         public void Init()
         {
-            this.컨트롤러1 = new LCP100DC() { 포트 = 조명포트.COM3 };
-            this.컨트롤러2 = new LCP100DC() { 포트 = 조명포트.COM4 };
+            this.컨트롤러1 = new LCP100DC() { 포트 = 조명포트.COM3 }; // 상부치수검사 LLXP조명
+            this.컨트롤러2 = new LCP24100PS() { 포트 = 조명포트.COM4 }; //표면검사 상하부 4개씩 2세트
+            this.컨트롤러3 = new LCP24100Q() { 포트 = 조명포트.COM5 }; // 공트레이검사 2개
 
             this.컨트롤러1.Init();
             this.컨트롤러2.Init();
+            this.컨트롤러3.Init();
 
             // 컨트롤러 당 카메라 1대씩 연결
             this.Add(new 조명정보(카메라구분.Cam01, 컨트롤러1) { 채널 = 조명채널.CH01, 밝기 = 70 });
-            this.Add(new 조명정보(카메라구분.Cam02, 컨트롤러1) { 채널 = 조명채널.CH02, 밝기 = 70 });
+            this.Add(new 조명정보(카메라구분.Cam02, 컨트롤러3) { 채널 = 조명채널.CH02, 밝기 = 70 });
+            this.Add(new 조명정보(카메라구분.Cam02, 컨트롤러3) { 채널 = 조명채널.CH02, 밝기 = 70 });
             this.Add(new 조명정보(카메라구분.Cam03, 컨트롤러2) { 채널 = 조명채널.CH01, 밝기 = 70 });
             this.Add(new 조명정보(카메라구분.Cam03, 컨트롤러2) { 채널 = 조명채널.CH02, 밝기 = 70 });
             this.Add(new 조명정보(카메라구분.Cam03, 컨트롤러2) { 채널 = 조명채널.CH03, 밝기 = 90 });
@@ -292,6 +308,11 @@ namespace SamhwaInspectionNeo.Schemas
                 this.컨트롤러2.Close();
                 Global.오류로그(로그영역, "조명장치 연결", "조명 컨트롤러2에 연결할 수 없습니다.", true);
             }
+            if (!this.컨트롤러3.Open())
+            {
+                this.컨트롤러3.Close();
+                Global.오류로그(로그영역, "조명장치 연결", "조명 컨트롤러3에 연결할 수 없습니다.", true);
+            }
         }
 
         public void Close()
@@ -300,6 +321,7 @@ namespace SamhwaInspectionNeo.Schemas
             Task.Delay(100).Wait();
             this.컨트롤러1?.Close();
             this.컨트롤러2?.Close();
+            this.컨트롤러3?.Close();
         }
 
         public void Set()
