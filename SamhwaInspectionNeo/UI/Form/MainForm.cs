@@ -58,33 +58,16 @@ namespace SamhwaInspectionNeo
             this.HideWaitForm();
             Common.SetForegroundWindow(this.Handle.ToInt32());
 
-            //// 로그인
-            //Login login = new Login();
-            //if (Utils.ShowDialog(login, this) == DialogResult.OK)
-            //{
-            //    Global.DxLocalization();
-            //    this.Init();
-            //    Global.Start();
-            //}
-            //else this.Close();
-
-            //if (Global.환경설정.동작구분 == 동작구분.Live)
-            //{
-            //}
-            //else
-            //{
-            ////자동로그인
             Global.환경설정.시스템관리자로그인();
             Global.DxLocalization();
             this.Init();
             Global.Start();
-            //}
         }
 
         private void Init()
         {
             this.SetLocalization();
-            //this.e결과뷰어.Init();
+            this.e결과뷰어.Init();
             this.e검사설정.Init();
             this.e장치설정.Init();
             this.e검사내역.Init();

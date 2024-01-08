@@ -53,23 +53,24 @@ namespace SamhwaInspectionNeo
             {
                 로그자료 = new 로그자료();
                 환경설정 = new 환경설정();
+                VM제어 = new VM제어();
                 유저자료 = new 유저자료();
                 조명제어 = new 조명제어();
                 신호제어 = new 신호제어();
                 그랩제어 = new 그랩제어();
                 모델자료 = new 모델자료();
                 검사자료 = new 검사자료();
-                VM제어 = new VM제어();
 
                 로그자료.Init();
                 환경설정.Init();
+                VM제어.Init();
                 유저자료.Init();
                 조명제어.Init();
                 신호제어.Init();
                 그랩제어.Init();
                 모델자료.Init();
                 검사자료.Init();
-                VM제어.Init();
+               
 
                 Global.정보로그(로그영역, "초기화", "시스템을 초기화 합니다.", false);
                 Initialized?.Invoke(null, true);

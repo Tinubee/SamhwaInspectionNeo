@@ -40,6 +40,7 @@
             this.e모델선택 = new DevExpress.XtraEditors.LookUpEdit();
             this.b설정저장 = new DevExpress.XtraEditors.SimpleButton();
             this.GridControl1 = new MvUtils.CustomGrid();
+            this.bind검사설정 = new System.Windows.Forms.BindingSource(this.components);
             this.GridView1 = new MvUtils.CustomView();
             this.col검사그룹 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col검사명칭 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -58,23 +59,24 @@
             this.col실측값 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ｅ교정계산 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.col검사여부 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.bind검사설정 = new System.Windows.Forms.BindingSource(this.components);
             this.bind모델자료 = new System.Windows.Forms.BindingSource(this.components);
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.repositoryItemToggleSwitch1 = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.e모델선택.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bind검사설정)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e마진값)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ｅ교정계산)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bind검사설정)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bind모델자료)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemToggleSwitch1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl1
@@ -145,12 +147,17 @@
             this.GridControl1.Name = "GridControl1";
             this.GridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.ｅ교정계산,
-            this.e마진값});
+            this.e마진값,
+            this.repositoryItemToggleSwitch1});
             this.GridControl1.Size = new System.Drawing.Size(1244, 729);
             this.GridControl1.TabIndex = 7;
             this.GridControl1.UseDirectXPaint = DevExpress.Utils.DefaultBoolean.True;
             this.GridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.GridView1});
+            // 
+            // bind검사설정
+            // 
+            this.bind검사설정.DataSource = typeof(SamhwaInspectionNeo.Schemas.검사설정자료);
             // 
             // GridView1
             // 
@@ -378,14 +385,11 @@
             this.col검사여부.AppearanceHeader.Options.UseTextOptions = true;
             this.col검사여부.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.col검사여부.Caption = "검사여부";
+            this.col검사여부.ColumnEdit = this.repositoryItemToggleSwitch1;
             this.col검사여부.FieldName = "검사여부";
             this.col검사여부.Name = "col검사여부";
             this.col검사여부.Visible = true;
             this.col검사여부.VisibleIndex = 14;
-            // 
-            // bind검사설정
-            // 
-            this.bind검사설정.DataSource = typeof(SamhwaInspectionNeo.Schemas.검사설정자료);
             // 
             // barManager1
             // 
@@ -427,6 +431,13 @@
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 781);
             // 
+            // repositoryItemToggleSwitch1
+            // 
+            this.repositoryItemToggleSwitch1.AutoHeight = false;
+            this.repositoryItemToggleSwitch1.Name = "repositoryItemToggleSwitch1";
+            this.repositoryItemToggleSwitch1.OffText = "Off";
+            this.repositoryItemToggleSwitch1.OnText = "On";
+            // 
             // SetInspection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -443,12 +454,13 @@
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.e모델선택.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bind검사설정)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e마진값)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ｅ교정계산)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bind검사설정)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bind모델자료)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemToggleSwitch1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -486,5 +498,6 @@
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
+        private DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch repositoryItemToggleSwitch1;
     }
 }

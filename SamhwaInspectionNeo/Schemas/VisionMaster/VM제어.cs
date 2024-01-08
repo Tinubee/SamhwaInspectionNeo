@@ -18,9 +18,14 @@ namespace SamhwaInspectionNeo.Schemas
     public enum Flow구분
     {
         Flow1 = 카메라구분.Cam01,
-        Flow2 = 카메라구분.Cam02,
-        Flow3 = 카메라구분.Cam03,
-        Flow4 = 카메라구분.Cam04,
+        Flow2 = 카메라구분.Cam01,
+        Flow3 = 카메라구분.Cam01,
+        Flow4 = 카메라구분.Cam01,
+        Flow5 = 카메라구분.Cam01,
+        Flow6 = 카메라구분.Cam01,
+        공트레이검사 = 카메라구분.Cam02,
+        상부표면검사 = 카메라구분.Cam03,
+        하부표면검사 = 카메라구분.Cam04,
     }
 
     public class VM제어 : List<비전마스터플로우>
@@ -28,7 +33,7 @@ namespace SamhwaInspectionNeo.Schemas
         private static String 로그영역 = "검사도구";
         public delegate void 현재결과상태갱신(결과구분 구분);
         public event 현재결과상태갱신 결과상태갱신알림;
-        private String 도구파일 { get => Path.Combine(Global.환경설정.기본경로, MvUtils.Utils.GetDescription(Global.환경설정.선택모델)); }
+        private String 도구파일 { get => Path.Combine(Global.환경설정.도구경로, $"{MvUtils.Utils.GetDescription(Global.환경설정.선택모델)}.sol"); }
         public Dictionary<카메라구분, bool> grabFinishDic = new Dictionary<카메라구분, bool>();
         public VmGlobals 글로벌변수제어 = new VmGlobals();
         public ImageBaseData 각인이미지;
@@ -100,6 +105,10 @@ namespace SamhwaInspectionNeo.Schemas
         public GraphicsSetModuleTool graphicsSetModuleTool;
         public ShellModuleTool shellModuleTool;
 
+        public List<ImageSourceModuleTool> imageSourceModuleToolList;
+        public List<GraphicsSetModuleTool> graphicsSetModuleToolList;
+        public List<ShellModuleTool> shellModuleToolList;
+
         public 비전마스터플로우(Flow구분 구분)
         {
             this.구분 = 구분;
@@ -118,11 +127,30 @@ namespace SamhwaInspectionNeo.Schemas
             this.Procedure = VmSolution.Instance[this.구분.ToString()] as VmProcedure;
             if (Procedure != null)
             {
-                //Debug.WriteLine($"{this.구분} Init");
-                this.imageSourceModuleTool = this.Procedure["InputImage"] as ImageSourceModuleTool;
-                this.graphicsSetModuleTool = this.Procedure["OutputImage"] as GraphicsSetModuleTool;
-                this.shellModuleTool = this.Procedure["Resulte"] as ShellModuleTool;
-                this.imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;
+                if (this.구분 == Flow구분.상부표면검사 || this.구분 == Flow구분.하부표면검사)
+                {
+                    this.imageSourceModuleToolList = new List<ImageSourceModuleTool>();
+                    this.graphicsSetModuleToolList = new List<GraphicsSetModuleTool>();
+                    this.shellModuleToolList = new List<ShellModuleTool>();
+
+                    foreach (var item in this.Procedure.Modules)
+                    {
+                        if(item.GetType() == typeof(ImageSourceModuleTool)) this.imageSourceModuleToolList.Add(item as ImageSourceModuleTool);
+                        else if(item.GetType() == typeof(GraphicsSetModuleTool)) this.graphicsSetModuleToolList.Add(item as GraphicsSetModuleTool);
+                        else if(item.GetType() == typeof(ShellModuleTool)) this.shellModuleToolList.Add(item as ShellModuleTool);
+                    }
+
+                    foreach (ImageSourceModuleTool imageSourceModuleTool in this.imageSourceModuleToolList)
+                        imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;
+                  
+                }
+                else
+                {
+                    this.imageSourceModuleTool = this.Procedure["InputImage"] as ImageSourceModuleTool;
+                    this.graphicsSetModuleTool = this.Procedure["OutputImage"] as GraphicsSetModuleTool;
+                    this.shellModuleTool = this.Procedure["Resulte"] as ShellModuleTool;
+                    this.imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;
+                }
             }
         }
 

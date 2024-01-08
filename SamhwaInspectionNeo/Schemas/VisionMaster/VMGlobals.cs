@@ -16,6 +16,7 @@ namespace SamhwaInspectionNeo.Schemas
         {
             base.Clear(); //모델변경시 기존 변수들 초기화
             this.Variables = VmSolution.Instance["Global Variable1"] as GlobalVariableModuleTool;
+            if (this.Variables == null) return;
             List<GlobalVarInfo> lists = Variables.GetAllGlobalVar();
             foreach (GlobalVarInfo info in lists)
             {

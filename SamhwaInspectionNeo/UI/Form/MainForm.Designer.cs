@@ -41,6 +41,7 @@
             this.tabFormContentContainer2 = new DevExpress.XtraBars.TabFormContentContainer();
             this.t환경설정 = new DevExpress.XtraTab.XtraTabControl();
             this.t검사설정 = new DevExpress.XtraTab.XtraTabPage();
+            this.e검사설정 = new SamhwaInspectionNeo.UI.Control.SetInspection();
             this.t변수설정 = new DevExpress.XtraTab.XtraTabPage();
             this.t장치설정 = new DevExpress.XtraTab.XtraTabPage();
             this.e장치설정 = new SamhwaInspectionNeo.UI.Controls.DeviceSettings();
@@ -50,7 +51,7 @@
             this.p로그내역 = new DevExpress.XtraBars.TabFormPage();
             this.tabFormContentContainer3 = new DevExpress.XtraBars.TabFormContentContainer();
             this.e로그내역 = new SamhwaInspectionNeo.UI.Controls.LogViewer();
-            this.e검사설정 = new SamhwaInspectionNeo.UI.Control.SetInspection();
+            this.e결과뷰어 = new SamhwaInspectionNeo.UI.Control.CamViewers();
             ((System.ComponentModel.ISupportInitialize)(this.tabFormControl1)).BeginInit();
             this.tabFormContentContainer1.SuspendLayout();
             this.tabFormContentContainer2.SuspendLayout();
@@ -84,7 +85,7 @@
             this.tabFormControl1.Pages.Add(this.p환경설정);
             this.tabFormControl1.Pages.Add(this.p검사내역);
             this.tabFormControl1.Pages.Add(this.p로그내역);
-            this.tabFormControl1.SelectedPage = this.p환경설정;
+            this.tabFormControl1.SelectedPage = this.p검사하기;
             this.tabFormControl1.ShowAddPageButton = false;
             this.tabFormControl1.ShowTabCloseButtons = false;
             this.tabFormControl1.ShowTabsInTitleBar = DevExpress.XtraBars.ShowTabsInTitleBar.True;
@@ -124,6 +125,7 @@
             // 
             // tabFormContentContainer1
             // 
+            this.tabFormContentContainer1.Controls.Add(this.e결과뷰어);
             this.tabFormContentContainer1.Controls.Add(this.e상태뷰어);
             this.tabFormContentContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabFormContentContainer1.Location = new System.Drawing.Point(0, 30);
@@ -179,6 +181,14 @@
             this.t검사설정.Name = "t검사설정";
             this.t검사설정.Size = new System.Drawing.Size(1918, 980);
             this.t검사설정.Text = "검사설정";
+            // 
+            // e검사설정
+            // 
+            this.e검사설정.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.e검사설정.Location = new System.Drawing.Point(0, 0);
+            this.e검사설정.Name = "e검사설정";
+            this.e검사설정.Size = new System.Drawing.Size(1918, 980);
+            this.e검사설정.TabIndex = 0;
             // 
             // t변수설정
             // 
@@ -250,13 +260,14 @@
             this.e로그내역.Size = new System.Drawing.Size(1920, 1010);
             this.e로그내역.TabIndex = 0;
             // 
-            // e검사설정
+            // e결과뷰어
             // 
-            this.e검사설정.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.e검사설정.Location = new System.Drawing.Point(0, 0);
-            this.e검사설정.Name = "e검사설정";
-            this.e검사설정.Size = new System.Drawing.Size(1918, 980);
-            this.e검사설정.TabIndex = 0;
+            this.e결과뷰어.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.e결과뷰어.Location = new System.Drawing.Point(0, 104);
+            this.e결과뷰어.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.e결과뷰어.Name = "e결과뷰어";
+            this.e결과뷰어.Size = new System.Drawing.Size(1920, 906);
+            this.e결과뷰어.TabIndex = 1;
             // 
             // MainForm
             // 
@@ -268,7 +279,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1920, 1040);
-            this.Controls.Add(this.tabFormContentContainer2);
+            this.Controls.Add(this.tabFormContentContainer1);
             this.Controls.Add(this.tabFormControl1);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -312,6 +323,7 @@
         private DevExpress.XtraBars.TabFormContentContainer tabFormContentContainer4;
         private UI.Controls.Results e검사내역;
         private UI.Control.SetInspection e검사설정;
+        private UI.Control.CamViewers e결과뷰어;
     }
 }
 
