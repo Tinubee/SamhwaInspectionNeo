@@ -74,6 +74,7 @@ namespace SamhwaInspectionNeo
             //this.e검사피봇.Init();
             this.e상태뷰어.Init();
             this.e로그내역.Init();
+            this.e변수설정.Init();
             this.p환경설정.Enabled = Global.환경설정.권한여부(유저권한구분.시스템);
             this.TabFormControl.AllowMoveTabs = false;
             this.TabFormControl.AllowMoveTabsToOuterForm = false;

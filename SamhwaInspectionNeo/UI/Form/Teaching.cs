@@ -16,6 +16,13 @@ namespace SamhwaInspectionNeo.UI.Form
         public Teaching()
         {
             InitializeComponent();
+            this.FormClosed += Teaching_FormClosed;
+        }
+
+        private void Teaching_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Global.VM제어.글로벌변수제어.Init();
+            Global.MainForm.e변수설정.UpdateGridView();
         }
     }
 }

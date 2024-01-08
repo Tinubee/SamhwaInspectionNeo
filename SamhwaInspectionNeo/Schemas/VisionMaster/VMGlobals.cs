@@ -1,7 +1,9 @@
 ﻿using DevExpress.Office.Utils;
+using DevExpress.Utils.Extensions;
 using GlobalVariableModuleCs;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,22 +14,24 @@ namespace SamhwaInspectionNeo.Schemas
     public class VmGlobals : List<VmVariable>
     {
         private GlobalVariableModuleTool Variables;
+        private List<GlobalVarInfo> GlobalVarInfo;
         public void Init()
         {
             base.Clear(); //모델변경시 기존 변수들 초기화
             this.Variables = VmSolution.Instance["Global Variable1"] as GlobalVariableModuleTool;
             if (this.Variables == null) return;
-            List<GlobalVarInfo> lists = Variables.GetAllGlobalVar();
-            foreach (GlobalVarInfo info in lists)
+            GlobalVarInfo = Variables.GetAllGlobalVar();
+           
+            foreach (GlobalVarInfo info in GlobalVarInfo)
             {
                 if (info.strValueType.ToLower() == typeof(String).Name.ToLower()) continue;
                 if (info.strValueName.Contains("calValue") || info.strValueName.Contains("offset")) continue;
-
+                
                 this.Add(new VmVariable(info));
             }
         }
-
-        public List<VmVariable> GetCalValue()
+       
+       public List<VmVariable> GetCalValue()
         {
             List<GlobalVarInfo> lists = Variables.GetAllGlobalVar();
             List<VmVariable> calValueList = new List<VmVariable>();
