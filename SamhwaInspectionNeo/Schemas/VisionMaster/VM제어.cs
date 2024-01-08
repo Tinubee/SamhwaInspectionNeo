@@ -36,7 +36,6 @@ namespace SamhwaInspectionNeo.Schemas
         private String 도구파일 { get => Path.Combine(Global.환경설정.도구경로, $"{MvUtils.Utils.GetDescription(Global.환경설정.선택모델)}.sol"); }
         public Dictionary<카메라구분, bool> grabFinishDic = new Dictionary<카메라구분, bool>();
         public VmGlobals 글로벌변수제어 = new VmGlobals();
-        public ImageBaseData 각인이미지;
 
         public Boolean Init() => Load();
         public void Save() => VmSolution.Save();
@@ -96,7 +95,7 @@ namespace SamhwaInspectionNeo.Schemas
     public class 비전마스터플로우
     {
         public Flow구분 구분;
-        //public Boolean 결과;
+        public Boolean 결과;
         //public Boolean 결과업데이트완료;
         public String 로그영역 { get => $"비전도구({구분})"; }
 
@@ -112,6 +111,7 @@ namespace SamhwaInspectionNeo.Schemas
         public 비전마스터플로우(Flow구분 구분)
         {
             this.구분 = 구분;
+            this.결과 = false;
             this.Init();
             if (this.graphicsSetModuleTool != null)
             {
@@ -154,7 +154,7 @@ namespace SamhwaInspectionNeo.Schemas
             }
         }
 
-        private void SetResult(Flow구분 구분)
+        private void SetResult(Flow구분 구분) //결과체크 추가해줘야됨.
         {
             ShellModuleTool shell = Global.VM제어.GetItem(구분).shellModuleTool;
             for (int i = 6; i < shell.Outputs.Count; i++)
@@ -164,7 +164,6 @@ namespace SamhwaInspectionNeo.Schemas
                 if (t[0].Value != null)
                 {
                     String str = ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[0].strValue;
-                    //Debug.WriteLine(str, name);
                     try
                     {
                         String[] vals = str.Split(';');
@@ -184,11 +183,11 @@ namespace SamhwaInspectionNeo.Schemas
 
         public Boolean Run(Mat mat, ImageBaseData imageBaseData)
         {
-            //this.결과 = false;
+            this.결과 = false;
             //this.결과업데이트완료 = false;
             if (this.imageSourceModuleTool == null)
             {
-                Global.오류로그(로그영역, "검사오류", $"[{구분}] VM 검사 모델이 없습니다.", false);
+                Global.오류로그(로그영역, "검사오류", $"[{this.구분}] VM 검사 모델이 없습니다.", false);
                 return false;
             }
             try
@@ -198,13 +197,13 @@ namespace SamhwaInspectionNeo.Schemas
                 this.imageSourceModuleTool.SetImageData(imageBaseData);
 
                 this.Procedure.Run();
-                this.SetResult(구분);
+                this.SetResult(this.구분);
 
                 return true;
             }
             catch (Exception ex)
             {
-                Global.오류로그(로그영역, "검사오류", $"[{구분}] VM 검사오류: {ex.Message}", false);
+                Global.오류로그(로그영역, "검사오류", $"[{this.구분}] VM 검사오류: {ex.Message}", false);
                 return false;
             }
         }

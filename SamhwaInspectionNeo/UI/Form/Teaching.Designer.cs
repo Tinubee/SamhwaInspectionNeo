@@ -28,19 +28,71 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
+            this.vmMainViewConfigControl1 = new VMControls.Winform.Release.VmMainViewConfigControl();
+            this.vmGlobalToolControl1 = new VMControls.Winform.Release.VmGlobalToolControl();
+            ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
+            this.tablePanel1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // tablePanel1
+            // 
+            this.tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 5F)});
+            this.tablePanel1.Controls.Add(this.vmMainViewConfigControl1);
+            this.tablePanel1.Controls.Add(this.vmGlobalToolControl1);
+            this.tablePanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tablePanel1.Location = new System.Drawing.Point(0, 0);
+            this.tablePanel1.Name = "tablePanel1";
+            this.tablePanel1.Padding = new System.Windows.Forms.Padding(1);
+            this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 75F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
+            this.tablePanel1.Size = new System.Drawing.Size(1482, 979);
+            this.tablePanel1.TabIndex = 1;
+            this.tablePanel1.UseSkinIndents = true;
+            // 
+            // vmMainViewConfigControl1
+            // 
+            this.tablePanel1.SetColumn(this.vmMainViewConfigControl1, 0);
+            this.vmMainViewConfigControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.vmMainViewConfigControl1.Location = new System.Drawing.Point(3, 78);
+            this.vmMainViewConfigControl1.Margin = new System.Windows.Forms.Padding(2);
+            this.vmMainViewConfigControl1.Name = "vmMainViewConfigControl1";
+            this.tablePanel1.SetRow(this.vmMainViewConfigControl1, 1);
+            this.vmMainViewConfigControl1.Size = new System.Drawing.Size(1476, 898);
+            this.vmMainViewConfigControl1.TabIndex = 1;
+// TODO: '기본 형식이 잘못되었습니다. System.IntPtr. CodeObjectCreateExpression을 사용하십시오.' 예외가 발생하여 ''의 코드를 생성하지 못했습니다.
+            // 
+            // vmGlobalToolControl1
+            // 
+            this.tablePanel1.SetColumn(this.vmGlobalToolControl1, 0);
+            this.vmGlobalToolControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.vmGlobalToolControl1.Location = new System.Drawing.Point(5, 5);
+            this.vmGlobalToolControl1.Margin = new System.Windows.Forms.Padding(4);
+            this.vmGlobalToolControl1.Name = "vmGlobalToolControl1";
+            this.tablePanel1.SetRow(this.vmGlobalToolControl1, 0);
+            this.vmGlobalToolControl1.Size = new System.Drawing.Size(1472, 67);
+            this.vmGlobalToolControl1.TabIndex = 0;
             // 
             // Teaching
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1123, 825);
+            this.ClientSize = new System.Drawing.Size(1482, 979);
+            this.Controls.Add(this.tablePanel1);
             this.Name = "Teaching";
             this.Text = "Teaching";
+            ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
+            this.tablePanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private DevExpress.Utils.Layout.TablePanel tablePanel1;
+        private VMControls.Winform.Release.VmMainViewConfigControl vmMainViewConfigControl1;
+        private VMControls.Winform.Release.VmGlobalToolControl vmGlobalToolControl1;
     }
 }
