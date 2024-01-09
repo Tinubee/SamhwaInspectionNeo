@@ -72,6 +72,9 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.e모델선택.EditValue = 모델코드;
             this.bind모델자료.DataSource = Global.모델자료.선택모델;
             this.bind모델자료.ResetBindings(false);
+            Global.VM제어.Init();
+            Global.MainForm.e결과뷰어.Init();
+            Global.MainForm.e변수설정.UpdateGridView();
         }
 
         private void 모델변경(object sender, DevExpress.XtraEditors.Controls.ChangingEventArgs e)

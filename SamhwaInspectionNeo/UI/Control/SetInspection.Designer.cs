@@ -30,11 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SetInspection));
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.b도구설정 = new DevExpress.XtraEditors.SimpleButton();
             this.e모델선택 = new DevExpress.XtraEditors.LookUpEdit();
@@ -58,7 +58,6 @@
             this.col측정값 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col실측값 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ｅ교정계산 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.col검사여부 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemToggleSwitch1 = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
             this.bind모델자료 = new System.Windows.Forms.BindingSource(this.components);
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
@@ -183,8 +182,7 @@
             this.col마진값,
             this.col교정값,
             this.col측정값,
-            this.col실측값,
-            this.col검사여부});
+            this.col실측값});
             this.GridView1.FooterPanelHeight = 21;
             this.GridView1.GridControl = this.GridControl1;
             this.GridView1.GroupRowHeight = 21;
@@ -331,7 +329,7 @@
             // 
             this.e마진값.AutoHeight = false;
             this.e마진값.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo, "", -1, true, false, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo, "", -1, true, false, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.e마진값.MaxValue = new decimal(new int[] {
             100,
             0,
@@ -380,23 +378,16 @@
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.ｅ교정계산.Name = "ｅ교정계산";
             // 
-            // col검사여부
-            // 
-            this.col검사여부.AppearanceHeader.Options.UseTextOptions = true;
-            this.col검사여부.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.col검사여부.Caption = "검사여부";
-            this.col검사여부.ColumnEdit = this.repositoryItemToggleSwitch1;
-            this.col검사여부.FieldName = "검사여부";
-            this.col검사여부.Name = "col검사여부";
-            this.col검사여부.Visible = true;
-            this.col검사여부.VisibleIndex = 14;
-            // 
             // repositoryItemToggleSwitch1
             // 
             this.repositoryItemToggleSwitch1.AutoHeight = false;
             this.repositoryItemToggleSwitch1.Name = "repositoryItemToggleSwitch1";
             this.repositoryItemToggleSwitch1.OffText = "Off";
             this.repositoryItemToggleSwitch1.OnText = "On";
+            // 
+            // bind모델자료
+            // 
+            this.bind모델자료.DataSource = typeof(SamhwaInspectionNeo.Schemas.모델자료);
             // 
             // barManager1
             // 
@@ -490,7 +481,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn col측정값;
         private DevExpress.XtraGrid.Columns.GridColumn col실측값;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit ｅ교정계산;
-        private DevExpress.XtraGrid.Columns.GridColumn col검사여부;
         private System.Windows.Forms.BindingSource bind검사설정;
         private System.Windows.Forms.BindingSource bind모델자료;
         private DevExpress.XtraBars.BarManager barManager1;

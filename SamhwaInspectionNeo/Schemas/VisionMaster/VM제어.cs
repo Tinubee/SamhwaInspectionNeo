@@ -14,18 +14,17 @@ using VM.PlatformSDKCS;
 
 namespace SamhwaInspectionNeo.Schemas
 {
-    // 카메라 순번과 맞춤
     public enum Flow구분
     {
-        Flow1 = 카메라구분.Cam01,
-        Flow2 = 카메라구분.Cam01,
-        Flow3 = 카메라구분.Cam01,
-        Flow4 = 카메라구분.Cam01,
-        Flow5 = 카메라구분.Cam01,
-        Flow6 = 카메라구분.Cam01,
-        공트레이검사 = 카메라구분.Cam02,
-        상부표면검사 = 카메라구분.Cam03,
-        하부표면검사 = 카메라구분.Cam04,
+        Flow1,
+        Flow2,
+        Flow3,
+        Flow4,
+        Flow5,
+        Flow6,
+        공트레이검사,
+        상부표면검사,
+        하부표면검사,
     }
 
     public class VM제어 : List<비전마스터플로우>
@@ -34,6 +33,7 @@ namespace SamhwaInspectionNeo.Schemas
         public delegate void 현재결과상태갱신(결과구분 구분);
         public event 현재결과상태갱신 결과상태갱신알림;
         private String 도구파일 { get => Path.Combine(Global.환경설정.도구경로, $"{MvUtils.Utils.GetDescription(Global.환경설정.선택모델)}.sol"); }
+        private String 기본도구파일 { get => Path.Combine(Global.환경설정.도구경로, $"Default.sol"); }
         public Dictionary<카메라구분, bool> grabFinishDic = new Dictionary<카메라구분, bool>();
         public VmGlobals 글로벌변수제어 = new VmGlobals();
 
@@ -49,9 +49,16 @@ namespace SamhwaInspectionNeo.Schemas
                 {
                     VmSolution.Load(도구파일, null);
                     글로벌변수제어.Init();
-                    Global.정보로그(로그영역, "솔루션 로드", "솔루션을 로드하였습니다.", false);
+                    Global.정보로그(로그영역, 로그영역, "VmSolution파일 로드 완료.", false);
                 }
-                else Global.오류로그(로그영역, "솔루션 로드", "솔루션파일이 없습니다.", true);
+                else
+                {
+                    VmSolution.Load(기본도구파일, null);
+                    VmSolution.SaveAs(도구파일, null);
+                    VmSolution.Instance.CloseSolution();
+                    VmSolution.Load(도구파일, null);
+                    Global.오류로그(로그영역, 로그영역, "VmSolution파일이 없어 기본 Solution파일 생성 후 로드 완료.", true);
+                }
 
                 //모듈 콜백 Disable
                 VmSolution.Instance.DisableModulesCallback();
@@ -96,7 +103,6 @@ namespace SamhwaInspectionNeo.Schemas
     {
         public Flow구분 구분;
         public Boolean 결과;
-        //public Boolean 결과업데이트완료;
         public String 로그영역 { get => $"비전도구({구분})"; }
 
         public VmProcedure Procedure;
@@ -135,21 +141,23 @@ namespace SamhwaInspectionNeo.Schemas
 
                     foreach (var item in this.Procedure.Modules)
                     {
-                        if(item.GetType() == typeof(ImageSourceModuleTool)) this.imageSourceModuleToolList.Add(item as ImageSourceModuleTool);
-                        else if(item.GetType() == typeof(GraphicsSetModuleTool)) this.graphicsSetModuleToolList.Add(item as GraphicsSetModuleTool);
-                        else if(item.GetType() == typeof(ShellModuleTool)) this.shellModuleToolList.Add(item as ShellModuleTool);
+                        if (item.GetType() == typeof(ImageSourceModuleTool)) this.imageSourceModuleToolList.Add(item as ImageSourceModuleTool);
+                        else if (item.GetType() == typeof(GraphicsSetModuleTool)) this.graphicsSetModuleToolList.Add(item as GraphicsSetModuleTool);
+                        else if (item.GetType() == typeof(ShellModuleTool)) this.shellModuleToolList.Add(item as ShellModuleTool);
                     }
 
                     foreach (ImageSourceModuleTool imageSourceModuleTool in this.imageSourceModuleToolList)
                         imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;
-                  
+
                 }
                 else
                 {
                     this.imageSourceModuleTool = this.Procedure["InputImage"] as ImageSourceModuleTool;
                     this.graphicsSetModuleTool = this.Procedure["OutputImage"] as GraphicsSetModuleTool;
                     this.shellModuleTool = this.Procedure["Resulte"] as ShellModuleTool;
-                    this.imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;
+
+                    if (this.imageSourceModuleTool != null)
+                        this.imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;
                 }
             }
         }

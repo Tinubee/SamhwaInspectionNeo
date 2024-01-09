@@ -204,9 +204,6 @@ namespace SamhwaInspectionNeo.Schemas
         public Decimal 결과값 { get; set; } = 0m;
         [Column("idres"), JsonProperty("idres"), Translation("Result", "판정")]
         public 결과구분 측정결과 { get; set; } = 결과구분.NO;
-        [NotMapped, JsonProperty("iduse"), Translation("Used", "검사"), BatchEdit(true)]
-        public Boolean 검사여부 { get; set; } = true;
-
         [NotMapped, JsonIgnore]
         public Double 검사시간 = 0;
 
@@ -277,7 +274,6 @@ namespace SamhwaInspectionNeo.Schemas
             검사설정자료 자료 = Global.모델자료.GetItem(this.모델구분)?.검사설정;
             foreach (검사정보 정보 in 자료)
             {
-                if (!정보.검사여부) continue;
                 this.검사내역.Add(new 검사정보(정보) { 검사일시 = this.검사일시 });
             }
         }

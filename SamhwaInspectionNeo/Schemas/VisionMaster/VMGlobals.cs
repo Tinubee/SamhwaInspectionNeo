@@ -64,6 +64,7 @@ namespace SamhwaInspectionNeo.Schemas
 
         public void InspectUseSet(string Name, string Value)
         {
+            if(this.Variables == null) return;
             this.Variables.SetGlobalVar(Name, Value);
         }
 

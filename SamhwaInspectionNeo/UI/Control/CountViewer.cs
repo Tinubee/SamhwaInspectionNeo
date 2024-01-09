@@ -51,7 +51,7 @@ namespace SamhwaInspectionNeo.UI.Control
             get { return this.e현재값.Appearance.ForeColor; }
             set
             {
-                //this.e현재값.Appearance.ForeColor = value;
+                this.e현재값.Appearance.ForeColor = value;
                 this.e현재값.Appearance.BackColor = Color.FromArgb(32, value);
             }
         }
