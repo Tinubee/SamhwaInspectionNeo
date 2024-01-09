@@ -33,7 +33,7 @@ namespace SamhwaInspectionNeo
             DevExpress.XtraEditors.WindowsFormsSettings.LoadApplicationSettings();
             DevExpress.XtraEditors.WindowsFormsSettings.FormThickBorder = false;
             //DevExpress.XtraEditors.WindowsFormsSettings.ForceDirectXPaint();
-            DevExpress.Skins.SkinManager.EnableFormSkins();
+            SkinManager.EnableFormSkins();
 
             if (!String.IsNullOrEmpty(Properties.Settings.Default.SkinName))
                 DevExpress.LookAndFeel.UserLookAndFeel.Default.SetSkinStyle("The Bezier", Properties.Settings.Default.SvgPaletteName);//Properties.Settings.Default.SkinName

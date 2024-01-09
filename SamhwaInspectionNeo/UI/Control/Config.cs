@@ -27,10 +27,132 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.e문서저장.Text = this.d문서저장.SelectedPath;
             this.e사진저장.Text = this.d사진저장.SelectedPath;
 
+            this.e양품저장.IsOn = Global.환경설정.사진저장OK;
+            this.e불량저장.IsOn = Global.환경설정.사진저장NG;
+
+            this.e20Point검사.IsOn = Global.환경설정.슬롯부20Point검사;
+            this.e200Point검사.IsOn = Global.환경설정.슬롯부200Point검사;
+            this.e너비검사.IsOn = Global.환경설정.너비측정검사;
+            this.e높이검사.IsOn = Global.환경설정.높이측정검사;
+            this.e상부표면검사.IsOn = Global.환경설정.상부표면검사;
+            this.e하부표면검사.IsOn = Global.환경설정.하부표면검사;
+            this.e큰홀검사.IsOn = Global.환경설정.큰원치수측정검사;
+            this.e작은홀검사.IsOn = Global.환경설정.작은원치수측정검사;
+
             this.e기본경로.ButtonClick += E기본경로_ButtonClick;
             this.e문서저장.ButtonClick += E문서저장_ButtonClick;
             this.e사진저장.ButtonClick += E사진저장_ButtonClick;
             this.b설정저장.Click += b설정저장_Click;
+
+            this.e양품저장.Toggled += E양품저장_Toggled;
+            this.e불량저장.Toggled += E불량저장_Toggled;
+
+            this.e20Point검사.Toggled += E20Point검사_Toggled;
+            this.e200Point검사.Toggled += E200Point검사_Toggled;
+            this.e너비검사.Toggled += E너비검사_Toggled;
+            this.e높이검사.Toggled += E높이검사_Toggled;
+            this.e상부표면검사.Toggled += E상부표면검사_Toggled;
+            this.e하부표면검사.Toggled += E하부표면검사_Toggled;
+            this.e큰홀검사.Toggled += E큰홀검사_Toggled;
+            this.e작은홀검사.Toggled += E작은홀검사_Toggled;
+
+            검사설정초기화();
+        }
+
+        private void 검사설정초기화()
+        {
+            Global.VM제어.글로벌변수제어.InspectUseSet("높이검사Pass", Convert.ToInt32(Global.환경설정.높이측정검사).ToString());
+            Global.VM제어.글로벌변수제어.InspectUseSet("너비검사Pass", Convert.ToInt32(Global.환경설정.너비측정검사).ToString());
+            Global.VM제어.글로벌변수제어.InspectUseSet("작은홀검사Pass", Convert.ToInt32(Global.환경설정.작은원치수측정검사).ToString());
+            Global.VM제어.글로벌변수제어.InspectUseSet("큰홀검사Pass", Convert.ToInt32(Global.환경설정.큰원치수측정검사).ToString());
+            Global.VM제어.글로벌변수제어.InspectUseSet("하부표면검사Pass", Convert.ToInt32(Global.환경설정.하부표면검사).ToString());
+            Global.VM제어.글로벌변수제어.InspectUseSet("상부표면검사Pass", Convert.ToInt32(Global.환경설정.상부표면검사).ToString());
+            Global.VM제어.글로벌변수제어.InspectUseSet("슬롯부200Pass", Convert.ToInt32(Global.환경설정.슬롯부200Point검사).ToString());
+            Global.VM제어.글로벌변수제어.InspectUseSet("슬롯부20Pass", Convert.ToInt32(Global.환경설정.슬롯부20Point검사).ToString());
+            UpdateView();
+        }
+
+
+        private void E높이검사_Toggled(object sender, EventArgs e)
+        {
+            Global.환경설정.높이측정검사 = e높이검사.IsOn;
+            Global.VM제어.글로벌변수제어.InspectUseSet("높이검사Pass", Convert.ToInt32(Global.환경설정.높이측정검사).ToString());
+            UpdateView();
+        }
+
+        private void E너비검사_Toggled(object sender, EventArgs e)
+        {
+            Global.환경설정.너비측정검사 = e너비검사.IsOn;
+            Global.VM제어.글로벌변수제어.InspectUseSet("너비검사Pass", Convert.ToInt32(Global.환경설정.너비측정검사).ToString());
+            UpdateView();
+        }
+
+        private void E작은홀검사_Toggled(object sender, EventArgs e)
+        {
+            Global.환경설정.작은원치수측정검사 = e작은홀검사.IsOn;
+            Global.VM제어.글로벌변수제어.InspectUseSet("작은홀검사Pass", Convert.ToInt32(Global.환경설정.작은원치수측정검사).ToString());
+            UpdateView();
+        }
+
+        private void E큰홀검사_Toggled(object sender, EventArgs e)
+        {
+            Global.환경설정.큰원치수측정검사 = e큰홀검사.IsOn;
+            Global.VM제어.글로벌변수제어.InspectUseSet("큰홀검사Pass", Convert.ToInt32(Global.환경설정.큰원치수측정검사).ToString());
+            UpdateView();
+        }
+
+        private void E하부표면검사_Toggled(object sender, EventArgs e)
+        {
+            Global.환경설정.하부표면검사 = e하부표면검사.IsOn;
+            Global.VM제어.글로벌변수제어.InspectUseSet("하부표면검사Pass", Convert.ToInt32(Global.환경설정.하부표면검사).ToString());
+            UpdateView();
+        }
+
+        private void E상부표면검사_Toggled(object sender, EventArgs e)
+        {
+            Global.환경설정.상부표면검사 = e상부표면검사.IsOn;
+            Global.VM제어.글로벌변수제어.InspectUseSet("상부표면검사Pass", Convert.ToInt32(Global.환경설정.상부표면검사).ToString());
+            UpdateView();
+        }
+
+        private void E200Point검사_Toggled(object sender, EventArgs e)
+        {
+            Global.환경설정.슬롯부200Point검사 = e200Point검사.IsOn;
+            Global.VM제어.글로벌변수제어.InspectUseSet("슬롯부200Pass", Convert.ToInt32(Global.환경설정.슬롯부200Point검사).ToString());
+            UpdateView();
+        }
+
+        private void E20Point검사_Toggled(object sender, EventArgs e)
+        {
+            Global.환경설정.슬롯부20Point검사 = e20Point검사.IsOn;
+            Global.VM제어.글로벌변수제어.InspectUseSet("슬롯부20Pass", Convert.ToInt32(Global.환경설정.슬롯부20Point검사).ToString());
+            UpdateView();
+        }
+
+        private void UpdateView()
+        {
+            Global.VM제어.글로벌변수제어.Init();
+            Global.MainForm.e변수설정.UpdateGridView();
+        }
+
+        private void E불량저장_Toggled(object sender, EventArgs e)
+        {
+            if (e불량저장.IsOn)
+            {
+                Global.환경설정.사진저장NG = true;
+                return;
+            }
+            Global.환경설정.사진저장NG = false;
+        }
+
+        private void E양품저장_Toggled(object sender, EventArgs e)
+        {
+            if (e양품저장.IsOn)
+            {
+                Global.환경설정.사진저장OK = true;
+                return;
+            }
+            Global.환경설정.사진저장OK = false;
         }
 
         public void Close()
@@ -61,6 +183,7 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.bind환경설정.EndEdit();
             if (!MvUtils.Utils.Confirm(번역.저장확인, Localization.확인.GetString())) return;
             Global.환경설정.Save();
+            Global.VM제어.Save();
             Global.정보로그(환경설정.로그영역.GetString(), 번역.설정저장, 번역.저장완료, true);
         }
 

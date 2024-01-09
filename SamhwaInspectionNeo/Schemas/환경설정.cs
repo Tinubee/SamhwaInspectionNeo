@@ -65,6 +65,29 @@ namespace SamhwaInspectionNeo.Schemas
         [JsonIgnore, Description("티칭모드")]
         public Boolean 티칭모드 { get; set; } = false; // 활성화 시 사진 강제 저장 됨
 
+        [Description("큰원 치수 측정"), JsonProperty("BigCircleIns")]
+        public Boolean 큰원치수측정검사 { get; set; } = false;
+        [Description("작은원 치수 측정"), JsonProperty("SmallCircleIns")]
+        public Boolean 작은원치수측정검사 { get; set; } = false;
+        [Description("높이 측정"), JsonProperty("Height")]
+        public Boolean 높이측정검사 { get; set; } = false;
+        [Description("너비 측정"), JsonProperty("Width")]
+        public Boolean 너비측정검사 { get; set; } = false;
+        [Description("슬롯부 20Point 측정"), JsonProperty("Slot20PointIns")]
+        public Boolean 슬롯부20Point검사 { get; set; } = false;
+        [Description("슬롯부 200Point 측정"), JsonProperty("Slot200PointIns")]
+        public Boolean 슬롯부200Point검사 { get; set; } = false;
+        [Description("상부 표면검사"), JsonProperty("TopSurfaceIns")]
+        public Boolean 상부표면검사 { get; set; } = false;
+        [Description("하부 표면검사"), JsonProperty("BottomSurfaceIns")]
+        public Boolean 하부표면검사 { get; set; } = false;
+        [Description("50.5부 측정"), JsonProperty("50.5PointIns")]
+        public Boolean D50_5부측정 { get; set; } = false;
+        [Description("33.94부 측정"), JsonProperty("33.94PointIns")]
+        public Boolean D33_94부측정 { get; set; } = false;
+        [Description("15부 측정"), JsonProperty("15PointIns")]
+        public Boolean D15부측정 { get; set; } = false;
+
         public Boolean 권한여부(유저권한구분 요구권한)
         {
             return (Int32)사용권한 >= (Int32)요구권한;

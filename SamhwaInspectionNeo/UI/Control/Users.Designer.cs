@@ -84,12 +84,12 @@
             // 
             this.b유저저장.Appearance.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.b유저저장.Appearance.Options.UseFont = true;
-            this.b유저저장.Dock = System.Windows.Forms.DockStyle.Right;
+            this.b유저저장.Dock = System.Windows.Forms.DockStyle.Fill;
             this.b유저저장.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("b유저저장.ImageOptions.SvgImage")));
             this.b유저저장.ImageOptions.SvgImageSize = new System.Drawing.Size(24, 24);
-            this.b유저저장.Location = new System.Drawing.Point(1, 3);
+            this.b유저저장.Location = new System.Drawing.Point(3, 3);
             this.b유저저장.Name = "b유저저장";
-            this.b유저저장.Size = new System.Drawing.Size(642, 28);
+            this.b유저저장.Size = new System.Drawing.Size(640, 28);
             this.b유저저장.TabIndex = 1;
             this.b유저저장.Text = "저  장";
             // 
