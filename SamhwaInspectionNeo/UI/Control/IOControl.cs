@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static SamhwaInspectionNeo.Schemas.신호제어;
 
 namespace SamhwaInspectionNeo.UI.Control
 {
@@ -16,6 +17,14 @@ namespace SamhwaInspectionNeo.UI.Control
         public IOControl()
         {
             InitializeComponent();
+        }
+
+        public void Init()
+        {
+            ////MyGridView.SetFocusedRow(this.gridView1);
+            //this.customGrid1.DataSource = new 입력신호자료();
+            //this.입출변경알림();
+            //Global.신호제어.입출변경알림 += 입출변경알림;
         }
     }
 }

@@ -159,7 +159,7 @@ namespace SamhwaInspectionNeo.Schemas
         public 검사결과 검사결과계산(Int32 검사코드)
         {
             검사결과 검사;
-            if (Global.신호제어.자동모드여부 == 1)
+            if (Global.장치상태.자동수동)
             {
                 검사 = this.검사항목찾기(검사코드);
                 if (검사 == null)

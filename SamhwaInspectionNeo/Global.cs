@@ -44,6 +44,7 @@ namespace SamhwaInspectionNeo
             public static Boolean 카메라2 { get { return (그랩제어?.카메라2) != null && 그랩제어.카메라2.상태; } }
             public static Boolean 카메라3 { get { return (그랩제어?.카메라3) != null && 그랩제어.카메라3.상태; } }
             public static Boolean 카메라4 { get { return (그랩제어?.카메라4) != null && 그랩제어.카메라4.상태; } }
+            public static Boolean 자동수동 { get => Global.신호제어.자동모드여부; }
             //public static Boolean 조명장치 { get { return 조명제어.정상여부; } }
         }
 
@@ -70,7 +71,8 @@ namespace SamhwaInspectionNeo
                 그랩제어.Init();
                 모델자료.Init();
                 검사자료.Init();
-               
+
+                if (!신호제어.Open()) new Exception("PLC 서버에 연결할 수 없습니다.");
 
                 Global.정보로그(로그영역, "초기화", "시스템을 초기화 합니다.", false);
                 Initialized?.Invoke(null, true);
@@ -91,10 +93,13 @@ namespace SamhwaInspectionNeo
             {
                 로그자료?.Close();
                 환경설정?.Close();
-                //조명제어?.Close();
-                모델자료?.Close();
                 VM제어?.Close();
+                유저자료?.Close();
+                조명제어?.Close();
+                신호제어?.Close();
                 그랩제어?.Close();
+                모델자료?.Close();
+                검사자료?.Close();
                 Properties.Settings.Default.Save();
                 return true;
             }
@@ -107,7 +112,7 @@ namespace SamhwaInspectionNeo
 
         public static void Start()
         {
-
+            신호제어.Start();
         }
 
         public static void DxLocalization()
