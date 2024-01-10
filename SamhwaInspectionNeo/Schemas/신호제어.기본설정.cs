@@ -28,7 +28,7 @@ namespace SamhwaInspectionNeo.Schemas
         public Boolean 정상여부 = false;
 
         //private List<정보주소> 검사번호주소 = new List<정보주소> { 정보주소.이송장치1, 정보주소.검사지그1, 정보주소.이송장치2, 정보주소.검사지그2, 정보주소.이송장치3, 정보주소.검사지그3 };
-        private enum 정보주소 : Int32
+        public enum 정보주소 : Int32
         {
             [Address("W0010")]
             모델변경트리거,
@@ -80,7 +80,7 @@ namespace SamhwaInspectionNeo.Schemas
         private static Boolean ToBool(Int32 val) { return val != 0; }
         private static Int32 ToInt(Boolean val) { return val ? 1 : 0; }
         private Int32 정보읽기(정보주소 구분) { return this.입출자료.Get(구분); }
-        private Boolean 신호읽기(정보주소 구분) { return ToBool(this.입출자료.Get(구분)); }
+        public Boolean 신호읽기(정보주소 구분) { return ToBool(this.입출자료.Get(구분)); }
         private void 신호쓰기(정보주소 구분, Int32 val) { this.입출자료.Set(구분, val); }
         private void 신호쓰기(정보주소 구분, Boolean val) { this.입출자료.Set(구분, ToInt(val)); }
 
@@ -276,7 +276,7 @@ namespace SamhwaInspectionNeo.Schemas
         }
         private static BitArray FromUInt16(UInt16 val) => new BitArray(BitConverter.GetBytes(val));
 
-        private class AddressAttribute : Attribute
+        public class AddressAttribute : Attribute
         {
             public String Address = String.Empty;
             public Int32 Delay = 0;
@@ -288,7 +288,7 @@ namespace SamhwaInspectionNeo.Schemas
             }
         }
 
-        private class 통신정보
+        public class 통신정보
         {
             public 정보주소 구분;
             public Int32 순번 = 0;
@@ -327,7 +327,7 @@ namespace SamhwaInspectionNeo.Schemas
                 return true;
             }
         }
-        private class 통신자료 : Dictionary<정보주소, 통신정보>
+        public class 통신자료 : Dictionary<정보주소, 통신정보>
         {
             private Action<정보주소, Int32> Transmit;
             public String[] 주소목록;
@@ -410,5 +410,26 @@ namespace SamhwaInspectionNeo.Schemas
             }
         }
         #endregion
+
+        //public class 입력신호자료 : List<입력신호정보>
+        //{
+        //    public 입력신호자료()
+        //    {
+        //        foreach (신호제어.정보주소 번호 in typeof(신호제어.정보주소).GetEnumValues())
+        //        {
+        //            if (MvUtils.Utils.GetAttribute<TranslationAttribute>(번호) == null) continue;
+        //            this.Add(new 입력신호정보() { 구분 = 번호 });
+
+        //        }
+        //    }
+        //}
+
+        //public class 입력신호정보
+        //{
+        //    public 신호제어.정보주소 구분 { get; set; }
+        //    public Int32 번호 { get { return (Int32)구분; } }
+        //    public String 명칭 { get { return Localization.GetString(this.구분); } }
+        //    public Boolean 여부 { get { return Global.신호제어.신호읽기(구분); } }
+        //}
     }
 }

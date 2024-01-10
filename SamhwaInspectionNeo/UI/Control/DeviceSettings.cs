@@ -26,6 +26,7 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.e카메라.Init();
             this.e기본설정.Init();
             this.e유저관리.Init();
+            this.e입출신호.Init();
         }
 
         public void Close()

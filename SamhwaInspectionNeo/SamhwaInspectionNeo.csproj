@@ -496,6 +496,8 @@
     <None Include="Properties\DataSources\SamhwaInspectionNeo.Schemas.검사설정자료.datasource" />
     <None Include="Properties\DataSources\SamhwaInspectionNeo.Schemas.로그자료.datasource" />
     <None Include="Properties\DataSources\SamhwaInspectionNeo.Schemas.모델자료.datasource" />
+    <None Include="Properties\DataSources\SamhwaInspectionNeo.Schemas.신호제어.datasource" />
+    <None Include="Properties\DataSources\SamhwaInspectionNeo.UI.Control.IOControl.datasource" />
     <None Include="Properties\DataSources\SamhwaInspectionNeo.UI.Controls.State.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

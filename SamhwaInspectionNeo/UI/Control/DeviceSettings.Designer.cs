@@ -43,6 +43,7 @@
             this.e기본설정 = new SamhwaInspectionNeo.UI.Controls.Config();
             this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
             this.e유저관리 = new SamhwaInspectionNeo.UI.Controls.Users();
+            this.e입출신호 = new SamhwaInspectionNeo.UI.Control.IOControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).BeginInit();
             this.splitContainerControl1.Panel1.SuspendLayout();
@@ -107,6 +108,7 @@
             // 
             // xtraTabPage1
             // 
+            this.xtraTabPage1.Controls.Add(this.e입출신호);
             this.xtraTabPage1.Controls.Add(this.groupControl1);
             this.xtraTabPage1.Controls.Add(this.b캠트리거리셋);
             this.xtraTabPage1.Name = "xtraTabPage1";
@@ -206,6 +208,14 @@
             this.e유저관리.Size = new System.Drawing.Size(620, 370);
             this.e유저관리.TabIndex = 0;
             // 
+            // e입출신호
+            // 
+            this.e입출신호.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.e입출신호.Location = new System.Drawing.Point(0, 195);
+            this.e입출신호.Name = "e입출신호";
+            this.e입출신호.Size = new System.Drawing.Size(620, 755);
+            this.e입출신호.TabIndex = 6;
+            // 
             // DeviceSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -251,5 +261,6 @@
         private Config e기본설정;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage3;
         private Users e유저관리;
+        private Control.IOControl e입출신호;
     }
 }
