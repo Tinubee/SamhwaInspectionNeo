@@ -150,6 +150,7 @@ namespace SamhwaInspectionNeo.Schemas
             catch (Exception ex)
             {
                 Global.오류로그(로그영역, "카메라 연결 실패", "카메라 연결 작업에 실패하였습니다.", true);
+                Global.오류로그(로그영역, "카메라 연결 실패", $"{ex.Message}", true);
                 return false;
             }
 

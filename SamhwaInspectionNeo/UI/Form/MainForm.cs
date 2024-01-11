@@ -79,9 +79,8 @@ namespace SamhwaInspectionNeo
             this.TabFormControl.AllowMoveTabs = false;
             this.TabFormControl.AllowMoveTabsToOuterForm = false;
 
-            //if (Global.환경설정.동작구분 == 동작구분.Live)
-            //    this.WindowState = FormWindowState.Maximized;
-            //this.ShowHideControl();
+            if (Global.환경설정.동작구분 == 동작구분.Live)
+                this.WindowState = FormWindowState.Maximized;
 
             if (Global.환경설정.동작구분 != 동작구분.Live) return;
 

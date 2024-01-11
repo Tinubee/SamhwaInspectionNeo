@@ -21,6 +21,8 @@ namespace SamhwaInspectionNeo.UI.Control
 
         public void Init()
         {
+            if (Global.VM제어.Count == 0) return;
+
             this.Flow1Viewer.ModuleSource = Global.VM제어.GetItem(Flow구분.Flow1).graphicsSetModuleTool;
             this.Flow2Viewer.ModuleSource = Global.VM제어.GetItem(Flow구분.Flow2).graphicsSetModuleTool;
             this.Flow3Viewer.ModuleSource = Global.VM제어.GetItem(Flow구분.Flow3).graphicsSetModuleTool;

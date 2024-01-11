@@ -15,7 +15,7 @@ namespace SamhwaInspectionNeo.Schemas
     public partial class 신호제어
     {
         public event Global.BaseEvent 동작상태알림;
-        public event Global.BaseEvent 통신상태알림;
+        //public event Global.BaseEvent 통신상태알림;
         public event Global.BaseEvent 검사위치알림;
 
         #region 기본상수 및 멤버
