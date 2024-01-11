@@ -103,7 +103,7 @@
             // 
             this.타이틀.Caption = "Samhwa Busbar Inspection";
             this.타이틀.Id = 0;
-            this.타이틀.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("타이틀.ImageOptions.SvgImage")));
+            this.타이틀.ImageOptions.SvgImage = global::SamhwaInspectionNeo.Properties.Resources.vision;
             this.타이틀.Name = "타이틀";
             this.타이틀.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             // 

@@ -81,6 +81,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1482, 979);
             this.Controls.Add(this.tablePanel1);
+            this.IconOptions.SvgImage = global::SamhwaInspectionNeo.Properties.Resources.customizegrid;
             this.Name = "Teaching";
             this.Text = "Teaching";
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
