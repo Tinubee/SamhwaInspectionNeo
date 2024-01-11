@@ -43,6 +43,7 @@
             this.col권한 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col허용 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.repositoryItemToggleSwitch1 = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
             ((System.ComponentModel.ISupportInitialize)(this.bind유저정보)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.g유저관리)).BeginInit();
             this.g유저관리.SuspendLayout();
@@ -52,6 +53,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.GridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e암호)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemToggleSwitch1)).BeginInit();
             this.SuspendLayout();
             // 
             // bind유저정보
@@ -101,7 +103,8 @@
             this.GridControl1.MainView = this.GridView1;
             this.GridControl1.Name = "GridControl1";
             this.GridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.e암호});
+            this.e암호,
+            this.repositoryItemToggleSwitch1});
             this.GridControl1.Size = new System.Drawing.Size(646, 341);
             this.GridControl1.TabIndex = 0;
             this.GridControl1.UseDirectXPaint = DevExpress.Utils.DefaultBoolean.True;
@@ -194,6 +197,7 @@
             // 
             this.col허용.AppearanceHeader.Options.UseTextOptions = true;
             this.col허용.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.col허용.ColumnEdit = this.repositoryItemToggleSwitch1;
             this.col허용.FieldName = "허용";
             this.col허용.Name = "col허용";
             this.col허용.Visible = true;
@@ -203,6 +207,13 @@
             // 
             this.barManager1.DockingEnabled = false;
             this.barManager1.Form = this;
+            // 
+            // repositoryItemToggleSwitch1
+            // 
+            this.repositoryItemToggleSwitch1.AutoHeight = false;
+            this.repositoryItemToggleSwitch1.Name = "repositoryItemToggleSwitch1";
+            this.repositoryItemToggleSwitch1.OffText = "Off";
+            this.repositoryItemToggleSwitch1.OnText = "On";
             // 
             // Users
             // 
@@ -220,6 +231,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.GridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e암호)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemToggleSwitch1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -239,5 +251,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn col권한;
         private DevExpress.XtraGrid.Columns.GridColumn col허용;
         private DevExpress.XtraBars.BarManager barManager1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch repositoryItemToggleSwitch1;
     }
 }
