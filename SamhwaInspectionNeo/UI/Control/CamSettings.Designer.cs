@@ -44,25 +44,24 @@
             this.col켜짐 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.e조명켜짐 = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.bind카메라설정 = new System.Windows.Forms.BindingSource(this.components);
+            this.bind조명설정 = new System.Windows.Forms.BindingSource(this.components);
             this.GridControl1 = new MvUtils.CustomGrid();
             this.GridView1 = new MvUtils.CustomView();
             this.col구분 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.col번호 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col코드 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.col명칭 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col설명1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.col주소 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col시간 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col노출 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.col대비 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.e대비 = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             this.col밝기 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.e밝기 = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
+            this.col대비 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col가로 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col세로 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colOffsetX = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.col주소 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col상태 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.e상태 = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
-            this.bind카메라설정 = new System.Windows.Forms.BindingSource(this.components);
-            this.bind조명설정 = new System.Windows.Forms.BindingSource(this.components);
+            this.repositoryItemToggleSwitch1 = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
@@ -73,13 +72,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.e조명켜짐)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.GridControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.e대비)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.e밝기)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.e상태)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bind카메라설정)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bind조명설정)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GridControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemToggleSwitch1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl1
@@ -271,21 +268,21 @@
             this.groupControl2.TabIndex = 11;
             this.groupControl2.Text = "Cameras";
             // 
+            // bind카메라설정
+            // 
+            this.bind카메라설정.DataSource = typeof(SamhwaInspectionNeo.Schemas.카메라장치);
+            // 
             // GridControl1
             // 
+            this.GridControl1.DataSource = this.bind카메라설정;
             this.GridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.GridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.GridControl1.Location = new System.Drawing.Point(2, 27);
             this.GridControl1.MainView = this.GridView1;
-            this.GridControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.GridControl1.Name = "GridControl1";
             this.GridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.e상태,
-            this.e대비,
-            this.e밝기});
+            this.repositoryItemToggleSwitch1});
             this.GridControl1.Size = new System.Drawing.Size(936, 340);
-            this.GridControl1.TabIndex = 8;
-            this.GridControl1.UseDirectXPaint = DevExpress.Utils.DefaultBoolean.True;
+            this.GridControl1.TabIndex = 0;
             this.GridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.GridView1});
             // 
@@ -301,42 +298,34 @@
             this.GridView1.Caption = "";
             this.GridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.col구분,
+            this.col번호,
             this.col코드,
+            this.col명칭,
             this.col설명1,
+            this.col주소,
             this.col시간,
             this.col노출,
-            this.col대비,
             this.col밝기,
+            this.col대비,
             this.col가로,
             this.col세로,
-            this.colOffsetX,
-            this.col주소,
             this.col상태});
-            this.GridView1.DetailHeight = 288;
-            this.GridView1.FooterPanelHeight = 17;
+            this.GridView1.FooterPanelHeight = 21;
             this.GridView1.GridControl = this.GridControl1;
-            this.GridView1.GroupRowHeight = 17;
+            this.GridView1.GroupRowHeight = 21;
             this.GridView1.IndicatorWidth = 44;
             this.GridView1.MinColumnRowHeight = 24;
-            this.GridView1.MinRowHeight = 16;
+            this.GridView1.MinRowHeight = 18;
             this.GridView1.Name = "GridView1";
+            this.GridView1.OptionsBehavior.Editable = false;
             this.GridView1.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
-            this.GridView1.OptionsCustomization.AllowColumnMoving = false;
-            this.GridView1.OptionsCustomization.AllowFilter = false;
-            this.GridView1.OptionsCustomization.AllowGroup = false;
-            this.GridView1.OptionsCustomization.AllowMergedGrouping = DevExpress.Utils.DefaultBoolean.False;
-            this.GridView1.OptionsCustomization.AllowQuickHideColumns = false;
-            this.GridView1.OptionsCustomization.AllowSort = false;
-            this.GridView1.OptionsFilter.AllowFilterEditor = false;
             this.GridView1.OptionsFilter.UseNewCustomFilterDialog = true;
             this.GridView1.OptionsNavigation.EnterMoveNextColumn = true;
             this.GridView1.OptionsPrint.AutoWidth = false;
             this.GridView1.OptionsPrint.UsePrintStyles = false;
             this.GridView1.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.False;
-            this.GridView1.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom;
-            this.GridView1.OptionsView.ShowGroupPanel = false;
             this.GridView1.OptionsView.ShowIndicator = false;
-            this.GridView1.RowHeight = 16;
+            this.GridView1.RowHeight = 20;
             // 
             // col구분
             // 
@@ -347,6 +336,15 @@
             this.col구분.Visible = true;
             this.col구분.VisibleIndex = 0;
             // 
+            // col번호
+            // 
+            this.col번호.AppearanceHeader.Options.UseTextOptions = true;
+            this.col번호.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.col번호.FieldName = "번호";
+            this.col번호.Name = "col번호";
+            this.col번호.Visible = true;
+            this.col번호.VisibleIndex = 1;
+            // 
             // col코드
             // 
             this.col코드.AppearanceHeader.Options.UseTextOptions = true;
@@ -354,7 +352,16 @@
             this.col코드.FieldName = "코드";
             this.col코드.Name = "col코드";
             this.col코드.Visible = true;
-            this.col코드.VisibleIndex = 1;
+            this.col코드.VisibleIndex = 2;
+            // 
+            // col명칭
+            // 
+            this.col명칭.AppearanceHeader.Options.UseTextOptions = true;
+            this.col명칭.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.col명칭.FieldName = "명칭";
+            this.col명칭.Name = "col명칭";
+            this.col명칭.Visible = true;
+            this.col명칭.VisibleIndex = 3;
             // 
             // col설명1
             // 
@@ -363,148 +370,87 @@
             this.col설명1.FieldName = "설명";
             this.col설명1.Name = "col설명1";
             this.col설명1.Visible = true;
-            this.col설명1.VisibleIndex = 2;
+            this.col설명1.VisibleIndex = 4;
+            // 
+            // col주소
+            // 
+            this.col주소.AppearanceHeader.Options.UseTextOptions = true;
+            this.col주소.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.col주소.FieldName = "주소";
+            this.col주소.Name = "col주소";
+            this.col주소.Visible = true;
+            this.col주소.VisibleIndex = 5;
             // 
             // col시간
             // 
             this.col시간.AppearanceHeader.Options.UseTextOptions = true;
             this.col시간.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.col시간.Caption = "Timeout";
-            this.col시간.DisplayFormat.FormatString = "{0:#,0}";
-            this.col시간.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.col시간.FieldName = "시간";
             this.col시간.Name = "col시간";
-            this.col시간.ToolTip = "취득 대기시간(ms)";
+            this.col시간.Visible = true;
+            this.col시간.VisibleIndex = 6;
             // 
             // col노출
             // 
             this.col노출.AppearanceHeader.Options.UseTextOptions = true;
             this.col노출.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.col노출.Caption = "Exposure";
-            this.col노출.DisplayFormat.FormatString = "{0:#,0}";
-            this.col노출.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.col노출.FieldName = "노출";
             this.col노출.Name = "col노출";
-            // 
-            // col대비
-            // 
-            this.col대비.AppearanceHeader.Options.UseTextOptions = true;
-            this.col대비.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.col대비.Caption = "Contrast";
-            this.col대비.ColumnEdit = this.e대비;
-            this.col대비.DisplayFormat.FormatString = "{0:#,0}";
-            this.col대비.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.col대비.FieldName = "대비";
-            this.col대비.Name = "col대비";
-            // 
-            // e대비
-            // 
-            this.e대비.AutoHeight = false;
-            this.e대비.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.e대비.IsFloatValue = false;
-            this.e대비.MaskSettings.Set("mask", "N00");
-            this.e대비.MaxValue = new decimal(new int[] {
-            19,
-            0,
-            0,
-            0});
-            this.e대비.Name = "e대비";
+            this.col노출.Visible = true;
+            this.col노출.VisibleIndex = 7;
             // 
             // col밝기
             // 
             this.col밝기.AppearanceHeader.Options.UseTextOptions = true;
             this.col밝기.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.col밝기.Caption = "Black Level";
-            this.col밝기.ColumnEdit = this.e밝기;
-            this.col밝기.DisplayFormat.FormatString = "{0:#,0}";
-            this.col밝기.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.col밝기.FieldName = "밝기";
             this.col밝기.Name = "col밝기";
             this.col밝기.Visible = true;
-            this.col밝기.VisibleIndex = 3;
+            this.col밝기.VisibleIndex = 8;
             // 
-            // e밝기
+            // col대비
             // 
-            this.e밝기.AutoHeight = false;
-            this.e밝기.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.e밝기.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.e밝기.IsFloatValue = false;
-            this.e밝기.MaskSettings.Set("mask", "N00");
-            this.e밝기.MaxValue = new decimal(new int[] {
-            4095,
-            0,
-            0,
-            0});
-            this.e밝기.Name = "e밝기";
+            this.col대비.AppearanceHeader.Options.UseTextOptions = true;
+            this.col대비.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.col대비.FieldName = "대비";
+            this.col대비.Name = "col대비";
+            this.col대비.Visible = true;
+            this.col대비.VisibleIndex = 9;
             // 
             // col가로
             // 
             this.col가로.AppearanceHeader.Options.UseTextOptions = true;
             this.col가로.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.col가로.DisplayFormat.FormatString = "{0:#,#}";
-            this.col가로.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.col가로.FieldName = "가로";
             this.col가로.Name = "col가로";
             this.col가로.Visible = true;
-            this.col가로.VisibleIndex = 6;
+            this.col가로.VisibleIndex = 10;
             // 
             // col세로
             // 
             this.col세로.AppearanceHeader.Options.UseTextOptions = true;
             this.col세로.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.col세로.DisplayFormat.FormatString = "{0:#,#}";
-            this.col세로.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.col세로.FieldName = "세로";
             this.col세로.Name = "col세로";
             this.col세로.Visible = true;
-            this.col세로.VisibleIndex = 7;
-            // 
-            // colOffsetX
-            // 
-            this.colOffsetX.AppearanceHeader.Options.UseTextOptions = true;
-            this.colOffsetX.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.colOffsetX.DisplayFormat.FormatString = "{0:#,#}";
-            this.colOffsetX.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.colOffsetX.FieldName = "OffsetX";
-            this.colOffsetX.Name = "colOffsetX";
-            this.colOffsetX.Visible = true;
-            this.colOffsetX.VisibleIndex = 8;
-            // 
-            // col주소
-            // 
-            this.col주소.AppearanceCell.Options.UseTextOptions = true;
-            this.col주소.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.col주소.AppearanceHeader.Options.UseTextOptions = true;
-            this.col주소.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.col주소.FieldName = "주소";
-            this.col주소.Name = "col주소";
-            this.col주소.OptionsColumn.AllowEdit = false;
-            this.col주소.Visible = true;
-            this.col주소.VisibleIndex = 4;
+            this.col세로.VisibleIndex = 11;
             // 
             // col상태
             // 
             this.col상태.AppearanceHeader.Options.UseTextOptions = true;
             this.col상태.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.col상태.ColumnEdit = this.e상태;
+            this.col상태.ColumnEdit = this.repositoryItemToggleSwitch1;
             this.col상태.FieldName = "상태";
             this.col상태.Name = "col상태";
-            this.col상태.OptionsColumn.AllowEdit = false;
             this.col상태.Visible = true;
-            this.col상태.VisibleIndex = 5;
+            this.col상태.VisibleIndex = 12;
             // 
-            // e상태
+            // repositoryItemToggleSwitch1
             // 
-            this.e상태.AutoHeight = false;
-            this.e상태.Name = "e상태";
-            this.e상태.OffText = "Off";
-            this.e상태.OnText = "On";
+            this.repositoryItemToggleSwitch1.AutoHeight = false;
+            this.repositoryItemToggleSwitch1.Name = "repositoryItemToggleSwitch1";
+            this.repositoryItemToggleSwitch1.OffText = "Off";
+            this.repositoryItemToggleSwitch1.OnText = "On";
             // 
             // CamSettings
             // 
@@ -526,13 +472,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.e조명켜짐)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.GridControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.e대비)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.e밝기)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.e상태)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bind카메라설정)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bind조명설정)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GridControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemToggleSwitch1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -553,24 +497,23 @@
         private DevExpress.XtraGrid.Columns.GridColumn col켜짐;
         private DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch e조명켜짐;
         private DevExpress.XtraEditors.GroupControl groupControl2;
+        private System.Windows.Forms.BindingSource bind카메라설정;
+        private System.Windows.Forms.BindingSource bind조명설정;
         private MvUtils.CustomGrid GridControl1;
         private MvUtils.CustomView GridView1;
         private DevExpress.XtraGrid.Columns.GridColumn col구분;
+        private DevExpress.XtraGrid.Columns.GridColumn col번호;
         private DevExpress.XtraGrid.Columns.GridColumn col코드;
+        private DevExpress.XtraGrid.Columns.GridColumn col명칭;
         private DevExpress.XtraGrid.Columns.GridColumn col설명1;
+        private DevExpress.XtraGrid.Columns.GridColumn col주소;
         private DevExpress.XtraGrid.Columns.GridColumn col시간;
         private DevExpress.XtraGrid.Columns.GridColumn col노출;
-        private DevExpress.XtraGrid.Columns.GridColumn col대비;
-        private DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit e대비;
         private DevExpress.XtraGrid.Columns.GridColumn col밝기;
-        private DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit e밝기;
+        private DevExpress.XtraGrid.Columns.GridColumn col대비;
         private DevExpress.XtraGrid.Columns.GridColumn col가로;
         private DevExpress.XtraGrid.Columns.GridColumn col세로;
-        private DevExpress.XtraGrid.Columns.GridColumn colOffsetX;
-        private DevExpress.XtraGrid.Columns.GridColumn col주소;
         private DevExpress.XtraGrid.Columns.GridColumn col상태;
-        private DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch e상태;
-        private System.Windows.Forms.BindingSource bind카메라설정;
-        private System.Windows.Forms.BindingSource bind조명설정;
+        private DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch repositoryItemToggleSwitch1;
     }
 }

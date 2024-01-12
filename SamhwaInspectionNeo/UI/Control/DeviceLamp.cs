@@ -5,13 +5,16 @@ using System.Diagnostics;
 using SamhwaInspectionNeo.Schemas;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.Threading;
 
 namespace SamhwaInspectionNeo.UI.Controls
 {
     public partial class DeviceLamp : XtraUserControl
     {
         private const String 로그영역 = "장치상태표시";
+        private LocalizationConfig 번역 = new LocalizationConfig();
         private Int32 구분;
+        private Int32 촬영횟수;
         public DeviceLamp()
         {
             InitializeComponent();
@@ -45,24 +48,34 @@ namespace SamhwaInspectionNeo.UI.Controls
         {
             try
             {
-                SvgImageBox bx = sender as SvgImageBox;
-                구분 = (int)bx.Tag;
-                if (구분 == 1) return;
-                HikeGigE 장치 = Global.그랩제어.GetItem((카메라구분)구분) as HikeGigE;
+                if (!MvUtils.Utils.Confirm(번역.수동촬영, Localization.확인.GetString())) return;
 
-                Task.Run(() =>
+                SvgImageBox bx = sender as SvgImageBox;
+                구분 = Convert.ToInt32(bx.Tag);
+                if (구분 == 1) return;
+                if (구분 == 2) this.촬영횟수 = 1;
+                else this.촬영횟수 = 6;
+
+                HikeGigE 장치 = Global.그랩제어.GetItem((카메라구분)구분) as HikeGigE;
+                //트리거소스 소프트웨어 트리거로 변경.
+
+                for (int lop = 0; lop < this.촬영횟수; lop++)
                 {
-                    //트리거소스 소프트웨어 트리거로 변경.
-                    장치.TrigSource = MvCamCtrl.NET.CameraParams.MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_SOFTWARE;
-                    장치.트리거소스적용();
-                    //카메라 그랩스타트.
-                    장치.Ready();
-                    //소프트웨어 트리거 날리기.
+                    if (장치.MatImage.Count == 0)
+                    {
+                        장치.TrigSource = MvCamCtrl.NET.CameraParams.MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_SOFTWARE;
+                        장치.트리거소스적용();
+                        장치.Ready();
+                    }
+                    Thread.Sleep(200);
                     장치.TrigForce();
-                    //트리거소스 LINE0 으로 변경.
-                    장치.TrigSource = MvCamCtrl.NET.CameraParams.MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_LINE0;
-                    장치.트리거소스적용();
-                });
+                  
+                    if(lop == 5)
+                    {
+                        장치.TrigSource = MvCamCtrl.NET.CameraParams.MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_LINE0;
+                        장치.트리거소스적용();
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -127,6 +140,17 @@ namespace SamhwaInspectionNeo.UI.Controls
                 else if (상태 == 상태구분.오류) this.도구.SvgImage = this.오류;
                 else if (상태 == 상태구분.대기) this.도구.SvgImage = this.대기;
             }
+        }
+
+        private class LocalizationConfig
+        {
+            private enum Items
+            {
+                [Translation("do you want proceed with manual shot?", "수동촬영을 진행하시겠습니까?")]
+                수동촬영,
+            }
+
+            public String 수동촬영 { get { return Localization.GetString(Items.수동촬영); } }
         }
     }
 }

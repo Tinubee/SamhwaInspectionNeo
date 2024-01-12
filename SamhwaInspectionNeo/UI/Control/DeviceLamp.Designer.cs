@@ -79,6 +79,7 @@
             // e카메라4
             // 
             this.tablePanel1.SetColumn(this.e카메라4, 3);
+            this.e카메라4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.e카메라4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.e카메라4.Location = new System.Drawing.Point(151, 52);
             this.e카메라4.Name = "e카메라4";
@@ -104,6 +105,7 @@
             // 
             // e카메라1
             // 
+            this.e카메라1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.e카메라1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.e카메라1.Location = new System.Drawing.Point(4, 52);
             this.e카메라1.Name = "e카메라1";
@@ -117,6 +119,7 @@
             // 
             // e카메라3
             // 
+            this.e카메라3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.e카메라3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.e카메라3.Location = new System.Drawing.Point(102, 52);
             this.e카메라3.Name = "e카메라3";
@@ -142,6 +145,7 @@
             // 
             // e카메라2
             // 
+            this.e카메라2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.e카메라2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.e카메라2.Location = new System.Drawing.Point(53, 52);
             this.e카메라2.Name = "e카메라2";

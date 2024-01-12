@@ -38,6 +38,8 @@ namespace SamhwaInspectionNeo.UI.Control
             this.GridView1.AddEditSelectionMenuItem();
             this.GridView1.AddSelectPopMenuItems();
             this.GridView1.AddDeleteMenuItem(DeleteClick);
+            this.GridView1.CellValueChanged += GridView1_CellValueChanged;
+
             this.col최소값.DisplayFormat.FormatString = Global.환경설정.결과표현;
             this.col최대값.DisplayFormat.FormatString = Global.환경설정.결과표현;
             this.col기준값.DisplayFormat.FormatString = Global.환경설정.결과표현;
@@ -56,6 +58,13 @@ namespace SamhwaInspectionNeo.UI.Control
             //this.모델선택(this.e모델선택, (DevExpress.XtraEditors.Controls.ChangingEventArgs)EventArgs.Empty);
             this.b도구설정.Click += B도구설정_Click;
             Loading = false;
+        }
+
+        private void GridView1_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            GridView view = sender as GridView;
+            
+            //throw new NotImplementedException();
         }
 
         public void Close() { }

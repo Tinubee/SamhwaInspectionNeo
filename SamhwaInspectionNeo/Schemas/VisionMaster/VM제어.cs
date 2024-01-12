@@ -110,7 +110,6 @@ namespace SamhwaInspectionNeo.Schemas
         public GraphicsSetModuleTool graphicsSetModuleTool;
         public ShellModuleTool shellModuleTool;
 
-        public List<ImageSourceModuleTool> imageSourceModuleToolList;
         public List<GraphicsSetModuleTool> graphicsSetModuleToolList;
         public List<ShellModuleTool> shellModuleToolList;
 
@@ -135,20 +134,19 @@ namespace SamhwaInspectionNeo.Schemas
             {
                 if (this.구분 == Flow구분.상부표면검사 || this.구분 == Flow구분.하부표면검사)
                 {
-                    this.imageSourceModuleToolList = new List<ImageSourceModuleTool>();
                     this.graphicsSetModuleToolList = new List<GraphicsSetModuleTool>();
                     this.shellModuleToolList = new List<ShellModuleTool>();
 
                     foreach (var item in this.Procedure.Modules)
                     {
-                        if (item.GetType() == typeof(ImageSourceModuleTool)) this.imageSourceModuleToolList.Add(item as ImageSourceModuleTool);
+                        if (item.GetType() == typeof(ImageSourceModuleTool))
+                        {
+                            this.imageSourceModuleTool = this.Procedure["InputImage"] as ImageSourceModuleTool;
+                            this.imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;
+                        }
                         else if (item.GetType() == typeof(GraphicsSetModuleTool)) this.graphicsSetModuleToolList.Add(item as GraphicsSetModuleTool);
                         else if (item.GetType() == typeof(ShellModuleTool)) this.shellModuleToolList.Add(item as ShellModuleTool);
                     }
-
-                    foreach (ImageSourceModuleTool imageSourceModuleTool in this.imageSourceModuleToolList)
-                        imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;
-
                 }
                 else
                 {
@@ -164,6 +162,8 @@ namespace SamhwaInspectionNeo.Schemas
 
         private void SetResult(Flow구분 구분) //결과체크 추가해줘야됨.
         {
+            if (구분 == Flow구분.상부표면검사 || 구분 == Flow구분.하부표면검사) return;
+
             ShellModuleTool shell = Global.VM제어.GetItem(구분).shellModuleTool;
             for (int i = 6; i < shell.Outputs.Count; i++)
             {
@@ -189,25 +189,40 @@ namespace SamhwaInspectionNeo.Schemas
             }
         }
 
-        public Boolean Run(Mat mat, ImageBaseData imageBaseData)
+        public Boolean Run(Mat mat, ImageBaseData imageBaseData, int 순서)
         {
             this.결과 = false;
             //this.결과업데이트완료 = false;
-            if (this.imageSourceModuleTool == null)
-            {
-                Global.오류로그(로그영역, "검사오류", $"[{this.구분}] VM 검사 모델이 없습니다.", false);
-                return false;
-            }
             try
             {
-                imageBaseData = mat == null ? imageBaseData : MatToImageBaseData(mat);
+                if (this.구분 == Flow구분.상부표면검사 || this.구분 == Flow구분.하부표면검사)
+                {
+                    if (this.imageSourceModuleTool == null)
+                    {
+                        Global.오류로그(로그영역, "검사오류", $"[{this.구분}] VM 검사 모델이 없습니다.", false);
+                        return false;
+                    }
+                    imageBaseData = mat == null ? imageBaseData : MatToImageBaseData(mat);
+                    this.imageSourceModuleTool.SetImageData(imageBaseData);
+                    this.Procedure.Run();
+                    this.SetResult(this.구분);
 
-                this.imageSourceModuleTool.SetImageData(imageBaseData);
+                    return true;
+                }
+                else
+                {
+                    if (this.imageSourceModuleTool == null)
+                    {
+                        Global.오류로그(로그영역, "검사오류", $"[{this.구분}] VM 검사 모델이 없습니다.", false);
+                        return false;
+                    }
+                    imageBaseData = mat == null ? imageBaseData : MatToImageBaseData(mat);
+                    this.imageSourceModuleTool.SetImageData(imageBaseData);
+                    this.Procedure.Run();
+                    this.SetResult(this.구분);
 
-                this.Procedure.Run();
-                this.SetResult(this.구분);
-
-                return true;
+                    return true;
+                }
             }
             catch (Exception ex)
             {

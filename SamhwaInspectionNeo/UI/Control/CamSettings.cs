@@ -64,8 +64,8 @@ namespace SamhwaInspectionNeo.UI.Controls
             if (장치 == null) return;
             GridControl1.EmbeddedNavigator.Buttons.DoClick(GridControl1.EmbeddedNavigator.Buttons.EndEdit);
             if (e.Column.FieldName == this.col밝기.FieldName) 장치.밝기적용();
-            //else if (e.Column.FieldName == this.col대비.FieldName) 장치.대비적용();
-            //else if (e.Column.FieldName == this.col노출.FieldName) 장치.노출적용();
+            else if (e.Column.FieldName == this.col대비.FieldName) 장치.대비적용();
+            else if (e.Column.FieldName == this.col노출.FieldName) 장치.노출적용();
         }
 
         private void GridView2_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
