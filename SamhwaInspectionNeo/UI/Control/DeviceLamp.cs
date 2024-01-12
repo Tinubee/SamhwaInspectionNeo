@@ -3,11 +3,15 @@ using MvUtils;
 using System;
 using System.Diagnostics;
 using SamhwaInspectionNeo.Schemas;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace SamhwaInspectionNeo.UI.Controls
 {
     public partial class DeviceLamp : XtraUserControl
     {
+        private const String 로그영역 = "장치상태표시";
+        private Int32 구분;
         public DeviceLamp()
         {
             InitializeComponent();
@@ -30,6 +34,41 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.카메라4 = new 장치상태(this.e카메라4);
             //Global.장치통신.통신상태알림 += 통신상태알림;
             this.통신상태알림();
+
+            this.e카메라1.Click += 수동촬영;
+            this.e카메라2.Click += 수동촬영;
+            this.e카메라3.Click += 수동촬영;
+            this.e카메라4.Click += 수동촬영;
+        }
+
+        private void 수동촬영(object sender, EventArgs e)
+        {
+            try
+            {
+                SvgImageBox bx = sender as SvgImageBox;
+                구분 = (int)bx.Tag;
+                if (구분 == 1) return;
+                HikeGigE 장치 = Global.그랩제어.GetItem((카메라구분)구분) as HikeGigE;
+
+                Task.Run(() =>
+                {
+                    //트리거소스 소프트웨어 트리거로 변경.
+                    장치.TrigSource = MvCamCtrl.NET.CameraParams.MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_SOFTWARE;
+                    장치.트리거소스적용();
+                    //카메라 그랩스타트.
+                    장치.Ready();
+                    //소프트웨어 트리거 날리기.
+                    장치.TrigForce();
+                    //트리거소스 LINE0 으로 변경.
+                    장치.TrigSource = MvCamCtrl.NET.CameraParams.MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_LINE0;
+                    장치.트리거소스적용();
+                });
+            }
+            catch (Exception ex)
+            {
+                Global.오류로그(로그영역, "수동촬영오류", $"{(카메라구분)구분} 수동촬영에 실패하였습니다.\n" + ex.Message, true);
+            }
+
         }
 
         private void 통신상태알림()

@@ -339,6 +339,10 @@ namespace SamhwaInspectionNeo.Schemas
         private cbOutputExdelegate ImageCallBackDelegate;
         [JsonIgnore]
         public uint ImageCount = 6;
+        [JsonIgnore, Description("Trig Mode")]
+        public MV_CAM_TRIGGER_MODE TrigMode { get; set; } = MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_ON;
+        [JsonIgnore, Description("Trig Source")]
+        public MV_CAM_TRIGGER_SOURCE TrigSource { get; set; } = MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_LINE0;
         public Boolean Init(CGigECameraInfo info)
         {
             try
@@ -377,6 +381,7 @@ namespace SamhwaInspectionNeo.Schemas
             그랩제어.Validate("", this.Camera.SetBoolValue("BlackLevelEnable", true), false);
 
             this.Camera.SetImageNodeNum(ImageCount);
+            this.Camera.SetEnumValue("TriggerMode", (uint)MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_ON);
             this.옵션적용();
 
             Global.정보로그(로그영역, "카메라 연결", $"[{this.구분}] 카메라 연결 성공!", false);
@@ -390,6 +395,8 @@ namespace SamhwaInspectionNeo.Schemas
             this.노출적용();
             this.대비적용();
             this.밝기적용();
+            this.트리거모드적용();
+            this.트리거소스적용();
         }
 
         public void 밝기적용() // Black Level : 0 ~ 4095
@@ -411,6 +418,34 @@ namespace SamhwaInspectionNeo.Schemas
             Int32 nRet = this.Camera.SetFloatValue("Gain", this.대비);
             그랩제어.Validate($"[{this.구분}] 대비 설정에 실패하였습니다.", nRet, true);
         }
+
+        public void 트리거모드적용()
+        {
+            if (this.Camera == null) return;
+            Int32 nRet = this.Camera.SetEnumValue("TriggerMode", (uint)this.TrigMode);
+            그랩제어.Validate($"[{this.구분}] 트리거모드 설정에 실패하였습니다.", nRet, true);
+        }
+
+        public void 트리거소스적용()
+        {
+            if (this.Camera == null) return;
+            Int32 nRet = this.Camera.SetEnumValue("TriggerSource", (uint)this.TrigSource);
+            그랩제어.Validate($"[{this.구분}] 트리거소스 설정에 실패하였습니다.", nRet, true);
+        }
+
+        //public void 소프트웨어트리거모드()
+        //{
+        //    if (this.Camera == null) return;
+        //    Int32 nRet = this.Camera.SetEnumValue("TriggerSource", (uint)MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_SOFTWARE);
+        //    그랩제어.Validate($"[{this.구분}] 소프트웨어트리거 모드 설정에 실패하였습니다.", nRet, true);
+        //}
+
+        //public void 하드웨어트리거모드() //defalut
+        //{
+        //    if (this.Camera == null) return;
+        //    Int32 nRet = this.Camera.SetEnumValue("TriggerSource", (uint)MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_LINE0);
+        //    그랩제어.Validate($"[{this.구분}] 하드웨어트리거 모드 설정에 실패하였습니다.", nRet, true);
+        //}
 
         public override Boolean Start()
         {
