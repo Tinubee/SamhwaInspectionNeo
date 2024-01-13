@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Net.Sockets;
@@ -25,11 +26,19 @@ namespace SamhwaInspectionNeo.UI.Control
         {
             ////MyGridView.SetFocusedRow(this.gridView1);
             this.GridControl1.DataSource = new 입력신호자료();
-            //this.customGrid1.DataSource = new 입력신호자료();
             this.입출변경알림();
             Global.신호제어.입출변경알림 += 입출변경알림;
         }
-
+        private void 입출변경알림()
+        {
+            //Debug.WriteLine("I/O Viewer 입출변경알림");
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(입출변경알림));
+                return;
+            }
+            GridView1.RefreshData();
+        }
 
         private class 입력신호자료 : List<입력신호정보>
         {
@@ -39,7 +48,6 @@ namespace SamhwaInspectionNeo.UI.Control
                 {
                     //if (MvUtils.Utils.GetAttribute<TranslationAttribute>(번호) == null) continue;
                     this.Add(new 입력신호정보() { 구분 = 번호 });
-
                 }
             }
         }

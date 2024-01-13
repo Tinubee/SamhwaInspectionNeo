@@ -43,6 +43,7 @@ namespace SamhwaInspectionNeo.Schemas
         private Boolean 입출자료분석()
         {
             if (!입출자료갱신()) return false;
+            입출변경확인();
             제품검사수행();
             장치상태확인();
             통신핑퐁수행();
@@ -56,11 +57,11 @@ namespace SamhwaInspectionNeo.Schemas
         }
 
         // 검사위치 변경 확인
-        private void 검사위치확인()
+        private void 입출변경확인()
         {
-            Dictionary<정보주소, Int32> 변경 = this.입출자료.Changes(정보주소.하부표면검사카메라트리거, 정보주소.상부치수검사카메라트리거);
+            Dictionary<정보주소, Int32> 변경 = this.입출자료.Changes(정보주소.모델변경트리거, 정보주소.생산수량);
             if (변경.Count < 1) return;
-            this.검사위치알림?.Invoke();
+            this.입출변경알림?.Invoke();
         }
 
         private void 제품검사수행()
@@ -125,43 +126,47 @@ namespace SamhwaInspectionNeo.Schemas
             // 16K 상부 카메라 영상취득 시작
             if (상부치수검사번호 > 0)
             {
-                new Thread(() =>
-                {
-                    Global.조명제어.TurnOn(카메라구분.Cam01);
-                    Global.그랩제어.Ready(카메라구분.Cam01);
-                }).Start();
-                신호쓰기(정보주소.상부치수검사카메라트리거, 0);
+                Debug.WriteLine("상부 치수검사 신호 들어옴");
+                //new Thread(() =>
+                //{
+                //    Global.조명제어.TurnOn(카메라구분.Cam01);
+                //    Global.그랩제어.Ready(카메라구분.Cam01);
+                //}).Start();
+                //신호쓰기(정보주소.상부치수검사카메라트리거, 0);
             }
             // 상부 GigE 카메라 영상취득 시작
             if (상부표면검사번호 > 0)
             {
-                new Thread(() =>
-                {
-                    Global.조명제어.TurnOn(카메라구분.Cam03);
-                    Global.그랩제어.Ready(카메라구분.Cam03);
-                }).Start();
-                신호쓰기(정보주소.상부표면검사카메라트리거, 0);
+                Debug.WriteLine("상부 표면검사 신호 들어옴");
+                //new Thread(() =>
+                //{
+                //    Global.조명제어.TurnOn(카메라구분.Cam03);
+                //    Global.그랩제어.Ready(카메라구분.Cam03);
+                //}).Start();
+                //신호쓰기(정보주소.상부표면검사카메라트리거, 0);
             }
             // 하부 GigE 카메라 영상취득 시작
             if (하부표면검사번호 > 0)
             {
-                new Thread(() =>
-                {
-                    Global.조명제어.TurnOn(카메라구분.Cam04);
-                    Global.그랩제어.Ready(카메라구분.Cam04);
-                }).Start();
-                신호쓰기(정보주소.하부표면검사카메라트리거, 0);
+                Debug.WriteLine("하부 표면검사 신호 들어옴");
+                //new Thread(() =>
+                //{
+                //    Global.조명제어.TurnOn(카메라구분.Cam04);
+                //    Global.그랩제어.Ready(카메라구분.Cam04);
+                //}).Start();
+                //신호쓰기(정보주소.하부표면검사카메라트리거, 0);
             }
 
             // 트레이 검사 카메라 영상취득 시작
             if (트레이확인검사번호 > 0)
             {
-                new Thread(() =>
-                {
-                    Global.조명제어.TurnOn(카메라구분.Cam02);
-                    Global.그랩제어.Ready(카메라구분.Cam02);
-                }).Start();
-                신호쓰기(정보주소.트레이확인카메라트리거, 0);
+                Debug.WriteLine("공트레이 신호 들어옴");
+                //new Thread(() =>
+                //{
+                //    Global.조명제어.TurnOn(카메라구분.Cam02);
+                //    Global.그랩제어.Ready(카메라구분.Cam02);
+                //}).Start();
+                //신호쓰기(정보주소.트레이확인카메라트리거, 0);
             }
         }
 
