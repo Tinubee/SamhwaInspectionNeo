@@ -31,7 +31,7 @@ namespace SamhwaInspectionNeo.Schemas
             }
         }
        
-       public List<VmVariable> GetCalValue()
+       public List<VmVariable> 보정값불러오기()
         {
             List<GlobalVarInfo> lists = Variables.GetAllGlobalVar();
             List<VmVariable> calValueList = new List<VmVariable>();
@@ -46,7 +46,7 @@ namespace SamhwaInspectionNeo.Schemas
             return calValueList;
         }
 
-        public List<VmVariable> GetMasterInspectionValue()
+        public List<VmVariable> 마스터셋팅값가져오기()
         {
             List<GlobalVarInfo> lists = Variables.GetAllGlobalVar();
             List<VmVariable> masterValueList = new List<VmVariable>();
@@ -65,7 +65,14 @@ namespace SamhwaInspectionNeo.Schemas
         public void InspectUseSet(string Name, string Value)
         {
             if(this.Variables == null) return;
-            this.Variables.SetGlobalVar(Name, Value);
+
+            List<GlobalVarInfo> lists = Variables.GetAllGlobalVar();
+
+            foreach (GlobalVarInfo info in lists)
+            {
+                if(info.strValueName.Contains(Name))
+                    this.Variables.SetGlobalVar(Name, Value);
+            }
         }
 
         public void Set()

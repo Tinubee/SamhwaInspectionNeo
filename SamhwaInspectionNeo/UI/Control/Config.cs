@@ -47,19 +47,19 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.e양품저장.Toggled += E양품저장_Toggled;
             this.e불량저장.Toggled += E불량저장_Toggled;
 
-            this.e20Point검사.Toggled += E20Point검사_Toggled;
-            this.e200Point검사.Toggled += E200Point검사_Toggled;
-            this.e너비검사.Toggled += E너비검사_Toggled;
-            this.e높이검사.Toggled += E높이검사_Toggled;
-            this.e상부표면검사.Toggled += E상부표면검사_Toggled;
-            this.e하부표면검사.Toggled += E하부표면검사_Toggled;
-            this.e큰홀검사.Toggled += E큰홀검사_Toggled;
-            this.e작은홀검사.Toggled += E작은홀검사_Toggled;
+            this.e20Point검사.Toggled += 검사설정변경;
+            this.e200Point검사.Toggled += 검사설정변경;
+            this.e너비검사.Toggled += 검사설정변경;
+            this.e높이검사.Toggled += 검사설정변경;
+            this.e상부표면검사.Toggled += 검사설정변경;
+            this.e하부표면검사.Toggled += 검사설정변경;
+            this.e큰홀검사.Toggled += 검사설정변경;
+            this.e작은홀검사.Toggled += 검사설정변경;
 
-            검사설정초기화();
+            검사설정();
         }
 
-        private void 검사설정초기화()
+        private void 검사설정()
         {
             Global.VM제어.글로벌변수제어.InspectUseSet("높이검사Pass", Convert.ToInt32(Global.환경설정.높이측정검사).ToString());
             Global.VM제어.글로벌변수제어.InspectUseSet("너비검사Pass", Convert.ToInt32(Global.환경설정.너비측정검사).ToString());
@@ -72,60 +72,40 @@ namespace SamhwaInspectionNeo.UI.Controls
             UpdateView();
         }
 
-
-        private void E높이검사_Toggled(object sender, EventArgs e)
+        private void 검사설정변경(object sender, EventArgs e)
         {
-            Global.환경설정.높이측정검사 = e높이검사.IsOn;
-            Global.VM제어.글로벌변수제어.InspectUseSet("높이검사Pass", Convert.ToInt32(Global.환경설정.높이측정검사).ToString());
-            UpdateView();
-        }
+            ToggleSwitch ts = sender as ToggleSwitch;
+            String tagName = ts.Tag.ToString();
 
-        private void E너비검사_Toggled(object sender, EventArgs e)
-        {
-            Global.환경설정.너비측정검사 = e너비검사.IsOn;
-            Global.VM제어.글로벌변수제어.InspectUseSet("너비검사Pass", Convert.ToInt32(Global.환경설정.너비측정검사).ToString());
-            UpdateView();
-        }
+            switch (tagName)
+            {
+                case "높이검사Pass":
+                    Global.환경설정.높이측정검사 = ts.IsOn;
+                    break;
+                case "너비검사Pass":
+                    Global.환경설정.너비측정검사 = ts.IsOn;
+                    break;
+                case "작은홀검사Pass":
+                    Global.환경설정.작은원치수측정검사 = ts.IsOn;
+                    break;
+                case "큰홀검사Pass":
+                    Global.환경설정.큰원치수측정검사 = ts.IsOn;
+                    break;
+                case "하부표면검사Pass":
+                    Global.환경설정.하부표면검사 = ts.IsOn;
+                    break;
+                case "상부표면검사Pass":
+                    Global.환경설정.상부표면검사 = ts.IsOn;
+                    break;
+                case "슬롯부200Pass":
+                    Global.환경설정.슬롯부200Point검사 = ts.IsOn;
+                    break;
+                case "슬롯부20Pass":
+                    Global.환경설정.슬롯부20Point검사 = ts.IsOn;
+                    break;
+            }
 
-        private void E작은홀검사_Toggled(object sender, EventArgs e)
-        {
-            Global.환경설정.작은원치수측정검사 = e작은홀검사.IsOn;
-            Global.VM제어.글로벌변수제어.InspectUseSet("작은홀검사Pass", Convert.ToInt32(Global.환경설정.작은원치수측정검사).ToString());
-            UpdateView();
-        }
-
-        private void E큰홀검사_Toggled(object sender, EventArgs e)
-        {
-            Global.환경설정.큰원치수측정검사 = e큰홀검사.IsOn;
-            Global.VM제어.글로벌변수제어.InspectUseSet("큰홀검사Pass", Convert.ToInt32(Global.환경설정.큰원치수측정검사).ToString());
-            UpdateView();
-        }
-
-        private void E하부표면검사_Toggled(object sender, EventArgs e)
-        {
-            Global.환경설정.하부표면검사 = e하부표면검사.IsOn;
-            Global.VM제어.글로벌변수제어.InspectUseSet("하부표면검사Pass", Convert.ToInt32(Global.환경설정.하부표면검사).ToString());
-            UpdateView();
-        }
-
-        private void E상부표면검사_Toggled(object sender, EventArgs e)
-        {
-            Global.환경설정.상부표면검사 = e상부표면검사.IsOn;
-            Global.VM제어.글로벌변수제어.InspectUseSet("상부표면검사Pass", Convert.ToInt32(Global.환경설정.상부표면검사).ToString());
-            UpdateView();
-        }
-
-        private void E200Point검사_Toggled(object sender, EventArgs e)
-        {
-            Global.환경설정.슬롯부200Point검사 = e200Point검사.IsOn;
-            Global.VM제어.글로벌변수제어.InspectUseSet("슬롯부200Pass", Convert.ToInt32(Global.환경설정.슬롯부200Point검사).ToString());
-            UpdateView();
-        }
-
-        private void E20Point검사_Toggled(object sender, EventArgs e)
-        {
-            Global.환경설정.슬롯부20Point검사 = e20Point검사.IsOn;
-            Global.VM제어.글로벌변수제어.InspectUseSet("슬롯부20Pass", Convert.ToInt32(Global.환경설정.슬롯부20Point검사).ToString());
+            Global.VM제어.글로벌변수제어.InspectUseSet(tagName, Convert.ToInt32(Global.환경설정.높이측정검사).ToString());
             UpdateView();
         }
 

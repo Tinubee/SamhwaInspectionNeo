@@ -230,9 +230,9 @@ namespace SamhwaInspectionNeo.Schemas
 
         public void Init()
         {
-            this.컨트롤러1 = new LCP100DC() { 포트 = 조명포트.COM3 }; // 상부치수검사 LLXP조명
-            this.컨트롤러2 = new LCP24100PS() { 포트 = 조명포트.COM4 }; //표면검사 상하부 4개씩 2세트
-            this.컨트롤러3 = new LCP24100Q() { 포트 = 조명포트.COM5 }; // 공트레이검사 2개
+            this.컨트롤러1 = new LCP100DC() { 포트 = 조명포트.COM4 }; // 상부치수검사 LLXP조명
+            this.컨트롤러2 = new LCP24100PS() { 포트 = 조명포트.COM5 }; //표면검사 상하부 4개씩 2세트
+            this.컨트롤러3 = new LCP24100Q() { 포트 = 조명포트.COM6 }; // 공트레이검사 2개
 
             this.컨트롤러1.Init();
             this.컨트롤러2.Init();

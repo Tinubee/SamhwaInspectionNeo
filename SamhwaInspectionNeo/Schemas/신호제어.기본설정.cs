@@ -44,9 +44,6 @@ namespace SamhwaInspectionNeo.Schemas
             상부표면검사카메라트리거,
             [Address("W002E")]
             상부치수검사카메라트리거,
-            //[Address("W003A")]
-            //상부표면검사카메라트리거,
-            //변위센서 트리거
             [Address("W0040")]
             상부변위센서확인트리거,
             [Address("W0041")]
@@ -150,8 +147,6 @@ namespace SamhwaInspectionNeo.Schemas
             {
                 this.입출자료갱신();
                 this.출력자료리셋();
-                //this.인덱스버퍼리셋();
-                //this.인덱스리셋확인();
                 this.생산수량전송();
                 this.동작상태알림?.Invoke();
             }
@@ -207,22 +202,7 @@ namespace SamhwaInspectionNeo.Schemas
             this.하부변위센서확인트리거 = false;
             this.결과값요청트리거 = false;
         }
-
-        //private void 인덱스버퍼리셋()
-        //{
-        //    this.인덱스버퍼.Clear();
-        //    검사번호주소.ForEach(e => this.인덱스버퍼.Add(e, 0));
-        //}
-
-        // 검사자료 로드 후 수행해야 함
-        //public void 인덱스리셋확인()
-        //{
-        //    if (Global.검사자료.Count < 1)
-        //    {
-        //        Debug.WriteLine("인덱스 리셋");
-        //        this.검사번호리셋 = true;
-        //    }
-        //}
+        
         public void 생산수량전송() =>
             this.생산수량정보 = Global.모델자료.선택모델.전체갯수;
         #endregion

@@ -68,7 +68,6 @@ namespace SamhwaInspectionNeo.Schemas
             영상촬영수행();
             //검사결과전송();
         }
-
         // 카메라 별 현재 검사 위치의 검사번호를 요청
         public Int32 촬영위치번호(카메라구분 구분)
         {
@@ -79,7 +78,6 @@ namespace SamhwaInspectionNeo.Schemas
             return 0;
         }
 
-        // 트리거 입력 시 현재 인덱스를 버퍼에 입력하고 검사 수행 시 해당 버퍼의 인덱스를 기준으로 검사
         private Int32 검사위치번호(정보주소 구분)
         {
             if (!this.입출자료.Firing(구분, true, out Boolean 현재, out Boolean 변경))
@@ -97,11 +95,9 @@ namespace SamhwaInspectionNeo.Schemas
             //else if (구분 == 정보주소.결과값요청트리거) index = this.양불판정번호;
 
             //Debug.WriteLine("----------------------------------");
-            if (index == 0) Global.경고로그(로그영역, 구분.ToString(), $"해당 위치에 검사할 제품의 Index가 없습니다.", false); // There are no index of products to inspect in that location.
+            if (index == 0) Global.경고로그(로그영역, 구분.ToString(), $"해당 위치에 검사할 제품이 없습니다.", false); // There are no index of products to inspect in that location.
             //else Debug.WriteLine($"{Utils.FormatDate(DateTime.Now, "{0:HH:mm:ss.fff}")}  {구분} => {index}", "Trigger");
             this.인덱스버퍼[구분] = index;
-            // if (구분 == 정보주소.평탄센서 || 구분 == 정보주소.결과요청)
-            //     Debug.WriteLine($"{MvUtils.Utils.FormatDate(DateTime.Now, "{0:HH:mm:ss.fff}")} [{구분.ToString()}] 큐알=>{큐알리딩번호}, 상부=>{상부촬영번호}, 하부=>{하부촬영번호}, 측면=>{측면촬영번호}, 평탄=>{평탄센서번호}, 양불=>{양불판정번호}");
             return index;
         }
 

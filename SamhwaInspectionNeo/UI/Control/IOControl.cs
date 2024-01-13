@@ -26,8 +26,8 @@ namespace SamhwaInspectionNeo.UI.Control
             ////MyGridView.SetFocusedRow(this.gridView1);
             this.GridControl1.DataSource = new 입력신호자료();
             //this.customGrid1.DataSource = new 입력신호자료();
-            //this.입출변경알림();
-            //Global.신호제어.입출변경알림 += 입출변경알림;
+            this.입출변경알림();
+            Global.신호제어.입출변경알림 += 입출변경알림;
         }
 
 

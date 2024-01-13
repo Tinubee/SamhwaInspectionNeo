@@ -762,7 +762,7 @@ namespace SamhwaInspectionNeo.Schemas
         [Description("Acquisition Process")]
         private void ProcessingCallback(MC.SIGNALINFO signalInfo)
         {
-            //Debug.WriteLine("ProcessingCallback");
+            Debug.WriteLine("ProcessingCallback");
             currentSurface = signalInfo.SignalInfo;
             try
             {

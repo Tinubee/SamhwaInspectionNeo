@@ -39,7 +39,7 @@ namespace SamhwaInspectionNeo.Schemas
         [Translation("Logs Storage Days", "로그 보관일"), JsonProperty("DaysToKeepLogs")]
         public Int32 로그보관 { get; set; } = 60;
         [JsonProperty("CurrentModel")]
-        public 모델구분 선택모델 { get; set; } = 모델구분.Model_2PB;
+        public 모델구분 선택모델 { get; set; } = 모델구분.None;
         [Translation("Model Image Path", "제품 사진 경로")] // , JsonProperty("ImagePath")
         public String 사진경로 { get { return Path.Combine(기본경로, "Items"); } } // = @"C:\VISION\Config\Items";
         [Translation("Model Movie Path", "제품 영상 경로"), JsonIgnore] //, JsonProperty("MoviePath")

@@ -105,7 +105,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Remote|x64'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>\\192.168.100.1\ivm\Excute\</OutputPath>
+    <OutputPath>\\192.168.3.100\ivm\Excute\</OutputPath>
     <DefineConstants>TRACE;DEBUG</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
@@ -407,6 +407,12 @@
     <Compile Include="UI\Control\LogViewer.Designer.cs">
       <DependentUpon>LogViewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Control\MasterSetting.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Control\MasterSetting.Designer.cs">
+      <DependentUpon>MasterSetting.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Control\Results.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -500,6 +506,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\LogViewer.resx">
       <DependentUpon>LogViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Control\MasterSetting.resx">
+      <DependentUpon>MasterSetting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\Results.resx">
       <DependentUpon>Results.cs</DependentUpon>

@@ -20,8 +20,6 @@ namespace SamhwaInspectionNeo.Schemas
         Flow2,
         Flow3,
         Flow4,
-        Flow5,
-        Flow6,
         공트레이검사,
         상부표면검사,
         하부표면검사,
@@ -142,7 +140,8 @@ namespace SamhwaInspectionNeo.Schemas
                         if (item.GetType() == typeof(ImageSourceModuleTool))
                         {
                             this.imageSourceModuleTool = this.Procedure["InputImage"] as ImageSourceModuleTool;
-                            this.imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;
+                            if (this.imageSourceModuleTool != null)
+                                this.imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;
                         }
                         else if (item.GetType() == typeof(GraphicsSetModuleTool)) this.graphicsSetModuleToolList.Add(item as GraphicsSetModuleTool);
                         else if (item.GetType() == typeof(ShellModuleTool)) this.shellModuleToolList.Add(item as ShellModuleTool);

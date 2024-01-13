@@ -14,20 +14,9 @@ namespace SamhwaInspectionNeo.Schemas
     {
         [ListBindable(false)]
         None,
-        [DXDescription("2P-B"), Description("2P-B")]
-        Model_2PB,
         [DXDescription("4P-B"), Description("4P-B")]
         Model_4PB,
     }
-
-    public enum 노멀미러
-    {
-        [ListBindable(false)]
-        None = 0,
-        Normal = 1,
-        Mirror = 2,
-    }
-
     public class 모델정보
     {
         [JsonProperty("type"), Translation("Model", "모델")]

@@ -54,7 +54,7 @@ namespace SamhwaInspectionNeo.UI.Controls
                 구분 = Convert.ToInt32(bx.Tag);
                 if (구분 == 1) return;
                 if (구분 == 2) this.촬영횟수 = 1;
-                else this.촬영횟수 = 6;
+                else this.촬영횟수 = 4;
 
                 HikeGigE 장치 = Global.그랩제어.GetItem((카메라구분)구분) as HikeGigE;
                 //트리거소스 소프트웨어 트리거로 변경.
@@ -70,7 +70,7 @@ namespace SamhwaInspectionNeo.UI.Controls
                     Thread.Sleep(200);
                     장치.TrigForce();
                   
-                    if(lop == 5)
+                    if(lop == this.촬영횟수 - 1)
                     {
                         장치.TrigSource = MvCamCtrl.NET.CameraParams.MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_LINE0;
                         장치.트리거소스적용();
@@ -100,6 +100,7 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.카메라2.Set(Global.장치상태.카메라2);
             this.카메라3.Set(Global.장치상태.카메라3);
             this.카메라4.Set(Global.장치상태.카메라4);
+            this.장치통신.Set(Global.장치상태.장치통신);
             //this.조명장치.Set(Global.장치상태.조명장치);
         }
 
