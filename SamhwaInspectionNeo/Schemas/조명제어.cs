@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Ports;
+using System.Security.RightsManagement;
 using System.Threading.Tasks;
 
 namespace SamhwaInspectionNeo.Schemas
@@ -17,6 +18,9 @@ namespace SamhwaInspectionNeo.Schemas
         COM4,
         COM5,
         COM6,
+        COM7,
+        COM8,
+        COM9,
     }
 
     public enum 조명채널
@@ -108,7 +112,7 @@ namespace SamhwaInspectionNeo.Schemas
             try
             {
                 통신포트.Write($"{STX}{Command}{ETX}");
-                //Debug.WriteLine($"{STX}{Command}{ETX}".Trim(), 구분);
+                Debug.WriteLine($"{STX}{Command}{ETX}".Trim(), 구분);
                 return true;
             }
             catch (Exception ex)
@@ -122,16 +126,44 @@ namespace SamhwaInspectionNeo.Schemas
     // LCP24-100PS  //FA-LCP24
     public class LCP24100PS : 조명컨트롤러
     {
+        public Int32 컨트롤러모드 = 3;
         public override String 로그영역 { get; set; } = nameof(LCP24100PS);
-        public override 조명포트 포트 { get; set; } = 조명포트.COM3;
-        public override Int32 통신속도 { get; set; } = 9600;
-        public override Int32 최대밝기 { get; } = 1023;
-        public override String STX { get; set; } = $"{Convert.ToChar(2)}";
-        public override String ETX { get; set; } = $"{Convert.ToChar(3)}";
-        public override Boolean Set(조명정보 정보) => SendCommand($"{정보.카메라} Set", $"{(Int32)정보.채널 - 1}w{this.밝기변환(정보.밝기):d4}");
+        public override 조명포트 포트 { get; set; } = 조명포트.COM5;
+        public override Int32 통신속도 { get; set; } = 115200;
+        public override Int32 최대밝기 { get; } = 150;
+        public override String STX { get; set; } = $"@";
+        public override String ETX { get; set; } = $"{Convert.ToChar(13)}{Convert.ToChar(10)}";
+        //public override Boolean Set(조명정보 정보) => SendCommand($"{정보.카메라} Set", $"SP00{(Int32)정보.채널 - 1}w{this.밝기변환(정보.밝기):d4}");
+        public override Boolean Set(조명정보 정보) => SendCommand($"{정보.카메라} Set", $"SC000{(Int32)정보.채널 - 1};{정보.밝기}");
         public override Boolean Save(조명정보 정보) => false; // 커맨드가 있는지 모름
-        public override Boolean TurnOn(조명정보 정보) => SendCommand($"{정보.카메라} On", $"{(Int32)정보.채널 - 1}o");//{this.밝기변환(정보.밝기).ToString("d4")}
-        public override Boolean TurnOff(조명정보 정보) => SendCommand($"{정보.카메라} Off", $"{(Int32)정보.채널 - 1}f");//0000
+        public override Boolean TurnOn(조명정보 정보) => SendCommand($"{정보.카메라} On", $"SC000{(Int32)정보.채널 - 1};{정보.밝기}");//{this.밝기변환(정보.밝기).ToString("d4")}
+        public override Boolean TurnOff(조명정보 정보) => SendCommand($"{정보.카메라} Off", $"SC000{(Int32)정보.채널 - 1};0");//0000
+
+        public void 모드변경() => SendCommand($"모드변경", $"SM0000;{this.컨트롤러모드}");
+            /*
+             1) 모드 0 (순차 출력)
+                - 페이지 트리거(챕터6.Connection Specifications / Trigger Input PINMAP 참조) 하나만 받아 최대 16채널 12페이지 ON-TIME 순차적으로 출력
+                  마지막 페이지이면 첫 페이지로 순환출력(Page 0→1→2→3…11→0→1→2..)
+                - 리셋 트리거(챕터6.Connection Specifications / Trigger Input PINMAP 참조) 입력시 페이지 0으로 돌아가서 다시 순차 출력
+                    (Page 0→1→2→3→ 리셋트리거 →0→1→2...)
+                - 라스트 시퀀스 설정시 리셋 트리거 없이 사용 가능(챕터5.Protocol / (1)Command List 참조)
+                    (라스트 시퀀스 3으로 설정시 Page 0→1→2→3→리셋→0→1→2...)
+                - 개별 채널 트리거 입력받아 해당 페이지 전 채널 출력
+                    (CH3 트리거 입력시 PAGE.3 전 채널 출력, CH5 트리거 입력시 PAGE.5 전 채널 출력)
+                    (총 12페이지이므로 0~11채널 입력까지만 사용가능)
+            2) 모드 1 (사용자 임의 출력)
+                - 페이지 트리거 하나만 받아 최대 16채널 12페이지 ON-TIME 임의적으로 순환 출력(Page 1→3→5→…11→1→3→5...)
+                - 임의 페이지 설정은 시퀀스 설정에서 원하는 페이지만 출력 세팅 가능(챕터5.Protocol / (1)Command List 참조)
+                - 리셋 트리거(챕터6.Connection Specifications / Trigger Input PINMAP 참조) 입력시 처음으로 돌아가서 다시 순차 출력
+                    (Page 1→3→5→7→리셋트리거→1→3→5→7...)
+                - 라스트 시퀀스 설정시 리셋 트리거 없이 사용 가능(챕터5.Protocol / (1)Command List 참조)
+                    (라스트 시퀀스 3으로 설정시 Page 1→3→5→7→리셋→1→3→5→7...)
+            3) 모드 2 (개별 트리거 출력)
+                - 개별 트리거를 받아 트리거 입력 채널만 출력
+                - 이 모드는 페이지 0의 데이터만 출력
+            4) 모드 3 (소프트웨어 트리거 출력)
+                - 트리거를 입력받지 않고 소프트웨어에서 트리거를 발생하여 출력 테스트 가능
+            */
     }
 
     // LCP100DC
@@ -230,14 +262,13 @@ namespace SamhwaInspectionNeo.Schemas
 
         public void Init()
         {
-            this.컨트롤러1 = new LCP100DC() { 포트 = 조명포트.COM4 }; // 상부치수검사 LLXP조명
+            this.컨트롤러1 = new LCP100DC() { 포트 = 조명포트.COM6 }; // 상부치수검사 LLXP조명
             this.컨트롤러2 = new LCP24100PS() { 포트 = 조명포트.COM5 }; //표면검사 상하부 4개씩 2세트
-            this.컨트롤러3 = new LCP24100Q() { 포트 = 조명포트.COM6 }; // 공트레이검사 2개
+            this.컨트롤러3 = new LCP24100Q() { 포트 = 조명포트.COM7 }; // 공트레이검사 2개
 
             this.컨트롤러1.Init();
             this.컨트롤러2.Init();
             this.컨트롤러3.Init();
-
             // 컨트롤러 당 카메라 1대씩 연결
             this.Add(new 조명정보(카메라구분.Cam01, 컨트롤러1) { 채널 = 조명채널.CH01, 밝기 = 70 });
             this.Add(new 조명정보(카메라구분.Cam02, 컨트롤러3) { 채널 = 조명채널.CH02, 밝기 = 70 });
@@ -253,6 +284,7 @@ namespace SamhwaInspectionNeo.Schemas
 
             this.Load();
             this.Open();
+            this.컨트롤러2.모드변경();
             this.Set();
         }
 

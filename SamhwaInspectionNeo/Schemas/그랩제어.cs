@@ -115,8 +115,9 @@ namespace SamhwaInspectionNeo.Schemas
 
                 this.카메라1 = new EuresysLink(카메라구분.Cam01) { 코드 = "" };
                 this.카메라2 = new HikeGigE() { 구분 = 카메라구분.Cam02, 코드 = "" };
-                this.카메라3 = new HikeGigE() { 구분 = 카메라구분.Cam03, 코드 = "DA1996738" };
-                this.카메라4 = new HikeGigE() { 구분 = 카메라구분.Cam04, 코드 = "DA1996737" };
+                this.카메라3 = new HikeGigE() { 구분 = 카메라구분.Cam03, 코드 = "DA1996738" }; //상부표면검사
+                this.카메라4 = new HikeGigE() { 구분 = 카메라구분.Cam04, 코드 = "DA1996737" }; //하부표면검사
+
                 this.Add(카메라구분.Cam01, this.카메라1);
                 this.Add(카메라구분.Cam02, this.카메라2);
                 this.Add(카메라구분.Cam03, this.카메라3);

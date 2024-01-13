@@ -44,9 +44,8 @@
             this.col켜짐 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.e조명켜짐 = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
-            this.bind카메라설정 = new System.Windows.Forms.BindingSource(this.components);
-            this.bind조명설정 = new System.Windows.Forms.BindingSource(this.components);
             this.GridControl1 = new MvUtils.CustomGrid();
+            this.bind카메라설정 = new System.Windows.Forms.BindingSource(this.components);
             this.GridView1 = new MvUtils.CustomView();
             this.col구분 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col번호 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -62,6 +61,7 @@
             this.col세로 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col상태 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemToggleSwitch1 = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
+            this.bind조명설정 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
@@ -72,11 +72,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.e조명켜짐)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bind카메라설정)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bind조명설정)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bind카메라설정)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemToggleSwitch1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bind조명설정)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl1
@@ -268,10 +268,6 @@
             this.groupControl2.TabIndex = 11;
             this.groupControl2.Text = "Cameras";
             // 
-            // bind카메라설정
-            // 
-            this.bind카메라설정.DataSource = typeof(SamhwaInspectionNeo.Schemas.카메라장치);
-            // 
             // GridControl1
             // 
             this.GridControl1.DataSource = this.bind카메라설정;
@@ -285,6 +281,10 @@
             this.GridControl1.TabIndex = 0;
             this.GridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.GridView1});
+            // 
+            // bind카메라설정
+            // 
+            this.bind카메라설정.DataSource = typeof(SamhwaInspectionNeo.Schemas.카메라장치);
             // 
             // GridView1
             // 
@@ -472,11 +472,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.e조명켜짐)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bind카메라설정)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bind조명설정)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bind카메라설정)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemToggleSwitch1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bind조명설정)).EndInit();
             this.ResumeLayout(false);
 
         }
