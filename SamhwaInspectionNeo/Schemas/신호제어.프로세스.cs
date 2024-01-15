@@ -127,12 +127,12 @@ namespace SamhwaInspectionNeo.Schemas
             if (상부치수검사번호 > 0)
             {
                 Debug.WriteLine("상부 치수검사 신호 들어옴");
-                //new Thread(() =>
-                //{
-                //    Global.조명제어.TurnOn(카메라구분.Cam01);
-                //    Global.그랩제어.Ready(카메라구분.Cam01);
-                //}).Start();
-                //신호쓰기(정보주소.상부치수검사카메라트리거, false);
+                new Thread(() =>
+                {
+                    //Global.조명제어.TurnOn(카메라구분.Cam01);
+                    Global.그랩제어.Ready(카메라구분.Cam01);
+                }).Start();
+                신호쓰기(정보주소.상부치수검사카메라트리거, false);
             }
             // 상부 GigE 카메라 영상취득 시작
             if (상부표면검사번호 > 0)

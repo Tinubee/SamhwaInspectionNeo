@@ -204,7 +204,7 @@ namespace SamhwaInspectionNeo.Schemas
                     imageBaseData = mat == null ? imageBaseData : MatToImageBaseData(mat);
                     this.imageSourceModuleTool.SetImageData(imageBaseData);
                     this.Procedure.Run();
-                    this.SetResult(this.구분);
+                    //this.SetResult(this.구분);
 
                     return true;
                 }

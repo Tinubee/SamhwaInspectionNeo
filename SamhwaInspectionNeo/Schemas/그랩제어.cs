@@ -1,4 +1,6 @@
-﻿using DevExpress.Utils.Extensions;
+﻿using DevExpress.Drawing.Internal.Fonts.Interop;
+using DevExpress.Utils.Design;
+using DevExpress.Utils.Extensions;
 using Euresys.MultiCam;
 using MvCamCtrl.NET;
 using MvCamCtrl.NET.CameraParams;
@@ -11,6 +13,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using static SamhwaInspectionNeo.Schemas.EuresysLink;
@@ -195,10 +198,10 @@ namespace SamhwaInspectionNeo.Schemas
                         //Global.조명제어.TurnOff(카메라구분.Cam01);
                         // 이미지 연결
                         Cv2.VConcat(this.카메라1.Page1Image, this.카메라1.Page2Image, this.카메라1.mergedImage);
-                        this.카메라1.roi[0] = new Rect(0, 3000, this.카메라1.width, 18000);
-                        this.카메라1.roi[1] = new Rect(0, 22000, this.카메라1.width, 18000);
-                        this.카메라1.roi[2] = new Rect(0, 41000, this.카메라1.width, 18000);
-                        this.카메라1.roi[3] = new Rect(0, 61000, this.카메라1.width, 18000);
+                        this.카메라1.roi[0] = new Rect(0, 2000, this.카메라1.width, 18000);
+                        this.카메라1.roi[1] = new Rect(0, 21000, this.카메라1.width, 18000);
+                        this.카메라1.roi[2] = new Rect(0, 40000, this.카메라1.width, 18000);
+                        this.카메라1.roi[3] = new Rect(0, 60000, this.카메라1.width, 18000);
 
                         for (int lop = 0; lop < this.카메라1.roi.Length; lop++)
                         {
@@ -675,7 +678,7 @@ namespace SamhwaInspectionNeo.Schemas
                 MC.SetParam(this.Channel, "DriverIndex", this.DriverIndex);
                 MC.SetParam(this.Channel, "Connector", this.Connector.ToString());
                 MC.SetParam(this.Channel, "CamFile", Path.Combine(Global.환경설정.기본경로, this.CamFile));
-                //MC.SetParam(this.Channel, "AcquisitionMode", this.AcquisitionMode.ToString());
+                MC.SetParam(this.Channel, "AcquisitionMode", this.AcquisitionMode.ToString());
                 MC.SetParam(this.Channel, "TrigMode", this.TrigMode.ToString());
                 //MC.SetParam(this.Channel, "NextTrigMode", this.NextTrigMode.ToString());
                 //MC.SetParam(this.Channel, "EndTrigMode", this.EndTrigMode.ToString());
@@ -697,8 +700,11 @@ namespace SamhwaInspectionNeo.Schemas
                 this.Page2Image = new Mat(height, width, MatType.CV_8UC1);
                 this.mergedImage = new Mat(height * 2, width, MatType.CV_8UC1);
 
+                //InitBuffers(this.width, this.height);
                 //this.mergedImage = new Mat(height_cam * 2, width_cam, MatType.CV_8UC1);
+                Debug.WriteLine($"{this.Channel}, {this.CurrentState()}", "READY currentState");
                 Global.정보로그(로그영역, "카메라 연결", $"[{this.구분}] 카메라 연결 성공!", false);
+   
                 return true;
             }
             catch (Exception e)
@@ -707,7 +713,25 @@ namespace SamhwaInspectionNeo.Schemas
                 return false;
             }
         }
+        internal void InitBuffers(Int32 width, Int32 height)
+        {
+            //if (width == 0 || height == 0) return;
+            //Int32 channels =  1;
+            //Int32 imageSize = width * height * channels;
+            //if (BufferAddress != IntPtr.Zero && imageSize == BufferSize) return;
+            //this.ImageWidth = width; this.ImageHeight = height;
+            //if (BufferAddress != IntPtr.Zero)
+            //{
+            //    Marshal.Release(BufferAddress);
+            //    BufferAddress = IntPtr.Zero;
+            //    BufferSize = 0;
+            //}
 
+            //BufferAddress = Marshal.AllocHGlobal(imageSize);
+            //if (BufferAddress == IntPtr.Zero) return;
+            //BufferSize = (UInt32)imageSize;
+            //Debug.WriteLine(this.구분.ToString(), "InitBuffers");
+        }
         public override Boolean Close()
         {
             this.Free();
@@ -777,19 +801,20 @@ namespace SamhwaInspectionNeo.Schemas
             try
             {
                 UInt32 currentChannel = (UInt32)signalInfo.Context;
-                Int32 ImageSizeX, ImageSizeY, BufferPitch;
-                IntPtr BufferAddress;
+                Int32 imageSizeX, imageSizeY, bufferPitch;
 
-                MC.GetParam(currentChannel, "ImageSizeX", out ImageSizeX);
-                MC.GetParam(currentChannel, "ImageSizeY", out ImageSizeY);
-                MC.GetParam(currentChannel, "BufferPitch", out BufferPitch);
-                MC.GetParam(currentSurface, "SurfaceAddr", out BufferAddress);
+                MC.GetParam(currentChannel, "ImageSizeX", out imageSizeX);
+                MC.GetParam(currentChannel, "ImageSizeY", out imageSizeY);
+                MC.GetParam(currentChannel, "BufferPitch", out bufferPitch);
+                Debug.WriteLine($"{imageSizeX}", "ImageSizeX");
+                Debug.WriteLine($"{imageSizeY}", "ImageSizeY");
+                Debug.WriteLine($"{bufferPitch}", "BufferPitch");
+
 
                 if (this.AcquisitionMode == AcquisitionMode.PAGE)
-                    this.ImageGrap(currentChannel, signalInfo.SignalInfo, ImageSizeX, ImageSizeY, BufferPitch);
+                    this.ImageGrap(currentChannel, signalInfo.SignalInfo, imageSizeX, imageSizeY, bufferPitch);
 
                 //Mat image = new Mat(ImageSizeY, ImageSizeX, MatType.CV_8U, BufferAddress);
-
                 //Global.그랩제어.그랩완료(this.구분, image);
             }
             catch (Euresys.MultiCamException ex)
@@ -797,7 +822,7 @@ namespace SamhwaInspectionNeo.Schemas
                 MvUtils.Utils.MessageBox("영상획득", ex.ToString(), 2000);
             }
         }
-        private void ImageGrap(UInt32 Channel, UInt32 SurfaceAddr, Int32 Width, Int32 Height, Int32 BufferPitch)
+        private void ImageGrap(UInt32 channel, UInt32 bufferAddress, Int32 width, Int32 height, Int32 bufferPitch)
         {
             Debug.WriteLine("LineCamera ImageGrab");
             AcquisitionData acq = new AcquisitionData(this.구분, PageIndex);
@@ -807,14 +832,18 @@ namespace SamhwaInspectionNeo.Schemas
 
             try
             {
-                MC.GetParam(SurfaceAddr, "SurfaceAddr", out IntPtr BufferAddress);
-                image = new Mat(Height, Width, MatType.CV_8U, BufferAddress);
+                IntPtr surfaceAddr;
+                MC.GetParam(bufferAddress, "SurfaceAddr", out surfaceAddr);
+                image = new Mat(height, width, MatType.CV_8U, surfaceAddr);
+
+
                 acq.SetImage(image);
             }
             catch (Exception ex)
             {
                 acq.Dispose();
                 acq.Error = ex.Message;
+                Debug.WriteLine($"그랩오류: {ex.Message}");
             }
             this.AcquisitionFinishedEvent?.Invoke(acq);
         }

@@ -16,6 +16,8 @@ namespace SamhwaInspectionNeo.Schemas
         None,
         [DXDescription("4P-B"), Description("4P-B")]
         Model_4PB,
+        [DXDescription("4P-H"), Description("4P-H")]
+        Model_4PH,
     }
     public class 모델정보
     {
