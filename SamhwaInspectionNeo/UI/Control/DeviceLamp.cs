@@ -6,6 +6,7 @@ using SamhwaInspectionNeo.Schemas;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Threading;
+using static SamhwaInspectionNeo.Schemas.신호제어;
 
 namespace SamhwaInspectionNeo.UI.Controls
 {
@@ -52,7 +53,13 @@ namespace SamhwaInspectionNeo.UI.Controls
 
                 SvgImageBox bx = sender as SvgImageBox;
                 구분 = Convert.ToInt32(bx.Tag);
-                if (구분 == 1) return;
+                if (구분 == 1)
+                {
+                    //Global.신호제어.신호쓰기(정보주소.상부치수검사카메라트리거, false);
+                    Global.그랩제어.Ready(카메라구분.Cam01);
+                    return;
+                }
+               
                 if (구분 == 2) this.촬영횟수 = 1;
                 else this.촬영횟수 = 4;
 

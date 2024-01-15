@@ -437,6 +437,12 @@
     <Compile Include="UI\Control\State.Designer.cs">
       <DependentUpon>State.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Control\TirggerBoard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Control\TirggerBoard.Designer.cs">
+      <DependentUpon>TirggerBoard.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Control\TitleView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -521,6 +527,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\State.resx">
       <DependentUpon>State.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Control\TirggerBoard.resx">
+      <DependentUpon>TirggerBoard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\TitleView.resx">
       <DependentUpon>TitleView.cs</DependentUpon>

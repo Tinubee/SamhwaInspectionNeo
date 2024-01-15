@@ -1,4 +1,5 @@
-﻿using Euresys.MultiCam;
+﻿using DevExpress.Utils.Extensions;
+using Euresys.MultiCam;
 using MvCamCtrl.NET;
 using MvCamCtrl.NET.CameraParams;
 using Newtonsoft.Json;
@@ -185,22 +186,19 @@ namespace SamhwaInspectionNeo.Schemas
                         this.카메라1.isGrabCompleted_Page2 = true;
                         Debug.WriteLine(this.카메라1.CurrentState(), "두번쨰");
                     }
-                    Debug.WriteLine("자동검사 전");
+
                     if (this.카메라1.isGrabCompleted_Page1 & this.카메라1.isGrabCompleted_Page2)
                     {
-                        Debug.WriteLine("자동검사 시작");
                         this.카메라1.isGrabCompleted_Page1 = false;
                         this.카메라1.isGrabCompleted_Page2 = false;
                         //조명 끔
-                        Global.조명제어.TurnOff(카메라구분.Cam01);
+                        //Global.조명제어.TurnOff(카메라구분.Cam01);
                         // 이미지 연결
                         Cv2.VConcat(this.카메라1.Page1Image, this.카메라1.Page2Image, this.카메라1.mergedImage);
-                        this.카메라1.roi[0] = new Rect(0, 1919, this.카메라1.가로, 13000);
-                        this.카메라1.roi[1] = new Rect(0, 15520, this.카메라1.가로, 13000);
-                        this.카메라1.roi[2] = new Rect(0, 29118, this.카메라1.가로, 13000);
-                        this.카메라1.roi[3] = new Rect(0, 42732, this.카메라1.가로, 13000);
-                        this.카메라1.roi[4] = new Rect(0, 56267, this.카메라1.가로, 13000);
-                        this.카메라1.roi[5] = new Rect(0, 69909, this.카메라1.가로, 13000);
+                        this.카메라1.roi[0] = new Rect(0, 3000, this.카메라1.width, 18000);
+                        this.카메라1.roi[1] = new Rect(0, 22000, this.카메라1.width, 18000);
+                        this.카메라1.roi[2] = new Rect(0, 41000, this.카메라1.width, 18000);
+                        this.카메라1.roi[3] = new Rect(0, 61000, this.카메라1.width, 18000);
 
                         for (int lop = 0; lop < this.카메라1.roi.Length; lop++)
                         {
@@ -236,7 +234,7 @@ namespace SamhwaInspectionNeo.Schemas
 
         public void Close()
         {
-            this.Save();
+            //this.Save();
             foreach (카메라장치 장치 in this.Values)
                 장치?.Close();
         }
@@ -414,9 +412,9 @@ namespace SamhwaInspectionNeo.Schemas
         public Mat Page1Image;
         public Mat Page2Image;
         public Mat mergedImage;
-        public Rect[] roi = new Rect[6];
+        public Rect[] roi = new Rect[4];
         public Rect roiAlign;
-        public Mat[] splitImage = new Mat[6];
+        public Mat[] splitImage = new Mat[4];
 
         public virtual void Set(카메라장치 장치)
         {
@@ -651,11 +649,14 @@ namespace SamhwaInspectionNeo.Schemas
         [JsonIgnore, Description("Trig Mode")]
         public TrigMode TrigMode { get; set; } = TrigMode.HARD;
         [JsonIgnore, Description("SeqLength_pg")]
-        public Int32 SeqLength_pg { get; set; } = 1;
+        public Int32 SeqLength_pg { get; set; } = 2;
         [JsonIgnore, Description("Page Length")]
-        public Int32 PageLength_Ln { get; set; } = 37000;
+        public Int32 PageLength_Ln { get; set; } = 40000;
         [JsonIgnore]
         private MC.CALLBACK CamCallBack;
+
+        public Int32 height;
+        public Int32 width;
 
         private UInt32 currentSurface;
 
@@ -682,7 +683,8 @@ namespace SamhwaInspectionNeo.Schemas
                 MC.SetParam(this.Channel, "PageLength_Ln", this.PageLength_Ln);
                 MC.SetParam(this.Channel, "SeqLength_pg", this.SeqLength_pg);
                 //MC.SetParam(this.Channel, "Gain", 3);
-
+                MC.GetParam(this.Channel, "ImageSizeY", out this.height);
+                MC.GetParam(this.Channel, "ImageSizeX", out this.width);
                 //콜백등록
                 this.CamCallBack = new MC.CALLBACK(MultiCamCallback);
                 MC.RegisterCallback(this.Channel, this.CamCallBack, this.Channel);
@@ -690,12 +692,18 @@ namespace SamhwaInspectionNeo.Schemas
                 MC.SetParam(this.Channel, MC.SignalEnable + MC.SIG_SURFACE_PROCESSING, "ON");
                 MC.SetParam(this.Channel, MC.SignalEnable + MC.SIG_ACQUISITION_FAILURE, "ON");
                 MC.SetParam(this.Channel, "ChannelState", ChannelState.READY);
+
+                this.Page1Image = new Mat(height, width, MatType.CV_8UC1);
+                this.Page2Image = new Mat(height, width, MatType.CV_8UC1);
+                this.mergedImage = new Mat(height * 2, width, MatType.CV_8UC1);
+
+                //this.mergedImage = new Mat(height_cam * 2, width_cam, MatType.CV_8UC1);
                 Global.정보로그(로그영역, "카메라 연결", $"[{this.구분}] 카메라 연결 성공!", false);
                 return true;
             }
             catch (Exception e)
             {
-                Global.오류로그(로그영역, "카메라 연결", $"[{this.구분}] 카메라 연결 실패!", false);
+                Global.오류로그(로그영역, "카메라 연결", $"[{this.구분}] 카메라 연결 실패! - {e.Message}", false);
                 return false;
             }
         }
@@ -722,6 +730,7 @@ namespace SamhwaInspectionNeo.Schemas
         [Description("채널 활성화 준비")]
         public override Boolean Ready()
         {
+            Debug.WriteLine("LineScanCamera Active");
             if (this.CurrentState() != ChannelState.ACTIVE)
                 MC.SetParam(this.Channel, "ChannelState", ChannelState.ACTIVE);
             return true;
@@ -851,10 +860,19 @@ namespace SamhwaInspectionNeo.Schemas
 
             public void SetImage(Mat image)
             {
-                this.MatImage?.Dispose();
-                this.MatImage = image;
-                this.BmpImage?.Dispose();
-                this.BmpImage = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(this.MatImage);
+                try
+                {
+                    this.MatImage?.Dispose();
+                    this.MatImage = image;
+                    this.BmpImage?.Dispose();
+                    this.BmpImage = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(this.MatImage);
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.Message);
+                    Global.오류로그(로그영역, "SetImage", e.Message, true);
+                }
+
             }
 
             public void Dispose()

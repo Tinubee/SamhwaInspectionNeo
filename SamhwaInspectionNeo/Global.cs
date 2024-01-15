@@ -92,13 +92,13 @@ namespace SamhwaInspectionNeo
         {
             try
             {
+                그랩제어?.Close();
+                신호제어?.Close();
+                VM제어?.Close();
+                조명제어?.Close();
                 로그자료?.Close();
                 환경설정?.Close();
-                VM제어?.Close();
                 유저자료?.Close();
-                조명제어?.Close();
-                신호제어?.Close();
-                그랩제어?.Close();
                 모델자료?.Close();
                 검사자료?.Close();
                 Properties.Settings.Default.Save();

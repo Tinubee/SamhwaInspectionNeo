@@ -16,13 +16,13 @@ namespace SamhwaInspectionNeo.Schemas
     {
         public event Global.BaseEvent 동작상태알림;
         //public event Global.BaseEvent 통신상태알림;
-        public event Global.BaseEvent 검사위치알림;
+        //public event Global.BaseEvent 검사위치알림;
         public event Global.BaseEvent 입출변경알림;
 
         #region 기본상수 및 멤버
         private static String 로그영역 = "PLC";
         private const Int32 스테이션번호 = 2;
-        private const Int32 입출체크간격 = 20;
+        private const Int32 입출체크간격 = 10;
         private DateTime 시작일시 = DateTime.Now;
         private Boolean 작업여부 = false;  // 동작 FLAG 
         private ActUtlType64 PLC = null;
@@ -41,9 +41,9 @@ namespace SamhwaInspectionNeo.Schemas
             트레이확인카메라트리거,
             [Address("W0022")]
             하부표면검사카메라트리거,
-            [Address("W0028")]
-            상부표면검사카메라트리거,
             [Address("W002E")]
+            상부표면검사카메라트리거,
+            [Address("W0028")]
             상부치수검사카메라트리거,
             [Address("W0040")]
             상부변위센서확인트리거,
@@ -79,8 +79,8 @@ namespace SamhwaInspectionNeo.Schemas
         private static Int32 ToInt(Boolean val) { return val ? 1 : 0; }
         private Int32 정보읽기(정보주소 구분) { return this.입출자료.Get(구분); }
         public Boolean 신호읽기(정보주소 구분) { return ToBool(this.입출자료.Get(구분)); }
-        private void 신호쓰기(정보주소 구분, Int32 val) { this.입출자료.Set(구분, val); }
-        private void 신호쓰기(정보주소 구분, Boolean val) { this.입출자료.Set(구분, ToInt(val)); }
+        public void 신호쓰기(정보주소 구분, Int32 val) { this.입출자료.Set(구분, val); }
+        public void 신호쓰기(정보주소 구분, Boolean val) { this.입출자료.Set(구분, ToInt(val)); }
 
         #region 입출신호
         public Boolean 자동모드여부 { get { return 신호읽기(정보주소.자동모드); } }
