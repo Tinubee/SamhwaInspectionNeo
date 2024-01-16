@@ -47,6 +47,8 @@ namespace SamhwaInspectionNeo.Schemas
         public String 도구경로 { get { return Path.Combine(기본경로, "Tools"); } }
         [Description("마스터 이미지"), JsonIgnore]
         public String 마스터사진 { get { return Path.Combine(기본경로, "Masters"); } }
+        [Description("비젼 UserScriptTools"), JsonIgnore]
+        public String 스크립트경로 { get { return Path.Combine(도구경로, "UserScript"); } }
         [JsonIgnore]
         public Boolean 강제배출 { get; set; } = true;
         [JsonIgnore]

@@ -242,7 +242,7 @@ namespace SamhwaInspectionNeo.Schemas
                 {
                     if (항목 == 검사항목.None) continue;
                     ResultAttribute a = MvUtils.Utils.GetAttribute<ResultAttribute>(항목);
-                    this.Add(new 검사정보() { 검사항목 = 항목, 검사그룹 = a.검사그룹, 검사장치 = a.장치구분, 결과분류 = a.결과분류 });
+                    this.Add(new 검사정보() { 검사항목 = 항목, 검사그룹 = a.검사그룹, 검사장치 = a.장치구분, 결과분류 = a.결과분류, 플로우 = a.플로우구분 });
                 }
                 this.Save();
                 return;

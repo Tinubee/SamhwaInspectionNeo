@@ -63,6 +63,16 @@ namespace SamhwaInspectionNeo.Properties {
         /// <summary>
         ///   DevExpress.Utils.Svg.SvgImage 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static DevExpress.Utils.Svg.SvgImage business_calculator {
+            get {
+                object obj = ResourceManager.GetObject("business_calculator", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   DevExpress.Utils.Svg.SvgImage 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static DevExpress.Utils.Svg.SvgImage customizegrid {
             get {
                 object obj = ResourceManager.GetObject("customizegrid", resourceCulture);

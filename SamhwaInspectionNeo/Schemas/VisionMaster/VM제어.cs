@@ -36,9 +36,10 @@ namespace SamhwaInspectionNeo.Schemas
         public event 현재결과상태갱신 결과상태갱신알림;
         private String 도구파일 { get => Path.Combine(Global.환경설정.도구경로, $"{MvUtils.Utils.GetDescription(Global.환경설정.선택모델)}.sol"); }
         private String 기본도구파일 { get => Path.Combine(Global.환경설정.도구경로, $"Default.sol"); }
+        private String 스크립트파일 { get => Path.Combine(Global.환경설정.스크립트경로, $"Slot1계산.cs"); }
         public Dictionary<카메라구분, bool> grabFinishDic = new Dictionary<카메라구분, bool>();
         public VmGlobals 글로벌변수제어 = new VmGlobals();
-        
+
         public Boolean Init() => Load();
         public void Save() => VmSolution.Save();
         public Boolean Load()
@@ -163,10 +164,12 @@ namespace SamhwaInspectionNeo.Schemas
                     this.shellModuleTool = this.Procedure["Resulte"] as ShellModuleTool;
 
                     this.slot1GroupTool = this.Procedure["Slot1"] as IMVSGroupTool;
-                    this.slot1ShellModuleTool = this.slot1GroupTool["거리계산"] as ShellModuleTool;
+                    if (this.slot1GroupTool != null)
+                        this.slot1ShellModuleTool = this.slot1GroupTool["거리계산"] as ShellModuleTool;
 
                     this.slot2GroupTool = this.Procedure["Slot2"] as IMVSGroupTool;
-                    this.slot2ShellModuleTool = this.slot2GroupTool["거리계산"] as ShellModuleTool;
+                    if (this.slot2GroupTool != null)
+                        this.slot2ShellModuleTool = this.slot2GroupTool["거리계산"] as ShellModuleTool;
 
                     if (this.imageSourceModuleTool != null)
                         this.imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;

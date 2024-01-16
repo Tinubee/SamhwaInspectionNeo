@@ -2,7 +2,7 @@ using System;
 using System.Text;
 using System.Windows.Forms;
 using Script.Methods;
-public partial class UserScript:ScriptMethods,IProcessMethods
+public partial class Slot2계산 : ScriptMethods,IProcessMethods
 {
     
     public int Front지그

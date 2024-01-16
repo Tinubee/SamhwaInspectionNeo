@@ -57,14 +57,19 @@ namespace SamhwaInspectionNeo.UI.Control
             this.b설정저장.Text = 번역.설정저장;
             //this.모델선택(this.e모델선택, (DevExpress.XtraEditors.Controls.ChangingEventArgs)EventArgs.Empty);
             this.b도구설정.Click += B도구설정_Click;
+            this.b교정값계산.Click += B교정값계산_Click;
             Loading = false;
+        }
+
+        private void B교정값계산_Click(object sender, EventArgs e)
+        {
+            
         }
 
         private void GridView1_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
             GridView view = sender as GridView;
             
-            //throw new NotImplementedException();
         }
 
         public void Close() { }

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 /************************************
 Shell Module default code: using .NET Framwwork 4.6.1
 *************************************/
-public partial class UserScript:ScriptMethods,IProcessMethods
+public partial class Slot2계산 : ScriptMethods,IProcessMethods
 {
     //the count of process
 	//执行次数计数
