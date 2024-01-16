@@ -2,15 +2,19 @@
 using DevExpress.Utils;
 using GraphicsSetModuleCs;
 using ImageSourceModuleCs;
+using IMVSGroupCs;
 using OpenCvSharp;
 using ShellModuleCs;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using VM.Core;
 using VM.PlatformSDKCS;
+using VMBaseControls.Base.ImageView;
 
 namespace SamhwaInspectionNeo.Schemas
 {
@@ -34,7 +38,7 @@ namespace SamhwaInspectionNeo.Schemas
         private String 기본도구파일 { get => Path.Combine(Global.환경설정.도구경로, $"Default.sol"); }
         public Dictionary<카메라구분, bool> grabFinishDic = new Dictionary<카메라구분, bool>();
         public VmGlobals 글로벌변수제어 = new VmGlobals();
-
+        
         public Boolean Init() => Load();
         public void Save() => VmSolution.Save();
         public Boolean Load()
@@ -107,6 +111,10 @@ namespace SamhwaInspectionNeo.Schemas
         public ImageSourceModuleTool imageSourceModuleTool;
         public GraphicsSetModuleTool graphicsSetModuleTool;
         public ShellModuleTool shellModuleTool;
+        public IMVSGroupTool slot1GroupTool;
+        public ShellModuleTool slot1ShellModuleTool;
+        public IMVSGroupTool slot2GroupTool;
+        public ShellModuleTool slot2ShellModuleTool;
 
         public List<GraphicsSetModuleTool> graphicsSetModuleToolList;
         public List<ShellModuleTool> shellModuleToolList;
@@ -149,9 +157,16 @@ namespace SamhwaInspectionNeo.Schemas
                 }
                 else
                 {
+                    //this.Procedure.Inputs[0].Value =
                     this.imageSourceModuleTool = this.Procedure["InputImage"] as ImageSourceModuleTool;
                     this.graphicsSetModuleTool = this.Procedure["OutputImage"] as GraphicsSetModuleTool;
                     this.shellModuleTool = this.Procedure["Resulte"] as ShellModuleTool;
+
+                    this.slot1GroupTool = this.Procedure["Slot1"] as IMVSGroupTool;
+                    this.slot1ShellModuleTool = this.slot1GroupTool["거리계산"] as ShellModuleTool;
+
+                    this.slot2GroupTool = this.Procedure["Slot2"] as IMVSGroupTool;
+                    this.slot2ShellModuleTool = this.slot2GroupTool["거리계산"] as ShellModuleTool;
 
                     if (this.imageSourceModuleTool != null)
                         this.imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;

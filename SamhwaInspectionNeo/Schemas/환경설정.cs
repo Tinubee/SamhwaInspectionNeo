@@ -19,7 +19,6 @@ namespace SamhwaInspectionNeo.Schemas
 
         [JsonIgnore]
         public const String 프로젝트번호 = "23-1228-002";
-
         [Description("프로그램 동작구분"), JsonProperty("RunType")]
         public 동작구분 동작구분 { get; set; } = 동작구분.Live;
         [Translation("Config Path", "설정 저장 경로"), JsonProperty("ConfigSavePath")]

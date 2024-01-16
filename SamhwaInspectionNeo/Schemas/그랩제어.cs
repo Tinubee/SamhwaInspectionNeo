@@ -836,7 +836,6 @@ namespace SamhwaInspectionNeo.Schemas
                 MC.GetParam(bufferAddress, "SurfaceAddr", out surfaceAddr);
                 image = new Mat(height, width, MatType.CV_8U, surfaceAddr);
 
-
                 acq.SetImage(image);
             }
             catch (Exception ex)

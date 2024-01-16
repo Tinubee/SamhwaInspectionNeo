@@ -75,50 +75,28 @@ namespace SamhwaInspectionNeo.Schemas
     {
         [Result(), ListBindable(false)]
         None = 0,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Width")]
-        Width = 1,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Height")]
-        Height = 2,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Slot1-1")]
-        Slot1_1 = 101,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Slot1-2")]
-        Slot1_2 = 102,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Slot1-3")]
-        Slot1_3 = 103,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Slot1-4")]
-        Slot1_4 = 104,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Slot1-5")]
-        Slot1_5 = 105,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Slot2-1")]
-        Slot2_1 = 201,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Slot2-2")]
-        Slot2_2 = 202,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Slot2-3")]
-        Slot2_3 = 203,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Slot2-4")]
-        Slot2_4 = 204,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Slot2-5")]
-        Slot2_5 = 205,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Slot3-1")]
-        Slot3_1 = 301,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Slot3-2")]
-        Slot3_2 = 302,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Slot3-3")]
-        Slot3_3 = 303,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Slot3-4")]
-        Slot3_4 = 304,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Slot3-5")]
-        Slot3_5 = 305,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Slot4-1")]
-        Slot4_1 = 401,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Slot4-2")]
-        Slot4_2 = 402,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Slot4-3")]
-        Slot4_3 = 403,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Slot4-4")]
-        Slot4_4 = 404,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Slot4-5")]
-        Slot4_5 = 405,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Slot1Top")]
+        Slot1상부 = 1,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Slot1Middle")]
+        Slot1중앙부 = 2,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Slot1Bottom")]
+        Slot1하부 = 101,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Slot2Top")]
+        Slot2상부 = 102,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Slot2Middle")]
+        Slot2중앙부 = 103,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "Slot2Bottom")]
+        Slot2하부 = 104,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "StandardHole")]
+        기준홀경 = 105,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "TopHole")]
+        상측홀경 = 201,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "LeftBottomHole")]
+        좌하홀경 = 202,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "LeftTopHole")]
+        좌상홀경 = 203,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "RightTopHole")]
+        우상홀경 = 204,
         [Result(검사그룹.TrayCheck, 결과분류.Summary, 장치구분.Cam02)]
         TrayCheck = 501,
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03)]

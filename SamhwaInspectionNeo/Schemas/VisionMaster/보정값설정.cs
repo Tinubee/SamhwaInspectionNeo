@@ -15,17 +15,26 @@ namespace SamhwaInspectionNeo.Schemas.VisionMaster
 {
     public enum 검사항목
     {
-        슬롯부20Point,
-        슬롯부200Point,
-        큰원치수,
-        작은원치수,
-        높이,
-        너비,
-        //_50_5부,
-        //_33_94부,
-        //_15부,
+        [Description("X")]
         X축,
-        Y축
+        [Description("Y")]
+        Y축,
+        [Description("SlotTop")]
+        Slot상부,
+        [Description("SlotMiddle")]
+        Slot중앙부,
+        [Description("SlotBottom")]
+        Slot하부,
+        [Description("StandardHole")]
+        기준홀경,
+        [Description("TopHole")]
+        상측홀경,
+        [Description("LeftBottomHole")]
+        좌하홀경,
+        [Description("LeftTopHole")]
+        좌상홀경,
+        [Description("RightTopHole")]
+        우상홀경
     }
 
     public class 보정값설정 : List<보정값변수>
@@ -94,7 +103,7 @@ namespace SamhwaInspectionNeo.Schemas.VisionMaster
     public class 보정값변수
     {
         [JsonProperty("name"), Description("변수명")]
-        public 검사항목 검사명칭 { get; set; } = 검사항목.슬롯부20Point;
+        public 검사항목 검사명칭 { get; set; } = 검사항목.Slot상부;
         [JsonProperty("namecalv"), Description("변수명")]
         public String 변수명칭 { get; set; } = String.Empty;
         [JsonProperty("minv"), BatchEdit(true), Description("최소값")]
@@ -142,18 +151,22 @@ namespace SamhwaInspectionNeo.Schemas.VisionMaster
 
         public void 검사명칭설정()
         {
-            if (this.변수명칭.Contains("Slot"))
-                this.검사명칭 = 검사항목.슬롯부20Point;
-            else if (this.변수명칭.Contains("Height"))
-                this.검사명칭 = 검사항목.높이;
-            else if (this.변수명칭.Contains("Width"))
-                this.검사명칭 = 검사항목.너비;
-            else if (this.변수명칭.Contains("BigCircle"))
-                this.검사명칭 = 검사항목.큰원치수;
-            else if (this.변수명칭.Contains("SmallCircle"))
-                this.검사명칭 = 검사항목.작은원치수;
-            //else if (this.변수명칭.Contains("S1") || this.변수명칭.Contains("S2") || this.변수명칭.Contains("S3"))
-            //    this.검사명칭 = 검사항목._15부;
+            if (this.변수명칭.Contains("SlotTop"))
+                this.검사명칭 = 검사항목.Slot상부;
+            else if (this.변수명칭.Contains("SlotMiddle"))
+                this.검사명칭 = 검사항목.Slot중앙부;
+            else if (this.변수명칭.Contains("SlotBottom"))
+                this.검사명칭 = 검사항목.Slot하부;
+            else if (this.변수명칭.Contains("StandardHole"))
+                this.검사명칭 = 검사항목.기준홀경;
+            else if (this.변수명칭.Contains("TopHole"))
+                this.검사명칭 = 검사항목.상측홀경;
+            else if (this.변수명칭.Contains("LeftBottomHole"))
+                this.검사명칭 = 검사항목.좌하홀경;
+            else if (this.변수명칭.Contains("LeftTopHole"))
+                this.검사명칭 = 검사항목.좌상홀경;
+            else if (this.변수명칭.Contains("RightTopHole"))
+                this.검사명칭 = 검사항목.우상홀경;
             else if (this.변수명칭.Contains("calValueX"))
                 this.검사명칭 = 검사항목.X축;
             else if (this.변수명칭.Contains("calValueY"))

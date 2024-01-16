@@ -14,8 +14,8 @@ namespace SamhwaInspectionNeo.Schemas
     {
         [ListBindable(false)]
         None,
-        [DXDescription("4P-B"), Description("4P-B")]
-        Model_4PB,
+        [DXDescription("2P-A"), Description("2P-A")]
+        Model_2PA,
         [DXDescription("4P-H"), Description("4P-H")]
         Model_4PH,
     }
