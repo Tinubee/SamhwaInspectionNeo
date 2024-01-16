@@ -58,12 +58,27 @@ namespace SamhwaInspectionNeo.UI.Control
             //this.모델선택(this.e모델선택, (DevExpress.XtraEditors.Controls.ChangingEventArgs)EventArgs.Empty);
             this.b도구설정.Click += B도구설정_Click;
             this.b교정값계산.Click += B교정값계산_Click;
+            this.b수동검사.Click += B수동검사_Click;
             Loading = false;
+        }
+
+        private void B수동검사_Click(object sender, EventArgs e)
+        {
+            Global.VM제어.GetItem(Flow구분.Flow1).Run(null, null, 0);
+            this.GridView1.RefreshData();
         }
 
         private void B교정값계산_Click(object sender, EventArgs e)
         {
-            
+            검사설정자료 자료 = Global.모델자료.GetItem(Global.환경설정.선택모델)?.검사설정;
+            foreach (var item in 자료)
+            {
+                if(item.교정값 == 1 && item.측정값 > 0 && item.검사장치 == 장치구분.Cam01)
+                {
+                    item.교정값 =Convert.ToDecimal((item.측정값 / item.결과값).ToString("F4"));
+                }
+            }
+            this.GridView1.RefreshData();
         }
 
         private void GridView1_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)

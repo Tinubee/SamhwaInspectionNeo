@@ -10,6 +10,7 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using static SamhwaInspectionNeo.UI.Control.MasterSetting;
 
 namespace SamhwaInspectionNeo.Schemas
 {
@@ -155,7 +156,14 @@ namespace SamhwaInspectionNeo.Schemas
             검사.SetResult(name, value, ok);
             return 검사;
         }
-
+        //Flow, 지그, 이름, 값
+        public 검사결과 항목검사(Flow구분 구분, 지그위치 지그 , String name ,Single value)
+        {
+            검사결과 검사 = this.검사항목찾기(Global.신호제어.촬영위치번호(카메라구분.Cam01));
+            if (검사 == null) return null;
+            검사.SetResult(name, value);
+            return 검사;
+        }
         public 검사결과 검사결과계산(Int32 검사코드)
         {
             검사결과 검사;

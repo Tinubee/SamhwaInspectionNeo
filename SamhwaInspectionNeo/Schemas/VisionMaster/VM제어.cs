@@ -1,8 +1,11 @@
 ﻿using DevExpress.Office.Crypto;
 using DevExpress.Utils;
+using DevExpress.Utils.Extensions;
+using GlobalVariableModuleCs;
 using GraphicsSetModuleCs;
 using ImageSourceModuleCs;
 using IMVSGroupCs;
+using Newtonsoft.Json.Linq;
 using OpenCvSharp;
 using ShellModuleCs;
 using System;
@@ -10,11 +13,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using VM.Core;
 using VM.PlatformSDKCS;
 using VMBaseControls.Base.ImageView;
+using static SamhwaInspectionNeo.UI.Control.MasterSetting;
 
 namespace SamhwaInspectionNeo.Schemas
 {
@@ -116,7 +121,7 @@ namespace SamhwaInspectionNeo.Schemas
         public ShellModuleTool slot1ShellModuleTool;
         public IMVSGroupTool slot2GroupTool;
         public ShellModuleTool slot2ShellModuleTool;
-
+        public GlobalVariableModuleTool GlobalVariableModuleTool;
         public List<GraphicsSetModuleTool> graphicsSetModuleToolList;
         public List<ShellModuleTool> shellModuleToolList;
 
@@ -139,6 +144,7 @@ namespace SamhwaInspectionNeo.Schemas
             this.Procedure = VmSolution.Instance[this.구분.ToString()] as VmProcedure;
             if (Procedure != null)
             {
+                this.GlobalVariableModuleTool = VmSolution.Instance["Global Variable1"] as GlobalVariableModuleTool;
                 if (this.구분 == Flow구분.상부표면검사 || this.구분 == Flow구분.하부표면검사)
                 {
                     this.graphicsSetModuleToolList = new List<GraphicsSetModuleTool>();
@@ -181,22 +187,35 @@ namespace SamhwaInspectionNeo.Schemas
         {
             if (구분 == Flow구분.상부표면검사 || 구분 == Flow구분.하부표면검사) return;
 
-            ShellModuleTool shell = Global.VM제어.GetItem(구분).shellModuleTool;
-            for (int i = 6; i < shell.Outputs.Count; i++)
+            ShellModuleTool Slot1OutPut = Global.VM제어.GetItem(구분).slot1ShellModuleTool;
+            ShellModuleTool Slot2OutPut = Global.VM제어.GetItem(구분).slot2ShellModuleTool;
+            //if (Global.신호제어.Front지그)
+            this.F슬롯치수결과(Slot1OutPut);
+            this.F슬롯치수결과(Slot2OutPut);
+        }
+
+        public void F슬롯치수결과(ShellModuleTool tool)
+        {
+            for (int i = 7; i < tool.Outputs.Count; i++)
             {
-                List<VmIO> t = shell.Outputs[i].GetAllIO();
+                List<VmIO> t = tool.Outputs[i].GetAllIO();
                 String name = t[0].UniqueName.Split('%')[1];
-                if (t[0].Value != null)
+                if (t[0].Value != null && name.Contains("strSlot"))
                 {
-                    String str = ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[0].strValue;
+                    Single slotBottom = Convert.ToSingle(((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[0].strValue);
+                    Single slotMiddle = Convert.ToSingle(((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[1].strValue);
+                    Single slotTop = Convert.ToSingle(((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[2].strValue);
+
                     try
                     {
-                        String[] vals = str.Split(';');
-                        Boolean ok = false;
-                        Single val = Single.NaN;
-                        if (!String.IsNullOrEmpty(vals[0])) val = Convert.ToSingle(vals[0]);
-                        if (vals.Length > 1) ok = MvUtils.Utils.IntValue(vals[1]) == 1;
-                        //Global.검사자료.카메라검사((카메라구분)구분, name, val, ok);
+                        검사설정자료 자료 = Global.모델자료.GetItem(Global.환경설정.선택모델)?.검사설정;
+
+                        검사정보 상부치수 = 자료.Where(x => x.플로우 == this.구분).Where(x => x.지그 == 지그위치.Front).Where(x => x.검사항목.ToString().Contains(name.Contains("strSlot1") ? "Slot1상부" : "Slot2상부")).FirstOrDefault();
+                        검사정보 중앙부치수 = 자료.Where(x => x.플로우 == this.구분).Where(x => x.지그 == 지그위치.Front).Where(x => x.검사항목.ToString().Contains(name.Contains("strSlot1") ? "Slot1중앙부" : "Slot2중앙부")).FirstOrDefault();
+                        검사정보 하부치수 = 자료.Where(x => x.플로우 == this.구분).Where(x => x.지그 == 지그위치.Front).Where(x => x.검사항목.ToString().Contains(name.Contains("strSlot1") ? "Slot1하부" : "Slot2하부")).FirstOrDefault();
+                        결과값적용(상부치수, slotTop);
+                        결과값적용(중앙부치수, slotMiddle);
+                        결과값적용(하부치수, slotBottom);
                     }
                     catch (Exception e)
                     {
@@ -204,6 +223,21 @@ namespace SamhwaInspectionNeo.Schemas
                     }
                 }
             }
+        }
+
+        public Boolean 결과값적용(검사정보 검사, Single value)
+        {
+            if (검사 == null) return false;
+            if (Single.IsNaN(value))
+            {
+                검사.측정결과 = 결과구분.ER;
+                return false;
+            }
+            검사.측정값 = 0;
+            검사.결과값 = (Decimal)Math.Round(value, Global.환경설정.결과자릿수);
+            Boolean ok = 검사.결과값 >= 검사.최소값 && 검사.결과값 <= 검사.최대값;
+            검사.측정결과 = ok ? 결과구분.OK : 결과구분.NG;
+            return true;
         }
 
         public Boolean Run(Mat mat, ImageBaseData imageBaseData, int 순서)
@@ -219,11 +253,13 @@ namespace SamhwaInspectionNeo.Schemas
                         Global.오류로그(로그영역, "검사오류", $"[{this.구분}] VM 검사 모델이 없습니다.", false);
                         return false;
                     }
+
                     imageBaseData = mat == null ? imageBaseData : MatToImageBaseData(mat);
-                    this.imageSourceModuleTool.SetImageData(imageBaseData);
+                    if (imageBaseData != null)
+                        this.imageSourceModuleTool.SetImageData(imageBaseData);
+
                     this.Procedure.Run();
                     //this.SetResult(this.구분);
-
                     return true;
                 }
                 else
@@ -233,8 +269,13 @@ namespace SamhwaInspectionNeo.Schemas
                         Global.오류로그(로그영역, "검사오류", $"[{this.구분}] VM 검사 모델이 없습니다.", false);
                         return false;
                     }
+
+                    if (this.구분 == Flow구분.Flow1)
+                        지그위치체크();
+
                     imageBaseData = mat == null ? imageBaseData : MatToImageBaseData(mat);
-                    this.imageSourceModuleTool.SetImageData(imageBaseData);
+                    if (imageBaseData != null)
+                        this.imageSourceModuleTool.SetImageData(imageBaseData);
                     this.Procedure.Run();
                     this.SetResult(this.구분);
 
@@ -245,6 +286,19 @@ namespace SamhwaInspectionNeo.Schemas
             {
                 Global.오류로그(로그영역, "검사오류", $"[{this.구분}] VM 검사오류: {ex.Message}", false);
                 return false;
+            }
+        }
+        private void 지그위치체크()
+        {
+            if (Global.신호제어.Front지그)
+            {
+                this.GlobalVariableModuleTool.SetGlobalVar("Front지그", "1");
+                this.GlobalVariableModuleTool.SetGlobalVar("Rear지그", "0");
+            }
+            else if (Global.신호제어.Rear지그)
+            {
+                this.GlobalVariableModuleTool.SetGlobalVar("Front지그", "0");
+                this.GlobalVariableModuleTool.SetGlobalVar("Rear지그", "1");
             }
         }
 

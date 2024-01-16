@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using static SamhwaInspectionNeo.UI.Control.MasterSetting;
 
 namespace SamhwaInspectionNeo.Schemas
 {
@@ -53,11 +54,12 @@ namespace SamhwaInspectionNeo.Schemas
         public 장치구분 장치구분 = 장치구분.None;
         public 검사항목 결과항목 = 검사항목.None;
         public Flow구분 플로우구분 = Flow구분.Flow1;
+        public 지그위치 지그위치 = 지그위치.Front;
         public String 변수명칭 = String.Empty;
         public Int32 결과부호 = 1;
         public ResultAttribute() { }
         public ResultAttribute(검사그룹 그룹, 결과분류 결과, 장치구분 장치) { 검사그룹 = 그룹; 장치구분 = 장치; 결과분류 = 결과; }
-        public ResultAttribute(검사그룹 그룹, 결과분류 결과, 장치구분 장치, Flow구분 플로우, 검사항목 항목, String 변수) { 검사그룹 = 그룹; 결과분류 = 결과; 장치구분 = 장치; 플로우구분 = 플로우; 결과항목 = 항목; 변수명칭 = 변수; }
+        public ResultAttribute(검사그룹 그룹, 결과분류 결과, 장치구분 장치, Flow구분 플로우, 지그위치 지그, 검사항목 항목, String 변수) { 검사그룹 = 그룹; 결과분류 = 결과; 장치구분 = 장치; 플로우구분 = 플로우; 지그위치 = 지그; 결과항목 = 항목; 변수명칭 = 변수; }
     }
 
     public enum 검사그룹
@@ -76,94 +78,182 @@ namespace SamhwaInspectionNeo.Schemas
     {
         [Result(), ListBindable(false)]
         None = 0,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, None, "Slot1Top")]
-        Flow1_Slot1상부 = 101,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, None, "Slot1Middle")]
-        Flow1_Slot1중앙부 = 102,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, None, "Slot1Bottom")]
-        Flow1_Slot1하부 = 103,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, None, "Slot2Top")]
-        Flow1_Slot2상부 = 104,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, None, "Slot2Middle")]
-        Flow1_Slot2중앙부 = 105,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, None, "Slot2Bottom")]
-        Flow1_Slot2하부 = 106,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, None, "StandardHole")]
-        Flow1_기준홀경 = 107,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, None, "TopHole")]
-        Flow1_상측홀경 = 108,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, None, "LeftBottomHole")]
-        Flow1_좌하홀경 = 109,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, None, "LeftTopHole")]
-        Flow1_좌상홀경 = 110,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, None, "RightTopHole")]
-        Flow1_우상홀경 = 111,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, None, "Slot1Top")]
-        Flow2_Slot1상부 = 201,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, None, "Slot1Middle")]
-        Flow2_Slot1중앙부 = 202,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, None, "Slot1Bottom")]
-        Flow2_Slot1하부 = 203,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, None, "Slot2Top")]
-        Flow2_Slot2상부 = 204,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, None, "Slot2Middle")]
-        Flow2_Slot2중앙부 = 205,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, None, "Slot2Bottom")]
-        Flow2_Slot2하부 = 206,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, None, "StandardHole")]
-        Flow2_기준홀경 = 207,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, None, "TopHole")]
-        Flow2_상측홀경 = 208,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, None, "LeftBottomHole")]
-        Flow2_좌하홀경 = 209,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, None, "LeftTopHole")]
-        Flow2_좌상홀경 = 210,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, None, "RightTopHole")]
-        Flow2_우상홀경 = 211,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, None, "Slot1Top")]
-        Flow3_Slot1상부 = 301,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, None, "Slot1Middle")]
-        Flow3_Slot1중앙부 = 302,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, None, "Slot1Bottom")]
-        Flow3_Slot1하부 = 303,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, None, "Slot2Top")]
-        Flow3_Slot2상부 = 304,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, None, "Slot2Middle")]
-        Flow3_Slot2중앙부 = 305,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, None, "Slot2Bottom")]
-        Flow3_Slot2하부 = 306,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, None, "StandardHole")]
-        Flow3_기준홀경 = 307,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, None, "TopHole")]
-        Flow3_상측홀경 = 308,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, None, "LeftBottomHole")]
-        Flow3_좌하홀경 = 309,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, None, "LeftTopHole")]
-        Flow3_좌상홀경 = 310,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, None, "RightTopHole")]
-        Flow3_우상홀경 = 311,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, None, "Slot1Top")]
-        Flow4_Slot1상부 = 401,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, None, "Slot1Middle")]
-        Flow4_Slot1중앙부 = 402,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, None, "Slot1Bottom")]
-        Flow4_Slot1하부 = 403,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, None, "Slot2Top")]
-        Flow4_Slot2상부 = 404,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, None, "Slot2Middle")]
-        Flow4_Slot2중앙부 = 405,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, None, "Slot2Bottom")]
-        Flow4_Slot2하부 = 406,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, None, "StandardHole")]
-        Flow4_기준홀경 = 407,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, None, "TopHole")]
-        Flow4_상측홀경 = 408,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, None, "LeftBottomHole")]
-        Flow4_좌하홀경 = 409,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, None, "LeftTopHole")]
-        Flow4_좌상홀경 = 410,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, None, "RightTopHole")]
-        Flow4_우상홀경 = 411,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, 지그위치.Front, None, "Slot1Top")]
+        Flow1_Slot1상부_F = 101,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, 지그위치.Front, None, "Slot1Middle")]
+        Flow1_Slot1중앙부_F = 102,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, 지그위치.Front, None, "Slot1Bottom")]
+        Flow1_Slot1하부_F = 103,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, 지그위치.Front, None, "Slot2Top")]
+        Flow1_Slot2상부_F = 104,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, 지그위치.Front, None, "Slot2Middle")]
+        Flow1_Slot2중앙부_F = 105,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, 지그위치.Front, None, "Slot2Bottom")]
+        Flow1_Slot2하부_F = 106,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, 지그위치.Front, None, "StandardHole")]
+        Flow1_기준홀경_F = 107,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, 지그위치.Front, None, "TopHole")]
+        Flow1_상측홀경_F = 108,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, 지그위치.Front, None, "LeftBottomHole")]
+        Flow1_좌하홀경_F = 109,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, 지그위치.Front, None, "LeftTopHole")]
+        Flow1_좌상홀경_F = 110,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, 지그위치.Front, None, "RightTopHole")]
+        Flow1_우상홀경_F = 111,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, 지그위치.Rear, None, "Slot1Top")]
+        Flow1_Slot1상부_R = 112,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, 지그위치.Rear, None, "Slot1Middle")]
+        Flow1_Slot1중앙부_R = 113,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, 지그위치.Rear, None, "Slot1Bottom")]
+        Flow1_Slot1하부_R = 114,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, 지그위치.Rear, None, "Slot2Top")]
+        Flow1_Slot2상부_R = 115,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, 지그위치.Rear, None, "Slot2Middle")]
+        Flow1_Slot2중앙부_R = 116,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, 지그위치.Rear, None, "Slot2Bottom")]
+        Flow1_Slot2하부_R = 117,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, 지그위치.Rear, None, "StandardHole")]
+        Flow1_기준홀경_R = 118,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, 지그위치.Rear, None, "TopHole")]
+        Flow1_상측홀경_R = 119,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, 지그위치.Rear, None, "LeftBottomHole")]
+        Flow1_좌하홀경_R = 120,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, 지그위치.Rear, None, "LeftTopHole")]
+        Flow1_좌상홀경_R = 121,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow1, 지그위치.Rear, None, "RightTopHole")]
+        Flow1_우상홀경_R = 122,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, 지그위치.Front, None, "Slot1Top")]
+        Flow2_Slot1상부_F = 201,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, 지그위치.Front, None, "Slot1Middle")]
+        Flow2_Slot1중앙부_F = 202,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, 지그위치.Front, None, "Slot1Bottom")]
+        Flow2_Slot1하부_F = 203,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, 지그위치.Front, None, "Slot2Top")]
+        Flow2_Slot2상부_F = 204,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, 지그위치.Front, None, "Slot2Middle")]
+        Flow2_Slot2중앙부_F = 205,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, 지그위치.Front, None, "Slot2Bottom")]
+        Flow2_Slot2하부_F = 206,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, 지그위치.Front, None, "StandardHole")]
+        Flow2_기준홀경_F = 207,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, 지그위치.Front, None, "TopHole")]
+        Flow2_상측홀경_F = 208,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, 지그위치.Front, None, "LeftBottomHole")]
+        Flow2_좌하홀경_F = 209,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, 지그위치.Front, None, "LeftTopHole")]
+        Flow2_좌상홀경_F = 210,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, 지그위치.Front, None, "RightTopHole")]
+        Flow2_우상홀경_F = 211,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, 지그위치.Rear, None, "Slot1Top")]
+        Flow2_Slot1상부_R = 212,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, 지그위치.Rear, None, "Slot1Middle")]
+        Flow2_Slot1중앙부_R = 213,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, 지그위치.Rear, None, "Slot1Bottom")]
+        Flow2_Slot1하부_R = 214,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, 지그위치.Rear, None, "Slot2Top")]
+        Flow2_Slot2상부_R = 215,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, 지그위치.Rear, None, "Slot2Middle")]
+        Flow2_Slot2중앙부_R = 216,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, 지그위치.Rear, None, "Slot2Bottom")]
+        Flow2_Slot2하부_R = 217,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, 지그위치.Rear, None, "StandardHole")]
+        Flow2_기준홀경_R = 218,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, 지그위치.Rear, None, "TopHole")]
+        Flow2_상측홀경_R = 219,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, 지그위치.Rear, None, "LeftBottomHole")]
+        Flow2_좌하홀경_R = 220,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, 지그위치.Rear, None, "LeftTopHole")]
+        Flow2_좌상홀경_R = 221,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow2, 지그위치.Rear, None, "RightTopHole")]
+        Flow2_우상홀경_R = 222,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, 지그위치.Front, None, "Slot1Top")]
+        Flow3_Slot1상부_F = 301,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, 지그위치.Front, None, "Slot1Middle")]
+        Flow3_Slot1중앙부_F = 302,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, 지그위치.Front, None, "Slot1Bottom")]
+        Flow3_Slot1하부_F = 303,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, 지그위치.Front, None, "Slot2Top")]
+        Flow3_Slot2상부_F = 304,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, 지그위치.Front, None, "Slot2Middle")]
+        Flow3_Slot2중앙부_F = 305,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, 지그위치.Front, None, "Slot2Bottom")]
+        Flow3_Slot2하부_F = 306,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, 지그위치.Front, None, "StandardHole")]
+        Flow3_기준홀경_F = 307,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, 지그위치.Front, None, "TopHole")]
+        Flow3_상측홀경_F = 308,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, 지그위치.Front, None, "LeftBottomHole")]
+        Flow3_좌하홀경_F = 309,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, 지그위치.Front, None, "LeftTopHole")]
+        Flow3_좌상홀경_F = 310,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, 지그위치.Front, None, "RightTopHole")]
+        Flow3_우상홀경_F = 311,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, 지그위치.Rear, None, "Slot1Top")]
+        Flow3_Slot1상부_R = 312,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, 지그위치.Rear, None, "Slot1Middle")]
+        Flow3_Slot1중앙부_R = 313,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, 지그위치.Rear, None, "Slot1Bottom")]
+        Flow3_Slot1하부_R = 314,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, 지그위치.Rear, None, "Slot2Top")]
+        Flow3_Slot2상부_R = 315,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, 지그위치.Rear, None, "Slot2Middle")]
+        Flow3_Slot2중앙부_R = 316,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, 지그위치.Rear, None, "Slot2Bottom")]
+        Flow3_Slot2하부_R = 317,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, 지그위치.Rear, None, "StandardHole")]
+        Flow3_기준홀경_R = 318,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, 지그위치.Rear, None, "TopHole")]
+        Flow3_상측홀경_R = 319,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, 지그위치.Rear, None, "LeftBottomHole")]
+        Flow3_좌하홀경_R = 320,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, 지그위치.Rear, None, "LeftTopHole")]
+        Flow3_좌상홀경_R = 321,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow3, 지그위치.Rear, None, "RightTopHole")]
+        Flow3_우상홀경_R = 322,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, 지그위치.Front, None, "Slot1Top")]
+        Flow4_Slot1상부_F = 401,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, 지그위치.Front, None, "Slot1Middle")]
+        Flow4_Slot1중앙부_F = 402,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, 지그위치.Front, None, "Slot1Bottom")]
+        Flow4_Slot1하부_F = 403,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, 지그위치.Front, None, "Slot2Top")]
+        Flow4_Slot2상부_F = 404,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, 지그위치.Front, None, "Slot2Middle")]
+        Flow4_Slot2중앙부_F = 405,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, 지그위치.Front, None, "Slot2Bottom")]
+        Flow4_Slot2하부_F = 406,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, 지그위치.Front, None, "StandardHole")]
+        Flow4_기준홀경_F = 407,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, 지그위치.Front, None, "TopHole")]
+        Flow4_상측홀경_F = 408,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, 지그위치.Front, None, "LeftBottomHole")]
+        Flow4_좌하홀경_F = 409,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, 지그위치.Front, None, "LeftTopHole")]
+        Flow4_좌상홀경_F = 410,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, 지그위치.Front, None, "RightTopHole")]
+        Flow4_우상홀경_F = 411,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, 지그위치.Rear, None, "Slot1Top")]
+        Flow4_Slot1상부_R = 412,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, 지그위치.Rear, None, "Slot1Middle")]
+        Flow4_Slot1중앙부_R = 413,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, 지그위치.Rear, None, "Slot1Bottom")]
+        Flow4_Slot1하부_R = 414,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, 지그위치.Rear, None, "Slot2Top")]
+        Flow4_Slot2상부_R = 415,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, 지그위치.Rear, None, "Slot2Middle")]
+        Flow4_Slot2중앙부_R = 416,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, 지그위치.Rear, None, "Slot2Bottom")]
+        Flow4_Slot2하부_R = 417,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, 지그위치.Rear, None, "StandardHole")]
+        Flow4_기준홀경_R = 418,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, 지그위치.Rear, None, "TopHole")]
+        Flow4_상측홀경_R = 419,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, 지그위치.Rear, None, "LeftBottomHole")]
+        Flow4_좌하홀경_R = 420,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, 지그위치.Rear, None, "LeftTopHole")]
+        Flow4_좌상홀경_R = 421,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, Flow구분.Flow4, 지그위치.Rear, None, "RightTopHole")]
+        Flow4_우상홀경_R = 422,
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03)]
         TopSurface = 500,
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam04)]
@@ -231,6 +321,8 @@ namespace SamhwaInspectionNeo.Schemas
         public 장치구분 검사장치 { get; set; } = 장치구분.None;
         [Column("idflow"), JsonProperty("idflow"), Translation("Flow", "플로우")]
         public Flow구분 플로우 { get; set; } = Flow구분.Flow1;
+        [Column("idjig"), JsonProperty("idjig"), Translation("JIG", "지그위치")]
+        public 지그위치 지그 { get; set; } = 지그위치.Front;
         [Column("idcat"), JsonProperty("idcat"), Translation("Category", "결과유형")]
         public 결과분류 결과분류 { get; set; } = 결과분류.None;
         [Column("iduni"), JsonProperty("iduni"), Translation("Unit", "단위"), BatchEdit(true)]
