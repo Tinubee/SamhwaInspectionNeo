@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Results));
             this.GridView2 = new MvUtils.CustomView();
             this.col검사그룹 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -38,7 +39,6 @@
             this.col최소값 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col기준값 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col최대값 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.col보정값 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col결과값 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col검사결과 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.GridControl1 = new MvUtils.CustomGrid();
@@ -105,7 +105,6 @@
             this.col최소값,
             this.col기준값,
             this.col최대값,
-            this.col보정값,
             this.col결과값,
             this.col검사결과});
             this.GridView2.FooterPanelHeight = 21;
@@ -216,20 +215,6 @@
             this.col최대값.Visible = true;
             this.col최대값.VisibleIndex = 6;
             // 
-            // col보정값
-            // 
-            this.col보정값.AppearanceCell.Options.UseTextOptions = true;
-            this.col보정값.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.col보정값.AppearanceHeader.Options.UseTextOptions = true;
-            this.col보정값.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.col보정값.Caption = "Offset";
-            this.col보정값.DisplayFormat.FormatString = "{0:#,0.000}";
-            this.col보정값.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.col보정값.FieldName = "보정값";
-            this.col보정값.Name = "col보정값";
-            this.col보정값.Visible = true;
-            this.col보정값.VisibleIndex = 7;
-            // 
             // col결과값
             // 
             this.col결과값.AppearanceCell.Options.UseTextOptions = true;
@@ -242,7 +227,7 @@
             this.col결과값.FieldName = "결과값";
             this.col결과값.Name = "col결과값";
             this.col결과값.Visible = true;
-            this.col결과값.VisibleIndex = 8;
+            this.col결과값.VisibleIndex = 7;
             // 
             // col검사결과
             // 
@@ -254,11 +239,15 @@
             this.col검사결과.FieldName = "측정결과";
             this.col검사결과.Name = "col검사결과";
             this.col검사결과.Visible = true;
-            this.col검사결과.VisibleIndex = 9;
+            this.col검사결과.VisibleIndex = 8;
             // 
             // GridControl1
             // 
             this.GridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            gridLevelNode1.LevelTemplate = this.GridView2;
+            gridLevelNode1.RelationName = "표시내역";
+            this.GridControl1.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
+            gridLevelNode1});
             this.GridControl1.Location = new System.Drawing.Point(0, 40);
             this.GridControl1.MainView = this.GridView1;
             this.GridControl1.Name = "GridControl1";
@@ -621,7 +610,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn col최소값;
         private DevExpress.XtraGrid.Columns.GridColumn col기준값;
         private DevExpress.XtraGrid.Columns.GridColumn col최대값;
-        private DevExpress.XtraGrid.Columns.GridColumn col보정값;
         private DevExpress.XtraGrid.Columns.GridColumn col결과값;
         private DevExpress.XtraGrid.Columns.GridColumn col검사결과;
         private MvUtils.CustomView GridView1;
