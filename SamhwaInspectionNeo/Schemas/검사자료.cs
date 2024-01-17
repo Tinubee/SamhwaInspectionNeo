@@ -10,6 +10,7 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using static SamhwaInspectionNeo.UI.Control.MasterSetting;
 
 namespace SamhwaInspectionNeo.Schemas
@@ -58,7 +59,7 @@ namespace SamhwaInspectionNeo.Schemas
         }
 
         private String 저장파일(DateTime 날짜) => Path.Combine(Global.환경설정.문서저장, MvUtils.Utils.FormatDate(날짜, "{0:yyyyMMdd}") + ".json");
-        public void Save() => this.테이블.Save();
+        public void Save() => this.테이블.SaveAsync();
         private Boolean SaveJson()
         {
             DateTime 날짜 = DateTime.Today;
@@ -101,6 +102,10 @@ namespace SamhwaInspectionNeo.Schemas
         private void 자료추가(검사결과 결과)
         {
             this.Insert(0, 결과);
+            Task.Run(() => {
+                this.테이블.Add(결과);
+            });
+            //this.테이블.Add(결과);
             //if (Global.장치통신.자동수동여부)
             //    this.테이블.Add(결과);
             // 저장은 State 에서
@@ -114,7 +119,8 @@ namespace SamhwaInspectionNeo.Schemas
         }
         public Boolean 결과삭제(검사결과 결과, 검사정보 정보)
         {
-            결과.검사내역.Remove(정보);
+            결과.표시내역.Remove(정보);
+            //결과.검사내역.Remove(정보);
             return this.테이블.Delete(정보) > 0;
         }
         public 검사결과 결과조회(DateTime 일자, 모델구분 모델, Int32 코드) => this.테이블.Select(일자, 모델, 코드);
@@ -149,15 +155,15 @@ namespace SamhwaInspectionNeo.Schemas
             //    this.현재검사변경?.Invoke(검사);
             return 검사;
         }
-        public 검사결과 카메라검사(카메라구분 카메라, String name, Single value, Boolean ok)
+        public 검사결과 카메라검사(Flow구분 구분, String name, Single value, Boolean ok)
         {
-            검사결과 검사 = null; /*this.검사항목찾기(Global.장치통신.촬영위치번호(카메라))*/;
+            검사결과 검사 = this.검사항목찾기((int)구분);
             if (검사 == null) return null;
             검사.SetResult(name, value, ok);
             return 검사;
         }
         //Flow, 지그, 이름, 값
-        public 검사결과 항목검사(Flow구분 구분, 지그위치 지그 , String name ,Single value)
+        public 검사결과 항목검사(Flow구분 구분, 지그위치 지그, String name, Single value)
         {
             검사결과 검사 = this.검사항목찾기(Global.신호제어.촬영위치번호(카메라구분.Cam01));
             if (검사 == null) return null;
@@ -167,23 +173,23 @@ namespace SamhwaInspectionNeo.Schemas
         public 검사결과 검사결과계산(Int32 검사코드)
         {
             검사결과 검사;
-            if (Global.장치상태.자동수동)
+            //if (Global.장치상태.자동수동)
+            //{
+            검사 = this.검사항목찾기(검사코드);
+            if (검사 == null)
             {
-                검사 = this.검사항목찾기(검사코드);
-                if (검사 == null)
-                {
-                    Global.오류로그(로그영역.GetString(), "결과계산", $"[{(Int32)Global.환경설정.선택모델}.{검사코드}] 해당 검사가 없습니다.", false);
-                    return null;
-                }
-                검사.결과계산();
-                Global.모델자료.수량추가(검사.모델구분, 검사.측정결과);
-                this.검사스플.Remove(검사코드);
+                Global.오류로그(로그영역.GetString(), "결과계산", $"[{(Int32)Global.환경설정.선택모델}.{검사코드}] 해당 검사가 없습니다.", false);
+                return null;
             }
-            else
-            {
-                검사 = this.수동검사;
-                검사.결과계산();
-            }
+            검사.결과계산();
+            Global.모델자료.수량추가(검사.모델구분, 검사.측정결과);
+            this.검사스플.Remove(검사코드);
+            //}
+            //else
+            //{
+            //    검사 = this.수동검사;
+            //    검사.결과계산();
+            //}
 
             this.검사완료알림?.Invoke(검사);
             return 검사;
@@ -193,10 +199,14 @@ namespace SamhwaInspectionNeo.Schemas
         {
             //if (!Global.장치통신.자동수동여부) return this.수동검사;
             검사결과 검사 = null;
-            if (검사코드 > 0 && this.검사스플.ContainsKey(검사코드))
+            if (검사코드 >= 0 && this.검사스플.ContainsKey(검사코드))
                 검사 = this.검사스플[검사코드];
             if (검사 == null && !신규여부)
+            {
+                this.검사스플.Remove(검사코드);
                 Global.오류로그(로그영역.GetString(), "제품검사", $"[{검사코드}] Index가 없습니다.", true);
+            }
+                
             return 검사;
         }
 
@@ -223,9 +233,11 @@ namespace SamhwaInspectionNeo.Schemas
             modelBuilder.Entity<검사결과>().Property(e => e.CTQ결과).HasConversion(new EnumToNumberConverter<결과구분, Int32>());
             modelBuilder.Entity<검사결과>().Property(e => e.외관결과).HasConversion(new EnumToNumberConverter<결과구분, Int32>());
 
-            modelBuilder.Entity<검사정보>().HasKey(e => new { e.검사일시, e.검사항목 });
+            //modelBuilder.Entity<검사정보>().HasKey(e => new { e.검사일시, e.검사항목, e.표시항목 });
+            modelBuilder.Entity<검사정보>().HasKey(e => new { e.검사일시, e.표시항목 });
             modelBuilder.Entity<검사정보>().Property(e => e.검사그룹).HasConversion(new EnumToNumberConverter<검사그룹, Int32>());
-            modelBuilder.Entity<검사정보>().Property(e => e.검사항목).HasConversion(new EnumToNumberConverter<검사항목, Int32>());
+            //modelBuilder.Entity<검사정보>().Property(e => e.검사항목).HasConversion(new EnumToNumberConverter<검사항목, Int32>());
+            modelBuilder.Entity<검사정보>().Property(e => e.표시항목).HasConversion(new EnumToNumberConverter<표시항목, Int32>());
             modelBuilder.Entity<검사정보>().Property(e => e.검사장치).HasConversion(new EnumToNumberConverter<장치구분, Int32>());
             modelBuilder.Entity<검사정보>().Property(e => e.결과분류).HasConversion(new EnumToNumberConverter<결과분류, Int32>());
             modelBuilder.Entity<검사정보>().Property(e => e.측정단위).HasConversion(new EnumToNumberConverter<단위구분, Int32>());
@@ -248,7 +260,8 @@ namespace SamhwaInspectionNeo.Schemas
         public void Add(검사결과 정보)
         {
             this.검사결과.Add(정보);
-            this.검사정보.AddRange(정보.검사내역);
+            this.검사정보.AddRange(정보.표시내역);
+            //this.검사정보.AddRange(정보.검사내역);
         }
 
         public void Remove(List<검사정보> 자료)
@@ -283,11 +296,12 @@ namespace SamhwaInspectionNeo.Schemas
                 where (코드 <= 0 || l.검사코드 == 코드)
                 where (모델 == 모델구분.None || l.모델구분 == 모델)
                 orderby d.검사일시 descending
-                orderby d.검사항목 ascending
+                orderby d.표시항목 ascending
                 select d);
             List<검사정보> 정보 = query2.AsNoTracking().ToList();
 
-            자료.ForEach(l => {
+            자료.ForEach(l =>
+            {
                 l.AddRange(정보.Where(d => d.검사일시 == l.검사일시).ToList());
             });
 
@@ -349,7 +363,8 @@ namespace SamhwaInspectionNeo.Schemas
         {
             DateTime 일자 = DateTime.Today.AddDays(-일수);
             String day = MvUtils.Utils.FormatDate(일자, "{0:yyyy-MM-dd}");
-            String sql = $"DELETE FROM inspd WHERE idwdt < DATE('{day}');\nDELETE FROM inspl WHERE ilwdt < DATE('{day}');DELETE FROM inserial WHERE isday < CURRENT_DATE;";
+            //String sql = $"DELETE FROM inspd WHERE idwdt < DATE('{day}');\nDELETE FROM inspl WHERE ilwdt < DATE('{day}');DELETE FROM inserial WHERE isday < CURRENT_DATE;";
+            String sql = $"DELETE FROM inspd WHERE idwdt < DATE('{day}');\nDELETE FROM inspl WHERE ilwdt < DATE('{day}');";
             try
             {
                 int AffectedRows = 0;

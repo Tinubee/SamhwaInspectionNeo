@@ -3,6 +3,7 @@ using DevExpress.XtraEditors;
 using MvUtils;
 using System;
 using SamhwaInspectionNeo.Schemas;
+using System.Diagnostics;
 
 namespace SamhwaInspectionNeo.UI.Controls
 {
@@ -41,7 +42,7 @@ namespace SamhwaInspectionNeo.UI.Controls
 
             Global.환경설정.모델변경알림 += 모델변경알림;
             //Global.장치통신.동작상태알림 += 동작상태알림;
-            //Global.검사자료.검사완료알림 += 검사완료알림;
+            Global.검사자료.검사완료알림 += 검사완료알림;
 
             this.검사상태표현(결과구분.NO);
             this.e모델선택.Refresh();
@@ -107,7 +108,7 @@ namespace SamhwaInspectionNeo.UI.Controls
             if (this.InvokeRequired) { this.BeginInvoke((Action)(() => 검사완료알림(결과))); return; }
 
             // DB 저장
-            //Global.검사자료.Save();
+            Global.검사자료.Save();
             this.검사상태표현(결과.측정결과);
             this.e저장용량.EditValue = Global.환경설정.저장비율;
         }

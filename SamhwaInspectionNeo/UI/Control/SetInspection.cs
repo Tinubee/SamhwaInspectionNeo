@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MvUtils;
 using System.Drawing.Text;
+using static SamhwaInspectionNeo.Schemas.신호제어;
 
 namespace SamhwaInspectionNeo.UI.Control
 {
@@ -64,7 +65,10 @@ namespace SamhwaInspectionNeo.UI.Control
 
         private void B수동검사_Click(object sender, EventArgs e)
         {
+            Int32 검사코드 = (int)Flow구분.Flow1;
+            검사결과 검사 = Global.검사자료.검사시작(검사코드);
             Global.VM제어.GetItem(Flow구분.Flow1).Run(null, null, 0);
+
             this.GridView1.RefreshData();
         }
 

@@ -67,6 +67,7 @@ namespace SamhwaInspectionNeo.Schemas
         private void 제품검사수행()
         {
             영상촬영수행();
+
             //검사결과전송();
         }
         // 카메라 별 현재 검사 위치의 검사번호를 요청
@@ -115,7 +116,30 @@ namespace SamhwaInspectionNeo.Schemas
             }
             return 대상;
         }
+        private void 검사결과전송()
+        {
+            Int32 검사코드 = this.검사위치번호(정보주소.상부치수검사카메라트리거);
+            if (검사코드 < 0) return;
+            //if (검사코드 <= 0) { 강제결과전송(false); return; }
+            검사결과 검사 = Global.검사자료.검사결과계산(검사코드);
+            //if (검사 == null) { 강제결과전송(false); return; }
+            //// 강제 OK
+            //강제결과전송(true); return;
 
+            Boolean ok = 검사.측정결과 == 결과구분.OK;
+            if (ok)
+            {
+                //this.불량결과쓰기 = 0;
+            }
+            else
+            {
+                //this.양품결과쓰기 = 0;
+                //this.불량결과쓰기 = 검사.CTQ결과 != 결과구분.OK ? 1 : 2;
+            }
+            //this.양품여부요청 = ok;
+            //this.불량여부요청 = !ok;
+            //this.검사결과요청 = false;
+        }
         private void 영상촬영수행()
         {
             Int32 상부치수검사번호 = this.검사위치번호(정보주소.상부치수검사카메라트리거);
@@ -126,6 +150,8 @@ namespace SamhwaInspectionNeo.Schemas
             // 16K 상부 카메라 영상취득 시작
             if (상부치수검사번호 > 0)
             {
+                //Int32 검사코드 = this.검사위치번호(정보주소.상부치수검사카메라트리거);
+                //검사결과 검사 = Global.검사자료.검사시작(검사코드);
                 Debug.WriteLine("상부 치수검사 신호 들어옴");
                 new Thread(() =>
                 {

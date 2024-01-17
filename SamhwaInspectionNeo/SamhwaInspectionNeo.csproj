@@ -129,7 +129,6 @@
     <Reference Include="DevExpress.Data.Desktop.v23.2" />
     <Reference Include="DevExpress.Data.v23.2" />
     <Reference Include="DevExpress.Dialogs.v23.2.Core, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Drawing.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Printing.v23.2.Core" />
     <Reference Include="DevExpress.Utils.v23.2" />
     <Reference Include="DevExpress.XtraBars.v23.2" />
@@ -358,6 +357,7 @@
     <Compile Include="Schemas\VisionMaster\VM제어.cs" />
     <Compile Include="Schemas\VisionMaster\마스터데이터.cs" />
     <Compile Include="Schemas\VisionMaster\보정값설정.cs" />
+    <Compile Include="Schemas\검사로그정보.cs" />
     <Compile Include="Schemas\검사자료.cs" />
     <Compile Include="Schemas\검사정보.cs" />
     <Compile Include="Schemas\그랩제어.cs" />
@@ -582,6 +582,7 @@
     <None Include="Properties\DataSources\SamhwaInspectionNeo.Schemas.모델자료.datasource" />
     <None Include="Properties\DataSources\SamhwaInspectionNeo.Schemas.신호제어.datasource" />
     <None Include="Properties\DataSources\SamhwaInspectionNeo.Schemas.카메라장치.datasource" />
+    <None Include="Properties\DataSources\SamhwaInspectionNeo.Schemas.표시설정자료.datasource" />
     <None Include="Properties\DataSources\SamhwaInspectionNeo.UI.Control.IOControl.datasource" />
     <None Include="Properties\DataSources\SamhwaInspectionNeo.UI.Controls.State.datasource" />
     <None Include="Properties\Settings.settings">
@@ -608,6 +609,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\pivottablecalculationsfieldsitemssetsgroup.svg" />
     <None Include="Icon\Korea.svg" />
     <None Include="Resources\customizegrid.svg" />
   </ItemGroup>

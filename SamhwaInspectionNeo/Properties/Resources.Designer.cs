@@ -63,9 +63,29 @@ namespace SamhwaInspectionNeo.Properties {
         /// <summary>
         ///   DevExpress.Utils.Svg.SvgImage 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static DevExpress.Utils.Svg.SvgImage addcalculatedfield {
+            get {
+                object obj = ResourceManager.GetObject("addcalculatedfield", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   DevExpress.Utils.Svg.SvgImage 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static DevExpress.Utils.Svg.SvgImage business_calculator {
             get {
                 object obj = ResourceManager.GetObject("business_calculator", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   DevExpress.Utils.Svg.SvgImage 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static DevExpress.Utils.Svg.SvgImage calculatesheet {
+            get {
+                object obj = ResourceManager.GetObject("calculatesheet", resourceCulture);
                 return ((DevExpress.Utils.Svg.SvgImage)(obj));
             }
         }
@@ -86,6 +106,16 @@ namespace SamhwaInspectionNeo.Properties {
         internal static DevExpress.Utils.Svg.SvgImage Korea {
             get {
                 object obj = ResourceManager.GetObject("Korea", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   DevExpress.Utils.Svg.SvgImage 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static DevExpress.Utils.Svg.SvgImage pivottablecalculationsfieldsitemssetsgroup {
+            get {
+                object obj = ResourceManager.GetObject("pivottablecalculationsfieldsitemssetsgroup", resourceCulture);
                 return ((DevExpress.Utils.Svg.SvgImage)(obj));
             }
         }
