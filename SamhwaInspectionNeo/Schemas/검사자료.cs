@@ -59,7 +59,7 @@ namespace SamhwaInspectionNeo.Schemas
         }
 
         private String 저장파일(DateTime 날짜) => Path.Combine(Global.환경설정.문서저장, MvUtils.Utils.FormatDate(날짜, "{0:yyyyMMdd}") + ".json");
-        public void Save() => this.테이블.SaveAsync();
+        public void Save() => this.테이블.Save();
         private Boolean SaveJson()
         {
             DateTime 날짜 = DateTime.Today;
@@ -84,14 +84,14 @@ namespace SamhwaInspectionNeo.Schemas
             this.RaiseListChangedEvents = false;
             List<검사결과> 자료 = this.테이블.Select(시작, 종료);
 
-            //List<Int32> 대상 = Global.장치통신.검사중인항목();
-            //자료.ForEach(검사 =>
-            //{
-            //    this.Add(검사);
-            //    // 검사스플 생성
-            //    if (검사.측정결과 < 결과구분.ER && 대상.Contains(검사.검사코드) && !this.검사스플.ContainsKey(검사.검사코드))
-            //        this.검사스플.Add(검사.검사코드, 검사);
-            //});
+            List<Int32> 대상 = Global.신호제어.검사중인항목();
+            자료.ForEach(검사 =>
+            {
+                this.Add(검사);
+                // 검사스플 생성
+                if (검사.측정결과 < 결과구분.ER && 대상.Contains(검사.검사코드) && !this.검사스플.ContainsKey(검사.검사코드))
+                    this.검사스플.Add(검사.검사코드, 검사);
+            });
             this.RaiseListChangedEvents = true;
             this.ResetBindings();
         }
@@ -102,10 +102,10 @@ namespace SamhwaInspectionNeo.Schemas
         private void 자료추가(검사결과 결과)
         {
             this.Insert(0, 결과);
-            Task.Run(() => {
-                this.테이블.Add(결과);
-            });
-            //this.테이블.Add(결과);
+            //Task.Run(() => {
+            //    this.테이블.Add(결과);
+            //});
+            this.테이블.Add(결과);
             //if (Global.장치통신.자동수동여부)
             //    this.테이블.Add(결과);
             // 저장은 State 에서
@@ -119,15 +119,13 @@ namespace SamhwaInspectionNeo.Schemas
         }
         public Boolean 결과삭제(검사결과 결과, 검사정보 정보)
         {
-            결과.표시내역.Remove(정보);
-            //결과.검사내역.Remove(정보);
+            결과.검사내역.Remove(정보);
             return this.테이블.Delete(정보) > 0;
         }
         public 검사결과 결과조회(DateTime 일자, 모델구분 모델, Int32 코드) => this.테이블.Select(일자, 모델, 코드);
 
 
         #region 검사로직
-        // PLC에서 검사번호 요청 시 새 검사 자료를 생성하여 스플에 넣음
         public 검사결과 검사시작(Int32 검사코드)
         {
             검사결과 검사 = 검사항목찾기(검사코드, true);
@@ -155,21 +153,15 @@ namespace SamhwaInspectionNeo.Schemas
             //    this.현재검사변경?.Invoke(검사);
             return 검사;
         }
-        public 검사결과 카메라검사(Flow구분 구분, String name, Single value, Boolean ok)
+        public 검사결과 항목검사(Flow구분 구분,String name, Single value)
         {
+            //지그위치 추가해줘야될까..?
             검사결과 검사 = this.검사항목찾기((int)구분);
             if (검사 == null) return null;
-            검사.SetResult(name, value, ok);
+            검사.SetResult(구분 , name, value);
             return 검사;
         }
-        //Flow, 지그, 이름, 값
-        public 검사결과 항목검사(Flow구분 구분, 지그위치 지그, String name, Single value)
-        {
-            검사결과 검사 = this.검사항목찾기(Global.신호제어.촬영위치번호(카메라구분.Cam01));
-            if (검사 == null) return null;
-            검사.SetResult(name, value);
-            return 검사;
-        }
+       
         public 검사결과 검사결과계산(Int32 검사코드)
         {
             검사결과 검사;
@@ -232,12 +224,9 @@ namespace SamhwaInspectionNeo.Schemas
             modelBuilder.Entity<검사결과>().Property(e => e.측정결과).HasConversion(new EnumToNumberConverter<결과구분, Int32>());
             modelBuilder.Entity<검사결과>().Property(e => e.CTQ결과).HasConversion(new EnumToNumberConverter<결과구분, Int32>());
             modelBuilder.Entity<검사결과>().Property(e => e.외관결과).HasConversion(new EnumToNumberConverter<결과구분, Int32>());
-
-            //modelBuilder.Entity<검사정보>().HasKey(e => new { e.검사일시, e.검사항목, e.표시항목 });
-            modelBuilder.Entity<검사정보>().HasKey(e => new { e.검사일시, e.표시항목 });
+            modelBuilder.Entity<검사정보>().HasKey(e => new { e.검사일시, e.검사항목 });
             modelBuilder.Entity<검사정보>().Property(e => e.검사그룹).HasConversion(new EnumToNumberConverter<검사그룹, Int32>());
-            //modelBuilder.Entity<검사정보>().Property(e => e.검사항목).HasConversion(new EnumToNumberConverter<검사항목, Int32>());
-            modelBuilder.Entity<검사정보>().Property(e => e.표시항목).HasConversion(new EnumToNumberConverter<표시항목, Int32>());
+            modelBuilder.Entity<검사정보>().Property(e => e.검사항목).HasConversion(new EnumToNumberConverter<검사항목, Int32>());
             modelBuilder.Entity<검사정보>().Property(e => e.검사장치).HasConversion(new EnumToNumberConverter<장치구분, Int32>());
             modelBuilder.Entity<검사정보>().Property(e => e.결과분류).HasConversion(new EnumToNumberConverter<결과분류, Int32>());
             modelBuilder.Entity<검사정보>().Property(e => e.측정단위).HasConversion(new EnumToNumberConverter<단위구분, Int32>());
@@ -260,8 +249,7 @@ namespace SamhwaInspectionNeo.Schemas
         public void Add(검사결과 정보)
         {
             this.검사결과.Add(정보);
-            this.검사정보.AddRange(정보.표시내역);
-            //this.검사정보.AddRange(정보.검사내역);
+            this.검사정보.AddRange(정보.검사내역);
         }
 
         public void Remove(List<검사정보> 자료)
@@ -296,7 +284,7 @@ namespace SamhwaInspectionNeo.Schemas
                 where (코드 <= 0 || l.검사코드 == 코드)
                 where (모델 == 모델구분.None || l.모델구분 == 모델)
                 orderby d.검사일시 descending
-                orderby d.표시항목 ascending
+                orderby d.검사항목 ascending
                 select d);
             List<검사정보> 정보 = query2.AsNoTracking().ToList();
 

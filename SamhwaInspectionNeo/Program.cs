@@ -42,6 +42,7 @@ namespace SamhwaInspectionNeo
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             Global.MainForm = new MainForm();
             Application.Run(Global.MainForm);
         }

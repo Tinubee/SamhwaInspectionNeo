@@ -127,6 +127,9 @@
   <data name="Korea" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icon\Korea.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
+  <data name="pivottablecalculationsfieldsitemssetsgroup" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pivottablecalculationsfieldsitemssetsgroup.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
   <data name="calculatesheet" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\calculatesheet.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
@@ -139,7 +142,7 @@
   <data name="customizegrid" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\customizegrid.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
-  <data name="pivottablecalculationsfieldsitemssetsgroup" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pivottablecalculationsfieldsitemssetsgroup.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  <data name="insertcombobox" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\insertcombobox.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
 </root>

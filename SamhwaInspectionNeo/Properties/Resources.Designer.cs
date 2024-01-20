@@ -103,6 +103,16 @@ namespace SamhwaInspectionNeo.Properties {
         /// <summary>
         ///   DevExpress.Utils.Svg.SvgImage 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static DevExpress.Utils.Svg.SvgImage insertcombobox {
+            get {
+                object obj = ResourceManager.GetObject("insertcombobox", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   DevExpress.Utils.Svg.SvgImage 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static DevExpress.Utils.Svg.SvgImage Korea {
             get {
                 object obj = ResourceManager.GetObject("Korea", resourceCulture);

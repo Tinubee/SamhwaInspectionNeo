@@ -357,7 +357,6 @@
     <Compile Include="Schemas\VisionMaster\VM제어.cs" />
     <Compile Include="Schemas\VisionMaster\마스터데이터.cs" />
     <Compile Include="Schemas\VisionMaster\보정값설정.cs" />
-    <Compile Include="Schemas\검사로그정보.cs" />
     <Compile Include="Schemas\검사자료.cs" />
     <Compile Include="Schemas\검사정보.cs" />
     <Compile Include="Schemas\그랩제어.cs" />
@@ -609,6 +608,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\insertcombobox.svg" />
     <None Include="Resources\pivottablecalculationsfieldsitemssetsgroup.svg" />
     <None Include="Icon\Korea.svg" />
     <None Include="Resources\customizegrid.svg" />

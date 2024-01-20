@@ -187,43 +187,38 @@ namespace SamhwaInspectionNeo.Schemas
         private void SetResult(Flow구분 구분) //결과체크 추가해줘야됨.
         {
             if (구분 == Flow구분.상부표면검사 || 구분 == Flow구분.하부표면검사) return;
-        
-            ShellModuleTool Slot1OutPut = Global.VM제어.GetItem(구분).slot1ShellModuleTool;
-            ShellModuleTool Slot2OutPut = Global.VM제어.GetItem(구분).slot2ShellModuleTool;
-            //if (Global.신호제어.Front지그)
-            this.검사결과(Slot1OutPut);
-            this.검사결과(Slot2OutPut);
 
-            검사결과 검사 = Global.검사자료.검사결과계산((int)구분);
+            ShellModuleTool Slot1shell = Global.VM제어.GetItem(구분).slot1ShellModuleTool;
+            ShellModuleTool Slot2shell = Global.VM제어.GetItem(구분).slot2ShellModuleTool;
+            슬롯부값적용(Slot1shell);
+            슬롯부값적용(Slot2shell);
         }
 
-        public void 검사결과(ShellModuleTool tool)
+        private void 슬롯부값적용(ShellModuleTool tool)
         {
             for (int i = 7; i < tool.Outputs.Count; i++)
             {
                 List<VmIO> t = tool.Outputs[i].GetAllIO();
                 String name = t[0].UniqueName.Split('%')[1];
-                if (t[0].Value != null && name.Contains("strSlot"))
+                int lop = 1;
+                if (t[0].Value != null)
                 {
-                    Single slotBottom = Convert.ToSingle(((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[0].strValue);
-                    Single slotMiddle = Convert.ToSingle(((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[1].strValue);
-                    Single slotTop = Convert.ToSingle(((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[2].strValue);
-
                     try
                     {
-                        //검사설정자료 자료 = Global.모델자료.GetItem(Global.환경설정.선택모델)?.검사설정;
-                        표시설정자료 자료 = Global.모델자료.GetItem(Global.환경설정.선택모델)?.표시설정;
+                        foreach (ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX vals in t[0].Value)
+                        {
+                            if (lop == 1) name = "하부";
+                            else if (lop == 2) name = "중앙부";
+                            else if (lop == 3) name = "상부";
 
-                        검사정보 상부치수 = 자료.Where(x => x.지그 == 지그위치.Front).Where(x => x.표시항목.ToString().Contains(name.Contains("strSlot1") ? "Slot1상부" : "Slot2상부")).FirstOrDefault();
-                        검사정보 중앙부치수 = 자료.Where(x => x.지그 == 지그위치.Front).Where(x => x.표시항목.ToString().Contains(name.Contains("strSlot1") ? "Slot1중앙부" : "Slot2중앙부")).FirstOrDefault();
-                        검사정보 하부치수 = 자료.Where(x => x.지그 == 지그위치.Front).Where(x => x.표시항목.ToString().Contains(name.Contains("strSlot1") ? "Slot1하부" : "Slot2하부")).FirstOrDefault();
-                        결과값적용(상부치수, slotTop);
-                        결과값적용(중앙부치수, slotMiddle);
-                        결과값적용(하부치수, slotBottom);
-
-                        Global.검사자료.카메라검사(this.구분, 상부치수.표시항목.ToString(), slotTop, true);
-                        Global.검사자료.카메라검사(this.구분, 중앙부치수.표시항목.ToString(), slotMiddle, true);
-                        Global.검사자료.카메라검사(this.구분, 하부치수.표시항목.ToString(), slotBottom, true);
+                            lop++;
+                            //Boolean ok = false;
+                            Single val = Single.NaN;
+                            if (!String.IsNullOrEmpty(vals.strValue)) val = Convert.ToSingle(vals.strValue);
+                            //if (vals.Length > 1) ok = MvUtils.Utils.IntValue(vals[1]) == 1;
+                            Global.검사자료.항목검사(this.구분, name, val); //Flow1, 지그위치, 값, 결과
+                            //valueList.Add(vals.strValue);
+                        }
                     }
                     catch (Exception e)
                     {
@@ -232,6 +227,41 @@ namespace SamhwaInspectionNeo.Schemas
                 }
             }
         }
+
+        //public void 검사결과(ShellModuleTool tool)
+        //{
+        //    for (int i = 7; i < tool.Outputs.Count; i++)
+        //    {
+        //        List<VmIO> t = tool.Outputs[i].GetAllIO();
+        //        String name = t[0].UniqueName.Split('%')[1];
+        //        if (t[0].Value != null && name.Contains("strSlot"))
+        //        {
+        //            Single slotBottom = Convert.ToSingle(((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[0].strValue);
+        //            Single slotMiddle = Convert.ToSingle(((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[1].strValue);
+        //            Single slotTop = Convert.ToSingle(((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[2].strValue);
+
+        //            try
+        //            {
+        //                검사설정자료 자료 = Global.모델자료.GetItem(Global.환경설정.선택모델)?.검사설정;
+
+        //                검사정보 상부치수 = 자료.Where(x => x.지그 == 지그위치.Front).Where(x => x.검사항목.ToString().Contains(name.Contains("strSlot1") ? "Slot1상부" : "Slot2상부")).FirstOrDefault();
+        //                검사정보 중앙부치수 = 자료.Where(x => x.지그 == 지그위치.Front).Where(x => x.검사항목.ToString().Contains(name.Contains("strSlot1") ? "Slot1중앙부" : "Slot2중앙부")).FirstOrDefault();
+        //                검사정보 하부치수 = 자료.Where(x => x.지그 == 지그위치.Front).Where(x => x.검사항목.ToString().Contains(name.Contains("strSlot1") ? "Slot1하부" : "Slot2하부")).FirstOrDefault();
+        //                결과값적용(상부치수, slotTop);
+        //                결과값적용(중앙부치수, slotMiddle);
+        //                결과값적용(하부치수, slotBottom);
+
+        //                Global.검사자료.카메라검사(this.구분, 상부치수.검사항목.ToString(), slotTop, true);
+        //                Global.검사자료.카메라검사(this.구분, 중앙부치수.검사항목.ToString(), slotMiddle, true);
+        //                Global.검사자료.카메라검사(this.구분, 하부치수.검사항목.ToString(), slotBottom, true);
+        //            }
+        //            catch (Exception e)
+        //            {
+        //                Debug.WriteLine(e.Message, name);
+        //            }
+        //        }
+        //    }
+        //}
 
         public Boolean 결과값적용(검사정보 검사, Single value)
         {
@@ -286,7 +316,7 @@ namespace SamhwaInspectionNeo.Schemas
                         this.imageSourceModuleTool.SetImageData(imageBaseData);
                     this.Procedure.Run();
                     this.SetResult(this.구분);
-                    
+                    //검사결과 검사 = Global.검사자료.검사결과계산((int)this.구분);
                     return true;
                 }
             }

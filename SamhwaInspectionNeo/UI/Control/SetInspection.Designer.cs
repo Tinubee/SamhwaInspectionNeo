@@ -30,11 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SetInspection));
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions3 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject9 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject10 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject11 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject12 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.tg보정값모드 = new DevExpress.XtraEditors.ToggleSwitch();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
@@ -54,8 +54,6 @@
             this.col검사항목 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col검사그룹 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col검사장치 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.col플로우 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.col지그 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col결과분류 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col측정단위 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col기준값 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -65,7 +63,6 @@
             this.col교정값 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col측정값 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col결과값 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.col측정결과 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ｅ교정계산 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.e마진값 = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             this.repositoryItemToggleSwitch1 = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
@@ -262,8 +259,6 @@
             this.col검사항목,
             this.col검사그룹,
             this.col검사장치,
-            this.col플로우,
-            this.col지그,
             this.col결과분류,
             this.col측정단위,
             this.col기준값,
@@ -272,8 +267,7 @@
             this.col보정값,
             this.col교정값,
             this.col측정값,
-            this.col결과값,
-            this.col측정결과});
+            this.col결과값});
             this.GridView1.FooterPanelHeight = 21;
             this.GridView1.GridControl = this.GridControl1;
             this.GridView1.GroupRowHeight = 21;
@@ -333,24 +327,6 @@
             this.col검사장치.Visible = true;
             this.col검사장치.VisibleIndex = 3;
             // 
-            // col플로우
-            // 
-            this.col플로우.AppearanceHeader.Options.UseTextOptions = true;
-            this.col플로우.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.col플로우.FieldName = "플로우";
-            this.col플로우.Name = "col플로우";
-            this.col플로우.Visible = true;
-            this.col플로우.VisibleIndex = 4;
-            // 
-            // col지그
-            // 
-            this.col지그.AppearanceHeader.Options.UseTextOptions = true;
-            this.col지그.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.col지그.FieldName = "지그";
-            this.col지그.Name = "col지그";
-            this.col지그.Visible = true;
-            this.col지그.VisibleIndex = 5;
-            // 
             // col결과분류
             // 
             this.col결과분류.AppearanceHeader.Options.UseTextOptions = true;
@@ -358,7 +334,7 @@
             this.col결과분류.FieldName = "결과분류";
             this.col결과분류.Name = "col결과분류";
             this.col결과분류.Visible = true;
-            this.col결과분류.VisibleIndex = 6;
+            this.col결과분류.VisibleIndex = 4;
             // 
             // col측정단위
             // 
@@ -367,7 +343,7 @@
             this.col측정단위.FieldName = "측정단위";
             this.col측정단위.Name = "col측정단위";
             this.col측정단위.Visible = true;
-            this.col측정단위.VisibleIndex = 7;
+            this.col측정단위.VisibleIndex = 5;
             // 
             // col기준값
             // 
@@ -376,7 +352,7 @@
             this.col기준값.FieldName = "기준값";
             this.col기준값.Name = "col기준값";
             this.col기준값.Visible = true;
-            this.col기준값.VisibleIndex = 8;
+            this.col기준값.VisibleIndex = 6;
             // 
             // col최소값
             // 
@@ -385,7 +361,7 @@
             this.col최소값.FieldName = "최소값";
             this.col최소값.Name = "col최소값";
             this.col최소값.Visible = true;
-            this.col최소값.VisibleIndex = 9;
+            this.col최소값.VisibleIndex = 7;
             // 
             // col최대값
             // 
@@ -394,7 +370,7 @@
             this.col최대값.FieldName = "최대값";
             this.col최대값.Name = "col최대값";
             this.col최대값.Visible = true;
-            this.col최대값.VisibleIndex = 10;
+            this.col최대값.VisibleIndex = 8;
             // 
             // col보정값
             // 
@@ -403,7 +379,7 @@
             this.col보정값.FieldName = "보정값";
             this.col보정값.Name = "col보정값";
             this.col보정값.Visible = true;
-            this.col보정값.VisibleIndex = 11;
+            this.col보정값.VisibleIndex = 9;
             // 
             // col교정값
             // 
@@ -412,7 +388,7 @@
             this.col교정값.FieldName = "교정값";
             this.col교정값.Name = "col교정값";
             this.col교정값.Visible = true;
-            this.col교정값.VisibleIndex = 12;
+            this.col교정값.VisibleIndex = 10;
             // 
             // col측정값
             // 
@@ -421,7 +397,7 @@
             this.col측정값.FieldName = "측정값";
             this.col측정값.Name = "col측정값";
             this.col측정값.Visible = true;
-            this.col측정값.VisibleIndex = 13;
+            this.col측정값.VisibleIndex = 11;
             // 
             // col결과값
             // 
@@ -430,16 +406,7 @@
             this.col결과값.FieldName = "결과값";
             this.col결과값.Name = "col결과값";
             this.col결과값.Visible = true;
-            this.col결과값.VisibleIndex = 14;
-            // 
-            // col측정결과
-            // 
-            this.col측정결과.AppearanceHeader.Options.UseTextOptions = true;
-            this.col측정결과.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.col측정결과.FieldName = "측정결과";
-            this.col측정결과.Name = "col측정결과";
-            this.col측정결과.Visible = true;
-            this.col측정결과.VisibleIndex = 15;
+            this.col결과값.VisibleIndex = 12;
             // 
             // ｅ교정계산
             // 
@@ -452,7 +419,7 @@
             // 
             this.e마진값.AutoHeight = false;
             this.e마진값.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo, "", -1, true, false, false, editorButtonImageOptions3, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject9, serializableAppearanceObject10, serializableAppearanceObject11, serializableAppearanceObject12, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo, "", -1, true, false, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.e마진값.MaxValue = new decimal(new int[] {
             100,
             0,
@@ -524,8 +491,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn col검사항목;
         private DevExpress.XtraGrid.Columns.GridColumn col검사그룹;
         private DevExpress.XtraGrid.Columns.GridColumn col검사장치;
-        private DevExpress.XtraGrid.Columns.GridColumn col플로우;
-        private DevExpress.XtraGrid.Columns.GridColumn col지그;
         private DevExpress.XtraGrid.Columns.GridColumn col결과분류;
         private DevExpress.XtraGrid.Columns.GridColumn col측정단위;
         private DevExpress.XtraGrid.Columns.GridColumn col기준값;
@@ -535,7 +500,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn col교정값;
         private DevExpress.XtraGrid.Columns.GridColumn col측정값;
         private DevExpress.XtraGrid.Columns.GridColumn col결과값;
-        private DevExpress.XtraGrid.Columns.GridColumn col측정결과;
         private DevExpress.XtraEditors.ToggleSwitch tg보정값모드;
     }
 }

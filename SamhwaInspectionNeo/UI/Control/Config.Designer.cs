@@ -33,15 +33,6 @@
             this.g환경설정 = new DevExpress.XtraEditors.GroupControl();
             this.b설정저장 = new DevExpress.XtraEditors.SimpleButton();
             this.layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
-            this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.d기본경로 = new DevExpress.XtraEditors.XtraFolderBrowserDialog(this.components);
-            this.d문서저장 = new DevExpress.XtraEditors.XtraFolderBrowserDialog(this.components);
-            this.d사진저장 = new DevExpress.XtraEditors.XtraFolderBrowserDialog(this.components);
             this.e큰홀검사 = new DevExpress.XtraEditors.ToggleSwitch();
             this.e200Point검사 = new DevExpress.XtraEditors.ToggleSwitch();
             this.e20Point검사 = new DevExpress.XtraEditors.ToggleSwitch();
@@ -50,6 +41,8 @@
             this.e하부표면검사 = new DevExpress.XtraEditors.ToggleSwitch();
             this.e너비검사 = new DevExpress.XtraEditors.ToggleSwitch();
             this.e높이검사 = new DevExpress.XtraEditors.ToggleSwitch();
+            this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -58,6 +51,7 @@
             this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.e불량저장 = new DevExpress.XtraEditors.ToggleSwitch();
             this.e양품저장 = new DevExpress.XtraEditors.ToggleSwitch();
             this.e사진저장 = new DevExpress.XtraEditors.ButtonEdit();
@@ -66,6 +60,8 @@
             this.e결과보관 = new DevExpress.XtraEditors.SpinEdit();
             this.e로그보관 = new DevExpress.XtraEditors.SpinEdit();
             this.e기본경로 = new DevExpress.XtraEditors.ButtonEdit();
+            this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -74,19 +70,16 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.d기본경로 = new DevExpress.XtraEditors.XtraFolderBrowserDialog(this.components);
+            this.d문서저장 = new DevExpress.XtraEditors.XtraFolderBrowserDialog(this.components);
+            this.d사진저장 = new DevExpress.XtraEditors.XtraFolderBrowserDialog(this.components);
             this.BindLocalization = new System.Windows.Forms.BindingSource(this.components);
             this.bind환경설정 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.g환경설정)).BeginInit();
             this.g환경설정.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).BeginInit();
             this.layoutControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
-            this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e큰홀검사.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e200Point검사.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e20Point검사.Properties)).BeginInit();
@@ -95,6 +88,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.e하부표면검사.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e너비검사.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e높이검사.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).BeginInit();
@@ -103,6 +98,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
+            this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.e불량저장.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e양품저장.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e사진저장.Properties)).BeginInit();
@@ -111,6 +108,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.e결과보관.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e로그보관.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e기본경로.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
@@ -119,6 +118,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BindLocalization)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bind환경설정)).BeginInit();
             this.SuspendLayout();
@@ -166,94 +166,6 @@
             this.layoutControl2.Size = new System.Drawing.Size(596, 219);
             this.layoutControl2.TabIndex = 2;
             this.layoutControl2.Text = "layoutControl2";
-            // 
-            // layoutControlGroup2
-            // 
-            this.layoutControlGroup2.AppearanceItemCaption.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.layoutControlGroup2.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlGroup2.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            this.layoutControlGroup2.GroupBordersVisible = false;
-            this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlGroup3});
-            this.layoutControlGroup2.Name = "Root";
-            this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup2.Size = new System.Drawing.Size(596, 219);
-            this.layoutControlGroup2.TextVisible = false;
-            // 
-            // layoutControlGroup3
-            // 
-            this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem12,
-            this.layoutControlItem13,
-            this.layoutControlItem17,
-            this.layoutControlItem9,
-            this.layoutControlItem10,
-            this.layoutControlItem11,
-            this.layoutControlItem15,
-            this.layoutControlItem16});
-            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup3.Name = "layoutControlGroup1";
-            this.layoutControlGroup3.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 4, 4);
-            this.layoutControlGroup3.Size = new System.Drawing.Size(596, 219);
-            this.layoutControlGroup3.Text = "Inspection";
-            // 
-            // layoutControl1
-            // 
-            this.layoutControl1.Controls.Add(this.e불량저장);
-            this.layoutControl1.Controls.Add(this.e양품저장);
-            this.layoutControl1.Controls.Add(this.e사진저장);
-            this.layoutControl1.Controls.Add(this.e소수자리);
-            this.layoutControl1.Controls.Add(this.e문서저장);
-            this.layoutControl1.Controls.Add(this.e결과보관);
-            this.layoutControl1.Controls.Add(this.e로그보관);
-            this.layoutControl1.Controls.Add(this.e기본경로);
-            this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.layoutControl1.Location = new System.Drawing.Point(12, 36);
-            this.layoutControl1.Name = "layoutControl1";
-            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(655, 240, 650, 400);
-            this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(596, 496);
-            this.layoutControl1.TabIndex = 1;
-            this.layoutControl1.Text = "layoutControl1";
-            // 
-            // Root
-            // 
-            this.Root.AppearanceItemCaption.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.Root.AppearanceItemCaption.Options.UseFont = true;
-            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            this.Root.GroupBordersVisible = false;
-            this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlGroup1});
-            this.Root.Name = "Root";
-            this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.Root.Size = new System.Drawing.Size(596, 496);
-            this.Root.TextVisible = false;
-            // 
-            // layoutControlGroup1
-            // 
-            this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1,
-            this.layoutControlItem8,
-            this.layoutControlItem4,
-            this.layoutControlItem5,
-            this.layoutControlItem7,
-            this.layoutControlItem2,
-            this.layoutControlItem6,
-            this.layoutControlItem3,
-            this.emptySpaceItem2});
-            this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 4, 4);
-            this.layoutControlGroup1.Size = new System.Drawing.Size(596, 496);
-            this.layoutControlGroup1.Text = "Basic";
-            // 
-            // emptySpaceItem2
-            // 
-            this.emptySpaceItem2.AllowHotTrack = false;
-            this.emptySpaceItem2.Location = new System.Drawing.Point(291, 160);
-            this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(291, 297);
-            this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
             // e큰홀검사
             // 
@@ -367,6 +279,36 @@
             this.e높이검사.TabIndex = 14;
             this.e높이검사.Tag = "높이검사Pass";
             // 
+            // layoutControlGroup2
+            // 
+            this.layoutControlGroup2.AppearanceItemCaption.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.layoutControlGroup2.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlGroup2.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.layoutControlGroup2.GroupBordersVisible = false;
+            this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlGroup3});
+            this.layoutControlGroup2.Name = "Root";
+            this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(596, 219);
+            this.layoutControlGroup2.TextVisible = false;
+            // 
+            // layoutControlGroup3
+            // 
+            this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem12,
+            this.layoutControlItem13,
+            this.layoutControlItem17,
+            this.layoutControlItem9,
+            this.layoutControlItem10,
+            this.layoutControlItem11,
+            this.layoutControlItem15,
+            this.layoutControlItem16});
+            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup3.Name = "layoutControlGroup1";
+            this.layoutControlGroup3.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 4, 4);
+            this.layoutControlGroup3.Size = new System.Drawing.Size(596, 219);
+            this.layoutControlGroup3.Text = "Inspection";
+            // 
             // layoutControlItem12
             // 
             this.layoutControlItem12.Control = this.e20Point검사;
@@ -448,6 +390,25 @@
             this.layoutControlItem16.Size = new System.Drawing.Size(293, 32);
             this.layoutControlItem16.Text = "높이 검사";
             this.layoutControlItem16.TextSize = new System.Drawing.Size(108, 17);
+            // 
+            // layoutControl1
+            // 
+            this.layoutControl1.Controls.Add(this.e불량저장);
+            this.layoutControl1.Controls.Add(this.e양품저장);
+            this.layoutControl1.Controls.Add(this.e사진저장);
+            this.layoutControl1.Controls.Add(this.e소수자리);
+            this.layoutControl1.Controls.Add(this.e문서저장);
+            this.layoutControl1.Controls.Add(this.e결과보관);
+            this.layoutControl1.Controls.Add(this.e로그보관);
+            this.layoutControl1.Controls.Add(this.e기본경로);
+            this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.layoutControl1.Location = new System.Drawing.Point(12, 36);
+            this.layoutControl1.Name = "layoutControl1";
+            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(655, 240, 650, 400);
+            this.layoutControl1.Root = this.Root;
+            this.layoutControl1.Size = new System.Drawing.Size(596, 496);
+            this.layoutControl1.TabIndex = 1;
+            this.layoutControl1.Text = "layoutControl1";
             // 
             // e불량저장
             // 
@@ -608,6 +569,37 @@
             this.e기본경로.StyleController = this.layoutControl1;
             this.e기본경로.TabIndex = 4;
             // 
+            // Root
+            // 
+            this.Root.AppearanceItemCaption.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Root.AppearanceItemCaption.Options.UseFont = true;
+            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.Root.GroupBordersVisible = false;
+            this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlGroup1});
+            this.Root.Name = "Root";
+            this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            this.Root.Size = new System.Drawing.Size(596, 496);
+            this.Root.TextVisible = false;
+            // 
+            // layoutControlGroup1
+            // 
+            this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1,
+            this.layoutControlItem8,
+            this.layoutControlItem4,
+            this.layoutControlItem5,
+            this.layoutControlItem7,
+            this.layoutControlItem2,
+            this.layoutControlItem6,
+            this.layoutControlItem3,
+            this.emptySpaceItem2});
+            this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup1.Name = "layoutControlGroup1";
+            this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 4, 4);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(596, 496);
+            this.layoutControlGroup1.Text = "Basic";
+            // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.e기본경로;
@@ -680,6 +672,14 @@
             this.layoutControlItem3.Text = "로그 보관일";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(101, 17);
             // 
+            // emptySpaceItem2
+            // 
+            this.emptySpaceItem2.AllowHotTrack = false;
+            this.emptySpaceItem2.Location = new System.Drawing.Point(291, 160);
+            this.emptySpaceItem2.Name = "emptySpaceItem2";
+            this.emptySpaceItem2.Size = new System.Drawing.Size(291, 297);
+            this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
+            // 
             // Config
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -691,13 +691,6 @@
             this.g환경설정.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).EndInit();
             this.layoutControl2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
-            this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e큰홀검사.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e200Point검사.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e20Point검사.Properties)).EndInit();
@@ -706,6 +699,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.e하부표면검사.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e너비검사.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e높이검사.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).EndInit();
@@ -714,6 +709,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
+            this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.e불량저장.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e양품저장.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e사진저장.Properties)).EndInit();
@@ -722,6 +719,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.e결과보관.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e로그보관.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e기본경로.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
@@ -730,6 +729,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BindLocalization)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bind환경설정)).EndInit();
             this.ResumeLayout(false);

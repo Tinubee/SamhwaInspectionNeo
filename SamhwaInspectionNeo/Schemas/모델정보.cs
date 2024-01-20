@@ -25,7 +25,6 @@ namespace SamhwaInspectionNeo.Schemas
         public 모델구분 모델구분 { get; set; } = 모델구분.None;
         [JsonProperty("desc"), Translation("Description", "설명")]
         public String 모델설명 { get; set; } = String.Empty;
-
         [JsonProperty("date"), Translation("Date", "일자")]
         public DateTime 양산일자 { get; set; } = DateTime.Today;
         [JsonProperty("OK"), Translation("OK", "양품")]
@@ -53,9 +52,6 @@ namespace SamhwaInspectionNeo.Schemas
 
         [JsonIgnore]
         public 검사설정자료 검사설정 = null;
-        [JsonIgnore]
-        public 표시설정자료 표시설정 = null;
-
         public Image 마스터이미지()
         {
             if (!File.Exists(this.모델사진)) return null;
@@ -73,7 +69,6 @@ namespace SamhwaInspectionNeo.Schemas
         public void Init()
         {
             this.검사설정 = new 검사설정자료(this);
-            this.표시설정 = new 표시설정자료(this);
         }
 
         public void Close() { }
@@ -205,10 +200,8 @@ namespace SamhwaInspectionNeo.Schemas
         {
             if (정보 == null) return;
             if (정보.검사설정 == null) 정보.Init();
-            if (정보.표시설정 == null) 정보.Init();
 
             정보.검사설정.Load();
-            정보.표시설정.Load();
         }
 
         public void SettingSave()
@@ -248,7 +241,7 @@ namespace SamhwaInspectionNeo.Schemas
                 {
                     if (항목 == 검사항목.None) continue;
                     ResultAttribute a = MvUtils.Utils.GetAttribute<ResultAttribute>(항목);
-                    this.Add(new 검사정보() { 검사항목 = 항목, 검사그룹 = a.검사그룹, 검사장치 = a.장치구분, 결과분류 = a.결과분류, 플로우 = a.플로우구분 });
+                    this.Add(new 검사정보() { 검사항목 = 항목, 검사그룹 = a.검사그룹, 검사장치 = a.장치구분, 결과분류 = a.결과분류 });
                 }
                 this.Save();
                 return;
@@ -315,95 +308,4 @@ namespace SamhwaInspectionNeo.Schemas
         //    return 검사결과.GetRunPrms(자료, 검사);
         //}
     }
-
-    public class 표시설정자료 : BindingList<검사정보>
-    {
-        public static TranslationAttribute 로그영역 = new TranslationAttribute("Inspection Settings", "검사설정");
-        private 모델정보 모델정보;
-        private 모델구분 모델구분 { get { return 모델정보.모델구분; } }
-        private Int32 모델번호 { get { return 모델정보.모델번호; } }
-        private String 저장파일 { get { return Path.Combine(Global.환경설정.기본경로, $"Model.{모델번호.ToString("d2")}_log.json"); } }
-        public 표시설정자료(모델정보 모델) { this.모델정보 = 모델; }
-
-        public void Init() { this.Load(); }
-
-        public void Load()
-        {
-            this.Clear();
-
-            if (!File.Exists(저장파일))
-            {
-                Global.정보로그(로그영역.GetString(), "자료로드", $"[{MvUtils.Utils.GetDescription(모델구분)}] 검사설정 파일이 없습니다.", false);
-                foreach (표시항목 항목 in typeof(표시항목).GetEnumValues())
-                {
-                    if (항목 == 표시항목.None) continue;
-                    ResultAttribute a = MvUtils.Utils.GetAttribute<ResultAttribute>(항목);
-                    this.Add(new 검사정보() { 표시항목 = 항목, 검사그룹 = a.검사그룹, 검사장치 = a.장치구분, 결과분류 = a.결과분류, 플로우 = a.플로우구분 });
-                }
-                this.Save();
-                return;
-            }
-            try
-            {
-                List<검사정보> 자료 = JsonConvert.DeserializeObject<List<검사정보>>(File.ReadAllText(저장파일));
-                자료.Sort((a, b) => a.표시항목.CompareTo(b.표시항목));
-                if (자료 == null)
-                {
-                    Global.정보로그(로그영역.GetString(), "자료로드", "저장 된 설정자료가 올바르지 않습니다.", false);
-                    return;
-                }
-
-                자료.ForEach(e =>
-                {
-                    검사정보 정보 = new 검사정보(e);
-                    this.Add(정보);
-                });
-            }
-            catch (Exception ex)
-            {
-                Global.오류로그(로그영역.GetString(), "자료로드", ex.Message, false);
-            }
-        }
-
-        public Boolean Save()
-        {
-            try
-            {
-                if (File.Exists(저장파일))
-                {
-                    String path = Path.Combine(Global.환경설정.기본경로, "backup");
-                    if (Common.DirectoryExists(path, true))
-                        File.Copy(저장파일, Path.Combine(path, $"검사설정.{모델번호.ToString("d2")}.{MvUtils.Utils.FormatDate(DateTime.Now, "{0:yymmddhhmmss}")}.json"));
-                }
-
-                File.WriteAllText(저장파일, JsonConvert.SerializeObject(this, Formatting.Indented));
-                Debug.WriteLine(저장파일, "티칭저장");
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Global.오류로그(로그영역.GetString(), "자료저장", ex.Message, false);
-                return false;
-            }
-        }
-
-        public 검사정보 GetItem(검사정보 정보)
-        {
-            return this.Where(e => e.검사항목 == 정보.검사항목).FirstOrDefault();
-            //return this.Where(e => e.검사번호 == 정보.검사번호 && e.장치구분 == 정보.장치구분 && e.검사그룹 == 정보.검사그룹).FirstOrDefault();
-        }
-
-        public void ResetItem(검사정보 설정) => this.ResetItem(this.IndexOf(설정));
-
-        //public Dictionary<String, Object> GetRunPrms(검사정보 검사)
-        //{
-        //    List<검사정보> 자료 = new List<검사정보>();
-        //    if (검사.검사유형 == 검사유형.원홀) 자료.Add(검사);
-        //    else if (검사.검사유형 == 검사유형.타원W || 검사.검사유형 == 검사유형.타원H)
-        //        자료 = this.Where(e => e.장치구분 == 검사.장치구분 && e.센서번호 == 검사.센서번호).ToList();
-        //    if (자료.Count < 1) return null;
-        //    return 검사결과.GetRunPrms(자료, 검사);
-        //}
-    }
-
 }

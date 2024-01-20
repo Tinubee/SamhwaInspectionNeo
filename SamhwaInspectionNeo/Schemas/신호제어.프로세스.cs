@@ -67,8 +67,7 @@ namespace SamhwaInspectionNeo.Schemas
         private void 제품검사수행()
         {
             영상촬영수행();
-
-            //검사결과전송();
+            검사결과전송();
         }
         // 카메라 별 현재 검사 위치의 검사번호를 요청
         public Int32 촬영위치번호(카메라구분 구분)
@@ -116,7 +115,7 @@ namespace SamhwaInspectionNeo.Schemas
             }
             return 대상;
         }
-        private void 검사결과전송()
+        public void 검사결과전송()
         {
             Int32 검사코드 = this.검사위치번호(정보주소.상부치수검사카메라트리거);
             if (검사코드 < 0) return;
