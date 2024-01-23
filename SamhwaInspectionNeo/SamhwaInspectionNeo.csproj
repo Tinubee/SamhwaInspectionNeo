@@ -156,11 +156,6 @@
       <HintPath>obj\x64\Debug\Interop.ActUtlType64Lib.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="log4Net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files\VisionMaster4.3.0\Development\V4.x\ComControls\Assembly\log4Net.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -349,10 +344,6 @@
     <Compile Include="Migrations\로그테이블ModelSnapshot.cs" />
     <Compile Include="Schemas\Data\BaseTable.cs" />
     <Compile Include="Schemas\MVSol.Enc.cs" />
-    <Compile Include="Schemas\UserScripts\Slot1계산.cs" />
-    <Compile Include="Schemas\UserScripts\Slot1계산.설정.cs" />
-    <Compile Include="Schemas\UserScripts\Slot2계산.cs" />
-    <Compile Include="Schemas\UserScripts\Slot2계산.설정.cs" />
     <Compile Include="Schemas\VisionMaster\VMGlobals.cs" />
     <Compile Include="Schemas\VisionMaster\VM제어.cs" />
     <Compile Include="Schemas\VisionMaster\마스터데이터.cs" />

@@ -597,7 +597,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private MvUtils.CustomGrid GridControl1;
         private MvUtils.CustomView GridView2;
-        private DevExpress.XtraGrid.Columns.GridColumn col검사그룹;
         private DevExpress.XtraGrid.Columns.GridColumn col결과분류;
         private DevExpress.XtraGrid.Columns.GridColumn col검사장치;
         private DevExpress.XtraGrid.Columns.GridColumn col측정단위;

@@ -1,27 +1,17 @@
-﻿using DevExpress.Office.Crypto;
-using DevExpress.Utils;
-using DevExpress.Utils.Extensions;
+﻿using DevExpress.Utils;
 using GlobalVariableModuleCs;
 using GraphicsSetModuleCs;
 using ImageSourceModuleCs;
 using IMVSGroupCs;
-using Newtonsoft.Json.Linq;
 using OpenCvSharp;
 using ShellModuleCs;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Security.RightsManagement;
-using System.Xml.Linq;
 using VM.Core;
 using VM.PlatformSDKCS;
-using VMBaseControls.Base.ImageView;
-using static SamhwaInspectionNeo.UI.Control.MasterSetting;
 
 namespace SamhwaInspectionNeo.Schemas
 {

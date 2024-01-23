@@ -1,12 +1,10 @@
-﻿using MvUtils;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Ports;
-using System.Security.RightsManagement;
 using System.Threading.Tasks;
 
 namespace SamhwaInspectionNeo.Schemas

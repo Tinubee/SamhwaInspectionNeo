@@ -1,12 +1,6 @@
-﻿using DevExpress.Office.Utils;
-using DevExpress.Utils.Extensions;
-using GlobalVariableModuleCs;
+﻿using GlobalVariableModuleCs;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VM.Core;
 
 namespace SamhwaInspectionNeo.Schemas

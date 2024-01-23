@@ -1,7 +1,4 @@
-﻿using DevExpress.Drawing.Internal.Fonts.Interop;
-using DevExpress.Utils.Design;
-using DevExpress.Utils.Extensions;
-using Euresys.MultiCam;
+﻿using Euresys.MultiCam;
 using MvCamCtrl.NET;
 using MvCamCtrl.NET.CameraParams;
 using Newtonsoft.Json;
@@ -13,8 +10,6 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading;
 using System.Threading.Tasks;
 using static SamhwaInspectionNeo.Schemas.EuresysLink;
 
