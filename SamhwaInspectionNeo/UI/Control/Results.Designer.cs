@@ -114,10 +114,7 @@
             this.GridView2.Name = "GridView2";
             this.GridView2.OptionsBehavior.Editable = false;
             this.GridView2.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
-            this.GridView2.OptionsCustomization.AllowColumnMoving = false;
-            this.GridView2.OptionsCustomization.AllowFilter = false;
             this.GridView2.OptionsCustomization.AllowGroup = false;
-            this.GridView2.OptionsCustomization.AllowQuickHideColumns = false;
             this.GridView2.OptionsCustomization.AllowSort = false;
             this.GridView2.OptionsFilter.UseNewCustomFilterDialog = true;
             this.GridView2.OptionsMenu.EnableColumnMenu = false;

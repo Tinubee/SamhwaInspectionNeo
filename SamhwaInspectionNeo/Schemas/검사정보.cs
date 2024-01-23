@@ -93,6 +93,30 @@ namespace SamhwaInspectionNeo.Schemas
         좌상홀경 = 10,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
         우상홀경 = 11,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        상측가로거리 = 12,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        상측세로거리 = 13,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        상측위치도 = 14,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        좌하가로거리 = 15,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        좌하세로거리 = 16,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        좌하위치도 = 17,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        좌상가로거리 = 18,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        좌상세로거리 = 19,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        좌상위치도 = 20,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우상가로거리 = 21,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우상세로거리 = 22,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우상위치도 = 23,
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03)]
         TopSurface = 500,
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam04)]
@@ -111,24 +135,6 @@ namespace SamhwaInspectionNeo.Schemas
         µm = 2,
         [Description("px")]
         px = 3,
-    }
-
-    public enum 큐알등급
-    {
-        [Description("-")]
-        X = 0,
-        [Description("A")]
-        A = 1,
-        [Description("B")]
-        B = 2,
-        [Description("C")]
-        C = 3,
-        [Description("D")]
-        D = 4,
-        [Description("E")]
-        E = 5,
-        [Description("F")]
-        F = 6,
     }
 
     public enum 결과구분

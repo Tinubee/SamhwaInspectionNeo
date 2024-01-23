@@ -71,6 +71,7 @@ namespace SamhwaInspectionNeo.UI.Controls
             {
                 view.AddDeleteMenuItem(검사삭제);
                 view.AddRowSelectedEvent(new CustomView.RowSelectedEventHandler(카메라검사보기));
+                view.CustomDrawCell += GridView2_CustomDrawCell;
             }
         }
 

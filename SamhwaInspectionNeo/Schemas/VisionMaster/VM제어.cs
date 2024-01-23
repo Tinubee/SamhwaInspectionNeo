@@ -217,6 +217,7 @@ namespace SamhwaInspectionNeo.Schemas
                             if (!String.IsNullOrEmpty(vals.strValue)) val = Convert.ToSingle(vals.strValue);
                             //if (vals.Length > 1) ok = MvUtils.Utils.IntValue(vals[1]) == 1;
                             Global.검사자료.항목검사(this.구분, name, val); //Flow1, 지그위치, 값, 결과
+                            //Math.radi
                             //valueList.Add(vals.strValue);
                         }
                     }
@@ -316,7 +317,7 @@ namespace SamhwaInspectionNeo.Schemas
                         this.imageSourceModuleTool.SetImageData(imageBaseData);
                     this.Procedure.Run();
                     this.SetResult(this.구분);
-                    //검사결과 검사 = Global.검사자료.검사결과계산((int)this.구분);
+                    검사결과 검사 = Global.검사자료.검사결과계산((int)this.구분);
                     return true;
                 }
             }

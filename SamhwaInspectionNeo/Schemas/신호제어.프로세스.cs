@@ -67,7 +67,7 @@ namespace SamhwaInspectionNeo.Schemas
         private void 제품검사수행()
         {
             영상촬영수행();
-            검사결과전송();
+            //검사결과전송();
         }
         // 카메라 별 현재 검사 위치의 검사번호를 요청
         public Int32 촬영위치번호(카메라구분 구분)
@@ -163,12 +163,12 @@ namespace SamhwaInspectionNeo.Schemas
             if (상부표면검사번호 > 0)
             {
                 Debug.WriteLine("상부 표면검사 신호 들어옴");
-                //new Thread(() =>
-                //{
-                //    Global.조명제어.TurnOn(카메라구분.Cam03);
-                //    Global.그랩제어.Ready(카메라구분.Cam03);
-                //}).Start();
-                //신호쓰기(정보주소.상부표면검사카메라트리거, 0);
+                new Thread(() =>
+                {
+                    Global.조명제어.TurnOn(카메라구분.Cam03);
+                    Global.그랩제어.Ready(카메라구분.Cam03);
+                }).Start();
+                신호쓰기(정보주소.상부표면검사카메라트리거, 0);
             }
             // 하부 GigE 카메라 영상취득 시작
             if (하부표면검사번호 > 0)
