@@ -195,7 +195,7 @@ namespace SamhwaInspectionNeo.Schemas
                         this.카메라1.isGrabCompleted_Page1 = false;
                         this.카메라1.isGrabCompleted_Page2 = false;
                         //조명 끔
-                        //Global.조명제어.TurnOff(카메라구분.Cam01);
+                        Global.조명제어.TurnOff(카메라구분.Cam01);
                         // 이미지 연결
                         Cv2.VConcat(this.카메라1.Page1Image, this.카메라1.Page2Image, this.카메라1.mergedImage);
                         this.카메라1.roi[0] = new Rect(0, 2000, this.카메라1.width, 18000);

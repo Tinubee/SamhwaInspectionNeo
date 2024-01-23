@@ -116,6 +116,7 @@
             // 
             // GridControl2
             // 
+            this.GridControl2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.GridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.GridControl2.Location = new System.Drawing.Point(2, 27);

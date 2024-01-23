@@ -172,8 +172,10 @@ namespace SamhwaInspectionNeo.Schemas
         public override String 로그영역 { get; set; } = nameof(LCP100DC);
         public override Int32 통신속도 { get; set; } = 19200;
         public override Int32 최대밝기 { get; } = 100;
+        public override String STX { get; set; } = $"{Convert.ToChar(2)}";
+        public override String ETX { get; set; } = $"{Convert.ToChar(3)}";
         public override Boolean Set(조명정보 정보) => false;
-        public override Boolean TurnOn(조명정보 정보) => SendCommand($"{정보.카메라} On", $"{(Int32)정보.채널}o{this.밝기변환(정보.밝기):d4}");
+        public override Boolean TurnOn(조명정보 정보) => SendCommand($"{정보.카메라} On", $"{(Int32)정보.채널}d{this.밝기변환(정보.밝기):d4}");
         public override Boolean TurnOff(조명정보 정보) => SendCommand($"{정보.카메라} Off", $"{(Int32)정보.채널}f0000");
     }
 

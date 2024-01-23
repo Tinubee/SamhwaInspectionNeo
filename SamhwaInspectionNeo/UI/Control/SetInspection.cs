@@ -68,7 +68,7 @@ namespace SamhwaInspectionNeo.UI.Control
             Int32 검사코드 = (int)Flow구분.Flow1;
             검사결과 검사 = Global.검사자료.검사시작(검사코드);
             Global.VM제어.GetItem((Flow구분)검사코드).Run(null, null, 0);
-            Global.검사자료.검사결과계산(검사코드);
+            //Global.검사자료.검사결과계산(검사코드);
             this.GridView1.RefreshData();
         }
 

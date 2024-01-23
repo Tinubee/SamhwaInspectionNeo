@@ -154,7 +154,7 @@ namespace SamhwaInspectionNeo.Schemas
                 Debug.WriteLine("상부 치수검사 신호 들어옴");
                 new Thread(() =>
                 {
-                    //Global.조명제어.TurnOn(카메라구분.Cam01);
+                    Global.조명제어.TurnOn(카메라구분.Cam01);
                     Global.그랩제어.Ready(카메라구분.Cam01);
                 }).Start();
                 신호쓰기(정보주소.상부치수검사카메라트리거, false);

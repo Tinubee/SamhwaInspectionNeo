@@ -237,7 +237,7 @@
             this.GridControl1.Location = new System.Drawing.Point(0, 40);
             this.GridControl1.MainView = this.GridView1;
             this.GridControl1.Name = "GridControl1";
-            this.GridControl1.Size = new System.Drawing.Size(1213, 768);
+            this.GridControl1.Size = new System.Drawing.Size(1463, 768);
             this.GridControl1.TabIndex = 16;
             this.GridControl1.UseDirectXPaint = DevExpress.Utils.DefaultBoolean.True;
             this.GridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -300,6 +300,7 @@
             this.col검사일자.Name = "col검사일자";
             this.col검사일자.Visible = true;
             this.col검사일자.VisibleIndex = 0;
+            this.col검사일자.Width = 150;
             // 
             // col검사시간
             // 
@@ -314,6 +315,7 @@
             this.col검사시간.Name = "col검사시간";
             this.col검사시간.Visible = true;
             this.col검사시간.VisibleIndex = 1;
+            this.col검사시간.Width = 150;
             // 
             // col모델구분
             // 
@@ -324,6 +326,7 @@
             this.col모델구분.Caption = "Model";
             this.col모델구분.FieldName = "모델구분";
             this.col모델구분.Name = "col모델구분";
+            this.col모델구분.Width = 50;
             // 
             // col검사코드
             // 
@@ -338,6 +341,7 @@
             this.col검사코드.Name = "col검사코드";
             this.col검사코드.Visible = true;
             this.col검사코드.VisibleIndex = 2;
+            this.col검사코드.Width = 150;
             // 
             // col측정결과
             // 
@@ -350,6 +354,7 @@
             this.col측정결과.Name = "col측정결과";
             this.col측정결과.Visible = true;
             this.col측정결과.VisibleIndex = 3;
+            this.col측정결과.Width = 150;
             // 
             // colCTQ결과
             // 
@@ -360,6 +365,7 @@
             this.colCTQ결과.Name = "colCTQ결과";
             this.colCTQ결과.Visible = true;
             this.colCTQ결과.VisibleIndex = 4;
+            this.colCTQ결과.Width = 150;
             // 
             // col외관결과
             // 
@@ -370,6 +376,7 @@
             this.col외관결과.Name = "col외관결과";
             this.col외관결과.Visible = true;
             this.col외관결과.VisibleIndex = 5;
+            this.col외관결과.Width = 150;
             // 
             // col불량정보
             // 
@@ -380,6 +387,7 @@
             this.col불량정보.Name = "col불량정보";
             this.col불량정보.Visible = true;
             this.col불량정보.VisibleIndex = 6;
+            this.col불량정보.Width = 400;
             // 
             // layoutControl1
             // 
@@ -392,7 +400,7 @@
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(1213, 40);
+            this.layoutControl1.Size = new System.Drawing.Size(1463, 40);
             this.layoutControl1.TabIndex = 15;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -463,7 +471,7 @@
             this.layoutControlItem5});
             this.Root.Name = "Root";
             this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
-            this.Root.Size = new System.Drawing.Size(1213, 40);
+            this.Root.Size = new System.Drawing.Size(1463, 40);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -484,7 +492,7 @@
             this.emptySpaceItem1.AllowHotTrack = false;
             this.emptySpaceItem1.Location = new System.Drawing.Point(713, 0);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(490, 30);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(740, 30);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem3
@@ -549,7 +557,7 @@
             this.Controls.Add(this.GridControl1);
             this.Controls.Add(this.layoutControl1);
             this.Name = "Results";
-            this.Size = new System.Drawing.Size(1213, 808);
+            this.Size = new System.Drawing.Size(1463, 808);
             ((System.ComponentModel.ISupportInitialize)(this.GridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridView1)).EndInit();

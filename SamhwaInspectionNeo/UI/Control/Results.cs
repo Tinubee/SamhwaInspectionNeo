@@ -132,11 +132,13 @@ namespace SamhwaInspectionNeo.UI.Controls
 
         private void GridView1_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
         {
-            if (e.RowHandle < 0 || e.Column.FieldName != this.col측정결과.FieldName) return;
-            GridView view = sender as GridView;
-            검사결과 정보 = view.GetRow(e.RowHandle) as 검사결과;
-            if (정보 == null) return;
-            e.Appearance.ForeColor = 환경설정.결과표현색상(정보.측정결과);
+            if(e.RowHandle <0 || (e.Column.FieldName == this.col측정결과.FieldName || e.Column.FieldName == this.colCTQ결과.FieldName || e.Column.FieldName ==this.col외관결과.FieldName))
+            {
+                GridView view = sender as GridView;
+                검사결과 정보 = view.GetRow(e.RowHandle) as 검사결과;
+                if (정보 == null) return;
+                e.Appearance.ForeColor = 환경설정.결과표현색상(정보.측정결과);
+            }
         }
 
         private void GridView2_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)

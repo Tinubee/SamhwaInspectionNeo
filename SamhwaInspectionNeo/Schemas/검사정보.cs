@@ -262,7 +262,7 @@ namespace SamhwaInspectionNeo.Schemas
 
         public 검사정보 GetItem(검사항목 항목) => 검사내역.Where(e => e.검사항목 == 항목).FirstOrDefault();
         // 카메라 검사결과 적용
-        public Boolean SetResult(Flow구분 구분, String name, Single value) => SetResult(검사내역.Where(e => e.검사항목.ToString().Contains(name) && e.결과값 == 0).FirstOrDefault(), value, 구분);
+        public Boolean SetResult(Flow구분 구분, String name, Single value) => SetResult(검사내역.Where(e => e.검사항목.ToString().Contains(name) && e.측정결과 == 결과구분.NO).FirstOrDefault(), value, 구분);
         //public Boolean SetResult(검사항목 항목, Single value, Boolean ok) => SetResult(검사내역.Where(e => e.검사항목 == 항목).FirstOrDefault(), value, ok);
         public Boolean SetResult(검사정보 검사, Single value, Flow구분 구분)
         {
@@ -319,6 +319,10 @@ namespace SamhwaInspectionNeo.Schemas
                 if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.Surface && e.측정결과 == 결과구분.ER)) this.외관결과 = 결과구분.ER;
                 else this.외관결과 = 결과구분.NG;
             }
+
+            List<String> 불량내역 = this.검사내역.Where(e => e.측정결과 != 결과구분.OK && e.측정결과 != 결과구분.PS).Select(e => e.검사항목.ToString()).ToList();
+            if (불량내역.Count > 0) this.불량정보 = String.Join(",", 불량내역);
+
             Debug.WriteLine($"{this.검사코드} = {this.측정결과}", "검사완료");
             return this.측정결과;
         }
