@@ -41,7 +41,7 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.b수량리셋.Click += 수량리셋_Click;
 
             Global.환경설정.모델변경알림 += 모델변경알림;
-            //Global.장치통신.동작상태알림 += 동작상태알림;
+            Global.신호제어.동작상태알림 += 동작상태알림;
             Global.검사자료.검사완료알림 += 검사완료알림;
 
             this.검사상태표현(결과구분.NO);
@@ -117,8 +117,8 @@ namespace SamhwaInspectionNeo.UI.Controls
         private void 동작상태알림()
         {
             if (this.InvokeRequired) { this.BeginInvoke(new Action(동작상태알림)); return; }
-            //this.b동작구분.Text = Global.장치상태.자동수동 ? 번역.자동 : 번역.수동;
-            //this.b동작구분.Appearance.ForeColor = Global.장치상태.시작정지 ? DXSkinColors.ForeColors.Information : DXSkinColors.ForeColors.DisabledText;
+            this.b동작구분.Text = Global.장치상태.자동수동 ? 번역.자동 : 번역.수동;
+            this.b동작구분.Appearance.ForeColor = Global.장치상태.자동수동 ? DXSkinColors.ForeColors.Information : DXSkinColors.ForeColors.DisabledText;
         }
 
         private void 수량리셋_Click(object sender, EventArgs e)

@@ -38,6 +38,7 @@ namespace SamhwaInspectionNeo.Schemas
 
         private Boolean 입출자료분석()
         {
+            if (Global.환경설정.동작구분 == 동작구분.LocalTest) return false;
             if (!입출자료갱신()) return false;
             입출변경확인();
             제품검사수행();
@@ -135,6 +136,19 @@ namespace SamhwaInspectionNeo.Schemas
             //this.불량여부요청 = !ok;
             //this.검사결과요청 = false;
         }
+        public void 지그위치체크()
+        {
+            if (Global.신호제어.Front지그)
+            {
+                Global.VM제어.글로벌변수제어.SetValue("Front지그", "1");
+                Global.VM제어.글로벌변수제어.SetValue("Rear지그", "0");
+            }
+            else if (Global.신호제어.Rear지그)
+            {
+                Global.VM제어.글로벌변수제어.SetValue("Front지그", "0");
+                Global.VM제어.글로벌변수제어.SetValue("Rear지그", "1");
+            }
+        }
         private void 영상촬영수행()
         {
             Int32 상부치수검사번호 = this.검사위치번호(정보주소.상부치수검사카메라트리거);
@@ -148,6 +162,7 @@ namespace SamhwaInspectionNeo.Schemas
                 //Int32 검사코드 = this.검사위치번호(정보주소.상부치수검사카메라트리거);
                 //검사결과 검사 = Global.검사자료.검사시작(검사코드);
                 Debug.WriteLine("상부 치수검사 신호 들어옴");
+                지그위치체크();
                 new Thread(() =>
                 {
                     Global.조명제어.TurnOn(카메라구분.Cam01);
@@ -158,13 +173,13 @@ namespace SamhwaInspectionNeo.Schemas
             // 상부 GigE 카메라 영상취득 시작
             if (상부표면검사번호 > 0)
             {
-                Debug.WriteLine("상부 표면검사 신호 들어옴");
-                new Thread(() =>
-                {
-                    Global.조명제어.TurnOn(카메라구분.Cam03);
-                    Global.그랩제어.Ready(카메라구분.Cam03);
-                }).Start();
-                신호쓰기(정보주소.상부표면검사카메라트리거, 0);
+                //Debug.WriteLine("상부 표면검사 신호 들어옴");
+                //new Thread(() =>
+                //{
+                //    Global.조명제어.TurnOn(카메라구분.Cam03);
+                //    Global.그랩제어.Ready(카메라구분.Cam03);
+                //}).Start();
+                //신호쓰기(정보주소.상부표면검사카메라트리거, 0);
             }
             // 하부 GigE 카메라 영상취득 시작
             if (하부표면검사번호 > 0)

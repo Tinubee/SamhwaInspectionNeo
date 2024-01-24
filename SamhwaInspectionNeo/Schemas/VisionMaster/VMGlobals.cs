@@ -1,6 +1,7 @@
 ﻿using GlobalVariableModuleCs;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using VM.Core;
 
 namespace SamhwaInspectionNeo.Schemas
@@ -24,7 +25,13 @@ namespace SamhwaInspectionNeo.Schemas
                 this.Add(new VmVariable(info));
             }
         }
-       
+
+        public String GetValue(string name)
+        {
+            VmVariable info = this.Where(e => e.Name == name).FirstOrDefault();
+            return info.StringValue;
+        }
+
        public List<VmVariable> 보정값불러오기()
         {
             List<GlobalVarInfo> lists = Variables.GetAllGlobalVar();
@@ -73,6 +80,11 @@ namespace SamhwaInspectionNeo.Schemas
         {
             foreach (VmVariable v in this)
                 this.Variables.SetGlobalVar(v.Name, v.StringValue);
+        }
+
+        public void SetValue(String name, String value)
+        {
+            this.Where(e => e.Name == name).FirstOrDefault().StringValue = value;
         }
     }
 

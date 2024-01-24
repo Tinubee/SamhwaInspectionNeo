@@ -164,7 +164,7 @@ namespace SamhwaInspectionNeo.Schemas
         {
             try
             {
-                PLC.Close();
+                PLC?.Close();
                 Global.정보로그(로그영역, "PLC 연결종료", $"서버에 연결을 종료하였습니다.", false);
             }
             catch (Exception ex)

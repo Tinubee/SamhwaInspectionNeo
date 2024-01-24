@@ -12,6 +12,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using VM.Core;
 using VM.PlatformSDKCS;
+using static SamhwaInspectionNeo.UI.Control.MasterSetting;
 
 namespace SamhwaInspectionNeo.Schemas
 {
@@ -162,7 +163,7 @@ namespace SamhwaInspectionNeo.Schemas
             }
         }
 
-        private void SetResult(Flow구분 구분) 
+        private void SetResult(Flow구분 구분, 지그위치 지그) //1이면 Front, 0이면 Rear 
         {
             if (구분 == Flow구분.상부표면검사 || 구분 == Flow구분.하부표면검사) return;
 
@@ -181,7 +182,7 @@ namespace SamhwaInspectionNeo.Schemas
                         Single val = Single.NaN;
                         if (!String.IsNullOrEmpty(vals[0])) val = Convert.ToSingle(vals[0]);
                         if (vals.Length > 1) ok = MvUtils.Utils.IntValue(vals[1]) == 1;
-                        Global.검사자료.항목검사(this.구분, name, val);
+                        Global.검사자료.항목검사(this.구분, 지그, name, val);
                     }
                     catch (Exception e)
                     {
@@ -225,7 +226,6 @@ namespace SamhwaInspectionNeo.Schemas
                         this.imageSourceModuleTool.SetImageData(imageBaseData);
 
                     this.Procedure.Run();
-                    //this.SetResult(this.구분);
                     return true;
                 }
                 else
@@ -236,14 +236,13 @@ namespace SamhwaInspectionNeo.Schemas
                         return false;
                     }
 
-                    if (this.구분 == Flow구분.Flow1)
-                        지그위치체크();
+                    Int32 Front = Convert.ToInt32(Global.VM제어.글로벌변수제어.GetValue("Front지그"));
 
                     imageBaseData = mat == null ? imageBaseData : MatToImageBaseData(mat);
                     if (imageBaseData != null)
                         this.imageSourceModuleTool.SetImageData(imageBaseData);
                     this.Procedure.Run();
-                    this.SetResult(this.구분);
+                    this.SetResult(this.구분, Front == 1 ? 지그위치.Front : 지그위치.Rear ); //1이면 Front지그, 0이면 Rear지그
                     검사결과 검사 = Global.검사자료.검사결과계산((int)this.구분);
                     return true;
                 }
@@ -252,19 +251,6 @@ namespace SamhwaInspectionNeo.Schemas
             {
                 Global.오류로그(로그영역, "검사오류", $"[{this.구분}] VM 검사오류: {ex.Message}", false);
                 return false;
-            }
-        }
-        private void 지그위치체크()
-        {
-            if (Global.신호제어.Front지그)
-            {
-                this.GlobalVariableModuleTool.SetGlobalVar("Front지그", "1");
-                this.GlobalVariableModuleTool.SetGlobalVar("Rear지그", "0");
-            }
-            else if (Global.신호제어.Rear지그)
-            {
-                this.GlobalVariableModuleTool.SetGlobalVar("Front지그", "0");
-                this.GlobalVariableModuleTool.SetGlobalVar("Rear지그", "1");
             }
         }
 

@@ -137,7 +137,11 @@ namespace SamhwaInspectionNeo.UI.Controls
                 GridView view = sender as GridView;
                 검사결과 정보 = view.GetRow(e.RowHandle) as 검사결과;
                 if (정보 == null) return;
-                e.Appearance.ForeColor = 환경설정.결과표현색상(정보.측정결과);
+
+                if(e.Column.FieldName == this.col측정결과.FieldName) e.Appearance.ForeColor = 환경설정.결과표현색상(정보.측정결과);
+                if (e.Column.FieldName == this.colCTQ결과.FieldName) e.Appearance.ForeColor = 환경설정.결과표현색상(정보.CTQ결과);
+                if (e.Column.FieldName == this.col외관결과.FieldName) e.Appearance.ForeColor = 환경설정.결과표현색상(정보.외관결과);
+                //e.Appearance.ForeColor = 환경설정.결과표현색상(정보.외관결과);
             }
         }
 

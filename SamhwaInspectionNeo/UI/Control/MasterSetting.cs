@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace SamhwaInspectionNeo.UI.Control
 {
-    public partial class MasterSetting : DevExpress.XtraEditors.XtraUserControl
+    public partial class MasterSetting : XtraUserControl
     {
         public enum 지그위치
         {

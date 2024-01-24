@@ -25,6 +25,14 @@ namespace SamhwaInspectionNeo.Schemas
         }
     }
 
+    //public enum 지그위치
+    //{
+    //    [Description("Front Jig"), DXDescription("FR")]
+    //    Front = 1,
+    //    [Description("Rear Jig"), DXDescription("RE")]
+    //    Rear = 2,
+    //}
+
     // 카메라구분 과 번호 맞춤
     public enum 장치구분
     {
@@ -72,7 +80,7 @@ namespace SamhwaInspectionNeo.Schemas
         [Result(), ListBindable(false)]
         None = 0,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot1상부= 1,
+        Slot1상부 = 1,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
         Slot1중앙부 = 2,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
@@ -244,7 +252,7 @@ namespace SamhwaInspectionNeo.Schemas
 
         [NotMapped, JsonProperty("inspd")]
         public List<검사정보> 검사내역 { get; set; } = new List<검사정보>();
-       
+
         public 검사결과()
         {
             this.검사일시 = DateTime.Now;
@@ -268,8 +276,8 @@ namespace SamhwaInspectionNeo.Schemas
 
         public 검사정보 GetItem(검사항목 항목) => 검사내역.Where(e => e.검사항목 == 항목).FirstOrDefault();
         // 카메라 검사결과 적용
-        public Boolean SetResult(Flow구분 구분, String name, Single value) => SetResult(검사내역.Where(e => e.검사항목.ToString() == name).FirstOrDefault(), value, 구분);
-        public Boolean SetResult(검사정보 검사, Single value, Flow구분 구분)
+        public Boolean SetResult(Flow구분 구분, 지그위치 지그, String name, Single value) => SetResult(검사내역.Where(e => e.검사항목.ToString() == name).FirstOrDefault(), value, 구분, 지그);
+        public Boolean SetResult(검사정보 검사, Single value, Flow구분 구분, 지그위치 지그)
         {
             if (검사 == null) return false;
             if (Single.IsNaN(value))
@@ -279,6 +287,7 @@ namespace SamhwaInspectionNeo.Schemas
             }
 
             검사.플로우 = 구분;
+            검사.지그 = 지그;
             검사.결과값 = (Decimal)Math.Round(value, Global.환경설정.결과자릿수);
             검사.측정값 = 검사.결과값;
             Boolean ok = 검사.결과값 >= 검사.최소값 && 검사.결과값 <= 검사.최대값;
@@ -320,9 +329,13 @@ namespace SamhwaInspectionNeo.Schemas
             else
             {
                 if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.CTQ && e.측정결과 == 결과구분.ER)) this.CTQ결과 = 결과구분.ER;
-                else this.CTQ결과 = 결과구분.NG;
+                else if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.CTQ && e.측정결과 == 결과구분.NG)) this.CTQ결과 = 결과구분.NG;
+                else this.CTQ결과 = 결과구분.OK;
+                //임시
+                // this.외관결과 = 결과구분.OK;
                 if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.Surface && e.측정결과 == 결과구분.ER)) this.외관결과 = 결과구분.ER;
-                else this.외관결과 = 결과구분.NG;
+                else if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.Surface && e.측정결과 == 결과구분.NG)) this.외관결과 = 결과구분.NG;
+                else this.외관결과 = 결과구분.OK;
             }
 
             List<String> 불량내역 = this.검사내역.Where(e => e.측정결과 != 결과구분.OK && e.측정결과 != 결과구분.PS).Select(e => e.검사항목.ToString()).ToList();

@@ -9,6 +9,7 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using static SamhwaInspectionNeo.UI.Control.MasterSetting;
 
 namespace SamhwaInspectionNeo.Schemas
 {
@@ -150,15 +151,14 @@ namespace SamhwaInspectionNeo.Schemas
             //    this.현재검사변경?.Invoke(검사);
             return 검사;
         }
-        public 검사결과 항목검사(Flow구분 구분,String name, Single value)
+        public 검사결과 항목검사(Flow구분 구분, 지그위치 지그, String name, Single value)
         {
-            //지그위치 추가해줘야될까..?
             검사결과 검사 = this.검사항목찾기((int)구분);
             if (검사 == null) return null;
-            검사.SetResult(구분 , name, value);
+            검사.SetResult(구분, 지그, name, value);
             return 검사;
         }
-       
+
         public 검사결과 검사결과계산(Int32 검사코드)
         {
             검사결과 검사;
@@ -195,7 +195,7 @@ namespace SamhwaInspectionNeo.Schemas
                 this.검사스플.Remove(검사코드);
                 Global.오류로그(로그영역.GetString(), "제품검사", $"[{검사코드}] Index가 없습니다.", true);
             }
-                
+
             return 검사;
         }
 

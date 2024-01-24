@@ -71,12 +71,15 @@ namespace SamhwaInspectionNeo
                 Debug.WriteLine("VM제어 클래스 Init");
                 유저자료.Init();
                 Debug.WriteLine("유저자료 클래스 Init");
-                조명제어.Init();
-                Debug.WriteLine("조명제어 클래스 Init");
-                신호제어.Init();
-                Debug.WriteLine("신호제어 클래스 Init");
-                그랩제어.Init();
-                Debug.WriteLine("그랩제어 클래스 Init");
+                if (Global.환경설정.동작구분 == 동작구분.Live)
+                {
+                    조명제어.Init();
+                    Debug.WriteLine("조명제어 클래스 Init");
+                    신호제어.Init();
+                    Debug.WriteLine("신호제어 클래스 Init");
+                    그랩제어.Init();
+                    Debug.WriteLine("그랩제어 클래스 Init");
+                }
                 모델자료.Init();
                 Debug.WriteLine("모델자료 클래스 Init");
                 검사자료.Init();
