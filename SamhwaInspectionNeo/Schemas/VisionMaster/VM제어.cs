@@ -109,15 +109,6 @@ namespace SamhwaInspectionNeo.Schemas
         public ImageSourceModuleTool imageSourceModuleTool;
         public GraphicsSetModuleTool graphicsSetModuleTool;
         public ShellModuleTool shellModuleTool;
-        public IMVSGroupTool slot1GroupTool;
-        public ShellModuleTool slot1ShellModuleTool;
-        public IMVSGroupTool slot2GroupTool;
-        public ShellModuleTool slot2ShellModuleTool;
-        public IMVSGroupTool holeGroupTool;
-        public ShellModuleTool holeSizeTool;
-        public ShellModuleTool holeGaruTool;
-        public ShellModuleTool holeSeroTool;
-        public ShellModuleTool holeLocationTool;
         public GlobalVariableModuleTool GlobalVariableModuleTool;
         public List<GraphicsSetModuleTool> graphicsSetModuleToolList;
         public List<ShellModuleTool> shellModuleToolList;
@@ -165,23 +156,6 @@ namespace SamhwaInspectionNeo.Schemas
                     this.graphicsSetModuleTool = this.Procedure["OutputImage"] as GraphicsSetModuleTool;
                     this.shellModuleTool = this.Procedure["Resulte"] as ShellModuleTool;
 
-                    this.slot1GroupTool = this.Procedure["Slot1"] as IMVSGroupTool;
-                    if (this.slot1GroupTool != null)
-                        this.slot1ShellModuleTool = this.slot1GroupTool["거리계산"] as ShellModuleTool;
-
-                    this.slot2GroupTool = this.Procedure["Slot2"] as IMVSGroupTool;
-                    if (this.slot2GroupTool != null)
-                        this.slot2ShellModuleTool = this.slot2GroupTool["거리계산"] as ShellModuleTool;
-
-                    this.holeGroupTool = this.Procedure["홀치수검사"] as IMVSGroupTool;
-                    if (this.holeGroupTool != null)
-                    {
-                        this.holeSizeTool = this.holeGroupTool["홀크기계산"] as ShellModuleTool;
-                        this.holeGaruTool = this.holeGroupTool["가로계산"] as ShellModuleTool;
-                        this.holeSeroTool = this.holeGroupTool["세로계산"] as ShellModuleTool;
-                        this.holeLocationTool = this.holeGroupTool["위치도결과"] as ShellModuleTool;
-                    }
-
                     if (this.imageSourceModuleTool != null)
                         this.imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;
                 }
@@ -192,18 +166,29 @@ namespace SamhwaInspectionNeo.Schemas
         {
             if (구분 == Flow구분.상부표면검사 || 구분 == Flow구분.하부표면검사) return;
 
-            ShellModuleTool Slot1shell = Global.VM제어.GetItem(구분).slot1ShellModuleTool;
-            ShellModuleTool Slot2shell = Global.VM제어.GetItem(구분).slot2ShellModuleTool;
-            ShellModuleTool HoleSizeshell = Global.VM제어.GetItem(구분).holeSizeTool;
-            ShellModuleTool HoleGaruhell = Global.VM제어.GetItem(구분).holeGaruTool;
-            ShellModuleTool HoleSerohell = Global.VM제어.GetItem(구분).holeSeroTool;
-            ShellModuleTool HoleLocationhell = Global.VM제어.GetItem(구분).holeLocationTool;
-            슬롯부값적용(Slot1shell);
-            슬롯부값적용(Slot2shell);
-            홀측정값적용(HoleSizeshell, "홀경");
-            홀측정값적용(HoleGaruhell, "가로");
-            홀측정값적용(HoleSerohell, "세로");
-            홀측정값적용(HoleLocationhell, "위치도");
+            ShellModuleTool shell = Global.VM제어.GetItem(구분).shellModuleTool;
+            for (int i = 6; i < shell.Outputs.Count; i++)
+            {
+                List<VmIO> t = shell.Outputs[i].GetAllIO();
+                String name = t[0].UniqueName.Split('%')[1];
+                if (t[0].Value != null)
+                {
+                    String str = ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[0].strValue;
+                    try
+                    {
+                        String[] vals = str.Split(';');
+                        Boolean ok = false;
+                        Single val = Single.NaN;
+                        if (!String.IsNullOrEmpty(vals[0])) val = Convert.ToSingle(vals[0]);
+                        if (vals.Length > 1) ok = MvUtils.Utils.IntValue(vals[1]) == 1;
+                        Global.검사자료.항목검사(this.구분, name, val);
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.WriteLine(e.Message, name);
+                    }
+                }
+            }
         }
 
         private void 홀측정값적용(ShellModuleTool tool, string name)
@@ -273,40 +258,6 @@ namespace SamhwaInspectionNeo.Schemas
             }
         }
 
-        //public void 검사결과(ShellModuleTool tool)
-        //{
-        //    for (int i = 7; i < tool.Outputs.Count; i++)
-        //    {
-        //        List<VmIO> t = tool.Outputs[i].GetAllIO();
-        //        String name = t[0].UniqueName.Split('%')[1];
-        //        if (t[0].Value != null && name.Contains("strSlot"))
-        //        {
-        //            Single slotBottom = Convert.ToSingle(((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[0].strValue);
-        //            Single slotMiddle = Convert.ToSingle(((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[1].strValue);
-        //            Single slotTop = Convert.ToSingle(((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[2].strValue);
-
-        //            try
-        //            {
-        //                검사설정자료 자료 = Global.모델자료.GetItem(Global.환경설정.선택모델)?.검사설정;
-
-        //                검사정보 상부치수 = 자료.Where(x => x.지그 == 지그위치.Front).Where(x => x.검사항목.ToString().Contains(name.Contains("strSlot1") ? "Slot1상부" : "Slot2상부")).FirstOrDefault();
-        //                검사정보 중앙부치수 = 자료.Where(x => x.지그 == 지그위치.Front).Where(x => x.검사항목.ToString().Contains(name.Contains("strSlot1") ? "Slot1중앙부" : "Slot2중앙부")).FirstOrDefault();
-        //                검사정보 하부치수 = 자료.Where(x => x.지그 == 지그위치.Front).Where(x => x.검사항목.ToString().Contains(name.Contains("strSlot1") ? "Slot1하부" : "Slot2하부")).FirstOrDefault();
-        //                결과값적용(상부치수, slotTop);
-        //                결과값적용(중앙부치수, slotMiddle);
-        //                결과값적용(하부치수, slotBottom);
-
-        //                Global.검사자료.카메라검사(this.구분, 상부치수.검사항목.ToString(), slotTop, true);
-        //                Global.검사자료.카메라검사(this.구분, 중앙부치수.검사항목.ToString(), slotMiddle, true);
-        //                Global.검사자료.카메라검사(this.구분, 하부치수.검사항목.ToString(), slotBottom, true);
-        //            }
-        //            catch (Exception e)
-        //            {
-        //                Debug.WriteLine(e.Message, name);
-        //            }
-        //        }
-        //    }
-        //}
 
         public Boolean 결과값적용(검사정보 검사, Single value)
         {

@@ -193,10 +193,10 @@ namespace SamhwaInspectionNeo.Schemas
                         Global.조명제어.TurnOff(카메라구분.Cam01);
                         // 이미지 연결
                         Cv2.VConcat(this.카메라1.Page1Image, this.카메라1.Page2Image, this.카메라1.mergedImage);
-                        this.카메라1.roi[0] = new Rect(0, 2000, this.카메라1.width, 18000);
-                        this.카메라1.roi[1] = new Rect(0, 21000, this.카메라1.width, 18000);
-                        this.카메라1.roi[2] = new Rect(0, 40000, this.카메라1.width, 18000);
-                        this.카메라1.roi[3] = new Rect(0, 60000, this.카메라1.width, 18000);
+                        this.카메라1.roi[0] = new Rect(0, 0, this.카메라1.width, 18000);
+                        this.카메라1.roi[1] = new Rect(0, 19500, this.카메라1.width, 18000);
+                        this.카메라1.roi[2] = new Rect(0, 38000, this.카메라1.width, 18000);
+                        this.카메라1.roi[3] = new Rect(0, 57500, this.카메라1.width, 18000);
 
                         for (int lop = 0; lop < this.카메라1.roi.Length; lop++)
                         {
