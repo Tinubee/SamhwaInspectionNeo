@@ -167,7 +167,7 @@ namespace SamhwaInspectionNeo.Schemas
             if (구분 == Flow구분.상부표면검사 || 구분 == Flow구분.하부표면검사) return;
 
             ShellModuleTool shell = Global.VM제어.GetItem(구분).shellModuleTool;
-            for (int i = 6; i < shell.Outputs.Count; i++)
+            for (int i = 8; i < shell.Outputs.Count; i++)
             {
                 List<VmIO> t = shell.Outputs[i].GetAllIO();
                 String name = t[0].UniqueName.Split('%')[1];
