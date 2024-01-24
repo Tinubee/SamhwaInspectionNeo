@@ -78,45 +78,51 @@ namespace SamhwaInspectionNeo.Schemas
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
         Slot1하부 = 3,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot2상부 = 4,
+        Slot1위치도 = 4,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot2중앙부 = 5,
+        Slot2상부 = 5,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot2하부 = 6,
+        Slot2중앙부 = 6,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        기준홀경 = 7,
+        Slot2하부 = 7,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        상측홀경 = 8,
+        Slot2위치도 = 8,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌하홀경 = 9,
+        기준홀경 = 9,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌상홀경 = 10,
+        상측홀경 = 10,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우상홀경 = 11,
+        좌하홀경 = 11,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        상측가로거리 = 12,
+        좌상홀경 = 12,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        상측세로거리 = 13,
+        우상홀경 = 13,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        상측위치도 = 14,
+        상측가로거리 = 14,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌하가로거리 = 15,
+        상측세로거리 = 15,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌하세로거리 = 16,
+        상측위치도 = 16,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌하위치도 = 17,
+        좌하가로거리 = 17,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌상가로거리 = 18,
+        좌하세로거리 = 18,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌상세로거리 = 19,
+        좌하위치도 = 19,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌상위치도 = 20,
+        좌상가로거리 = 20,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우상가로거리 = 21,
+        좌상세로거리 = 21,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우상세로거리 = 22,
+        좌상위치도 = 22,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우상위치도 = 23,
+        우상가로거리 = 23,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우상세로거리 = 24,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우상위치도 = 25,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot길이 = 26,
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03)]
         TopSurface = 500,
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam04)]
@@ -263,7 +269,6 @@ namespace SamhwaInspectionNeo.Schemas
         public 검사정보 GetItem(검사항목 항목) => 검사내역.Where(e => e.검사항목 == 항목).FirstOrDefault();
         // 카메라 검사결과 적용
         public Boolean SetResult(Flow구분 구분, String name, Single value) => SetResult(검사내역.Where(e => e.검사항목.ToString() == name).FirstOrDefault(), value, 구분);
-        //public Boolean SetResult(검사항목 항목, Single value, Boolean ok) => SetResult(검사내역.Where(e => e.검사항목 == 항목).FirstOrDefault(), value, ok);
         public Boolean SetResult(검사정보 검사, Single value, Flow구분 구분)
         {
             if (검사 == null) return false;

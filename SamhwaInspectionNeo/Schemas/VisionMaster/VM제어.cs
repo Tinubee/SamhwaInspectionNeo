@@ -162,7 +162,7 @@ namespace SamhwaInspectionNeo.Schemas
             }
         }
 
-        private void SetResult(Flow구분 구분) //결과체크 추가해줘야됨.
+        private void SetResult(Flow구분 구분) 
         {
             if (구분 == Flow구분.상부표면검사 || 구분 == Flow구분.하부표면검사) return;
 
@@ -190,74 +190,6 @@ namespace SamhwaInspectionNeo.Schemas
                 }
             }
         }
-
-        private void 홀측정값적용(ShellModuleTool tool, string name)
-        {
-            for (int i = 7; i < tool.Outputs.Count; i++)
-            {
-                List<VmIO> t = tool.Outputs[i].GetAllIO();
-                if (t[0].Value != null)
-                {
-                    try
-                    {
-                        foreach (ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX vals in t[0].Value)
-                        {
-                            Single val = Single.NaN;
-                            if (!String.IsNullOrEmpty(vals.strValue)) val = Convert.ToSingle(vals.strValue);
-                            if (name != "홀경")
-                            {
-                                if(val == 0) continue;
-                            }
-                            Global.검사자료.항목검사(this.구분, name, val); //Flow1, 지그위치, 값, 결과
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        Debug.WriteLine(e.Message, name);
-                    }
-                }
-                else
-                {
-                    Global.검사자료.항목검사(this.구분, name, 9999);
-                }
-            }
-        }
-
-        private void 슬롯부값적용(ShellModuleTool tool)
-        {
-            for (int i = 7; i < tool.Outputs.Count; i++)
-            {
-                List<VmIO> t = tool.Outputs[i].GetAllIO();
-                String name = t[0].UniqueName.Split('%')[1];
-                int lop = 1;
-                if (t[0].Value != null)
-                {
-                    try
-                    {
-                        foreach (ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX vals in t[0].Value)
-                        {
-                            if (lop == 1) name = "하부";
-                            else if (lop == 2) name = "중앙부";
-                            else if (lop == 3) name = "상부";
-
-                            lop++;
-                            //Boolean ok = false;
-                            Single val = Single.NaN;
-                            if (!String.IsNullOrEmpty(vals.strValue)) val = Convert.ToSingle(vals.strValue);
-                            //if (vals.Length > 1) ok = MvUtils.Utils.IntValue(vals[1]) == 1;
-                            Global.검사자료.항목검사(this.구분, name, val); //Flow1, 지그위치, 값, 결과
-                            //Math.radi
-                            //valueList.Add(vals.strValue);
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        Debug.WriteLine(e.Message, name);
-                    }
-                }
-            }
-        }
-
 
         public Boolean 결과값적용(검사정보 검사, Single value)
         {
