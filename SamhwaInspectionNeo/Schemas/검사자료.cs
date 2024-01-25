@@ -153,7 +153,9 @@ namespace SamhwaInspectionNeo.Schemas
         }
         public 검사결과 항목검사(Flow구분 구분, 지그위치 지그, String name, Single value)
         {
-            검사결과 검사 = this.검사항목찾기((int)구분);
+            Int32 검사코드 = (Int32)구분 < 5 ? (Int32)구분 : (Int32)구분 - 5;
+
+            검사결과 검사 = this.검사항목찾기(검사코드);
             if (검사 == null) return null;
             검사.SetResult(구분, 지그, name, value);
             return 검사;

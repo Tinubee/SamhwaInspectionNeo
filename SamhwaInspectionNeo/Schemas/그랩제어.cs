@@ -112,8 +112,8 @@ namespace SamhwaInspectionNeo.Schemas
             {
                 MC.OpenDriver();
 
-                this.카메라1 = new EuresysLink(카메라구분.Cam01) { 코드 = "" };
-                this.카메라2 = new HikeGigE() { 구분 = 카메라구분.Cam02, 코드 = "" };
+                this.카메라1 = new EuresysLink(카메라구분.Cam01) { 코드 = "" }; //치수검사
+                this.카메라2 = new HikeGigE() { 구분 = 카메라구분.Cam02, 코드 = "K38332371" }; //공트레이검사
                 this.카메라3 = new HikeGigE() { 구분 = 카메라구분.Cam03, 코드 = "DA1996738" }; //상부표면검사
                 this.카메라4 = new HikeGigE() { 구분 = 카메라구분.Cam04, 코드 = "DA1996737" }; //하부표면검사
 
@@ -195,8 +195,8 @@ namespace SamhwaInspectionNeo.Schemas
                         Cv2.VConcat(this.카메라1.Page1Image, this.카메라1.Page2Image, this.카메라1.mergedImage);
                         this.카메라1.roi[0] = new Rect(0, 0, this.카메라1.width, 18000);
                         this.카메라1.roi[1] = new Rect(0, 19500, this.카메라1.width, 18000);
-                        this.카메라1.roi[2] = new Rect(0, 38000, this.카메라1.width, 18000);
-                        this.카메라1.roi[3] = new Rect(0, 57500, this.카메라1.width, 18000);
+                        this.카메라1.roi[2] = new Rect(0, 39000, this.카메라1.width, 18000);
+                        this.카메라1.roi[3] = new Rect(0, 58500, this.카메라1.width, 18000);
 
                         for (int lop = 0; lop < this.카메라1.roi.Length; lop++)
                         {
@@ -253,7 +253,7 @@ namespace SamhwaInspectionNeo.Schemas
                 {
                     for (int lop = 0; lop < this.카메라3.MatImage.Count; lop++)
                     {
-                        Global.VM제어.GetItem(Flow구분.상부표면검사).Run(이미지[lop], null, lop);
+                        Global.VM제어.GetItem((Flow구분)lop+5).Run(이미지[lop], null, lop);
                         if (lop == this.카메라3.MatImage.Count - 1) this.카메라3.MatImage.Clear();
                     }
                     //foreach (Mat image in this.카메라3.MatImage)
@@ -283,7 +283,7 @@ namespace SamhwaInspectionNeo.Schemas
             {
                 Task.Run(() =>
                 {
-                    Global.VM제어.GetItem(카메라).Run(이미지, null, 0);
+                    Global.VM제어.GetItem(Flow구분.공트레이검사).Run(이미지, null, 0);
                 });
             }
             //if (Global.신호제어.자동모드여부)
@@ -448,7 +448,7 @@ namespace SamhwaInspectionNeo.Schemas
         [JsonIgnore]
         private cbOutputExdelegate ImageCallBackDelegate;
         [JsonIgnore]
-        public uint ImageCount = 6;
+        public uint ImageCount = 4;
         [JsonIgnore]
         public List<Mat> MatImage = new List<Mat>();
         [JsonIgnore, Description("Trig Mode")]
@@ -505,9 +505,9 @@ namespace SamhwaInspectionNeo.Schemas
 
         private void 옵션적용()
         {
-            this.노출적용();
-            this.대비적용();
-            this.밝기적용();
+            //this.노출적용();
+            //this.대비적용();
+            //this.밝기적용();
             this.트리거모드적용();
             this.트리거소스적용();
         }

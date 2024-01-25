@@ -75,6 +75,17 @@ namespace SamhwaInspectionNeo.Schemas
         [Description("TrayCheck"), Translation("TrayCheck", "트레이검사")]
         TrayCheck,
     }
+
+    public enum test
+    {
+        a,
+        b,
+        c,
+        d,
+        e,
+        f,
+    }
+
     public enum 검사항목 : Int32
     {
         [Result(), ListBindable(false)]
@@ -132,11 +143,11 @@ namespace SamhwaInspectionNeo.Schemas
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
         Slot길이 = 26,
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03)]
-        TopSurface = 500,
+        상부표면검사 = 500,
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam04)]
-        BottomSurface = 501,
+        하부표면검사 = 501,
         [Result(검사그룹.TrayCheck, 결과분류.Summary, 장치구분.Cam02)]
-        TrayCheck = 502,
+        공트레이검사 = 502,
     }
 
     public enum 단위구분

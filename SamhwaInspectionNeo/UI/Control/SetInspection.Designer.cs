@@ -30,11 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SetInspection));
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.tg보정값모드 = new DevExpress.XtraEditors.ToggleSwitch();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
@@ -93,7 +93,7 @@
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Padding = new System.Windows.Forms.Padding(3);
-            this.panelControl1.Size = new System.Drawing.Size(1339, 52);
+            this.panelControl1.Size = new System.Drawing.Size(1634, 52);
             this.panelControl1.TabIndex = 6;
             // 
             // tg보정값모드
@@ -109,6 +109,7 @@
             this.tg보정값모드.Properties.OnText = "보정값 설정모드 On";
             this.tg보정값모드.Size = new System.Drawing.Size(200, 42);
             this.tg보정값모드.TabIndex = 13;
+            this.tg보정값모드.Visible = false;
             // 
             // barManager1
             // 
@@ -124,7 +125,7 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Size = new System.Drawing.Size(1339, 0);
+            this.barDockControlTop.Size = new System.Drawing.Size(1634, 0);
             // 
             // barDockControlBottom
             // 
@@ -132,7 +133,7 @@
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 862);
             this.barDockControlBottom.Manager = this.barManager1;
-            this.barDockControlBottom.Size = new System.Drawing.Size(1339, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1634, 0);
             // 
             // barDockControlLeft
             // 
@@ -146,7 +147,7 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1339, 0);
+            this.barDockControlRight.Location = new System.Drawing.Point(1634, 0);
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 862);
             // 
@@ -217,7 +218,7 @@
             this.b설정저장.Cursor = System.Windows.Forms.Cursors.Hand;
             this.b설정저장.Dock = System.Windows.Forms.DockStyle.Right;
             this.b설정저장.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("b설정저장.ImageOptions.SvgImage")));
-            this.b설정저장.Location = new System.Drawing.Point(1154, 5);
+            this.b설정저장.Location = new System.Drawing.Point(1449, 5);
             this.b설정저장.Name = "b설정저장";
             this.b설정저장.Size = new System.Drawing.Size(180, 42);
             this.b설정저장.TabIndex = 0;
@@ -234,7 +235,7 @@
             this.ｅ교정계산,
             this.e마진값,
             this.repositoryItemToggleSwitch1});
-            this.GridControl1.Size = new System.Drawing.Size(1339, 810);
+            this.GridControl1.Size = new System.Drawing.Size(1634, 810);
             this.GridControl1.TabIndex = 7;
             this.GridControl1.UseDirectXPaint = DevExpress.Utils.DefaultBoolean.True;
             this.GridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -419,7 +420,7 @@
             // 
             this.e마진값.AutoHeight = false;
             this.e마진값.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo, "", -1, true, false, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo, "", -1, true, false, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.e마진값.MaxValue = new decimal(new int[] {
             100,
             0,
@@ -449,7 +450,7 @@
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.Name = "SetInspection";
-            this.Size = new System.Drawing.Size(1339, 862);
+            this.Size = new System.Drawing.Size(1634, 862);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tg보정값모드.Properties)).EndInit();

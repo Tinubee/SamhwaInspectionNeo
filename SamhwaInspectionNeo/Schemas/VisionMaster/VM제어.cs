@@ -23,7 +23,10 @@ namespace SamhwaInspectionNeo.Schemas
         Flow3,
         Flow4,
         공트레이검사,
-        상부표면검사,
+        상부표면검사1,
+        상부표면검사2,
+        상부표면검사3,
+        상부표면검사4,
         하부표면검사,
     }
 
@@ -111,6 +114,7 @@ namespace SamhwaInspectionNeo.Schemas
         public GraphicsSetModuleTool graphicsSetModuleTool;
         public ShellModuleTool shellModuleTool;
         public GlobalVariableModuleTool GlobalVariableModuleTool;
+        public List<ImageSourceModuleTool> imageSourcesModuleToolList;
         public List<GraphicsSetModuleTool> graphicsSetModuleToolList;
         public List<ShellModuleTool> shellModuleToolList;
 
@@ -134,18 +138,19 @@ namespace SamhwaInspectionNeo.Schemas
             if (Procedure != null)
             {
                 this.GlobalVariableModuleTool = VmSolution.Instance["Global Variable1"] as GlobalVariableModuleTool;
-                if (this.구분 == Flow구분.상부표면검사 || this.구분 == Flow구분.하부표면검사)
+                if (/*this.구분 == Flow구분.상부표면검사 ||*/ this.구분 == Flow구분.하부표면검사)
                 {
                     this.graphicsSetModuleToolList = new List<GraphicsSetModuleTool>();
                     this.shellModuleToolList = new List<ShellModuleTool>();
+                    this.imageSourcesModuleToolList = new List<ImageSourceModuleTool>();
 
                     foreach (var item in this.Procedure.Modules)
                     {
                         if (item.GetType() == typeof(ImageSourceModuleTool))
                         {
-                            this.imageSourceModuleTool = this.Procedure["InputImage"] as ImageSourceModuleTool;
-                            if (this.imageSourceModuleTool != null)
-                                this.imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;
+                            this.imageSourcesModuleToolList.Add(item as ImageSourceModuleTool);
+                            //if (this.imageSourceModuleTool != null)
+                            //    this.imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;
                         }
                         else if (item.GetType() == typeof(GraphicsSetModuleTool)) this.graphicsSetModuleToolList.Add(item as GraphicsSetModuleTool);
                         else if (item.GetType() == typeof(ShellModuleTool)) this.shellModuleToolList.Add(item as ShellModuleTool);
@@ -165,28 +170,55 @@ namespace SamhwaInspectionNeo.Schemas
 
         private void SetResult(Flow구분 구분, 지그위치 지그) //1이면 Front, 0이면 Rear 
         {
-            if (구분 == Flow구분.상부표면검사 || 구분 == Flow구분.하부표면검사) return;
-
-            ShellModuleTool shell = Global.VM제어.GetItem(구분).shellModuleTool;
-            for (int i = 8; i < shell.Outputs.Count; i++)
+            if (구분 == Flow구분.상부표면검사1 || 구분 == Flow구분.하부표면검사)
             {
-                List<VmIO> t = shell.Outputs[i].GetAllIO();
-                String name = t[0].UniqueName.Split('%')[1];
-                if (t[0].Value != null)
+                ShellModuleTool shell = Global.VM제어.GetItem(구분).shellModuleTool;
+                for (int i = 6; i < shell.Outputs.Count; i++)
                 {
-                    String str = ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[0].strValue;
-                    try
+                    List<VmIO> t = shell.Outputs[i].GetAllIO();
+                    String name = t[0].UniqueName.Split('%')[1];
+                    if (t[0].Value != null)
                     {
-                        String[] vals = str.Split(';');
-                        Boolean ok = false;
-                        Single val = Single.NaN;
-                        if (!String.IsNullOrEmpty(vals[0])) val = Convert.ToSingle(vals[0]);
-                        if (vals.Length > 1) ok = MvUtils.Utils.IntValue(vals[1]) == 1;
-                        Global.검사자료.항목검사(this.구분, 지그, name, val);
+                        String str = ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[0].strValue;
+                        try
+                        {
+                            String[] vals = str.Split(';');
+                            Boolean ok = false;
+                            Single val = Single.NaN;
+                            if (!String.IsNullOrEmpty(vals[0])) val = Convert.ToSingle(vals[0]);
+                            if (vals.Length > 1) ok = MvUtils.Utils.IntValue(vals[1]) == 1;
+                            Global.검사자료.항목검사(this.구분, 지그, name, val);
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.WriteLine(e.Message, name);
+                        }
                     }
-                    catch (Exception e)
+                }
+            }
+            else
+            {
+                ShellModuleTool shell = Global.VM제어.GetItem(구분).shellModuleTool;
+                for (int i = 8; i < shell.Outputs.Count; i++)
+                {
+                    List<VmIO> t = shell.Outputs[i].GetAllIO();
+                    String name = t[0].UniqueName.Split('%')[1];
+                    if (t[0].Value != null)
                     {
-                        Debug.WriteLine(e.Message, name);
+                        String str = ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[0].strValue;
+                        try
+                        {
+                            String[] vals = str.Split(';');
+                            Boolean ok = false;
+                            Single val = Single.NaN;
+                            if (!String.IsNullOrEmpty(vals[0])) val = Convert.ToSingle(vals[0]);
+                            if (vals.Length > 1) ok = MvUtils.Utils.IntValue(vals[1]) == 1;
+                            Global.검사자료.항목검사(this.구분, 지그, name, val);
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.WriteLine(e.Message, name);
+                        }
                     }
                 }
             }
@@ -213,7 +245,27 @@ namespace SamhwaInspectionNeo.Schemas
             //this.결과업데이트완료 = false;
             try
             {
-                if (this.구분 == Flow구분.상부표면검사 || this.구분 == Flow구분.하부표면검사)
+                if (this.구분 == Flow구분.상부표면검사1 || this.구분 == Flow구분.상부표면검사2 || this.구분 == Flow구분.상부표면검사3 || this.구분 == Flow구분.상부표면검사4)
+                {
+                    if (this.imageSourceModuleTool == null)
+                    {
+                        Global.오류로그(로그영역, "검사오류", $"[{this.구분}] VM 검사 모델이 없습니다.", false);
+                        return false;
+                    }
+
+                    Int32 Front = Convert.ToInt32(Global.VM제어.글로벌변수제어.GetValue("Front지그"));
+                    //Flow구분 결과값적용플로우 = (Flow구분)순서;
+
+                    imageBaseData = mat == null ? imageBaseData : MatToImageBaseData(mat);
+                    if (imageBaseData != null)
+                        this.imageSourceModuleTool.SetImageData(imageBaseData);
+
+                    this.Procedure.Run();
+                    this.SetResult(this.구분, Front == 1 ? 지그위치.Front : 지그위치.Rear); //1이면 Front지그, 0이면 Rear지그
+                    검사결과 검사 = Global.검사자료.검사결과계산((int)this.구분 - 5);
+                    return true;
+                }
+                else if (this.구분 == Flow구분.공트레이검사)
                 {
                     if (this.imageSourceModuleTool == null)
                     {
@@ -242,8 +294,11 @@ namespace SamhwaInspectionNeo.Schemas
                     if (imageBaseData != null)
                         this.imageSourceModuleTool.SetImageData(imageBaseData);
                     this.Procedure.Run();
-                    this.SetResult(this.구분, Front == 1 ? 지그위치.Front : 지그위치.Rear ); //1이면 Front지그, 0이면 Rear지그
-                    검사결과 검사 = Global.검사자료.검사결과계산((int)this.구분);
+                    this.SetResult(this.구분, Front == 1 ? 지그위치.Front : 지그위치.Rear); //1이면 Front지그, 0이면 Rear지그
+
+                    if (Global.환경설정.동작구분 == 동작구분.LocalTest)
+                        Global.검사자료.검사결과계산((int)this.구분);
+
                     return true;
                 }
             }
