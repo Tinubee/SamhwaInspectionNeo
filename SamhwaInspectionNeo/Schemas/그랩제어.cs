@@ -193,10 +193,12 @@ namespace SamhwaInspectionNeo.Schemas
                         Global.조명제어.TurnOff(카메라구분.Cam01);
                         // 이미지 연결
                         Cv2.VConcat(this.카메라1.Page1Image, this.카메라1.Page2Image, this.카메라1.mergedImage);
-                        this.카메라1.roi[0] = new Rect(0, 0, this.카메라1.width, 18000);
-                        this.카메라1.roi[1] = new Rect(0, 19500, this.카메라1.width, 18000);
-                        this.카메라1.roi[2] = new Rect(0, 39000, this.카메라1.width, 18000);
-                        this.카메라1.roi[3] = new Rect(0, 58500, this.카메라1.width, 18000);
+                        this.카메라1.roi[0] = new Rect(0, 0, this.카메라1.width, 13000);
+                        this.카메라1.roi[1] = new Rect(0, 13500, this.카메라1.width, 13000);
+                        this.카메라1.roi[2] = new Rect(0, 27000, this.카메라1.width, 13000);
+                        this.카메라1.roi[3] = new Rect(0, 40500, this.카메라1.width, 13000);
+                        this.카메라1.roi[4] = new Rect(0, 54000, this.카메라1.width, 13000);
+                        this.카메라1.roi[5] = new Rect(0, 67500, this.카메라1.width, 13000);
 
                         for (int lop = 0; lop < this.카메라1.roi.Length; lop++)
                         {
@@ -412,9 +414,9 @@ namespace SamhwaInspectionNeo.Schemas
         public Mat Page1Image;
         public Mat Page2Image;
         public Mat mergedImage;
-        public Rect[] roi = new Rect[4];
+        public Rect[] roi = new Rect[6];
         public Rect roiAlign;
-        public Mat[] splitImage = new Mat[4];
+        public Mat[] splitImage = new Mat[6];
 
         public virtual void Set(카메라장치 장치)
         {
@@ -448,7 +450,7 @@ namespace SamhwaInspectionNeo.Schemas
         [JsonIgnore]
         private cbOutputExdelegate ImageCallBackDelegate;
         [JsonIgnore]
-        public uint ImageCount = 4;
+        public uint ImageCount = 6;
         [JsonIgnore]
         public List<Mat> MatImage = new List<Mat>();
         [JsonIgnore, Description("Trig Mode")]

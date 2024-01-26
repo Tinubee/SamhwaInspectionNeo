@@ -27,6 +27,8 @@ namespace SamhwaInspectionNeo.UI.Control
             this.Flow2Viewer.ModuleSource = Global.VM제어.GetItem(Flow구분.Flow2).graphicsSetModuleTool;
             this.Flow3Viewer.ModuleSource = Global.VM제어.GetItem(Flow구분.Flow3).graphicsSetModuleTool;
             this.Flow4Viewer.ModuleSource = Global.VM제어.GetItem(Flow구분.Flow4).graphicsSetModuleTool;
+            this.Flow5Viewer.ModuleSource = Global.VM제어.GetItem(Flow구분.Flow5).graphicsSetModuleTool;
+            this.Flow6Viewer.ModuleSource = Global.VM제어.GetItem(Flow구분.Flow6).graphicsSetModuleTool;
 
             this.trayViewer.ModuleSource = Global.VM제어.GetItem(Flow구분.공트레이검사).graphicsSetModuleTool;
 
@@ -34,6 +36,8 @@ namespace SamhwaInspectionNeo.UI.Control
             this.UpSurfaceViewer2.ModuleSource = Global.VM제어.GetItem(Flow구분.상부표면검사2).graphicsSetModuleTool;
             this.UpSurfaceViewer3.ModuleSource = Global.VM제어.GetItem(Flow구분.상부표면검사3).graphicsSetModuleTool;
             this.UpSurfaceViewer4.ModuleSource = Global.VM제어.GetItem(Flow구분.상부표면검사4).graphicsSetModuleTool;
+            this.UpSurfaceViewer5.ModuleSource = Global.VM제어.GetItem(Flow구분.상부표면검사5).graphicsSetModuleTool;
+            this.UpSurfaceViewer6.ModuleSource = Global.VM제어.GetItem(Flow구분.상부표면검사6).graphicsSetModuleTool;
 
             this.BottomSurfaceViewer1.ModuleSource = Global.VM제어.GetItem(Flow구분.하부표면검사).graphicsSetModuleToolList[0];
             this.BottomSurfaceViewer2.ModuleSource = Global.VM제어.GetItem(Flow구분.하부표면검사).graphicsSetModuleToolList[1];

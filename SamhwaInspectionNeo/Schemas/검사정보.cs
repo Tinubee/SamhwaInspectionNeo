@@ -107,41 +107,57 @@ namespace SamhwaInspectionNeo.Schemas
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
         Slot2위치도 = 8,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        기준홀경 = 9,
+        Slot3상부 = 9,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        상측홀경 = 10,
+        Slot3중앙부 = 10,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌하홀경 = 11,
+        Slot3하부 = 11,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌상홀경 = 12,
+        Slot3위치도 = 12,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우상홀경 = 13,
+        Slot4상부 = 13,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        상측가로거리 = 14,
+        Slot4중앙부 = 14,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        상측세로거리 = 15,
+        Slot4하부 = 15,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        상측위치도 = 16,
+        Slot4위치도 = 16,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌하가로거리 = 17,
+        기준홀경 = 17,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌하세로거리 = 18,
+        우하홀경 = 18,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌하위치도 = 19,
+        좌상홀경 = 19,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌상가로거리 = 20,
+        중앙홀경 = 20,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌상세로거리 = 21,
+        우상홀경 = 21,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌상위치도 = 22,
+        우하가로거리 = 22,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우상가로거리 = 23,
+        우하세로거리 = 23,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우상세로거리 = 24,
+        우하위치도 = 24,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우상위치도 = 25,
+        좌상가로거리 = 25,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot길이 = 26,
+        좌상세로거리 = 26,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        좌상위치도 = 27,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        중앙가로거리 = 28,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        중앙세로거리 = 29,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        중앙위치도 = 30,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우상가로거리 = 31,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우상세로거리 = 32,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우상위치도 = 33,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot길이 = 34,
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03)]
         상부표면검사 = 500,
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam04)]

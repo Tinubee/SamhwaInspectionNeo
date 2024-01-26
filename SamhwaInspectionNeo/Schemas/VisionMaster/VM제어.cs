@@ -22,11 +22,15 @@ namespace SamhwaInspectionNeo.Schemas
         Flow2,
         Flow3,
         Flow4,
+        Flow5,
+        Flow6,
         공트레이검사,
         상부표면검사1,
         상부표면검사2,
         상부표면검사3,
         상부표면검사4,
+        상부표면검사5,
+        상부표면검사6,
         하부표면검사,
     }
 
