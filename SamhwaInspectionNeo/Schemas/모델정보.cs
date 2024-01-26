@@ -15,8 +15,12 @@ namespace SamhwaInspectionNeo.Schemas
         None,
         [DXDescription("2P-A"), Description("2P-A")]
         Model_2PA,
+        [DXDescription("2P-B"), Description("2P-B")]
+        Model_2PB,
         [DXDescription("2P-C"), Description("2P-C")]
         Model_2PC,
+        [DXDescription("2P-D"), Description("2P-D")]
+        Model_2PD,
     }
     public class 모델정보
     {

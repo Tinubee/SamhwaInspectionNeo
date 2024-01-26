@@ -31,7 +31,6 @@ namespace SamhwaInspectionNeo.Schemas
         상부표면검사4,
         상부표면검사5,
         상부표면검사6,
-        하부표면검사,
     }
 
     public class VM제어 : List<비전마스터플로우>
@@ -142,39 +141,39 @@ namespace SamhwaInspectionNeo.Schemas
             if (Procedure != null)
             {
                 this.GlobalVariableModuleTool = VmSolution.Instance["Global Variable1"] as GlobalVariableModuleTool;
-                if (/*this.구분 == Flow구분.상부표면검사 ||*/ this.구분 == Flow구분.하부표면검사)
-                {
-                    this.graphicsSetModuleToolList = new List<GraphicsSetModuleTool>();
-                    this.shellModuleToolList = new List<ShellModuleTool>();
-                    this.imageSourcesModuleToolList = new List<ImageSourceModuleTool>();
+                //if (/*this.구분 == Flow구분.상부표면검사 ||*/ this.구분 == Flow구분.하부표면검사)
+                //{
+                //    this.graphicsSetModuleToolList = new List<GraphicsSetModuleTool>();
+                //    this.shellModuleToolList = new List<ShellModuleTool>();
+                //    this.imageSourcesModuleToolList = new List<ImageSourceModuleTool>();
 
-                    foreach (var item in this.Procedure.Modules)
-                    {
-                        if (item.GetType() == typeof(ImageSourceModuleTool))
-                        {
-                            this.imageSourcesModuleToolList.Add(item as ImageSourceModuleTool);
-                            //if (this.imageSourceModuleTool != null)
-                            //    this.imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;
-                        }
-                        else if (item.GetType() == typeof(GraphicsSetModuleTool)) this.graphicsSetModuleToolList.Add(item as GraphicsSetModuleTool);
-                        else if (item.GetType() == typeof(ShellModuleTool)) this.shellModuleToolList.Add(item as ShellModuleTool);
-                    }
-                }
-                else
-                {
-                    this.imageSourceModuleTool = this.Procedure["InputImage"] as ImageSourceModuleTool;
-                    this.graphicsSetModuleTool = this.Procedure["OutputImage"] as GraphicsSetModuleTool;
-                    this.shellModuleTool = this.Procedure["Resulte"] as ShellModuleTool;
+                //    foreach (var item in this.Procedure.Modules)
+                //    {
+                //        if (item.GetType() == typeof(ImageSourceModuleTool))
+                //        {
+                //            this.imageSourcesModuleToolList.Add(item as ImageSourceModuleTool);
+                //            //if (this.imageSourceModuleTool != null)
+                //            //    this.imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;
+                //        }
+                //        else if (item.GetType() == typeof(GraphicsSetModuleTool)) this.graphicsSetModuleToolList.Add(item as GraphicsSetModuleTool);
+                //        else if (item.GetType() == typeof(ShellModuleTool)) this.shellModuleToolList.Add(item as ShellModuleTool);
+                //    }
+                //}
+                //else
+                //{
+                this.imageSourceModuleTool = this.Procedure["InputImage"] as ImageSourceModuleTool;
+                this.graphicsSetModuleTool = this.Procedure["OutputImage"] as GraphicsSetModuleTool;
+                this.shellModuleTool = this.Procedure["Resulte"] as ShellModuleTool;
 
-                    if (this.imageSourceModuleTool != null)
-                        this.imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;
-                }
+                if (this.imageSourceModuleTool != null)
+                    this.imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;
+                //}
             }
         }
 
         private void SetResult(Flow구분 구분, 지그위치 지그) //1이면 Front, 0이면 Rear 
         {
-            if (구분 == Flow구분.상부표면검사1 || 구분 == Flow구분.하부표면검사)
+            if ((int)구분 > 5)
             {
                 ShellModuleTool shell = Global.VM제어.GetItem(구분).shellModuleTool;
                 for (int i = 6; i < shell.Outputs.Count; i++)

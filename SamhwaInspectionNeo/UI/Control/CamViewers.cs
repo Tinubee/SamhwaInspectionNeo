@@ -38,12 +38,6 @@ namespace SamhwaInspectionNeo.UI.Control
             this.UpSurfaceViewer4.ModuleSource = Global.VM제어.GetItem(Flow구분.상부표면검사4).graphicsSetModuleTool;
             this.UpSurfaceViewer5.ModuleSource = Global.VM제어.GetItem(Flow구분.상부표면검사5).graphicsSetModuleTool;
             this.UpSurfaceViewer6.ModuleSource = Global.VM제어.GetItem(Flow구분.상부표면검사6).graphicsSetModuleTool;
-
-            this.BottomSurfaceViewer1.ModuleSource = Global.VM제어.GetItem(Flow구분.하부표면검사).graphicsSetModuleToolList[0];
-            this.BottomSurfaceViewer2.ModuleSource = Global.VM제어.GetItem(Flow구분.하부표면검사).graphicsSetModuleToolList[1];
-            this.BottomSurfaceViewer3.ModuleSource = Global.VM제어.GetItem(Flow구분.하부표면검사).graphicsSetModuleToolList[2];
-            this.BottomSurfaceViewer4.ModuleSource = Global.VM제어.GetItem(Flow구분.하부표면검사).graphicsSetModuleToolList[3];
-
         }
     }
 }

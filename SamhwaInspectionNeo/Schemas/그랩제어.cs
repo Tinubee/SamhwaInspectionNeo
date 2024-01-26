@@ -115,12 +115,12 @@ namespace SamhwaInspectionNeo.Schemas
                 this.카메라1 = new EuresysLink(카메라구분.Cam01) { 코드 = "" }; //치수검사
                 this.카메라2 = new HikeGigE() { 구분 = 카메라구분.Cam02, 코드 = "K38332371" }; //공트레이검사
                 this.카메라3 = new HikeGigE() { 구분 = 카메라구분.Cam03, 코드 = "DA1996738" }; //상부표면검사
-                this.카메라4 = new HikeGigE() { 구분 = 카메라구분.Cam04, 코드 = "DA1996737" }; //하부표면검사
+                //this.카메라4 = new HikeGigE() { 구분 = 카메라구분.Cam04, 코드 = "DA1996737" }; //하부표면검사
 
                 this.Add(카메라구분.Cam01, this.카메라1);
                 this.Add(카메라구분.Cam02, this.카메라2);
                 this.Add(카메라구분.Cam03, this.카메라3);
-                this.Add(카메라구분.Cam04, this.카메라4);
+                //this.Add(카메라구분.Cam04, this.카메라4);
 
                 this.카메라1.AcquisitionFinishedEvent += 카메라1_AcquisitionFinishedEvent;
 
@@ -262,19 +262,19 @@ namespace SamhwaInspectionNeo.Schemas
                     //    Global.VM제어.GetItem(Flow구분.상부표면검사).Run(image, null);
                 });
             }
-            else if (카메라 == 카메라구분.Cam04) //하부표면검사
-            {
-                Global.조명제어.TurnOff(카메라);
-                //if (Global.비전마스터구동.Count == 0 || Global.신호제어.마스터모드여부 == 1)
-                //    return;
-                Task.Run(() =>
-                {
-                    for (int lop = 0; lop < this.카메라4.MatImage.Count; lop++)
-                        Global.VM제어.GetItem(Flow구분.하부표면검사).Run(this.카메라4.MatImage[lop], null, lop);
-                    //foreach (Mat image in this.카메라4.MatImage)
-                    //    Global.VM제어.GetItem(Flow구분.하부표면검사).Run(image, null);
-                });
-            }
+            //else if (카메라 == 카메라구분.Cam04) //하부표면검사
+            //{
+            //    Global.조명제어.TurnOff(카메라);
+            //    //if (Global.비전마스터구동.Count == 0 || Global.신호제어.마스터모드여부 == 1)
+            //    //    return;
+            //    Task.Run(() =>
+            //    {
+            //        for (int lop = 0; lop < this.카메라4.MatImage.Count; lop++)
+            //            Global.VM제어.GetItem(Flow구분.하부표면검사).Run(this.카메라4.MatImage[lop], null, lop);
+            //        //foreach (Mat image in this.카메라4.MatImage)
+            //        //    Global.VM제어.GetItem(Flow구분.하부표면검사).Run(image, null);
+            //    });
+            //}
             this.그랩완료보고2?.Invoke(카메라, 이미지);
         }
 
@@ -611,15 +611,15 @@ namespace SamhwaInspectionNeo.Schemas
                         Global.그랩제어.그랩완료(this.구분, this.MatImage);
                     }
                 }
-                else if (this.구분 == 카메라구분.Cam04)
-                {
-                    this.MatImage.Add(image);
-                    if (Global.그랩제어.카메라4.MatImage.Count == this.ImageCount)
-                    {
-                        this.Stop();
-                        Global.그랩제어.그랩완료(this.구분, this.MatImage);
-                    }
-                }
+                //else if (this.구분 == 카메라구분.Cam04)
+                //{
+                //    this.MatImage.Add(image);
+                //    if (Global.그랩제어.카메라4.MatImage.Count == this.ImageCount)
+                //    {
+                //        this.Stop();
+                //        Global.그랩제어.그랩완료(this.구분, this.MatImage);
+                //    }
+                //}
             }
             catch (Exception ex)
             {

@@ -160,10 +160,10 @@ namespace SamhwaInspectionNeo.Schemas
         Slot길이 = 34,
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03)]
         상부표면검사 = 500,
-        [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam04)]
-        하부표면검사 = 501,
-        [Result(검사그룹.TrayCheck, 결과분류.Summary, 장치구분.Cam02)]
-        공트레이검사 = 502,
+        //[Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam04)]
+        //하부표면검사 = 501,
+        //[Result(검사그룹.TrayCheck, 결과분류.Summary, 장치구분.Cam02)]
+        //공트레이검사 = 502,
     }
 
     public enum 단위구분
