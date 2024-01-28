@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 using System.Diagnostics;
 using Newtonsoft.Json;
 using System.Runtime.InteropServices;
+using OpenCvSharp;
 
 namespace SamhwaInspectionNeo
 {
@@ -105,9 +106,45 @@ namespace SamhwaInspectionNeo
             Type type = val.GetType();
             return (T)type.GetField(type.GetEnumName(val)).GetCustomAttributes(typeof(T), false).FirstOrDefault();
         }
-
-
-
+        public static Mat Resize(Mat source, Double scale) =>
+           source.Resize(OpenCvSharp.Size.Zero, scale, scale, InterpolationFlags.Linear);
+        public static Boolean ImageSavePng(Mat image, String fileName, out String error, Int32 compression = 3) // compression: 0에서 9까지의 값 중 선택
+        {
+            error = String.Empty;
+            if (image == null) return false;
+            try
+            {
+                ImageEncodingParam[] @params = new ImageEncodingParam[] {
+                    new ImageEncodingParam(ImwriteFlags.PngCompression, compression),
+                };
+                return image.SaveImage(fileName, @params);
+            }
+            catch (Exception ex) { error = ex.Message; }
+            return false;
+        }
+        public static Boolean ImageSaveJpeg(Mat image, String fileName, out String error, Int32 quality = 90)
+        {
+            error = String.Empty;
+            if (image == null) return false;
+            try
+            {
+                ImageEncodingParam[] @params = new ImageEncodingParam[] {
+                    new ImageEncodingParam(ImwriteFlags.JpegQuality, quality),
+                    new ImageEncodingParam(ImwriteFlags.JpegOptimize, 1),
+                };
+                return image.SaveImage(fileName, @params);
+            }
+            catch (Exception ex) { error = ex.Message; }
+            return false;
+        }
+        public static Boolean ImageSaveBmp(Mat image, String fileName, out String error)
+        {
+            error = String.Empty;
+            if (image == null) return false;
+            try { return image.SaveImage(fileName); }
+            catch (Exception ex) { error = ex.Message; }
+            return false;
+        }
         public static class StringCipher
         {
             // This constant is used to determine the keysize of the encryption algorithm in bits.

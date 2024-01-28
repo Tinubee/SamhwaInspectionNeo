@@ -51,7 +51,7 @@ namespace SamhwaInspectionNeo.UI.Controls
 
             this.GridControl1.EmbeddedNavigator.Buttons.DoClick(this.GridControl1.EmbeddedNavigator.Buttons.EndEdit);
             this.GridControl2.EmbeddedNavigator.Buttons.DoClick(this.GridControl2.EmbeddedNavigator.Buttons.EndEdit);
-            Global.그랩제어.Save();
+            //Global.그랩제어.Save();
             Global.조명제어.Save();
             //Global.정보로그(환경설정.로그영역.GetString(), 번역.설정저장, 번역.저장완료, true);
             Global.정보로그("카메라 및 조명 설정", 번역.설정저장, 번역.저장완료, true);

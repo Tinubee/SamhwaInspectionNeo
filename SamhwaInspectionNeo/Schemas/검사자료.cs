@@ -174,15 +174,12 @@ namespace SamhwaInspectionNeo.Schemas
             }
             검사.결과계산();
             Global.모델자료.수량추가(검사.모델구분, 검사.측정결과);
-            this.검사스플.Remove(검사코드);
-            //}
-            //else
-            //{
-            //    검사 = this.수동검사;
-            //    검사.결과계산();
-            //}
-
-            this.검사완료알림?.Invoke(검사);
+            if (!검사.검사중확인())
+            {
+                this.검사스플.Remove(검사코드);
+                this.검사완료알림?.Invoke(검사);
+            }
+           
             return 검사;
         }
         // 현재 검사중인 정보를 검색

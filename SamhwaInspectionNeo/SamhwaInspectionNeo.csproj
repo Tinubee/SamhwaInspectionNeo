@@ -110,6 +110,7 @@
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Remote|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -248,6 +249,7 @@
     <Compile Include="Schemas\그랩제어.cs" />
     <Compile Include="Schemas\로그정보.cs" />
     <Compile Include="Schemas\모델정보.cs" />
+    <Compile Include="Schemas\사진저장.cs" />
     <Compile Include="Schemas\신호제어.기본설정.cs" />
     <Compile Include="Schemas\신호제어.프로세스.cs" />
     <Compile Include="Schemas\유저정보.cs" />

@@ -337,6 +337,15 @@ namespace SamhwaInspectionNeo.Schemas
 
         public void AddRange(List<검사정보> 자료) => this.검사내역.AddRange(자료);
 
+        public Boolean 검사중확인()
+        {
+            if (this.검사내역.Any(e => e.측정결과 == 결과구분.NO || e.측정결과 == 결과구분.IN))
+            {
+                return true;
+            }
+            else return false; 
+        }
+
         public 결과구분 결과계산()
         {
             if (this.검사내역.Any(e => e.측정결과 == 결과구분.ER)) this.측정결과 = 결과구분.ER;

@@ -176,6 +176,18 @@ namespace SamhwaInspectionNeo.Schemas
         public override Boolean TurnOn(조명정보 정보) => SendCommand($"{정보.카메라} On", $"{(Int32)정보.채널}d{this.밝기변환(정보.밝기):d4}");
         public override Boolean TurnOff(조명정보 정보) => SendCommand($"{정보.카메라} Off", $"{(Int32)정보.채널}f0000");
     }
+    // LCP12-150P
+    public class LCP12150P : LCP24100PS
+    {
+        public override String 로그영역 { get; set; } = nameof(LCP12150P);
+        public override Int32 통신속도 { get; set; } = 9600;
+        public override Int32 최대밝기 { get; } = 1023;
+        public override String STX { get; set; } = $"{Convert.ToChar(2)}";
+        public override String ETX { get; set; } = $"{Convert.ToChar(3)}";
+        public override Boolean Set(조명정보 정보) => false;
+        public override Boolean TurnOn(조명정보 정보) => SendCommand($"{정보.카메라} On", $"{(Int32)정보.채널 - 1}w{this.밝기변환(정보.밝기):d4}");
+        public override Boolean TurnOff(조명정보 정보) => SendCommand($"{정보.카메라} Off", $"{(Int32)정보.채널 - 1}w0000");
+    }
 
     //LCP24100Q
     public class LCP24100Q : LCP24100PS
@@ -253,7 +265,7 @@ namespace SamhwaInspectionNeo.Schemas
         [JsonIgnore]
         private LCP100DC 컨트롤러1;
         [JsonIgnore]
-        private LCP24100PS 컨트롤러2;
+        private LCP12150P 컨트롤러2;
         [JsonIgnore]
         private LCP24100Q 컨트롤러3;
 
@@ -263,7 +275,7 @@ namespace SamhwaInspectionNeo.Schemas
         public void Init()
         {
             this.컨트롤러1 = new LCP100DC() { 포트 = 조명포트.COM6 }; // 상부치수검사 LLXP조명
-            this.컨트롤러2 = new LCP24100PS() { 포트 = 조명포트.COM5 }; //표면검사 상하부 4개씩 2세트
+            this.컨트롤러2 = new LCP12150P() { 포트 = 조명포트.COM5 }; //표면검사 상하부 4개씩 2세트
             this.컨트롤러3 = new LCP24100Q() { 포트 = 조명포트.COM7 }; // 공트레이검사 2개
 
             this.컨트롤러1.Init();
@@ -273,18 +285,14 @@ namespace SamhwaInspectionNeo.Schemas
             this.Add(new 조명정보(카메라구분.Cam01, 컨트롤러1) { 채널 = 조명채널.CH01, 밝기 = 70 });
             this.Add(new 조명정보(카메라구분.Cam02, 컨트롤러3) { 채널 = 조명채널.CH02, 밝기 = 70 });
             this.Add(new 조명정보(카메라구분.Cam02, 컨트롤러3) { 채널 = 조명채널.CH02, 밝기 = 70 });
-            this.Add(new 조명정보(카메라구분.Cam03, 컨트롤러2) { 채널 = 조명채널.CH01, 밝기 = 70 });
-            this.Add(new 조명정보(카메라구분.Cam03, 컨트롤러2) { 채널 = 조명채널.CH02, 밝기 = 70 });
+            this.Add(new 조명정보(카메라구분.Cam03, 컨트롤러2) { 채널 = 조명채널.CH01, 밝기 = 90 });
+            this.Add(new 조명정보(카메라구분.Cam03, 컨트롤러2) { 채널 = 조명채널.CH02, 밝기 = 90 });
             this.Add(new 조명정보(카메라구분.Cam03, 컨트롤러2) { 채널 = 조명채널.CH03, 밝기 = 90 });
             this.Add(new 조명정보(카메라구분.Cam03, 컨트롤러2) { 채널 = 조명채널.CH04, 밝기 = 90 });
-            //this.Add(new 조명정보(카메라구분.Cam04, 컨트롤러2) { 채널 = 조명채널.CH05, 밝기 = 90 });
-            //this.Add(new 조명정보(카메라구분.Cam04, 컨트롤러2) { 채널 = 조명채널.CH06, 밝기 = 90 });
-            //this.Add(new 조명정보(카메라구분.Cam04, 컨트롤러2) { 채널 = 조명채널.CH07, 밝기 = 90 });
-            //this.Add(new 조명정보(카메라구분.Cam04, 컨트롤러2) { 채널 = 조명채널.CH08, 밝기 = 90 });
 
             this.Load();
             this.Open();
-            this.컨트롤러2.모드변경();
+            //this.컨트롤러2.모드변경();
             this.Set();
         }
 

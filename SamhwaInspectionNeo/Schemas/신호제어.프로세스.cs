@@ -175,7 +175,7 @@ namespace SamhwaInspectionNeo.Schemas
                 Debug.WriteLine("상부 표면검사 신호 들어옴");
                 new Thread(() =>
                 {
-                    //Global.조명제어.TurnOn(카메라구분.Cam03);
+                    Global.조명제어.TurnOn(카메라구분.Cam03);
                     if (Global.신호제어.Front지그)
                         Global.그랩제어.Ready(카메라구분.Cam03);
                 }).Start();
