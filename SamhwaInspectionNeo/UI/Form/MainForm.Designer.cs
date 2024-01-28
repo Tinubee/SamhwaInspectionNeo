@@ -91,7 +91,7 @@
             this.tabFormControl1.Pages.Add(this.p검사내역);
             this.tabFormControl1.Pages.Add(this.p로그내역);
             this.tabFormControl1.Pages.Add(this.p마스터검사내역);
-            this.tabFormControl1.SelectedPage = this.p마스터검사내역;
+            this.tabFormControl1.SelectedPage = this.p환경설정;
             this.tabFormControl1.ShowAddPageButton = false;
             this.tabFormControl1.ShowTabCloseButtons = false;
             this.tabFormControl1.ShowTabsInTitleBar = DevExpress.XtraBars.ShowTabsInTitleBar.True;
@@ -316,7 +316,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1920, 1040);
-            this.Controls.Add(this.tabFormContentContainer5);
+            this.Controls.Add(this.tabFormContentContainer2);
             this.Controls.Add(this.tabFormControl1);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -360,12 +360,12 @@
         private DevExpress.XtraBars.TabFormPage p검사내역;
         private DevExpress.XtraBars.TabFormContentContainer tabFormContentContainer4;
         private UI.Controls.Results e검사내역;
-        private UI.Control.SetInspection e검사설정;
         public UI.Control.SetVariables e변수설정;
         public UI.Control.CamViewers e결과뷰어;
         private DevExpress.XtraTab.XtraTabPage t마스터설정;
         private DevExpress.XtraBars.TabFormPage p마스터검사내역;
         private DevExpress.XtraBars.TabFormContentContainer tabFormContentContainer5;
+        public UI.Control.SetInspection e검사설정;
     }
 }
 

@@ -75,6 +75,7 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.bind모델자료.ResetBindings(false);
             Global.VM제어.Init();
             Global.MainForm.e결과뷰어.Init();
+            Global.MainForm.e검사설정.Init();
             Global.MainForm.e변수설정.UpdateGridView();
         }
 

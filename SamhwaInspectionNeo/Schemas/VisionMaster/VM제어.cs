@@ -27,7 +27,6 @@ namespace SamhwaInspectionNeo.Schemas
         상부표면검사2,
         상부표면검사3,
         상부표면검사4,
-        하부표면검사,
     }
 
     public class VM제어 : List<비전마스터플로우>
@@ -138,39 +137,19 @@ namespace SamhwaInspectionNeo.Schemas
             if (Procedure != null)
             {
                 this.GlobalVariableModuleTool = VmSolution.Instance["Global Variable1"] as GlobalVariableModuleTool;
-                if (/*this.구분 == Flow구분.상부표면검사 ||*/ this.구분 == Flow구분.하부표면검사)
-                {
-                    this.graphicsSetModuleToolList = new List<GraphicsSetModuleTool>();
-                    this.shellModuleToolList = new List<ShellModuleTool>();
-                    this.imageSourcesModuleToolList = new List<ImageSourceModuleTool>();
 
-                    foreach (var item in this.Procedure.Modules)
-                    {
-                        if (item.GetType() == typeof(ImageSourceModuleTool))
-                        {
-                            this.imageSourcesModuleToolList.Add(item as ImageSourceModuleTool);
-                            //if (this.imageSourceModuleTool != null)
-                            //    this.imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;
-                        }
-                        else if (item.GetType() == typeof(GraphicsSetModuleTool)) this.graphicsSetModuleToolList.Add(item as GraphicsSetModuleTool);
-                        else if (item.GetType() == typeof(ShellModuleTool)) this.shellModuleToolList.Add(item as ShellModuleTool);
-                    }
-                }
-                else
-                {
-                    this.imageSourceModuleTool = this.Procedure["InputImage"] as ImageSourceModuleTool;
-                    this.graphicsSetModuleTool = this.Procedure["OutputImage"] as GraphicsSetModuleTool;
-                    this.shellModuleTool = this.Procedure["Resulte"] as ShellModuleTool;
+                this.imageSourceModuleTool = this.Procedure["InputImage"] as ImageSourceModuleTool;
+                this.graphicsSetModuleTool = this.Procedure["OutputImage"] as GraphicsSetModuleTool;
+                this.shellModuleTool = this.Procedure["Resulte"] as ShellModuleTool;
 
-                    if (this.imageSourceModuleTool != null)
-                        this.imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;
-                }
+                if (this.imageSourceModuleTool != null)
+                    this.imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;
             }
         }
 
         private void SetResult(Flow구분 구분, 지그위치 지그) //1이면 Front, 0이면 Rear 
         {
-            if (구분 == Flow구분.상부표면검사1 || 구분 == Flow구분.하부표면검사)
+            if ((int)구분 > 4)
             {
                 ShellModuleTool shell = Global.VM제어.GetItem(구분).shellModuleTool;
                 for (int i = 6; i < shell.Outputs.Count; i++)
@@ -296,8 +275,8 @@ namespace SamhwaInspectionNeo.Schemas
                     this.Procedure.Run();
                     this.SetResult(this.구분, Front == 1 ? 지그위치.Front : 지그위치.Rear); //1이면 Front지그, 0이면 Rear지그
 
-                    if (Global.환경설정.동작구분 == 동작구분.LocalTest)
-                        Global.검사자료.검사결과계산((int)this.구분);
+                    //if (Global.환경설정.동작구분 == 동작구분.LocalTest)
+                    //    Global.검사자료.검사결과계산((int)this.구분);
 
                     return true;
                 }

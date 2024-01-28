@@ -9,7 +9,6 @@ namespace SamhwaInspectionNeo.Schemas
     {
         private DateTime 오류알림시간 = DateTime.Today.AddDays(-1);
         private Int32 오류알림간격 = 30; // 초
-
         public void 통신오류알림(Int32 오류코드)
         {
             if (오류코드 == 0)
@@ -72,7 +71,7 @@ namespace SamhwaInspectionNeo.Schemas
             if (구분 == 카메라구분.Cam01) return this.인덱스버퍼[정보주소.상부치수검사카메라트리거];
             if (구분 == 카메라구분.Cam02) return this.인덱스버퍼[정보주소.트레이확인카메라트리거];
             if (구분 == 카메라구분.Cam03) return this.인덱스버퍼[정보주소.상부표면검사카메라트리거];
-            if (구분 == 카메라구분.Cam04) return this.인덱스버퍼[정보주소.하부표면검사카메라트리거];
+            //if (구분 == 카메라구분.Cam04) return this.인덱스버퍼[정보주소.하부표면검사카메라트리거];
             return 0;
         }
 
@@ -153,7 +152,7 @@ namespace SamhwaInspectionNeo.Schemas
         {
             Int32 상부치수검사번호 = this.검사위치번호(정보주소.상부치수검사카메라트리거);
             Int32 상부표면검사번호 = this.검사위치번호(정보주소.상부표면검사카메라트리거);
-            Int32 하부표면검사번호 = this.검사위치번호(정보주소.하부표면검사카메라트리거);
+            //Int32 하부표면검사번호 = this.검사위치번호(정보주소.하부표면검사카메라트리거);
             Int32 트레이확인검사번호 = this.검사위치번호(정보주소.트레이확인카메라트리거);
 
             // 16K 상부 카메라 영상취득 시작
@@ -183,16 +182,16 @@ namespace SamhwaInspectionNeo.Schemas
                 신호쓰기(정보주소.상부표면검사카메라트리거, 0);
             }
             // 하부 GigE 카메라 영상취득 시작
-            if (하부표면검사번호 > 0)
-            {
-                Debug.WriteLine("하부 표면검사 신호 들어옴");
-                //new Thread(() =>
-                //{
-                //    Global.조명제어.TurnOn(카메라구분.Cam04);
-                //    Global.그랩제어.Ready(카메라구분.Cam04);
-                //}).Start();
-                //신호쓰기(정보주소.하부표면검사카메라트리거, 0);
-            }
+            //if (하부표면검사번호 > 0)
+            //{
+            //    Debug.WriteLine("하부 표면검사 신호 들어옴");
+            //    new Thread(() =>
+            //    {
+            //        Global.조명제어.TurnOn(카메라구분.Cam04);
+            //        Global.그랩제어.Ready(카메라구분.Cam04);
+            //    }).Start();
+            //    신호쓰기(정보주소.하부표면검사카메라트리거, 0);
+            //}
 
             // 트레이 검사 카메라 영상취득 시작
             if (트레이확인검사번호 > 0)

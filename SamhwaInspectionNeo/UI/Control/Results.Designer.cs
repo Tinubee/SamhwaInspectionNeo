@@ -300,7 +300,7 @@
             this.col검사일자.Name = "col검사일자";
             this.col검사일자.Visible = true;
             this.col검사일자.VisibleIndex = 0;
-            this.col검사일자.Width = 150;
+            this.col검사일자.Width = 157;
             // 
             // col검사시간
             // 
@@ -315,7 +315,7 @@
             this.col검사시간.Name = "col검사시간";
             this.col검사시간.Visible = true;
             this.col검사시간.VisibleIndex = 1;
-            this.col검사시간.Width = 150;
+            this.col검사시간.Width = 157;
             // 
             // col모델구분
             // 
@@ -326,7 +326,9 @@
             this.col모델구분.Caption = "Model";
             this.col모델구분.FieldName = "모델구분";
             this.col모델구분.Name = "col모델구분";
-            this.col모델구분.Width = 50;
+            this.col모델구분.Visible = true;
+            this.col모델구분.VisibleIndex = 2;
+            this.col모델구분.Width = 150;
             // 
             // col검사코드
             // 
@@ -340,8 +342,8 @@
             this.col검사코드.FieldName = "검사코드";
             this.col검사코드.Name = "col검사코드";
             this.col검사코드.Visible = true;
-            this.col검사코드.VisibleIndex = 2;
-            this.col검사코드.Width = 150;
+            this.col검사코드.VisibleIndex = 3;
+            this.col검사코드.Width = 157;
             // 
             // col측정결과
             // 
@@ -353,8 +355,8 @@
             this.col측정결과.FieldName = "측정결과";
             this.col측정결과.Name = "col측정결과";
             this.col측정결과.Visible = true;
-            this.col측정결과.VisibleIndex = 3;
-            this.col측정결과.Width = 150;
+            this.col측정결과.VisibleIndex = 4;
+            this.col측정결과.Width = 157;
             // 
             // colCTQ결과
             // 
@@ -364,8 +366,8 @@
             this.colCTQ결과.FieldName = "CTQ결과";
             this.colCTQ결과.Name = "colCTQ결과";
             this.colCTQ결과.Visible = true;
-            this.colCTQ결과.VisibleIndex = 4;
-            this.colCTQ결과.Width = 150;
+            this.colCTQ결과.VisibleIndex = 5;
+            this.colCTQ결과.Width = 157;
             // 
             // col외관결과
             // 
@@ -375,8 +377,8 @@
             this.col외관결과.FieldName = "외관결과";
             this.col외관결과.Name = "col외관결과";
             this.col외관결과.Visible = true;
-            this.col외관결과.VisibleIndex = 5;
-            this.col외관결과.Width = 150;
+            this.col외관결과.VisibleIndex = 6;
+            this.col외관결과.Width = 157;
             // 
             // col불량정보
             // 
@@ -386,8 +388,8 @@
             this.col불량정보.FieldName = "불량정보";
             this.col불량정보.Name = "col불량정보";
             this.col불량정보.Visible = true;
-            this.col불량정보.VisibleIndex = 6;
-            this.col불량정보.Width = 400;
+            this.col불량정보.VisibleIndex = 7;
+            this.col불량정보.Width = 419;
             // 
             // layoutControl1
             // 

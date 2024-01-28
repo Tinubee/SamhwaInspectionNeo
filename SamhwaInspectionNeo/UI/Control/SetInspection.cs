@@ -40,6 +40,7 @@ namespace SamhwaInspectionNeo.UI.Control
             this.GridView1.AddSelectPopMenuItems();
             this.GridView1.AddDeleteMenuItem(DeleteClick);
             this.GridView1.CellValueChanged += GridView1_CellValueChanged;
+            this.GridControl1.DataSource = Global.모델자료.GetItem(Global.환경설정.선택모델)?.검사설정;
 
             this.col최소값.DisplayFormat.FormatString = Global.환경설정.결과표현;
             this.col최대값.DisplayFormat.FormatString = Global.환경설정.결과표현;
@@ -52,6 +53,9 @@ namespace SamhwaInspectionNeo.UI.Control
             this.e모델선택.EditValue = Global.환경설정.선택모델;
             this.e모델선택.CustomDisplayText += 선택모델표현;
             this.b설정저장.Click += 설정저장;
+
+            Global.환경설정.모델변경알림 += 모델변경알림;
+
 
             Localization.SetColumnCaption(this.e모델선택, typeof(모델정보));
             Localization.SetColumnCaption(this.GridView1, typeof(검사정보));
@@ -92,34 +96,57 @@ namespace SamhwaInspectionNeo.UI.Control
 
         public void Close() { }
 
-        private 모델구분 선택모델 { get { return Global.환경설정.선택모델; } }
-        // private 모델구분 선택모델 { get { return (모델구분)this.e모델선택.EditValue; } }
+        public 모델구분 선택모델 { get { return Global.환경설정.선택모델; } set { } }
+        //private 모델구분 선택모델 { get { return (모델구분)this.e모델선택.EditValue; } }
         public 검사설정자료 검사설정 { get { return Global.모델자료.GetItem(this.선택모델)?.검사설정; } }
+
+        private void 모델변경알림(모델구분 모델코드)
+        {
+            this.GridControl1.DataSource = Global.모델자료.GetItem(모델코드)?.검사설정;
+            if (this.검사설정 != null && this.검사설정.Count > 0)
+            {
+                Task.Run(() =>
+                {
+                    Task.Delay(500).Wait();
+                    this.GridView1.MoveFirst();
+                    this.검사항목변경?.Invoke(Global.모델자료.GetItem(this.선택모델), this.GetItem(this.GridView1, this.GridView1.FocusedRowHandle));
+                });
+            }
+        }
 
         private void 모델선택(object sender, DevExpress.XtraEditors.Controls.ChangingEventArgs e)
         {
             try
             {
-                if (!Loading)
-                {
-                    if (!MvUtils.Utils.Confirm(번역.모델변경))
-                    {
-                        e.Cancel = true;
-                        return;
-                    }
-                }
-
+                if (e.NewValue == null) return;
                 모델구분 모델 = (모델구분)e.NewValue;
-                this.GridControl1.DataSource = this.검사설정;
-                if (this.검사설정 != null && this.검사설정.Count > 0)
+                if (Global.환경설정.선택모델 == 모델) return;
+                if (!MvUtils.Utils.Confirm(번역.모델변경))
                 {
-                    Task.Run(() => {
-                        Task.Delay(500).Wait();
-                        this.GridView1.MoveFirst();
-                        this.검사항목변경?.Invoke(Global.모델자료.GetItem(this.선택모델), this.GetItem(this.GridView1, this.GridView1.FocusedRowHandle));
-                        Global.환경설정.모델변경요청(모델);
-                    });
+                    e.Cancel = true;
+                    return;
                 }
+                Global.환경설정.모델변경요청(모델);
+                //if (!Loading)
+                //{
+                //    if (!MvUtils.Utils.Confirm(번역.모델변경))
+                //    {
+                //        e.Cancel = true;
+                //        return;
+                //    }
+                //}
+
+                //모델구분 모델 = (모델구분)e.NewValue;
+                //this.GridControl1.DataSource = Global.모델자료.GetItem(모델)?.검사설정;
+                //if (this.검사설정 != null && this.검사설정.Count > 0)
+                //{
+                //    Task.Run(() => {
+                //        Task.Delay(500).Wait();
+                //        this.GridView1.MoveFirst();
+                //        this.검사항목변경?.Invoke(Global.모델자료.GetItem(this.선택모델), this.GetItem(this.GridView1, this.GridView1.FocusedRowHandle));
+                //        Global.환경설정.모델변경요청(모델);
+                //    });
+                //}
             }
             catch (Exception ex)
             {
@@ -165,6 +192,10 @@ namespace SamhwaInspectionNeo.UI.Control
 
         private void B도구설정_Click(object sender, EventArgs e)
         {
+            System.Windows.Forms.Form opFrm = Application.OpenForms["Teaching"];
+
+            if (opFrm != null) return;
+
             Teaching form = new Teaching();
             form.Show(Global.MainForm);
         }

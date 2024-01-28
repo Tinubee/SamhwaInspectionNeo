@@ -25,14 +25,6 @@ namespace SamhwaInspectionNeo.Schemas
         }
     }
 
-    //public enum 지그위치
-    //{
-    //    [Description("Front Jig"), DXDescription("FR")]
-    //    Front = 1,
-    //    [Description("Rear Jig"), DXDescription("RE")]
-    //    Rear = 2,
-    //}
-
     // 카메라구분 과 번호 맞춤
     public enum 장치구분
     {
@@ -76,16 +68,6 @@ namespace SamhwaInspectionNeo.Schemas
         TrayCheck,
     }
 
-    public enum test
-    {
-        a,
-        b,
-        c,
-        d,
-        e,
-        f,
-    }
-
     public enum 검사항목 : Int32
     {
         [Result(), ListBindable(false)]
@@ -107,47 +89,75 @@ namespace SamhwaInspectionNeo.Schemas
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
         Slot2위치도 = 8,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        기준홀경 = 9,
+        Slot3상부 = 9,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        상측홀경 = 10,
+        Slot3중앙부 = 10,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌하홀경 = 11,
+        Slot3하부 = 11,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌상홀경 = 12,
+        Slot3위치도 = 12,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우상홀경 = 13,
+        Slot4상부 = 13,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        상측가로거리 = 14,
+        Slot4중앙부 = 14,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        상측세로거리 = 15,
+        Slot4하부 = 15,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        상측위치도 = 16,
+        Slot4위치도 = 16,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌하가로거리 = 17,
+        기준홀경 = 17,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌하세로거리 = 18,
+        상측홀경 = 18,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌하위치도 = 19,
+        좌상홀경 = 19,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌상가로거리 = 20,
+        좌하홀경 = 20,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌상세로거리 = 21,
+        중앙홀경 = 21,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌상위치도 = 22,
+        우상홀경 = 22,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우상가로거리 = 23,
+        우하홀경 = 23,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우상세로거리 = 24,
+        상측가로거리 = 24,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우상위치도 = 25,
+        좌상가로거리 = 25,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot길이 = 26,
+        좌하가로거리 = 26,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        중앙가로거리 = 27,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우상가로거리 = 28,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우하가로거리 = 29,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        상측세로거리 = 30,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        좌상세로거리 = 31,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        좌하세로거리 = 32,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        중앙세로거리 = 33,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우상세로거리 = 34,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우하세로거리 = 35,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        상측위치도 = 36,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        좌상위치도 = 37,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        좌하위치도 = 38,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        중앙위치도 = 39,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우상위치도 = 40,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우하위치도 = 41,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot길이 = 42,
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03)]
         상부표면검사 = 500,
-        [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam04)]
-        하부표면검사 = 501,
-        [Result(검사그룹.TrayCheck, 결과분류.Summary, 장치구분.Cam02)]
-        공트레이검사 = 502,
     }
 
     public enum 단위구분

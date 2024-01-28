@@ -25,8 +25,8 @@ namespace SamhwaInspectionNeo.Schemas
         Cam02 = 2,
         [Description("상부표면검사")]
         Cam03 = 3,
-        [Description("하부표면검사")]
-        Cam04 = 4,
+        //[Description("하부표면검사")]
+        //Cam04 = 4,
     }
 
     #region Enum Setting by LHD
@@ -115,12 +115,12 @@ namespace SamhwaInspectionNeo.Schemas
                 this.카메라1 = new EuresysLink(카메라구분.Cam01) { 코드 = "" }; //치수검사
                 this.카메라2 = new HikeGigE() { 구분 = 카메라구분.Cam02, 코드 = "K38332371" }; //공트레이검사
                 this.카메라3 = new HikeGigE() { 구분 = 카메라구분.Cam03, 코드 = "DA1996738" }; //상부표면검사
-                this.카메라4 = new HikeGigE() { 구분 = 카메라구분.Cam04, 코드 = "DA1996737" }; //하부표면검사
+                //this.카메라4 = new HikeGigE() { 구분 = 카메라구분.Cam04, 코드 = "DA1996737" }; //하부표면검사
 
                 this.Add(카메라구분.Cam01, this.카메라1);
                 this.Add(카메라구분.Cam02, this.카메라2);
                 this.Add(카메라구분.Cam03, this.카메라3);
-                this.Add(카메라구분.Cam04, this.카메라4);
+                //this.Add(카메라구분.Cam04, this.카메라4);
 
                 this.카메라1.AcquisitionFinishedEvent += 카메라1_AcquisitionFinishedEvent;
 
@@ -192,11 +192,17 @@ namespace SamhwaInspectionNeo.Schemas
                         //조명 끔
                         Global.조명제어.TurnOff(카메라구분.Cam01);
                         // 이미지 연결
+                        Int32 SplitPointStart = Convert.ToInt32(Global.VM제어.글로벌변수제어.GetValue("SplitPointStart"));
+                        Int32 SplitPointX = Convert.ToInt32(Global.VM제어.글로벌변수제어.GetValue("SplitPointX"));
+                        Int32 SplitPointY = Convert.ToInt32(Global.VM제어.글로벌변수제어.GetValue("SplitPointY"));
+
                         Cv2.VConcat(this.카메라1.Page1Image, this.카메라1.Page2Image, this.카메라1.mergedImage);
-                        this.카메라1.roi[0] = new Rect(0, 0, this.카메라1.width, 18000);
-                        this.카메라1.roi[1] = new Rect(0, 19500, this.카메라1.width, 18000);
-                        this.카메라1.roi[2] = new Rect(0, 39000, this.카메라1.width, 18000);
-                        this.카메라1.roi[3] = new Rect(0, 58500, this.카메라1.width, 18000);
+                        Debug.WriteLine($"Start : {SplitPointStart} , PointX : {SplitPointX}, PointY : {SplitPointY}");
+
+                        this.카메라1.roi[0] = new Rect(SplitPointX, SplitPointStart, this.카메라1.width, 18000);
+                        this.카메라1.roi[1] = new Rect(SplitPointX, SplitPointY * 1, this.카메라1.width, 18000);
+                        this.카메라1.roi[2] = new Rect(SplitPointX, SplitPointY * 2, this.카메라1.width, 18000);
+                        this.카메라1.roi[3] = new Rect(SplitPointX, SplitPointY * 3, this.카메라1.width, 18000);
 
                         for (int lop = 0; lop < this.카메라1.roi.Length; lop++)
                         {
@@ -253,24 +259,9 @@ namespace SamhwaInspectionNeo.Schemas
                 {
                     for (int lop = 0; lop < this.카메라3.MatImage.Count; lop++)
                     {
-                        Global.VM제어.GetItem((Flow구분)lop+5).Run(이미지[lop], null, lop);
+                        Global.VM제어.GetItem((Flow구분)lop + 5).Run(이미지[lop], null, lop);
                         if (lop == this.카메라3.MatImage.Count - 1) this.카메라3.MatImage.Clear();
                     }
-                    //foreach (Mat image in this.카메라3.MatImage)
-                    //    Global.VM제어.GetItem(Flow구분.상부표면검사).Run(image, null);
-                });
-            }
-            else if (카메라 == 카메라구분.Cam04) //하부표면검사
-            {
-                Global.조명제어.TurnOff(카메라);
-                //if (Global.비전마스터구동.Count == 0 || Global.신호제어.마스터모드여부 == 1)
-                //    return;
-                Task.Run(() =>
-                {
-                    for (int lop = 0; lop < this.카메라4.MatImage.Count; lop++)
-                        Global.VM제어.GetItem(Flow구분.하부표면검사).Run(this.카메라4.MatImage[lop], null, lop);
-                    //foreach (Mat image in this.카메라4.MatImage)
-                    //    Global.VM제어.GetItem(Flow구분.하부표면검사).Run(image, null);
                 });
             }
             this.그랩완료보고2?.Invoke(카메라, 이미지);
@@ -609,15 +600,15 @@ namespace SamhwaInspectionNeo.Schemas
                         Global.그랩제어.그랩완료(this.구분, this.MatImage);
                     }
                 }
-                else if (this.구분 == 카메라구분.Cam04)
-                {
-                    this.MatImage.Add(image);
-                    if (Global.그랩제어.카메라4.MatImage.Count == this.ImageCount)
-                    {
-                        this.Stop();
-                        Global.그랩제어.그랩완료(this.구분, this.MatImage);
-                    }
-                }
+                //else if (this.구분 == 카메라구분.Cam04)
+                //{
+                //    this.MatImage.Add(image);
+                //    if (Global.그랩제어.카메라4.MatImage.Count == this.ImageCount)
+                //    {
+                //        this.Stop();
+                //        Global.그랩제어.그랩완료(this.구분, this.MatImage);
+                //    }
+                //}
             }
             catch (Exception ex)
             {
@@ -701,7 +692,7 @@ namespace SamhwaInspectionNeo.Schemas
                 //this.mergedImage = new Mat(height_cam * 2, width_cam, MatType.CV_8UC1);
                 Debug.WriteLine($"{this.Channel}, {this.CurrentState()}", "READY currentState");
                 Global.정보로그(로그영역, "카메라 연결", $"[{this.구분}] 카메라 연결 성공!", false);
-   
+
                 return true;
             }
             catch (Exception e)

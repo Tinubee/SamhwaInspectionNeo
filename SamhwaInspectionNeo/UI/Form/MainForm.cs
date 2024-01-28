@@ -31,12 +31,12 @@ namespace SamhwaInspectionNeo
             //this.t환경설정.SelectedPageChanged += SelectedTabPageChanged;
         }
 
-        private void ShowWaitForm()
+        public void ShowWaitForm()
         {
             WaitForm = new UI.Form.WaitForm() { ShowOnTopMode = ShowFormOnTopMode.AboveAll };
             WaitForm.Show(this);
         }
-        private void HideWaitForm()
+        public void HideWaitForm()
         {
             WaitForm.Close();
         }

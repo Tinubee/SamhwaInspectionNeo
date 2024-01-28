@@ -44,12 +44,6 @@
             this.UpSurfaceViewer3 = new VMControls.Winform.Release.VmRenderControl();
             this.UpSurfaceViewer2 = new VMControls.Winform.Release.VmRenderControl();
             this.UpSurfaceViewer1 = new VMControls.Winform.Release.VmRenderControl();
-            this.p하부표면검사 = new DevExpress.XtraTab.XtraTabPage();
-            this.tablePanel3 = new DevExpress.Utils.Layout.TablePanel();
-            this.BottomSurfaceViewer4 = new VMControls.Winform.Release.VmRenderControl();
-            this.BottomSurfaceViewer3 = new VMControls.Winform.Release.VmRenderControl();
-            this.BottomSurfaceViewer2 = new VMControls.Winform.Release.VmRenderControl();
-            this.BottomSurfaceViewer1 = new VMControls.Winform.Release.VmRenderControl();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.p치수검사.SuspendLayout();
@@ -61,9 +55,6 @@
             this.p상부표면검사.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel2)).BeginInit();
             this.tablePanel2.SuspendLayout();
-            this.p하부표면검사.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tablePanel3)).BeginInit();
-            this.tablePanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // xtraTabControl1
@@ -76,9 +67,8 @@
             this.xtraTabControl1.TabIndex = 0;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.p치수검사,
-            this.p트레이검사,
             this.p상부표면검사,
-            this.p하부표면검사});
+            this.p트레이검사});
             // 
             // p치수검사
             // 
@@ -297,96 +287,6 @@
             this.UpSurfaceViewer1.Size = new System.Drawing.Size(774, 448);
             this.UpSurfaceViewer1.TabIndex = 0;
             // 
-            // p하부표면검사
-            // 
-            this.p하부표면검사.Controls.Add(this.tablePanel3);
-            this.p하부표면검사.Name = "p하부표면검사";
-            this.p하부표면검사.Size = new System.Drawing.Size(1585, 933);
-            this.p하부표면검사.Text = "하부표면검사";
-            // 
-            // tablePanel3
-            // 
-            this.tablePanel3.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F),
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F)});
-            this.tablePanel3.Controls.Add(this.BottomSurfaceViewer4);
-            this.tablePanel3.Controls.Add(this.BottomSurfaceViewer3);
-            this.tablePanel3.Controls.Add(this.BottomSurfaceViewer2);
-            this.tablePanel3.Controls.Add(this.BottomSurfaceViewer1);
-            this.tablePanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tablePanel3.Location = new System.Drawing.Point(0, 0);
-            this.tablePanel3.Name = "tablePanel3";
-            this.tablePanel3.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 26F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 26F)});
-            this.tablePanel3.Size = new System.Drawing.Size(1585, 933);
-            this.tablePanel3.TabIndex = 1;
-            this.tablePanel3.UseSkinIndents = true;
-            // 
-            // BottomSurfaceViewer4
-            // 
-            this.BottomSurfaceViewer4.BackColor = System.Drawing.Color.Black;
-            this.tablePanel3.SetColumn(this.BottomSurfaceViewer4, 1);
-            this.BottomSurfaceViewer4.CoordinateInfoVisible = true;
-            this.BottomSurfaceViewer4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BottomSurfaceViewer4.ImageSource = null;
-            this.BottomSurfaceViewer4.IsShowCustomROIMenu = false;
-            this.BottomSurfaceViewer4.Location = new System.Drawing.Point(797, 471);
-            this.BottomSurfaceViewer4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.BottomSurfaceViewer4.ModuleSource = null;
-            this.BottomSurfaceViewer4.Name = "BottomSurfaceViewer4";
-            this.tablePanel3.SetRow(this.BottomSurfaceViewer4, 1);
-            this.BottomSurfaceViewer4.Size = new System.Drawing.Size(774, 446);
-            this.BottomSurfaceViewer4.TabIndex = 3;
-            // 
-            // BottomSurfaceViewer3
-            // 
-            this.BottomSurfaceViewer3.BackColor = System.Drawing.Color.Black;
-            this.tablePanel3.SetColumn(this.BottomSurfaceViewer3, 0);
-            this.BottomSurfaceViewer3.CoordinateInfoVisible = true;
-            this.BottomSurfaceViewer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BottomSurfaceViewer3.ImageSource = null;
-            this.BottomSurfaceViewer3.IsShowCustomROIMenu = false;
-            this.BottomSurfaceViewer3.Location = new System.Drawing.Point(15, 471);
-            this.BottomSurfaceViewer3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.BottomSurfaceViewer3.ModuleSource = null;
-            this.BottomSurfaceViewer3.Name = "BottomSurfaceViewer3";
-            this.tablePanel3.SetRow(this.BottomSurfaceViewer3, 1);
-            this.BottomSurfaceViewer3.Size = new System.Drawing.Size(774, 446);
-            this.BottomSurfaceViewer3.TabIndex = 2;
-            // 
-            // BottomSurfaceViewer2
-            // 
-            this.BottomSurfaceViewer2.BackColor = System.Drawing.Color.Black;
-            this.tablePanel3.SetColumn(this.BottomSurfaceViewer2, 1);
-            this.BottomSurfaceViewer2.CoordinateInfoVisible = true;
-            this.BottomSurfaceViewer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BottomSurfaceViewer2.ImageSource = null;
-            this.BottomSurfaceViewer2.IsShowCustomROIMenu = false;
-            this.BottomSurfaceViewer2.Location = new System.Drawing.Point(797, 15);
-            this.BottomSurfaceViewer2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.BottomSurfaceViewer2.ModuleSource = null;
-            this.BottomSurfaceViewer2.Name = "BottomSurfaceViewer2";
-            this.tablePanel3.SetRow(this.BottomSurfaceViewer2, 0);
-            this.BottomSurfaceViewer2.Size = new System.Drawing.Size(774, 446);
-            this.BottomSurfaceViewer2.TabIndex = 1;
-            // 
-            // BottomSurfaceViewer1
-            // 
-            this.BottomSurfaceViewer1.BackColor = System.Drawing.Color.Black;
-            this.tablePanel3.SetColumn(this.BottomSurfaceViewer1, 0);
-            this.BottomSurfaceViewer1.CoordinateInfoVisible = true;
-            this.BottomSurfaceViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BottomSurfaceViewer1.ImageSource = null;
-            this.BottomSurfaceViewer1.IsShowCustomROIMenu = false;
-            this.BottomSurfaceViewer1.Location = new System.Drawing.Point(15, 14);
-            this.BottomSurfaceViewer1.Margin = new System.Windows.Forms.Padding(4);
-            this.BottomSurfaceViewer1.ModuleSource = null;
-            this.BottomSurfaceViewer1.Name = "BottomSurfaceViewer1";
-            this.tablePanel3.SetRow(this.BottomSurfaceViewer1, 0);
-            this.BottomSurfaceViewer1.Size = new System.Drawing.Size(774, 448);
-            this.BottomSurfaceViewer1.TabIndex = 0;
-            // 
             // CamViewers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -406,9 +306,6 @@
             this.p상부표면검사.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel2)).EndInit();
             this.tablePanel2.ResumeLayout(false);
-            this.p하부표면검사.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tablePanel3)).EndInit();
-            this.tablePanel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -419,7 +316,6 @@
         private DevExpress.XtraTab.XtraTabPage p치수검사;
         private DevExpress.XtraTab.XtraTabPage p트레이검사;
         private DevExpress.XtraTab.XtraTabPage p상부표면검사;
-        private DevExpress.XtraTab.XtraTabPage p하부표면검사;
         private DevExpress.Utils.Layout.TablePanel tablePanel1;
         private VMControls.Winform.Release.VmRenderControl Flow4Viewer;
         private VMControls.Winform.Release.VmRenderControl Flow3Viewer;
@@ -431,11 +327,6 @@
         private VMControls.Winform.Release.VmRenderControl UpSurfaceViewer3;
         private VMControls.Winform.Release.VmRenderControl UpSurfaceViewer2;
         private VMControls.Winform.Release.VmRenderControl UpSurfaceViewer1;
-        private DevExpress.Utils.Layout.TablePanel tablePanel3;
-        private VMControls.Winform.Release.VmRenderControl BottomSurfaceViewer4;
-        private VMControls.Winform.Release.VmRenderControl BottomSurfaceViewer3;
-        private VMControls.Winform.Release.VmRenderControl BottomSurfaceViewer2;
-        private VMControls.Winform.Release.VmRenderControl BottomSurfaceViewer1;
         private DevExpress.Utils.Layout.TablePanel tablePanel4;
     }
 }
