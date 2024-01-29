@@ -20,8 +20,8 @@ namespace SamhwaInspectionNeo.UI.Controls
         {
             this.bind환경설정.DataSource = Global.환경설정;
             this.d기본경로.SelectedPath = Global.환경설정.기본경로;
-            this.d문서저장.SelectedPath = Global.환경설정.문서저장;
-            this.d사진저장.SelectedPath = Global.환경설정.사진저장;
+            this.d문서저장.SelectedPath = Global.환경설정.문서저장경로;
+            this.d사진저장.SelectedPath = Global.환경설정.사진저장경로;
 
             this.e기본경로.Text = this.d기본경로.SelectedPath;
             this.e문서저장.Text = this.d문서저장.SelectedPath;
@@ -180,8 +180,8 @@ namespace SamhwaInspectionNeo.UI.Controls
             }
 
             public String 기본경로 { get { return Localization.GetString(typeof(환경설정).GetProperty(nameof(환경설정.기본경로))); } }
-            public String 문서저장 { get { return Localization.GetString(typeof(환경설정).GetProperty(nameof(환경설정.문서저장))); } }
-            public String 사진저장 { get { return Localization.GetString(typeof(환경설정).GetProperty(nameof(환경설정.사진저장))); } }
+            public String 문서저장 { get { return Localization.GetString(typeof(환경설정).GetProperty(nameof(환경설정.문서저장경로))); } }
+            public String 사진저장 { get { return Localization.GetString(typeof(환경설정).GetProperty(nameof(환경설정.사진저장경로))); } }
             public String 사진저장OK { get { return Localization.GetString(typeof(환경설정).GetProperty(nameof(환경설정.사진저장OK))); } }
             public String 사진저장NG { get { return Localization.GetString(typeof(환경설정).GetProperty(nameof(환경설정.사진저장NG))); } }
             public String 결과보관 { get { return Localization.GetString(typeof(환경설정).GetProperty(nameof(환경설정.결과보관))); } }

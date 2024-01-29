@@ -135,7 +135,7 @@ namespace SamhwaInspectionNeo.Schemas
 
         public String OriginImagePath(DateTime 시간, 카메라구분 카메라)
         {
-            List<String> paths = new List<String> { Global.환경설정.사진저장, MvUtils.Utils.FormatDate(시간, "{0:yyyy-MM-dd}"), 카메라.ToString() }; // , Global.환경설정.선택모델.ToString()
+            List<String> paths = new List<String> { Global.환경설정.사진저장경로, MvUtils.Utils.FormatDate(시간, "{0:yyyy-MM-dd}"), 카메라.ToString() }; // , Global.환경설정.선택모델.ToString()
             return Common.CreateDirectory(paths);
         }
         public String OriginImageFile(DateTime 시간, Int32 번호, 카메라구분 카메라)
@@ -148,7 +148,7 @@ namespace SamhwaInspectionNeo.Schemas
 
         public String CopyImagePath(DateTime 시간, 카메라구분 카메라)
         {
-            List<String> paths = new List<String> { Global.환경설정.사진저장, MvUtils.Utils.FormatDate(시간, "{0:yyyy-MM-dd}"), 카메라.ToString() }; // , Global.환경설정.선택모델.ToString()
+            List<String> paths = new List<String> { Global.환경설정.사진저장경로, MvUtils.Utils.FormatDate(시간, "{0:yyyy-MM-dd}"), 카메라.ToString() }; // , Global.환경설정.선택모델.ToString()
             return Common.CreateDirectory(paths);
         }
         public String CopyImageFile(DateTime 시간, Int32 번호, 카메라구분 카메라)

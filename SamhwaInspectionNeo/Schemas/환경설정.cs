@@ -23,9 +23,9 @@ namespace SamhwaInspectionNeo.Schemas
         [Translation("Config Path", "설정 저장 경로"), JsonProperty("ConfigSavePath")]
         public String 기본경로 { get; set; } = @"C:\VISION\Config";// Path.Combine(Application.StartupPath, @"Config");
         [Translation("Document Save Path", "문서 저장 경로"), JsonProperty("DocumentSavePath")]
-        public String 문서저장 { get; set; } = @"C:\VISION\SaveData";
+        public String 문서저장경로 { get; set; } = @"C:\VISION\SaveData";
         [Translation("Image Save Path", "사진 저장 경로"), JsonProperty("ImageSavePath")]
-        public String 사진저장 { get; set; } = @"C:\VISION\SaveImage";
+        public String 사진저장경로 { get; set; } = @"C:\VISION\SaveImage";
         [Translation("Decimals", "검사 결과 자릿수"), JsonProperty("Decimals")]
         public Int32 결과자릿수 { get; set; } = 3;
         [Translation("OK Image Save", "OK 이미지 저장"), JsonProperty("SaveOK")]
@@ -170,11 +170,11 @@ namespace SamhwaInspectionNeo.Schemas
                 Global.오류로그(로그영역.GetString(), "환경설정 로드 실패", "기본설정 폴더를 생성할 수 없습니다.", true);
                 return false;
             }
-            if (!Common.DirectoryExists(사진저장, true))
+            if (!Common.DirectoryExists(사진저장경로, true))
             {
                 Global.오류로그(로그영역.GetString(), "환경설정 로드 실패", "사진저장 폴더를 생성할 수 없습니다.", true);
             }
-            if (!Common.DirectoryExists(문서저장, true))
+            if (!Common.DirectoryExists(문서저장경로, true))
             {
                 Global.오류로그(로그영역.GetString(), "환경설정 로드 실패", "문서저장 폴더를 생성할 수 없습니다.", true);
             }
@@ -245,7 +245,7 @@ namespace SamhwaInspectionNeo.Schemas
             DriveInfo[] drives = DriveInfo.GetDrives();
             foreach (DriveInfo drive in drives)
             {
-                if (this.사진저장.StartsWith(drive.Name))
+                if (this.사진저장경로.StartsWith(drive.Name))
                 {
                     //Debug.WriteLine(drive.Name, drive.VolumeLabel);
                     this.ImageSaveDrive = drive;

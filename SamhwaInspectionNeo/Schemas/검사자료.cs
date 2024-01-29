@@ -56,7 +56,7 @@ namespace SamhwaInspectionNeo.Schemas
             this.수동검사.Reset();
         }
 
-        private String 저장파일(DateTime 날짜) => Path.Combine(Global.환경설정.문서저장, MvUtils.Utils.FormatDate(날짜, "{0:yyyyMMdd}") + ".json");
+        private String 저장파일(DateTime 날짜) => Path.Combine(Global.환경설정.문서저장경로, MvUtils.Utils.FormatDate(날짜, "{0:yyyyMMdd}") + ".json");
         public void Save() => this.테이블.Save();
         private Boolean SaveJson()
         {

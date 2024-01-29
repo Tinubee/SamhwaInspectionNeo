@@ -219,7 +219,7 @@ namespace SamhwaInspectionNeo.Schemas
             return true;
         }
 
-        public 결과구분 Run(Mat mat, ImageBaseData imageBaseData, int 순서)
+        public 결과구분 Run(Mat mat, ImageBaseData imageBaseData)
         {
             this.결과 = false;
             //this.결과업데이트완료 = false;
@@ -232,9 +232,7 @@ namespace SamhwaInspectionNeo.Schemas
                         Global.오류로그(로그영역, "검사오류", $"[{this.구분}] VM 검사 모델이 없습니다.", false);
                         return 결과구분.ER;
                     }
-
                     Int32 Front = Convert.ToInt32(Global.VM제어.글로벌변수제어.GetValue("Front지그"));
-                    //Flow구분 결과값적용플로우 = (Flow구분)순서;
 
                     imageBaseData = mat == null ? imageBaseData : MatToImageBaseData(mat);
                     if (imageBaseData != null)
@@ -277,7 +275,6 @@ namespace SamhwaInspectionNeo.Schemas
                     this.Procedure.Run();
                     this.SetResult(this.구분, Front == 1 ? 지그위치.Front : 지그위치.Rear); //1이면 Front지그, 0이면 Rear지그
 
-                    //if (Global.환경설정.동작구분 == 동작구분.LocalTest)
                     검사결과 검사 = Global.검사자료.검사결과계산((int)this.구분);
 
                     return 검사.CTQ결과; 
