@@ -53,6 +53,7 @@ namespace SamhwaInspectionNeo.UI.Control
             this.e모델선택.EditValue = Global.환경설정.선택모델;
             this.e모델선택.CustomDisplayText += 선택모델표현;
             this.b설정저장.Click += 설정저장;
+            this.b보정값설정.Click += B보정값설정_Click;
 
             Global.환경설정.모델변경알림 += 모델변경알림;
 
@@ -65,6 +66,14 @@ namespace SamhwaInspectionNeo.UI.Control
             this.b교정값계산.Click += B교정값계산_Click;
             this.b수동검사.Click += B수동검사_Click;
             Loading = false;
+        }
+
+        private void B보정값설정_Click(object sender, EventArgs e)
+        {
+            CalibrationFrom CalForm = new CalibrationFrom();
+            CalForm.StartPosition = FormStartPosition.CenterParent;
+            //CalForm.Init();
+            CalForm.ShowDialog();
         }
 
         private void B수동검사_Click(object sender, EventArgs e)

@@ -112,6 +112,10 @@ namespace SamhwaInspectionNeo.Schemas
         public ImageSourceModuleTool imageSourceModuleTool;
         public GraphicsSetModuleTool graphicsSetModuleTool;
         public ShellModuleTool shellModuleTool;
+        public IMVSGroupTool slot1GroupTool;
+        public ShellModuleTool slot1ShellModuleTool;
+        public IMVSGroupTool slot2GroupTool;
+        public ShellModuleTool slot2ShellModuleTool;
         public GlobalVariableModuleTool GlobalVariableModuleTool;
         public List<ImageSourceModuleTool> imageSourcesModuleToolList;
         public List<GraphicsSetModuleTool> graphicsSetModuleToolList;
@@ -141,6 +145,14 @@ namespace SamhwaInspectionNeo.Schemas
                 this.imageSourceModuleTool = this.Procedure["InputImage"] as ImageSourceModuleTool;
                 this.graphicsSetModuleTool = this.Procedure["OutputImage"] as GraphicsSetModuleTool;
                 this.shellModuleTool = this.Procedure["Resulte"] as ShellModuleTool;
+
+                this.slot1GroupTool = this.Procedure["Slot1"] as IMVSGroupTool;
+                if (this.slot1GroupTool != null)
+                    this.slot1ShellModuleTool = this.slot1GroupTool["거리계산"] as ShellModuleTool;
+
+                this.slot2GroupTool = this.Procedure["Slot2"] as IMVSGroupTool;
+                if (this.slot2GroupTool != null)
+                    this.slot2ShellModuleTool = this.slot2GroupTool["거리계산"] as ShellModuleTool;
 
                 if (this.imageSourceModuleTool != null)
                     this.imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;

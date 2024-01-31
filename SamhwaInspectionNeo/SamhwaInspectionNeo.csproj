@@ -255,6 +255,12 @@
     <Compile Include="Schemas\유저정보.cs" />
     <Compile Include="Schemas\조명제어.cs" />
     <Compile Include="Schemas\환경설정.cs" />
+    <Compile Include="UI\Control\Calibration.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Control\Calibration.Designer.cs">
+      <DependentUpon>Calibration.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Control\CamSettings.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -357,6 +363,12 @@
     <Compile Include="UI\Control\Users.Designer.cs">
       <DependentUpon>Users.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Form\CalibrationFrom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Form\CalibrationFrom.Designer.cs">
+      <DependentUpon>CalibrationFrom.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Form\Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -388,6 +400,9 @@
     <Compile Include="Utils\MultiCam.cs" />
     <Compile Include="Utils\MVCamera.cs" />
     <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="UI\Control\Calibration.resx">
+      <DependentUpon>Calibration.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\CamSettings.resx">
       <DependentUpon>CamSettings.cs</DependentUpon>
     </EmbeddedResource>
@@ -439,6 +454,9 @@
     <EmbeddedResource Include="UI\Control\Users.resx">
       <DependentUpon>Users.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Form\CalibrationFrom.resx">
+      <DependentUpon>CalibrationFrom.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Form\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -464,6 +482,7 @@
     <None Include="App.config" />
     <None Include="Properties\DataSources\SamhwaInspectionNeo.Schemas.VmGlobals.datasource" />
     <None Include="Properties\DataSources\SamhwaInspectionNeo.Schemas.검사설정자료.datasource" />
+    <None Include="Properties\DataSources\SamhwaInspectionNeo.Schemas.검사자료.datasource" />
     <None Include="Properties\DataSources\SamhwaInspectionNeo.Schemas.로그자료.datasource" />
     <None Include="Properties\DataSources\SamhwaInspectionNeo.Schemas.모델자료.datasource" />
     <None Include="Properties\DataSources\SamhwaInspectionNeo.Schemas.신호제어.datasource" />
@@ -495,6 +514,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\properties.svg" />
     <None Include="Resources\insertcombobox.svg" />
     <None Include="Resources\pivottablecalculationsfieldsitemssetsgroup.svg" />
     <None Include="Icon\Korea.svg" />

@@ -30,12 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SetInspection));
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.b보정값설정 = new DevExpress.XtraEditors.SimpleButton();
             this.tg보정값모드 = new DevExpress.XtraEditors.ToggleSwitch();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
@@ -83,6 +84,7 @@
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.b보정값설정);
             this.panelControl1.Controls.Add(this.tg보정값모드);
             this.panelControl1.Controls.Add(this.b수동검사);
             this.panelControl1.Controls.Add(this.b교정값계산);
@@ -95,6 +97,19 @@
             this.panelControl1.Padding = new System.Windows.Forms.Padding(3);
             this.panelControl1.Size = new System.Drawing.Size(1634, 52);
             this.panelControl1.TabIndex = 6;
+            // 
+            // b보정값설정
+            // 
+            this.b보정값설정.Appearance.Font = new System.Drawing.Font("맑은 고딕", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.b보정값설정.Appearance.Options.UseFont = true;
+            this.b보정값설정.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.b보정값설정.Dock = System.Windows.Forms.DockStyle.Right;
+            this.b보정값설정.ImageOptions.SvgImage = global::SamhwaInspectionNeo.Properties.Resources.properties;
+            this.b보정값설정.Location = new System.Drawing.Point(1269, 5);
+            this.b보정값설정.Name = "b보정값설정";
+            this.b보정값설정.Size = new System.Drawing.Size(180, 42);
+            this.b보정값설정.TabIndex = 14;
+            this.b보정값설정.Text = "보정값설정";
             // 
             // tg보정값모드
             // 
@@ -379,8 +394,6 @@
             this.col보정값.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.col보정값.FieldName = "보정값";
             this.col보정값.Name = "col보정값";
-            this.col보정값.Visible = true;
-            this.col보정값.VisibleIndex = 9;
             // 
             // col교정값
             // 
@@ -388,8 +401,6 @@
             this.col교정값.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.col교정값.FieldName = "교정값";
             this.col교정값.Name = "col교정값";
-            this.col교정값.Visible = true;
-            this.col교정값.VisibleIndex = 10;
             // 
             // col측정값
             // 
@@ -398,7 +409,7 @@
             this.col측정값.FieldName = "측정값";
             this.col측정값.Name = "col측정값";
             this.col측정값.Visible = true;
-            this.col측정값.VisibleIndex = 11;
+            this.col측정값.VisibleIndex = 9;
             // 
             // col결과값
             // 
@@ -407,7 +418,7 @@
             this.col결과값.FieldName = "결과값";
             this.col결과값.Name = "col결과값";
             this.col결과값.Visible = true;
-            this.col결과값.VisibleIndex = 12;
+            this.col결과값.VisibleIndex = 10;
             // 
             // ｅ교정계산
             // 
@@ -420,7 +431,7 @@
             // 
             this.e마진값.AutoHeight = false;
             this.e마진값.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo, "", -1, true, false, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo, "", -1, true, false, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.e마진값.MaxValue = new decimal(new int[] {
             100,
             0,
@@ -502,5 +513,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn col측정값;
         private DevExpress.XtraGrid.Columns.GridColumn col결과값;
         private DevExpress.XtraEditors.ToggleSwitch tg보정값모드;
+        private DevExpress.XtraEditors.SimpleButton b보정값설정;
     }
 }
