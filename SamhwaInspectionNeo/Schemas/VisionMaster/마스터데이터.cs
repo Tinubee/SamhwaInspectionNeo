@@ -8,5 +8,6 @@ namespace SamhwaInspectionNeo.Schemas.VisionMaster
 {
     public class 마스터데이터
     {
+
     }
 }

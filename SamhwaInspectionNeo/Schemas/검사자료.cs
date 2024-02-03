@@ -25,7 +25,7 @@ namespace SamhwaInspectionNeo.Schemas
         [JsonIgnore]
         private TranslationAttribute 저장오류 = new TranslationAttribute("An error occurred while saving the data.", "자료 저장중 오류가 발생하였습니다.");
         [JsonIgnore]
-        private 검사결과테이블 테이블 = null;
+        public 검사결과테이블 테이블 = null;
         [JsonIgnore]
         private Dictionary<Int32, 검사결과> 검사스플 = new Dictionary<Int32, 검사결과>();
         [JsonIgnore]
@@ -260,7 +260,8 @@ namespace SamhwaInspectionNeo.Schemas
         public List<검사결과> Select(DateTime 날짜)
         {
             DateTime 시작 = new DateTime(날짜.Year, 날짜.Month, 날짜.Day);
-            return this.Select(시작, 시작);
+            DateTime 종료 = new DateTime(날짜.Year, 날짜.Month, 날짜.Day + 1);
+            return this.Select(시작, 종료);
         }
         public List<검사결과> Select(DateTime 시작, DateTime 종료, 모델구분 모델 = 모델구분.None, Int32 코드 = 0)
         {

@@ -28,23 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.calibration1 = new SamhwaInspectionNeo.UI.Control.Calibration();
+            this.p보정값설정창 = new SamhwaInspectionNeo.UI.Control.Calibration();
             this.SuspendLayout();
             // 
-            // calibration1
+            // p보정값설정창
             // 
-            this.calibration1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.calibration1.Location = new System.Drawing.Point(0, 0);
-            this.calibration1.Name = "calibration1";
-            this.calibration1.Size = new System.Drawing.Size(1099, 641);
-            this.calibration1.TabIndex = 0;
+            this.p보정값설정창.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.p보정값설정창.Location = new System.Drawing.Point(0, 0);
+            this.p보정값설정창.Name = "p보정값설정창";
+            this.p보정값설정창.Size = new System.Drawing.Size(1099, 641);
+            this.p보정값설정창.TabIndex = 0;
             // 
             // CalibrationFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1099, 641);
-            this.Controls.Add(this.calibration1);
+            this.Controls.Add(this.p보정값설정창);
             this.Name = "CalibrationFrom";
             this.Text = "Calibration";
             this.ResumeLayout(false);
@@ -53,6 +53,6 @@
 
         #endregion
 
-        private Control.Calibration calibration1;
+        private Control.Calibration p보정값설정창;
     }
 }

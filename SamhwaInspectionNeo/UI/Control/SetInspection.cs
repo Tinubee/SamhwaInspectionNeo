@@ -72,7 +72,7 @@ namespace SamhwaInspectionNeo.UI.Control
         {
             CalibrationFrom CalForm = new CalibrationFrom();
             CalForm.StartPosition = FormStartPosition.CenterParent;
-            //CalForm.Init();
+            CalForm.Init();
             CalForm.ShowDialog();
         }
 

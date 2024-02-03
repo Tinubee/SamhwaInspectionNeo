@@ -17,5 +17,7 @@ namespace SamhwaInspectionNeo.UI.Form
         {
             InitializeComponent();
         }
+
+        public void Init() => p보정값설정창.Init();
     }
 }
