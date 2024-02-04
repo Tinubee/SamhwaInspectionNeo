@@ -159,7 +159,7 @@ namespace SamhwaInspectionNeo.UI.Control
             //VM Slot쪽에 넣어주기 //Flow와 Jig & 이름 체크.
             if (name.ToString().Contains("Slot1"))
             {
-                string setName = "test";// $"{this.위치}Cal{name}";
+                string setName = $"{this.위치}{name}";
                 Global.VM제어.GetItem(this.플로우).slot1ShellModuleTool.ModuParams.SetInputFloat(setName, calvalue);
                 Global.VM제어.GetItem(this.플로우).slot1ShellModuleTool.ResetParam();
                 //Global.VM제어.GetItem(this.플로우).slot1ShellModuleTool.Save();

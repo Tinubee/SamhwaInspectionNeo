@@ -32,18 +32,18 @@
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.e카메라 = new SamhwaInspectionNeo.UI.Controls.CamSettings();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
-            this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
+            this.p제어 = new DevExpress.XtraTab.XtraTabPage();
+            this.e입출신호 = new SamhwaInspectionNeo.UI.Control.IOControl();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.e강제배출 = new DevExpress.XtraEditors.ToggleSwitch();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.b캠트리거리셋 = new DevExpress.XtraEditors.SimpleButton();
-            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
+            this.p설정 = new DevExpress.XtraTab.XtraTabPage();
             this.e기본설정 = new SamhwaInspectionNeo.UI.Controls.Config();
-            this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
+            this.p유저정보 = new DevExpress.XtraTab.XtraTabPage();
             this.e유저관리 = new SamhwaInspectionNeo.UI.Controls.Users();
-            this.e입출신호 = new SamhwaInspectionNeo.UI.Control.IOControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).BeginInit();
             this.splitContainerControl1.Panel1.SuspendLayout();
@@ -52,7 +52,7 @@
             this.splitContainerControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
-            this.xtraTabPage1.SuspendLayout();
+            this.p제어.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -60,8 +60,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.e강제배출.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            this.xtraTabPage2.SuspendLayout();
-            this.xtraTabPage3.SuspendLayout();
+            this.p설정.SuspendLayout();
+            this.p유저정보.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainerControl1
@@ -98,22 +98,30 @@
             this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
             this.xtraTabControl1.Name = "xtraTabControl1";
-            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
+            this.xtraTabControl1.SelectedTabPage = this.p제어;
             this.xtraTabControl1.Size = new System.Drawing.Size(622, 980);
             this.xtraTabControl1.TabIndex = 2;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.xtraTabPage1,
-            this.xtraTabPage2,
-            this.xtraTabPage3});
+            this.p제어,
+            this.p설정,
+            this.p유저정보});
             // 
-            // xtraTabPage1
+            // p제어
             // 
-            this.xtraTabPage1.Controls.Add(this.e입출신호);
-            this.xtraTabPage1.Controls.Add(this.groupControl1);
-            this.xtraTabPage1.Controls.Add(this.b캠트리거리셋);
-            this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(620, 950);
-            this.xtraTabPage1.Text = "Others";
+            this.p제어.Controls.Add(this.e입출신호);
+            this.p제어.Controls.Add(this.groupControl1);
+            this.p제어.Controls.Add(this.b캠트리거리셋);
+            this.p제어.Name = "p제어";
+            this.p제어.Size = new System.Drawing.Size(620, 950);
+            this.p제어.Text = "Others";
+            // 
+            // e입출신호
+            // 
+            this.e입출신호.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.e입출신호.Location = new System.Drawing.Point(0, 195);
+            this.e입출신호.Name = "e입출신호";
+            this.e입출신호.Size = new System.Drawing.Size(620, 755);
+            this.e입출신호.TabIndex = 6;
             // 
             // groupControl1
             // 
@@ -178,12 +186,12 @@
             this.b캠트리거리셋.TabIndex = 4;
             this.b캠트리거리셋.Text = "카메라 트리거 리셋";
             // 
-            // xtraTabPage2
+            // p설정
             // 
-            this.xtraTabPage2.Controls.Add(this.e기본설정);
-            this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(620, 950);
-            this.xtraTabPage2.Text = "Config";
+            this.p설정.Controls.Add(this.e기본설정);
+            this.p설정.Name = "p설정";
+            this.p설정.Size = new System.Drawing.Size(620, 950);
+            this.p설정.Text = "Config";
             // 
             // e기본설정
             // 
@@ -193,12 +201,12 @@
             this.e기본설정.Size = new System.Drawing.Size(620, 950);
             this.e기본설정.TabIndex = 0;
             // 
-            // xtraTabPage3
+            // p유저정보
             // 
-            this.xtraTabPage3.Controls.Add(this.e유저관리);
-            this.xtraTabPage3.Name = "xtraTabPage3";
-            this.xtraTabPage3.Size = new System.Drawing.Size(620, 950);
-            this.xtraTabPage3.Text = "User";
+            this.p유저정보.Controls.Add(this.e유저관리);
+            this.p유저정보.Name = "p유저정보";
+            this.p유저정보.Size = new System.Drawing.Size(620, 950);
+            this.p유저정보.Text = "User";
             // 
             // e유저관리
             // 
@@ -207,14 +215,6 @@
             this.e유저관리.Name = "e유저관리";
             this.e유저관리.Size = new System.Drawing.Size(620, 370);
             this.e유저관리.TabIndex = 0;
-            // 
-            // e입출신호
-            // 
-            this.e입출신호.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.e입출신호.Location = new System.Drawing.Point(0, 195);
-            this.e입출신호.Name = "e입출신호";
-            this.e입출신호.Size = new System.Drawing.Size(620, 755);
-            this.e입출신호.TabIndex = 6;
             // 
             // DeviceSettings
             // 
@@ -231,7 +231,7 @@
             this.splitContainerControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
-            this.xtraTabPage1.ResumeLayout(false);
+            this.p제어.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
@@ -239,8 +239,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.e강제배출.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            this.xtraTabPage2.ResumeLayout(false);
-            this.xtraTabPage3.ResumeLayout(false);
+            this.p설정.ResumeLayout(false);
+            this.p유저정보.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -249,9 +249,9 @@
 
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
         private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
+        private DevExpress.XtraTab.XtraTabPage p제어;
         private DevExpress.XtraEditors.SimpleButton b캠트리거리셋;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
+        private DevExpress.XtraTab.XtraTabPage p설정;
         private Controls.CamSettings e카메라;
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
@@ -259,7 +259,7 @@
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private Config e기본설정;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage3;
+        private DevExpress.XtraTab.XtraTabPage p유저정보;
         private Users e유저관리;
         private Control.IOControl e입출신호;
     }
