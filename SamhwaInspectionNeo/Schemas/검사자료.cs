@@ -161,7 +161,7 @@ namespace SamhwaInspectionNeo.Schemas
             return 검사;
         }
 
-        public 검사결과 검사결과계산(Int32 검사코드)
+        public 검사결과 검사결과계산(Int32 검사코드) //상부표면검사 진행완료시 해주면된다.
         {
             검사결과 검사;
             //if (Global.장치상태.자동수동)

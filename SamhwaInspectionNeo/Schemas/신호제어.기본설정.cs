@@ -143,7 +143,7 @@ namespace SamhwaInspectionNeo.Schemas
         private void 검사완료알림(검사결과 결과)
         {
             Boolean ok = 결과.측정결과 == 결과구분.OK;
-            Debug.WriteLine($"{결과.검사코드} 검사결과 : {결과.측정결과}");
+            Debug.WriteLine($"{결과.검사코드} 검사결과 : {ok}");
             Global.신호제어.SetDevice($"W000{결과.검사코드}", ok ? 1 : 2, out Int32 오류);
             통신오류알림(오류);
         }

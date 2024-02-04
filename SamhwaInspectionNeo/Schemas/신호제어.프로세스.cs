@@ -63,7 +63,7 @@ namespace SamhwaInspectionNeo.Schemas
         private void 제품검사수행()
         {
             영상촬영수행();
-            검사결과전송();
+            //검사결과전송();
         }
         // 카메라 별 현재 검사 위치의 검사번호를 요청
         public Int32 촬영위치번호(카메라구분 구분)

@@ -341,6 +341,8 @@ namespace SamhwaInspectionNeo.Schemas
 
         public Boolean 검사중확인()
         {
+            if(Global.환경설정.동작구분 == 동작구분.LocalTest) return false;
+
             if (this.검사내역.Any(e => e.측정결과 == 결과구분.NO || e.측정결과 == 결과구분.IN))
             {
                 return true;

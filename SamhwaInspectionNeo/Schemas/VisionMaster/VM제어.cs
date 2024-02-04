@@ -253,7 +253,7 @@ namespace SamhwaInspectionNeo.Schemas
 
                     this.Procedure.Run();
                     this.SetResult(this.구분, Front == 1 ? 지그위치.Front : 지그위치.Rear); //1이면 Front지그, 0이면 Rear지그
-                    //검사결과 검사 = Global.검사자료.검사결과계산((int)this.구분 - 5);
+                    Global.검사자료.검사결과계산((int)this.구분 - 5);
                     return true;
                 }
                 else if (this.구분 == Flow구분.공트레이검사)
@@ -287,9 +287,10 @@ namespace SamhwaInspectionNeo.Schemas
                         this.imageSourceModuleTool.SetImageData(imageBaseData);
                     this.Procedure.Run();
                     this.SetResult(this.구분, Front == 1 ? 지그위치.Front : 지그위치.Rear); //1이면 Front지그, 0이면 Rear지그
+                    if (Global.환경설정.동작구분 == 동작구분.LocalTest)
+                        Global.검사자료.검사결과계산((int)this.구분);
 
-                    //검사결과 검사 = Global.검사자료.검사결과계산((int)this.구분);
-                    return true; 
+                    return true;
                 }
             }
             catch (Exception ex)
