@@ -110,7 +110,7 @@ namespace SamhwaInspectionNeo.Schemas
             try
             {
                 통신포트.Write($"{STX}{Command}{ETX}");
-                Debug.WriteLine($"{STX}{Command}{ETX}".Trim(), 구분);
+                //Debug.WriteLine($"{STX}{Command}{ETX}".Trim(), 구분);
                 return true;
             }
             catch (Exception ex)
