@@ -312,7 +312,7 @@ namespace SamhwaInspectionNeo.Schemas
             검사.플로우 = 구분;
             검사.지그 = 지그;
             검사.결과값 = (Decimal)Math.Round(value, Global.환경설정.결과자릿수);
-            검사.측정값 = 검사.결과값;
+            검사.측정값 = 검사.결과값 + 검사.보정값;
             Boolean ok = 검사.결과값 >= 검사.최소값 && 검사.결과값 <= 검사.최대값;
             검사.측정결과 = ok ? 결과구분.OK : 결과구분.NG;
 

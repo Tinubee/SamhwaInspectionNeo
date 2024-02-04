@@ -113,26 +113,8 @@ namespace SamhwaInspectionNeo.Schemas
         }
         public void 검사결과전송()
         {
-            //Int32 검사코드 = this.검사위치번호(정보주소.상부치수검사카메라트리거);
-            //if (검사코드 < 0) return;
-            //if (검사코드 <= 0) { 강제결과전송(false); return; }
-            //검사결과 검사 = Global.검사자료.검사결과계산(검사코드);
-            //if (검사 == null) { 강제결과전송(false); return; }
-            //// 강제 OK
-            //강제결과전송(true); return;
-            //Boolean ok = 검사.측정결과 == 결과구분.OK;
-            //if (ok)
-            //{
-                //this.불량결과쓰기 = 0;
-            //}
-            //else
-            //{
-                //this.양품결과쓰기 = 0;
-                //this.불량결과쓰기 = 검사.CTQ결과 != 결과구분.OK ? 1 : 2;
-            //}
-            //this.양품여부요청 = ok;
-            //this.불량여부요청 = !ok;
-            //this.검사결과요청 = false;
+            for (Int32 검사코드 = 0; 검사코드 < 4; 검사코드++)
+                Global.검사자료.검사결과계산(검사코드);
         }
         public void 지그위치체크()
         {
@@ -172,12 +154,11 @@ namespace SamhwaInspectionNeo.Schemas
                 new Thread(() =>
                 {
                     Global.조명제어.TurnOn(카메라구분.Cam03);
-                    if (Global.신호제어.Front지그)
-                        Global.그랩제어.Ready(카메라구분.Cam03);
+                    Global.그랩제어.Ready(카메라구분.Cam03);
                 }).Start();
                 신호쓰기(정보주소.상부표면검사카메라트리거, 0);
             }
-          
+
             // 트레이 검사 카메라 영상취득 시작
             if (트레이확인검사번호 > 0)
             {

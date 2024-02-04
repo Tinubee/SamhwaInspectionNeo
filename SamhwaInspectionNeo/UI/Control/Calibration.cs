@@ -114,7 +114,7 @@ namespace SamhwaInspectionNeo.UI.Control
             //현재날짜 데이터 가져와서 Flow / Jig Check후 가장 최신데이터 불러오기.
             List<검사결과> 자료 = Global.검사자료.테이블.Select();
 
-            if (자료.Count == 0l) return;
+            if (자료.Count == 0) return;
 
             for (int lop = 0; lop < 자료[0].검사내역.Count; lop++)
             {

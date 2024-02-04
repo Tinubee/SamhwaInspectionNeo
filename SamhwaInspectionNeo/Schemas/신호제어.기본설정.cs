@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using static SamhwaInspectionNeo.Schemas.검사자료;
 
 namespace SamhwaInspectionNeo.Schemas
 {
@@ -122,6 +123,7 @@ namespace SamhwaInspectionNeo.Schemas
         // 트리거 입력 시 버퍼에 입력
         private Dictionary<정보주소, Int32> 인덱스버퍼 = new Dictionary<정보주소, Int32>();
         #endregion
+       
         #endregion
 
         #region 기본함수
@@ -129,6 +131,7 @@ namespace SamhwaInspectionNeo.Schemas
         {
             this.PLC = new ActUtlType64();
             this.PLC.ActLogicalStationNumber = 스테이션번호;
+            Global.검사자료.검사완료알림 += 검사완료알림;
             if (Global.환경설정.동작구분 == 동작구분.Live)
             {
                 this.입출자료.Init(new Action<정보주소, Int32>((주소, 값) => 자료전송(주소, 값)));
@@ -136,6 +139,14 @@ namespace SamhwaInspectionNeo.Schemas
             else this.입출자료.Init(null);
         }
         public void Close() { this.Stop(); }
+
+        private void 검사완료알림(검사결과 결과)
+        {
+            Boolean ok = 결과.측정결과 == 결과구분.OK;
+            Debug.WriteLine($"{결과.검사코드} 검사결과 : {결과.측정결과}");
+            Global.신호제어.SetDevice($"W000{결과.검사코드}", ok ? 1 : 2, out Int32 오류);
+            통신오류알림(오류);
+        }
 
         public void Start()
         {
@@ -225,7 +236,7 @@ namespace SamhwaInspectionNeo.Schemas
         private Boolean SetDevice(String Address, Int32 Data, out Int32 오류코드)
         {
             오류코드 = PLC.SetDevice(Address, Data);
-            //Debug.WriteLine($"{Data}, {오류코드}", Address);
+            Debug.WriteLine($"{Data}, {오류코드}", Address);
             return 오류코드 == 0;
         }
 
@@ -390,26 +401,5 @@ namespace SamhwaInspectionNeo.Schemas
             }
         }
         #endregion
-
-        //public class 입력신호자료 : List<입력신호정보>
-        //{
-        //    public 입력신호자료()
-        //    {
-        //        foreach (신호제어.정보주소 번호 in typeof(신호제어.정보주소).GetEnumValues())
-        //        {
-        //            if (MvUtils.Utils.GetAttribute<TranslationAttribute>(번호) == null) continue;
-        //            this.Add(new 입력신호정보() { 구분 = 번호 });
-
-        //        }
-        //    }
-        //}
-
-        //public class 입력신호정보
-        //{
-        //    public 신호제어.정보주소 구분 { get; set; }
-        //    public Int32 번호 { get { return (Int32)구분; } }
-        //    public String 명칭 { get { return Localization.GetString(this.구분); } }
-        //    public Boolean 여부 { get { return Global.신호제어.신호읽기(구분); } }
-        //}
     }
 }

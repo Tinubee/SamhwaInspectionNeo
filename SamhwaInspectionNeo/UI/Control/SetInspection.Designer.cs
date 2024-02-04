@@ -394,6 +394,8 @@
             this.col보정값.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.col보정값.FieldName = "보정값";
             this.col보정값.Name = "col보정값";
+            this.col보정값.Visible = true;
+            this.col보정값.VisibleIndex = 9;
             // 
             // col교정값
             // 
@@ -409,7 +411,7 @@
             this.col측정값.FieldName = "측정값";
             this.col측정값.Name = "col측정값";
             this.col측정값.Visible = true;
-            this.col측정값.VisibleIndex = 9;
+            this.col측정값.VisibleIndex = 10;
             // 
             // col결과값
             // 
@@ -418,7 +420,7 @@
             this.col결과값.FieldName = "결과값";
             this.col결과값.Name = "col결과값";
             this.col결과값.Visible = true;
-            this.col결과값.VisibleIndex = 10;
+            this.col결과값.VisibleIndex = 11;
             // 
             // ｅ교정계산
             // 

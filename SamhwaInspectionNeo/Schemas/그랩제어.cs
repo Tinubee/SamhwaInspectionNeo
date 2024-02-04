@@ -209,7 +209,7 @@ namespace SamhwaInspectionNeo.Schemas
                             this.카메라1.splitImage[lop] = new Mat(this.카메라1.mergedImage, this.카메라1.roi[lop]);
                             Int32 검사코드 = Convert.ToInt32((Flow구분)lop);
                             검사결과 검사 = Global.검사자료.검사시작(검사코드);
-                            결과구분 결과 = Global.VM제어.GetItem((Flow구분)lop).Run(this.카메라1.splitImage[lop], null);
+                            Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop).Run(this.카메라1.splitImage[lop], null);
                             Debug.WriteLine($"치수검사 결과 {lop} : {결과}");
                             //이미지 저장함수 추가하면됨.
                             this.ImageSave(this.카메라1.splitImage[lop], 카메라구분.Cam01, lop, 결과);
@@ -262,7 +262,7 @@ namespace SamhwaInspectionNeo.Schemas
                 {
                     for (int lop = 0; lop < this.카메라3.MatImage.Count; lop++)
                     {
-                        결과구분 결과 = Global.VM제어.GetItem((Flow구분)lop + 5).Run(이미지[lop], null);
+                        Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop + 5).Run(이미지[lop], null);
                         Debug.WriteLine($"표면검사 결과 {lop} : {결과}");
                         //이미지 저장함수 추가하면됨.
                         this.ImageSave(이미지[lop], 카메라구분.Cam03, lop, 결과);
@@ -304,7 +304,7 @@ namespace SamhwaInspectionNeo.Schemas
         }
 
 
-        public void ImageSave(Mat 이미지, 카메라구분 카메라, Int32 검사번호, 결과구분 결과)
+        public void ImageSave(Mat 이미지, 카메라구분 카메라, Int32 검사번호, Boolean 결과)
         {
             if (!Global.환경설정.사진저장OK && !Global.환경설정.사진저장NG) return;
             List<String> paths = new List<String> { Global.환경설정.사진저장경로, MvUtils.Utils.FormatDate(DateTime.Now, "{0:yyyy-MM-dd}"), Global.환경설정.선택모델.ToString(), 카메라.ToString() };
