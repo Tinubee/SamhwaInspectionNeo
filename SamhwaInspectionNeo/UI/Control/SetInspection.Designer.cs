@@ -171,6 +171,7 @@
             this.b수동검사.Appearance.Font = new System.Drawing.Font("맑은 고딕", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.b수동검사.Appearance.Options.UseFont = true;
             this.b수동검사.Dock = System.Windows.Forms.DockStyle.Left;
+            this.b수동검사.ImageOptions.SvgImage = global::SamhwaInspectionNeo.Properties.Resources.bo_security_permission_action;
             this.b수동검사.Location = new System.Drawing.Point(746, 5);
             this.b수동검사.Name = "b수동검사";
             this.b수동검사.Size = new System.Drawing.Size(195, 42);
@@ -189,6 +190,7 @@
             this.b교정값계산.Size = new System.Drawing.Size(195, 42);
             this.b교정값계산.TabIndex = 11;
             this.b교정값계산.Text = "교정값 계산";
+            this.b교정값계산.Visible = false;
             // 
             // b도구설정
             // 

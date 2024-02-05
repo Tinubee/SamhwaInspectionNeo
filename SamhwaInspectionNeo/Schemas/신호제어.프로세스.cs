@@ -118,6 +118,8 @@ namespace SamhwaInspectionNeo.Schemas
         }
         public void 지그위치체크()
         {
+            Debug.WriteLine($"Front 지그 신호 : {Global.신호제어.Front지그}");
+            Debug.WriteLine($"Rear 지그 신호 : {Global.신호제어.Rear지그}");
             if (Global.신호제어.Front지그)
             {
                 Global.VM제어.글로벌변수제어.SetValue("Front지그", "1");

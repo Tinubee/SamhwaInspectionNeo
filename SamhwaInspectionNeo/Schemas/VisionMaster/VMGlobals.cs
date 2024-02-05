@@ -84,7 +84,8 @@ namespace SamhwaInspectionNeo.Schemas
 
         public void SetValue(String name, String value)
         {
-            this.Where(e => e.Name == name).FirstOrDefault().StringValue = value;
+            this.Variables.SetGlobalVar(name, value);
+            //this.Where(e => e.Name == name).FirstOrDefault().StringValue = value;
         }
     }
 

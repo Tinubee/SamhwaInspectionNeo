@@ -18,8 +18,8 @@ namespace SamhwaInspectionNeo.UI.Control
 {
     public partial class Calibration : XtraUserControl
     {
+        String 로그영역 = "보정값설정";
         private 지그위치 위치 { get; set; } = 지그위치.Front;
-
         private Flow구분 플로우 { get; set; } = Flow구분.Flow1;
         BindingList<결과정보> 결과정보리스트 = new BindingList<결과정보>();
         private bool isCalculating = false;
@@ -111,24 +111,32 @@ namespace SamhwaInspectionNeo.UI.Control
         public void Close() { }
         private void 자료조회(object sender, EventArgs e)
         {
+            this.결과정보리스트.Clear();
+            GridControl1.DataSource = null;
             //현재날짜 데이터 가져와서 Flow / Jig Check후 가장 최신데이터 불러오기.
             List<검사결과> 자료 = Global.검사자료.테이블.Select();
 
             if (자료.Count == 0) return;
 
-            for (int lop = 0; lop < 자료[0].검사내역.Count; lop++)
+            검사결과 선택자료 = 자료.Where(w => w.검사코드 == (Int32)this.플로우 && w.검사내역[0].지그 == this.위치).FirstOrDefault();
+
+            if (선택자료 == null)
+            {
+                Global.오류로그(로그영역, "자료조회오류", $"{this.플로우} - {this.위치}지그에 대한 검사데이터가 없습니다.\n", true);
+                return;
+            }
+
+            for (int lop = 0; lop < 선택자료.검사내역.Count; lop++)
             {
                 결과정보 조회정보 = new 결과정보();
-                검사정보 정보 = 자료[0].검사내역[lop];
+                검사정보 정보 = 선택자료.검사내역[lop];
                 조회정보.측정값 = 정보.측정값;
                 조회정보.검사항목 = 정보.검사항목;
                 조회정보.검사장치 = 정보.검사장치;
                 조회정보.측정단위 = 정보.측정단위;
-                결과정보리스트.Add(조회정보);
+                this.결과정보리스트.Add(조회정보);
             }
-
-            GridControl1.DataSource = null;
-            GridControl1.DataSource = 결과정보리스트;
+            GridControl1.DataSource = this.결과정보리스트;
         }
         private void 교정값계산(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
@@ -157,18 +165,12 @@ namespace SamhwaInspectionNeo.UI.Control
             }
 
             //VM Slot쪽에 넣어주기 //Flow와 Jig & 이름 체크.
-            if (name.ToString().Contains("Slot1"))
-            {
-                string setName = $"{this.위치}{name}";
-                Global.VM제어.GetItem(this.플로우).slot1ShellModuleTool.ModuParams.SetInputFloat(setName, calvalue);
-                Global.VM제어.GetItem(this.플로우).slot1ShellModuleTool.ResetParam();
-                //Global.VM제어.GetItem(this.플로우).slot1ShellModuleTool.Save();
-                //Global.VM제어.GetItem(this.플로우).slot1ShellModuleTool.Run();
-                //Global.VM제어.GetItem(this.플로우).slot1ShellModuleTool.ReFlashReadyState();
-                //Global.VM제어.GetItem(this.플로우).slot1ShellModuleTool.ResetParam();
-                //Global.VM제어.GetItem(this.플로우).slot1ShellModuleTool.RefreshResultForce();
+            string setName = $"{this.위치}{name}";
 
-            }
+            //Global.VM제어.GetItem(this.플로우).Procedure.Inputs[0].Value =  calvalue;
+
+            Global.VM제어.GetItem(this.플로우).slot1ShellModuleTool.ModuParams.SetInputFloat(setName, calvalue);
+            //Global.VM제어.GetItem(this.플로우).slot1ShellModuleTool.ResetParam();
         }
     }
 

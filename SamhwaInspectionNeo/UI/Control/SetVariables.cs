@@ -35,6 +35,9 @@ namespace SamhwaInspectionNeo.UI.Control
             this.GridView1.AddEditSelectionMenuItem();
             this.GridView1.AddSelectPopMenuItems();
             this.GridControl1.DataSource = Global.VM제어.글로벌변수제어;
+
+            this.colValue.DisplayFormat.FormatString = Global.환경설정.결과표현;
+
             this.b도구설정.Click += 도구설정;
             this.b도구저장.Click += 도구저장;
             this.b설정적용.Click += 설정적용;

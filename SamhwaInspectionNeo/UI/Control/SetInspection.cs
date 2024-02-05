@@ -57,13 +57,12 @@ namespace SamhwaInspectionNeo.UI.Control
 
             Global.환경설정.모델변경알림 += 모델변경알림;
 
-
             Localization.SetColumnCaption(this.e모델선택, typeof(모델정보));
             Localization.SetColumnCaption(this.GridView1, typeof(검사정보));
             this.b설정저장.Text = 번역.설정저장;
             //this.모델선택(this.e모델선택, (DevExpress.XtraEditors.Controls.ChangingEventArgs)EventArgs.Empty);
             this.b도구설정.Click += B도구설정_Click;
-            this.b교정값계산.Click += B교정값계산_Click;
+            //his.b교정값계산.Click += B교정값계산_Click;
             this.b수동검사.Click += B수동검사_Click;
             Loading = false;
         }
@@ -85,22 +84,41 @@ namespace SamhwaInspectionNeo.UI.Control
             this.GridView1.RefreshData();
         }
 
-        private void B교정값계산_Click(object sender, EventArgs e)
-        {
-            검사설정자료 자료 = Global.모델자료.GetItem(Global.환경설정.선택모델)?.검사설정;
-            foreach (var item in 자료)
-            {
-                if(item.교정값 == 1 && item.측정값 > 0 && item.검사장치 == 장치구분.Cam01)
-                {
-                    item.교정값 =Convert.ToDecimal((item.측정값 / item.결과값).ToString("F4"));
-                }
-            }
-            this.GridView1.RefreshData();
-        }
+        //private void B교정값계산_Click(object sender, EventArgs e)
+        //{
+        //    검사설정자료 자료 = Global.모델자료.GetItem(Global.환경설정.선택모델)?.검사설정;
+        //    foreach (var item in 자료)
+        //    {
+        //        if(item.교정값 == 1 && item.측정값 > 0 && item.검사장치 == 장치구분.Cam01)
+        //        {
+        //            item.교정값 =Convert.ToDecimal((item.측정값 / item.결과값).ToString("F4"));
+        //        }
+        //    }
+        //    this.GridView1.RefreshData();
+        //}
 
         private void GridView1_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
-            GridView view = sender as GridView;
+            int rowIndex = e.RowHandle;
+
+            object 최소값 = GridView1.GetRowCellValue(rowIndex, "최소값");
+            object 최대값 = GridView1.GetRowCellValue(rowIndex, "최대값");
+            object 검사항목 = GridView1.GetRowCellValue(rowIndex, "검사항목");
+
+            if (검사항목.ToString().Contains("Slot"))
+            {
+                Global.VM제어.글로벌변수제어.SetValue("슬롯부최소값", $"{최소값}");
+                Global.VM제어.글로벌변수제어.SetValue("슬롯부최대값", $"{최대값}");
+            }
+            else if (검사항목.ToString().Contains("홀경"))
+            {
+                Global.VM제어.글로벌변수제어.SetValue("홀경최소값", $"{최소값}");
+                Global.VM제어.글로벌변수제어.SetValue("홀경최대값", $"{최대값}");
+            }
+
+            Global.VM제어.Save();
+            Global.VM제어.글로벌변수제어.Init();
+            Global.MainForm.e변수설정.UpdateGridView();
         }
 
         public void Close() { }

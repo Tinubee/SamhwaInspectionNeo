@@ -515,6 +515,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\bo_security_permission_action.svg" />
     <None Include="Resources\properties.svg" />
     <None Include="Resources\insertcombobox.svg" />
     <None Include="Resources\pivottablecalculationsfieldsitemssetsgroup.svg" />
