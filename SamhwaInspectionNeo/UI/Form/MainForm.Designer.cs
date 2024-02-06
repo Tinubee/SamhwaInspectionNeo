@@ -52,12 +52,12 @@
             this.p검사내역 = new DevExpress.XtraBars.TabFormPage();
             this.tabFormContentContainer4 = new DevExpress.XtraBars.TabFormContentContainer();
             this.e검사내역 = new SamhwaInspectionNeo.UI.Controls.Results();
-            this.p로그내역 = new DevExpress.XtraBars.TabFormPage();
-            this.tabFormContentContainer3 = new DevExpress.XtraBars.TabFormContentContainer();
-            this.e로그내역 = new SamhwaInspectionNeo.UI.Controls.LogViewer();
             this.p마스터검사내역 = new DevExpress.XtraBars.TabFormPage();
             this.tabFormContentContainer5 = new DevExpress.XtraBars.TabFormContentContainer();
             this.e마스터검사내역 = new SamhwaInspectionNeo.UI.Controls.ResultsMaster();
+            this.p로그내역 = new DevExpress.XtraBars.TabFormPage();
+            this.tabFormContentContainer3 = new DevExpress.XtraBars.TabFormContentContainer();
+            this.e로그내역 = new SamhwaInspectionNeo.UI.Controls.LogViewer();
             this.setMasterInspection1 = new SamhwaInspectionNeo.UI.Control.SetMasterInspection();
             ((System.ComponentModel.ISupportInitialize)(this.tabFormControl1)).BeginInit();
             this.tabFormContentContainer1.SuspendLayout();
@@ -69,8 +69,8 @@
             this.t변수설정.SuspendLayout();
             this.t장치설정.SuspendLayout();
             this.tabFormContentContainer4.SuspendLayout();
-            this.tabFormContentContainer3.SuspendLayout();
             this.tabFormContentContainer5.SuspendLayout();
+            this.tabFormContentContainer3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabFormControl1
@@ -96,7 +96,7 @@
             this.tabFormControl1.Pages.Add(this.p검사내역);
             this.tabFormControl1.Pages.Add(this.p마스터검사내역);
             this.tabFormControl1.Pages.Add(this.p로그내역);
-            this.tabFormControl1.SelectedPage = this.p마스터검사내역;
+            this.tabFormControl1.SelectedPage = this.p환경설정;
             this.tabFormControl1.ShowAddPageButton = false;
             this.tabFormControl1.ShowTabCloseButtons = false;
             this.tabFormControl1.ShowTabsInTitleBar = DevExpress.XtraBars.ShowTabsInTitleBar.True;
@@ -200,7 +200,7 @@
             // 
             this.t검사설정.Controls.Add(this.e검사설정);
             this.t검사설정.Name = "t검사설정";
-            this.t검사설정.Size = new System.Drawing.Size(1918, 980);
+            this.t검사설정.Size = new System.Drawing.Size(1918, 979);
             this.t검사설정.Text = "검사설정";
             // 
             // e검사설정
@@ -208,14 +208,14 @@
             this.e검사설정.Dock = System.Windows.Forms.DockStyle.Fill;
             this.e검사설정.Location = new System.Drawing.Point(0, 0);
             this.e검사설정.Name = "e검사설정";
-            this.e검사설정.Size = new System.Drawing.Size(1918, 980);
+            this.e검사설정.Size = new System.Drawing.Size(1918, 979);
             this.e검사설정.TabIndex = 0;
             // 
             // t마스터설정
             // 
             this.t마스터설정.Controls.Add(this.e마스터설정);
             this.t마스터설정.Name = "t마스터설정";
-            this.t마스터설정.Size = new System.Drawing.Size(1918, 980);
+            this.t마스터설정.Size = new System.Drawing.Size(1918, 979);
             this.t마스터설정.Text = "마스터설정";
             // 
             // e마스터설정
@@ -223,14 +223,14 @@
             this.e마스터설정.Dock = System.Windows.Forms.DockStyle.Fill;
             this.e마스터설정.Location = new System.Drawing.Point(0, 0);
             this.e마스터설정.Name = "e마스터설정";
-            this.e마스터설정.Size = new System.Drawing.Size(1918, 980);
+            this.e마스터설정.Size = new System.Drawing.Size(1918, 979);
             this.e마스터설정.TabIndex = 0;
             // 
             // t변수설정
             // 
             this.t변수설정.Controls.Add(this.e변수설정);
             this.t변수설정.Name = "t변수설정";
-            this.t변수설정.Size = new System.Drawing.Size(1918, 980);
+            this.t변수설정.Size = new System.Drawing.Size(1918, 979);
             this.t변수설정.Text = "변수설정";
             // 
             // e변수설정
@@ -238,14 +238,14 @@
             this.e변수설정.Dock = System.Windows.Forms.DockStyle.Fill;
             this.e변수설정.Location = new System.Drawing.Point(0, 0);
             this.e변수설정.Name = "e변수설정";
-            this.e변수설정.Size = new System.Drawing.Size(1918, 980);
+            this.e변수설정.Size = new System.Drawing.Size(1918, 979);
             this.e변수설정.TabIndex = 0;
             // 
             // t장치설정
             // 
             this.t장치설정.Controls.Add(this.e장치설정);
             this.t장치설정.Name = "t장치설정";
-            this.t장치설정.Size = new System.Drawing.Size(1918, 980);
+            this.t장치설정.Size = new System.Drawing.Size(1918, 979);
             this.t장치설정.Text = "장치설정";
             // 
             // e장치설정
@@ -253,7 +253,7 @@
             this.e장치설정.Dock = System.Windows.Forms.DockStyle.Fill;
             this.e장치설정.Location = new System.Drawing.Point(0, 0);
             this.e장치설정.Name = "e장치설정";
-            this.e장치설정.Size = new System.Drawing.Size(1918, 980);
+            this.e장치설정.Size = new System.Drawing.Size(1918, 979);
             this.e장치설정.TabIndex = 1;
             // 
             // p검사내역
@@ -280,6 +280,30 @@
             this.e검사내역.Size = new System.Drawing.Size(1920, 1010);
             this.e검사내역.TabIndex = 0;
             // 
+            // p마스터검사내역
+            // 
+            this.p마스터검사내역.ContentContainer = this.tabFormContentContainer5;
+            this.p마스터검사내역.ImageOptions.SvgImage = global::SamhwaInspectionNeo.Properties.Resources.insertcombobox;
+            this.p마스터검사내역.Name = "p마스터검사내역";
+            this.p마스터검사내역.Text = "마스터검사내역";
+            // 
+            // tabFormContentContainer5
+            // 
+            this.tabFormContentContainer5.Controls.Add(this.e마스터검사내역);
+            this.tabFormContentContainer5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabFormContentContainer5.Location = new System.Drawing.Point(0, 30);
+            this.tabFormContentContainer5.Name = "tabFormContentContainer5";
+            this.tabFormContentContainer5.Size = new System.Drawing.Size(1920, 1010);
+            this.tabFormContentContainer5.TabIndex = 4;
+            // 
+            // e마스터검사내역
+            // 
+            this.e마스터검사내역.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.e마스터검사내역.Location = new System.Drawing.Point(0, 0);
+            this.e마스터검사내역.Name = "e마스터검사내역";
+            this.e마스터검사내역.Size = new System.Drawing.Size(1920, 1010);
+            this.e마스터검사내역.TabIndex = 0;
+            // 
             // p로그내역
             // 
             this.p로그내역.ContentContainer = this.tabFormContentContainer3;
@@ -305,30 +329,6 @@
             this.e로그내역.Size = new System.Drawing.Size(1920, 1010);
             this.e로그내역.TabIndex = 0;
             // 
-            // p마스터검사내역
-            // 
-            this.p마스터검사내역.ContentContainer = this.tabFormContentContainer5;
-            this.p마스터검사내역.ImageOptions.SvgImage = global::SamhwaInspectionNeo.Properties.Resources.insertcombobox;
-            this.p마스터검사내역.Name = "p마스터검사내역";
-            this.p마스터검사내역.Text = "마스터검사내역";
-            // 
-            // tabFormContentContainer5
-            // 
-            this.tabFormContentContainer5.Controls.Add(this.e마스터검사내역);
-            this.tabFormContentContainer5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabFormContentContainer5.Location = new System.Drawing.Point(0, 30);
-            this.tabFormContentContainer5.Name = "tabFormContentContainer5";
-            this.tabFormContentContainer5.Size = new System.Drawing.Size(1920, 1010);
-            this.tabFormContentContainer5.TabIndex = 4;
-            // 
-            // e마스터검사내역
-            // 
-            this.e마스터검사내역.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.e마스터검사내역.Location = new System.Drawing.Point(0, 0);
-            this.e마스터검사내역.Name = "e마스터검사내역";
-            this.e마스터검사내역.Size = new System.Drawing.Size(1920, 1010);
-            this.e마스터검사내역.TabIndex = 0;
-            // 
             // setMasterInspection1
             // 
             this.setMasterInspection1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -347,7 +347,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1920, 1040);
-            this.Controls.Add(this.tabFormContentContainer5);
+            this.Controls.Add(this.tabFormContentContainer2);
             this.Controls.Add(this.tabFormControl1);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -365,8 +365,8 @@
             this.t변수설정.ResumeLayout(false);
             this.t장치설정.ResumeLayout(false);
             this.tabFormContentContainer4.ResumeLayout(false);
-            this.tabFormContentContainer3.ResumeLayout(false);
             this.tabFormContentContainer5.ResumeLayout(false);
+            this.tabFormContentContainer3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

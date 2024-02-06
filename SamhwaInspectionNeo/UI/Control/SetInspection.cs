@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using MvUtils;
 using System.Drawing.Text;
 using static SamhwaInspectionNeo.Schemas.신호제어;
+using OpenCvSharp;
 
 namespace SamhwaInspectionNeo.UI.Control
 {
@@ -72,18 +73,22 @@ namespace SamhwaInspectionNeo.UI.Control
             CalibrationFrom CalForm = new CalibrationFrom();
             CalForm.StartPosition = FormStartPosition.CenterParent;
             CalForm.Init();
-            CalForm.ShowDialog();
+            CalForm.Show();
         }
 
         private void B수동검사_Click(object sender, EventArgs e)
         {
             Int32 검사코드 = (int)Flow구분.Flow1;
-
+            Global.VM제어.GetItem(Flow구분.Flow1).imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceModuleCs.ImageSourceParam.ImageSourceTypeEnum.LocalImage;
             검사코드 = Global.신호제어.마스터모드여부 ? 검사코드 + 100 : 검사코드;
-            검사결과 검사 = Global.검사자료.검사시작(검사코드);
-            Global.VM제어.GetItem(Flow구분.Flow1).Run(null, null);
+            Global.검사자료.검사시작(검사코드);
+
+            Mat Image =  Global.모델자료.GetItem(선택모델).마스터이미지();
+
+            Global.VM제어.GetItem(Flow구분.Flow1).Run(Image, null);
             //Global.검사자료.검사결과계산(검사코드);
             this.GridView1.RefreshData();
+            Global.VM제어.GetItem(Flow구분.Flow1).imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceModuleCs.ImageSourceParam.ImageSourceTypeEnum.SDK;
         }
 
         //private void B교정값계산_Click(object sender, EventArgs e)

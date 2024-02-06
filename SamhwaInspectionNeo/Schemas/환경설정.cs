@@ -39,7 +39,7 @@ namespace SamhwaInspectionNeo.Schemas
         [JsonProperty("CurrentModel")]
         public 모델구분 선택모델 { get; set; } = 모델구분.None;
         [Translation("Model Image Path", "제품 사진 경로")] // , JsonProperty("ImagePath")
-        public String 사진경로 { get { return Path.Combine(기본경로, "Items"); } } // = @"C:\VISION\Config\Items";
+        public String 사진경로 { get { return Path.Combine(기본경로, "Master"); } } // = @"C:\VISION\Config\Master";
         [Translation("Model Movie Path", "제품 영상 경로"), JsonIgnore] //, JsonProperty("MoviePath")
         public String 영상경로 { get { return Path.Combine(기본경로, "Movie"); } }// = @"C:\VISION\Config\Movie";
         [Description("비젼 Tools"), JsonIgnore]

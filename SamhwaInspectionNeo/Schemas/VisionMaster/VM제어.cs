@@ -262,58 +262,29 @@ namespace SamhwaInspectionNeo.Schemas
             //this.결과업데이트완료 = false;
             try
             {
-                if (this.구분 == Flow구분.상부표면검사1 || this.구분 == Flow구분.상부표면검사2 || this.구분 == Flow구분.상부표면검사3 || this.구분 == Flow구분.상부표면검사4)
+                if (this.imageSourceModuleTool == null)
                 {
-                    if (this.imageSourceModuleTool == null)
-                    {
-                        Global.오류로그(로그영역, "검사오류", $"[{this.구분}] VM 검사 모델이 없습니다.", false);
-                        return false;
-                    }
-                    Int32 Front = Convert.ToInt32(Global.VM제어.글로벌변수제어.GetValue("Front지그"));
-
-                    imageBaseData = mat == null ? imageBaseData : MatToImageBaseData(mat);
-                    if (imageBaseData != null)
-                        this.imageSourceModuleTool.SetImageData(imageBaseData);
-
-                    this.Procedure.Run();
-                    this.SetResult(this.구분, Front == 1 ? 지그위치.Front : 지그위치.Rear); //1이면 Front지그, 0이면 Rear지그
-                    Global.검사자료.검사결과계산((int)this.구분 - 5);
-                    return true;
+                    Global.오류로그(로그영역, "검사오류", $"[{this.구분}] VM 검사 모델이 없습니다.", false);
+                    return false;
                 }
-                else if (this.구분 == Flow구분.공트레이검사)
+                Int32 Front = Convert.ToInt32(Global.VM제어.글로벌변수제어.GetValue("Front지그"));
+
+                imageBaseData = mat == null ? imageBaseData : MatToImageBaseData(mat);
+                if (imageBaseData != null)
+                    this.imageSourceModuleTool.SetImageData(imageBaseData);
+
+                this.Procedure.Run();
+
+                if (this.구분 == Flow구분.공트레이검사)
                 {
-                    if (this.imageSourceModuleTool == null)
-                    {
-                        Global.오류로그(로그영역, "검사오류", $"[{this.구분}] VM 검사 모델이 없습니다.", false);
-                        return false;
-                    }
-
-                    imageBaseData = mat == null ? imageBaseData : MatToImageBaseData(mat);
-                    if (imageBaseData != null)
-                        this.imageSourceModuleTool.SetImageData(imageBaseData);
-
-                    this.Procedure.Run();
                     Boolean 트레이검사결과 = this.GetResult(this.구분);
                     return 트레이검사결과;
                 }
                 else
                 {
-                    if (this.imageSourceModuleTool == null)
-                    {
-                        Global.오류로그(로그영역, "검사오류", $"[{this.구분}] VM 검사 모델이 없습니다.", false);
-                        return false;
-                    }
-
-                    Int32 Front = Convert.ToInt32(Global.VM제어.글로벌변수제어.GetValue("Front지그"));
-
-                    imageBaseData = mat == null ? imageBaseData : MatToImageBaseData(mat);
-                    if (imageBaseData != null)
-                        this.imageSourceModuleTool.SetImageData(imageBaseData);
-                    this.Procedure.Run();
+                    Int32 검사코드 = (Int32)구분 < 5 ? (Int32)구분 : (Int32)구분 - 5;
                     this.SetResult(this.구분, Front == 1 ? 지그위치.Front : 지그위치.Rear); //1이면 Front지그, 0이면 Rear지그
-                    if (Global.환경설정.동작구분 == 동작구분.LocalTest)
-                        Global.검사자료.검사결과계산((int)this.구분);
-
+                    Global.검사자료.검사결과계산(검사코드);
                     return true;
                 }
             }

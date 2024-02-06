@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using OpenCvSharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -51,15 +52,15 @@ namespace SamhwaInspectionNeo.Schemas
         [JsonIgnore]
         public String 모델코드 { get { return MvUtils.Utils.GetDescription(this.모델구분); } }
         [JsonIgnore]
-        public String 모델사진 { get { return Path.Combine(Global.환경설정.사진경로, 모델번호.ToString("d2") + ".png"); } }
+        public String 모델사진 { get { return Path.Combine(Global.환경설정.사진경로, 모델번호.ToString("d2") + ".jpg"); } }
 
         [JsonIgnore]
         public 검사설정자료 검사설정 = null;
      
-        public Image 마스터이미지()
+        public Mat 마스터이미지()
         {
             if (!File.Exists(this.모델사진)) return null;
-            return Image.FromFile(this.모델사진);
+            return Cv2.ImRead(this.모델사진, ImreadModes.Grayscale); //Image.FromFile(this.모델사진);
         }
 
         public 모델정보() { }

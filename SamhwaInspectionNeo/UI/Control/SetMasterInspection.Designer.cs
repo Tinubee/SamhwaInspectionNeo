@@ -32,16 +32,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SetMasterInspection));
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.b보정값설정 = new DevExpress.XtraEditors.SimpleButton();
-            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
-            this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
-            this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
-            this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
-            this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.b수동검사 = new DevExpress.XtraEditors.SimpleButton();
             this.b교정값계산 = new DevExpress.XtraEditors.SimpleButton();
             this.b도구설정 = new DevExpress.XtraEditors.SimpleButton();
             this.e모델선택 = new DevExpress.XtraEditors.LookUpEdit();
             this.b설정저장 = new DevExpress.XtraEditors.SimpleButton();
+            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.bind검사설정 = new System.Windows.Forms.BindingSource(this.components);
             this.bind모델자료 = new System.Windows.Forms.BindingSource(this.components);
             this.GridControl1 = new MvUtils.CustomGrid();
@@ -66,8 +66,8 @@
             this.col측정결과 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e모델선택.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bind검사설정)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bind모델자료)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridControl1)).BeginInit();
@@ -86,7 +86,7 @@
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Padding = new System.Windows.Forms.Padding(3);
-            this.panelControl1.Size = new System.Drawing.Size(1634, 52);
+            this.panelControl1.Size = new System.Drawing.Size(1634, 56);
             this.panelControl1.TabIndex = 6;
             // 
             // b보정값설정
@@ -98,49 +98,9 @@
             this.b보정값설정.ImageOptions.SvgImage = global::SamhwaInspectionNeo.Properties.Resources.properties;
             this.b보정값설정.Location = new System.Drawing.Point(1269, 5);
             this.b보정값설정.Name = "b보정값설정";
-            this.b보정값설정.Size = new System.Drawing.Size(180, 42);
+            this.b보정값설정.Size = new System.Drawing.Size(180, 46);
             this.b보정값설정.TabIndex = 14;
             this.b보정값설정.Text = "보정값설정";
-            // 
-            // barManager1
-            // 
-            this.barManager1.DockControls.Add(this.barDockControlTop);
-            this.barManager1.DockControls.Add(this.barDockControlBottom);
-            this.barManager1.DockControls.Add(this.barDockControlLeft);
-            this.barManager1.DockControls.Add(this.barDockControlRight);
-            this.barManager1.Form = this;
-            // 
-            // barDockControlTop
-            // 
-            this.barDockControlTop.CausesValidation = false;
-            this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Size = new System.Drawing.Size(1634, 0);
-            // 
-            // barDockControlBottom
-            // 
-            this.barDockControlBottom.CausesValidation = false;
-            this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 862);
-            this.barDockControlBottom.Manager = this.barManager1;
-            this.barDockControlBottom.Size = new System.Drawing.Size(1634, 0);
-            // 
-            // barDockControlLeft
-            // 
-            this.barDockControlLeft.CausesValidation = false;
-            this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlLeft.Manager = this.barManager1;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 862);
-            // 
-            // barDockControlRight
-            // 
-            this.barDockControlRight.CausesValidation = false;
-            this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1634, 0);
-            this.barDockControlRight.Manager = this.barManager1;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 862);
             // 
             // b수동검사
             // 
@@ -150,7 +110,7 @@
             this.b수동검사.ImageOptions.SvgImage = global::SamhwaInspectionNeo.Properties.Resources.bo_security_permission_action;
             this.b수동검사.Location = new System.Drawing.Point(746, 5);
             this.b수동검사.Name = "b수동검사";
-            this.b수동검사.Size = new System.Drawing.Size(195, 42);
+            this.b수동검사.Size = new System.Drawing.Size(195, 46);
             this.b수동검사.TabIndex = 12;
             this.b수동검사.Text = "수동검사";
             // 
@@ -163,7 +123,7 @@
             this.b교정값계산.ImageOptions.SvgImage = global::SamhwaInspectionNeo.Properties.Resources.pivottablecalculationsfieldsitemssetsgroup;
             this.b교정값계산.Location = new System.Drawing.Point(551, 5);
             this.b교정값계산.Name = "b교정값계산";
-            this.b교정값계산.Size = new System.Drawing.Size(195, 42);
+            this.b교정값계산.Size = new System.Drawing.Size(195, 46);
             this.b교정값계산.TabIndex = 11;
             this.b교정값계산.Text = "교정값 계산";
             this.b교정값계산.Visible = false;
@@ -177,7 +137,7 @@
             this.b도구설정.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("b도구설정.ImageOptions.SvgImage")));
             this.b도구설정.Location = new System.Drawing.Point(379, 5);
             this.b도구설정.Name = "b도구설정";
-            this.b도구설정.Size = new System.Drawing.Size(172, 42);
+            this.b도구설정.Size = new System.Drawing.Size(172, 46);
             this.b도구설정.TabIndex = 10;
             this.b도구설정.Text = "VM 설정";
             // 
@@ -201,7 +161,7 @@
             this.e모델선택.Properties.DisplayMember = "모델구분";
             this.e모델선택.Properties.NullText = "[모델선택]";
             this.e모델선택.Properties.ValueMember = "모델구분";
-            this.e모델선택.Size = new System.Drawing.Size(374, 42);
+            this.e모델선택.Size = new System.Drawing.Size(374, 46);
             this.e모델선택.TabIndex = 9;
             // 
             // b설정저장
@@ -213,9 +173,49 @@
             this.b설정저장.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("b설정저장.ImageOptions.SvgImage")));
             this.b설정저장.Location = new System.Drawing.Point(1449, 5);
             this.b설정저장.Name = "b설정저장";
-            this.b설정저장.Size = new System.Drawing.Size(180, 42);
+            this.b설정저장.Size = new System.Drawing.Size(180, 46);
             this.b설정저장.TabIndex = 0;
             this.b설정저장.Text = "설정저장";
+            // 
+            // barManager1
+            // 
+            this.barManager1.DockControls.Add(this.barDockControlTop);
+            this.barManager1.DockControls.Add(this.barDockControlBottom);
+            this.barManager1.DockControls.Add(this.barDockControlLeft);
+            this.barManager1.DockControls.Add(this.barDockControlRight);
+            this.barManager1.Form = this;
+            // 
+            // barDockControlTop
+            // 
+            this.barDockControlTop.CausesValidation = false;
+            this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
+            this.barDockControlTop.Manager = this.barManager1;
+            this.barDockControlTop.Size = new System.Drawing.Size(1634, 0);
+            // 
+            // barDockControlBottom
+            // 
+            this.barDockControlBottom.CausesValidation = false;
+            this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 924);
+            this.barDockControlBottom.Manager = this.barManager1;
+            this.barDockControlBottom.Size = new System.Drawing.Size(1634, 0);
+            // 
+            // barDockControlLeft
+            // 
+            this.barDockControlLeft.CausesValidation = false;
+            this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
+            this.barDockControlLeft.Manager = this.barManager1;
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 924);
+            // 
+            // barDockControlRight
+            // 
+            this.barDockControlRight.CausesValidation = false;
+            this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.barDockControlRight.Location = new System.Drawing.Point(1634, 0);
+            this.barDockControlRight.Manager = this.barManager1;
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 924);
             // 
             // bind검사설정
             // 
@@ -229,11 +229,11 @@
             // 
             this.GridControl1.DataSource = this.bind검사설정;
             this.GridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.GridControl1.Location = new System.Drawing.Point(0, 52);
+            this.GridControl1.Location = new System.Drawing.Point(0, 56);
             this.GridControl1.MainView = this.GridView1;
             this.GridControl1.MenuManager = this.barManager1;
             this.GridControl1.Name = "GridControl1";
-            this.GridControl1.Size = new System.Drawing.Size(1634, 810);
+            this.GridControl1.Size = new System.Drawing.Size(1634, 868);
             this.GridControl1.TabIndex = 12;
             this.GridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.GridView1});
@@ -267,9 +267,10 @@
             this.col마스터공차,
             this.col결과값,
             this.col측정결과});
-            this.GridView1.FooterPanelHeight = 21;
+            this.GridView1.DetailHeight = 375;
+            this.GridView1.FooterPanelHeight = 22;
             this.GridView1.GridControl = this.GridControl1;
-            this.GridView1.GroupRowHeight = 21;
+            this.GridView1.GroupRowHeight = 22;
             this.GridView1.IndicatorWidth = 44;
             this.GridView1.MinColumnRowHeight = 24;
             this.GridView1.MinRowHeight = 18;
@@ -283,7 +284,7 @@
             this.GridView1.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.False;
             this.GridView1.OptionsView.ShowGroupPanel = false;
             this.GridView1.OptionsView.ShowIndicator = false;
-            this.GridView1.RowHeight = 20;
+            this.GridView1.RowHeight = 21;
             // 
             // col검사일시
             // 
@@ -431,7 +432,7 @@
             // 
             // SetMasterInspection
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.GridControl1);
             this.Controls.Add(this.panelControl1);
@@ -440,11 +441,11 @@
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.Name = "SetMasterInspection";
-            this.Size = new System.Drawing.Size(1634, 862);
+            this.Size = new System.Drawing.Size(1634, 924);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e모델선택.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bind검사설정)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bind모델자료)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridControl1)).EndInit();
