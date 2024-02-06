@@ -9,7 +9,6 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using static SamhwaInspectionNeo.UI.Control.MasterSetting;
 
 namespace SamhwaInspectionNeo.Schemas
 {
@@ -155,9 +154,13 @@ namespace SamhwaInspectionNeo.Schemas
         {
             Int32 검사코드 = (Int32)구분 < 5 ? (Int32)구분 : (Int32)구분 - 5;
 
+            검사코드 = Global.신호제어.마스터모드여부 ? 검사코드 + 100 : 검사코드;
+
             검사결과 검사 = this.검사항목찾기(검사코드);
             if (검사 == null) return null;
+
             검사.SetResult(구분, 지그, name, value);
+
             return 검사;
         }
 
@@ -166,6 +169,8 @@ namespace SamhwaInspectionNeo.Schemas
             검사결과 검사;
             //if (Global.장치상태.자동수동)
             //{
+            검사코드 = Global.신호제어.마스터모드여부 ? 검사코드 + 100 : 검사코드;
+
             검사 = this.검사항목찾기(검사코드);
             if (검사 == null)
             {
@@ -180,7 +185,7 @@ namespace SamhwaInspectionNeo.Schemas
                 this.검사스플.Remove(검사코드);
                 this.검사완료알림?.Invoke(검사);
             }
-           
+
             return 검사;
         }
         // 현재 검사중인 정보를 검색

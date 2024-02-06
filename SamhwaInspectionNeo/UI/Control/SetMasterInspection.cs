@@ -18,13 +18,13 @@ using static SamhwaInspectionNeo.Schemas.신호제어;
 
 namespace SamhwaInspectionNeo.UI.Control
 {
-    public partial class SetInspection : XtraUserControl
+    public partial class SetMasterInspection : XtraUserControl
     {
         public delegate void 검사항목선택(모델정보 모델, 검사정보 설정);
         public event 검사항목선택 검사항목변경;
         private readonly LocalizationInspection 번역 = new LocalizationInspection();
         private Boolean Loading = false;
-        public SetInspection()
+        public SetMasterInspection()
         {
             InitializeComponent();
         }
@@ -47,6 +47,8 @@ namespace SamhwaInspectionNeo.UI.Control
             this.col기준값.DisplayFormat.FormatString = Global.환경설정.결과표현;
             this.col보정값.DisplayFormat.FormatString = Global.환경설정.결과표현;
             this.col교정값.DisplayFormat.FormatString = Global.환경설정.결과표현;
+            this.col마스터값.DisplayFormat.FormatString = Global.환경설정.결과표현;
+            this.col마스터공차.DisplayFormat.FormatString = Global.환경설정.결과표현;
 
             this.e모델선택.EditValueChanging += 모델선택;
             this.e모델선택.Properties.DataSource = Global.모델자료;

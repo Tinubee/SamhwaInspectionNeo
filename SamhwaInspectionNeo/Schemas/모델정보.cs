@@ -55,6 +55,7 @@ namespace SamhwaInspectionNeo.Schemas
 
         [JsonIgnore]
         public 검사설정자료 검사설정 = null;
+     
         public Image 마스터이미지()
         {
             if (!File.Exists(this.모델사진)) return null;
@@ -203,7 +204,6 @@ namespace SamhwaInspectionNeo.Schemas
         {
             if (정보 == null) return;
             if (정보.검사설정 == null) 정보.Init();
-
             정보.검사설정.Load();
         }
 
@@ -221,7 +221,6 @@ namespace SamhwaInspectionNeo.Schemas
             정보?.검사설정?.Save();
         }
     }
-
     public class 검사설정자료 : BindingList<검사정보>
     {
         public static TranslationAttribute 로그영역 = new TranslationAttribute("Inspection Settings", "검사설정");

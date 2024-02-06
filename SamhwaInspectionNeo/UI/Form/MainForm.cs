@@ -68,9 +68,10 @@ namespace SamhwaInspectionNeo
             this.SetLocalization();
             this.e결과뷰어.Init();
             this.e검사설정.Init();
+            this.e마스터설정.Init();
             this.e장치설정.Init();
             this.e검사내역.Init();
-            //this.e검사피봇.Init();
+            this.e마스터검사내역.Init();
             this.e상태뷰어.Init();
             this.e로그내역.Init();
             this.e변수설정.Init();

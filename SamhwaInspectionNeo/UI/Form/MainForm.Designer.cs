@@ -44,6 +44,7 @@
             this.t검사설정 = new DevExpress.XtraTab.XtraTabPage();
             this.e검사설정 = new SamhwaInspectionNeo.UI.Control.SetInspection();
             this.t마스터설정 = new DevExpress.XtraTab.XtraTabPage();
+            this.e마스터설정 = new SamhwaInspectionNeo.UI.Control.SetMasterInspection();
             this.t변수설정 = new DevExpress.XtraTab.XtraTabPage();
             this.e변수설정 = new SamhwaInspectionNeo.UI.Control.SetVariables();
             this.t장치설정 = new DevExpress.XtraTab.XtraTabPage();
@@ -56,16 +57,20 @@
             this.e로그내역 = new SamhwaInspectionNeo.UI.Controls.LogViewer();
             this.p마스터검사내역 = new DevExpress.XtraBars.TabFormPage();
             this.tabFormContentContainer5 = new DevExpress.XtraBars.TabFormContentContainer();
+            this.e마스터검사내역 = new SamhwaInspectionNeo.UI.Controls.ResultsMaster();
+            this.setMasterInspection1 = new SamhwaInspectionNeo.UI.Control.SetMasterInspection();
             ((System.ComponentModel.ISupportInitialize)(this.tabFormControl1)).BeginInit();
             this.tabFormContentContainer1.SuspendLayout();
             this.tabFormContentContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.t환경설정)).BeginInit();
             this.t환경설정.SuspendLayout();
             this.t검사설정.SuspendLayout();
+            this.t마스터설정.SuspendLayout();
             this.t변수설정.SuspendLayout();
             this.t장치설정.SuspendLayout();
             this.tabFormContentContainer4.SuspendLayout();
             this.tabFormContentContainer3.SuspendLayout();
+            this.tabFormContentContainer5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabFormControl1
@@ -89,9 +94,9 @@
             this.tabFormControl1.Pages.Add(this.p검사하기);
             this.tabFormControl1.Pages.Add(this.p환경설정);
             this.tabFormControl1.Pages.Add(this.p검사내역);
-            this.tabFormControl1.Pages.Add(this.p로그내역);
             this.tabFormControl1.Pages.Add(this.p마스터검사내역);
-            this.tabFormControl1.SelectedPage = this.p환경설정;
+            this.tabFormControl1.Pages.Add(this.p로그내역);
+            this.tabFormControl1.SelectedPage = this.p마스터검사내역;
             this.tabFormControl1.ShowAddPageButton = false;
             this.tabFormControl1.ShowTabCloseButtons = false;
             this.tabFormControl1.ShowTabsInTitleBar = DevExpress.XtraBars.ShowTabsInTitleBar.True;
@@ -208,9 +213,18 @@
             // 
             // t마스터설정
             // 
+            this.t마스터설정.Controls.Add(this.e마스터설정);
             this.t마스터설정.Name = "t마스터설정";
             this.t마스터설정.Size = new System.Drawing.Size(1918, 980);
             this.t마스터설정.Text = "마스터설정";
+            // 
+            // e마스터설정
+            // 
+            this.e마스터설정.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.e마스터설정.Location = new System.Drawing.Point(0, 0);
+            this.e마스터설정.Name = "e마스터설정";
+            this.e마스터설정.Size = new System.Drawing.Size(1918, 980);
+            this.e마스터설정.TabIndex = 0;
             // 
             // t변수설정
             // 
@@ -300,11 +314,28 @@
             // 
             // tabFormContentContainer5
             // 
+            this.tabFormContentContainer5.Controls.Add(this.e마스터검사내역);
             this.tabFormContentContainer5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabFormContentContainer5.Location = new System.Drawing.Point(0, 30);
             this.tabFormContentContainer5.Name = "tabFormContentContainer5";
             this.tabFormContentContainer5.Size = new System.Drawing.Size(1920, 1010);
             this.tabFormContentContainer5.TabIndex = 4;
+            // 
+            // e마스터검사내역
+            // 
+            this.e마스터검사내역.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.e마스터검사내역.Location = new System.Drawing.Point(0, 0);
+            this.e마스터검사내역.Name = "e마스터검사내역";
+            this.e마스터검사내역.Size = new System.Drawing.Size(1920, 1010);
+            this.e마스터검사내역.TabIndex = 0;
+            // 
+            // setMasterInspection1
+            // 
+            this.setMasterInspection1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.setMasterInspection1.Location = new System.Drawing.Point(0, 0);
+            this.setMasterInspection1.Name = "setMasterInspection1";
+            this.setMasterInspection1.Size = new System.Drawing.Size(1918, 980);
+            this.setMasterInspection1.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -316,7 +347,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1920, 1040);
-            this.Controls.Add(this.tabFormContentContainer2);
+            this.Controls.Add(this.tabFormContentContainer5);
             this.Controls.Add(this.tabFormControl1);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -330,10 +361,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.t환경설정)).EndInit();
             this.t환경설정.ResumeLayout(false);
             this.t검사설정.ResumeLayout(false);
+            this.t마스터설정.ResumeLayout(false);
             this.t변수설정.ResumeLayout(false);
             this.t장치설정.ResumeLayout(false);
             this.tabFormContentContainer4.ResumeLayout(false);
             this.tabFormContentContainer3.ResumeLayout(false);
+            this.tabFormContentContainer5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -366,6 +399,9 @@
         private DevExpress.XtraBars.TabFormPage p마스터검사내역;
         private DevExpress.XtraBars.TabFormContentContainer tabFormContentContainer5;
         public UI.Control.SetInspection e검사설정;
+        private UI.Control.SetMasterInspection e마스터설정;
+        private UI.Control.SetMasterInspection setMasterInspection1;
+        private UI.Controls.ResultsMaster e마스터검사내역;
     }
 }
 

@@ -57,6 +57,8 @@ namespace SamhwaInspectionNeo.Schemas
             Front지그,
             [Address("B1019")]
             Rear지그,
+            [Address("B1021")]
+            NG리트라이, //신호가 켜져있을때 , 1이 치수NG //2 외관불량
             //[Address("B1020")]
             //수동모드,
             [Address("B1030")]

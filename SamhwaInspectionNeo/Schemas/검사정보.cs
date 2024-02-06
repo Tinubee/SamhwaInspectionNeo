@@ -8,7 +8,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using static SamhwaInspectionNeo.UI.Control.MasterSetting;
 
 namespace SamhwaInspectionNeo.Schemas
 {
@@ -219,6 +218,10 @@ namespace SamhwaInspectionNeo.Schemas
         public Decimal 교정값 { get; set; } = 1m;
         [Column("idmes"), JsonProperty("idmes"), Translation("Measure", "측정값")]
         public Decimal 측정값 { get; set; } = 0m;
+        [Column("idmaster"), JsonProperty("idmaster"), Translation("Master", "마스터값"), BatchEdit(true)]
+        public Decimal 마스터값 { get; set; } = 0m;
+        [Column("idmastertol"), JsonProperty("idmastertol"), Translation("MasterTol", "마스터공차"), BatchEdit(true)]
+        public Decimal 마스터공차 { get; set; } = 0m;
         [Column("idval"), JsonProperty("idval"), Translation("Value", "결과값")]
         public Decimal 결과값 { get; set; } = 0m;
         [Column("idres"), JsonProperty("idres"), Translation("Result", "판정")]
@@ -261,7 +264,7 @@ namespace SamhwaInspectionNeo.Schemas
         [Column("ilmcd"), JsonProperty("ilmcd"), Translation("Model", "모델")]
         public 모델구분 모델구분 { get; set; } = 모델구분.None;
         [Column("ilnum"), JsonProperty("ilnum"), Translation("Index", "번호")]
-        public Int32 검사코드 { get; set; } = 0;
+        public Int32 검사코드 { get; set; } = 0; //Flow로 검사코드설정. Master모드시+100
         [Column("ilres"), JsonProperty("ilres"), Translation("Result", "판정")]
         public 결과구분 측정결과 { get; set; } = 결과구분.NO;
         [Column("ilctq"), JsonProperty("ilctq"), Translation("CTQ", "CTQ결과")]
@@ -291,6 +294,7 @@ namespace SamhwaInspectionNeo.Schemas
             this.검사내역.Clear();
 
             검사설정자료 자료 = Global.모델자료.GetItem(this.모델구분)?.검사설정;
+
             foreach (검사정보 정보 in 자료)
                 this.검사내역.Add(new 검사정보(정보) { 검사일시 = this.검사일시 });
         }
@@ -299,6 +303,7 @@ namespace SamhwaInspectionNeo.Schemas
 
         public 검사정보 GetItem(검사항목 항목) => 검사내역.Where(e => e.검사항목 == 항목).FirstOrDefault();
         // 카메라 검사결과 적용
+        //public Boolean SetMasterResult(Flow구분 구분, 지그위치 지그, String name, Single value) => SetResult(마스터검사내역.Where(e => e.검사항목.ToString() == name).FirstOrDefault(), value, 구분, 지그);
         public Boolean SetResult(Flow구분 구분, 지그위치 지그, String name, Single value) => SetResult(검사내역.Where(e => e.검사항목.ToString() == name).FirstOrDefault(), value, 구분, 지그);
         public Boolean SetResult(검사정보 검사, Single value, Flow구분 구분, 지그위치 지그)
         {
@@ -316,24 +321,6 @@ namespace SamhwaInspectionNeo.Schemas
             Boolean ok = 검사.결과값 >= 검사.최소값 && 검사.결과값 <= 검사.최대값;
             검사.측정결과 = ok ? 결과구분.OK : 결과구분.NG;
 
-            return true;
-        }
-
-        // 일반 검사결과 적용
-        public Boolean SetResult(검사항목 항목, Single value) => SetResult(검사내역.Where(e => e.검사항목 == 항목).FirstOrDefault(), value);
-        public Boolean SetResult(String name, Single value) => SetResult(검사내역.Where(e => e.검사항목.ToString() == name).FirstOrDefault(), value);
-        public Boolean SetResult(검사정보 검사, Single value)
-        {
-            if (검사 == null) return false;
-            if (Single.IsNaN(value))
-            {
-                검사.측정결과 = 결과구분.ER;
-                return false;
-            }
-            검사.측정값 = (Decimal)Math.Round(value, Global.환경설정.결과자릿수);
-            검사.결과값 = 검사.측정값 + 검사.보정값;
-            Boolean ok = 검사.결과값 >= 검사.최소값 && 검사.결과값 <= 검사.최대값;
-            검사.측정결과 = ok ? 결과구분.OK : 결과구분.NG;
             return true;
         }
 

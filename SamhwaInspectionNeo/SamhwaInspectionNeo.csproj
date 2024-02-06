@@ -316,17 +316,23 @@
     <Compile Include="UI\Control\LogViewer.Designer.cs">
       <DependentUpon>LogViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Control\MasterSetting.cs">
+    <Compile Include="UI\Control\ResultsMaster.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Control\MasterSetting.Designer.cs">
-      <DependentUpon>MasterSetting.cs</DependentUpon>
+    <Compile Include="UI\Control\ResultsMaster.Designer.cs">
+      <DependentUpon>ResultsMaster.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Control\Results.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\Control\Results.Designer.cs">
       <DependentUpon>Results.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Control\SetMasterInspection.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Control\SetMasterInspection.Designer.cs">
+      <DependentUpon>SetMasterInspection.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Control\SetInspection.cs">
       <SubType>UserControl</SubType>
@@ -431,11 +437,14 @@
     <EmbeddedResource Include="UI\Control\LogViewer.resx">
       <DependentUpon>LogViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Control\MasterSetting.resx">
-      <DependentUpon>MasterSetting.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Control\ResultsMaster.resx">
+      <DependentUpon>ResultsMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\Results.resx">
       <DependentUpon>Results.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Control\SetMasterInspection.resx">
+      <DependentUpon>SetMasterInspection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\SetInspection.resx">
       <DependentUpon>SetInspection.cs</DependentUpon>
@@ -485,6 +494,7 @@
     <None Include="Properties\DataSources\SamhwaInspectionNeo.Schemas.검사설정자료.datasource" />
     <None Include="Properties\DataSources\SamhwaInspectionNeo.Schemas.검사자료.datasource" />
     <None Include="Properties\DataSources\SamhwaInspectionNeo.Schemas.로그자료.datasource" />
+    <None Include="Properties\DataSources\SamhwaInspectionNeo.Schemas.마스터검사설정자료.datasource" />
     <None Include="Properties\DataSources\SamhwaInspectionNeo.Schemas.모델자료.datasource" />
     <None Include="Properties\DataSources\SamhwaInspectionNeo.Schemas.신호제어.datasource" />
     <None Include="Properties\DataSources\SamhwaInspectionNeo.Schemas.카메라장치.datasource" />

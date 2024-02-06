@@ -12,7 +12,6 @@ using System.IO;
 using System.Runtime.InteropServices;
 using VM.Core;
 using VM.PlatformSDKCS;
-using static SamhwaInspectionNeo.UI.Control.MasterSetting;
 
 namespace SamhwaInspectionNeo.Schemas
 {
@@ -27,6 +26,12 @@ namespace SamhwaInspectionNeo.Schemas
         상부표면검사2,
         상부표면검사3,
         상부표면검사4,
+    }
+
+    public enum 지그위치
+    {
+        Front,
+        Rear,
     }
 
     public class VM제어 : List<비전마스터플로우>
@@ -65,6 +70,7 @@ namespace SamhwaInspectionNeo.Schemas
 
                 //모듈 콜백 Disable
                 VmSolution.Instance.DisableModulesCallback();
+                VmSolution.OnWorkStatusEvent += VmSolution_OnWorkStatusEvent;
                 //데이터 새롭게 추가
                 foreach (Flow구분 구분 in typeof(Flow구분).GetValues()) base.Add(new 비전마스터플로우(구분));
                 return true;
@@ -75,6 +81,11 @@ namespace SamhwaInspectionNeo.Schemas
                 Debug.WriteLine(e.Message, "솔루션 로드");
                 return false;
             }
+        }
+
+        private void VmSolution_OnWorkStatusEvent(ImvsSdkDefine.IMVS_MODULE_WORK_STAUS workStatusInfo)
+        {
+            Debug.WriteLine("Solution OnWork Event");
         }
 
         public 비전마스터플로우 GetItem(Flow구분 구분)

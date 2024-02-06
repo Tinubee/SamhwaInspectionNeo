@@ -207,7 +207,7 @@ namespace SamhwaInspectionNeo.Schemas
                         for (int lop = 0; lop < this.카메라1.roi.Length; lop++)
                         {
                             this.카메라1.splitImage[lop] = new Mat(this.카메라1.mergedImage, this.카메라1.roi[lop]);
-                            Int32 검사코드 = Convert.ToInt32((Flow구분)lop);
+                            Int32 검사코드 = Global.신호제어.마스터모드여부 ? Convert.ToInt32((Flow구분)lop+100) : Convert.ToInt32((Flow구분)lop);
                             검사결과 검사 = Global.검사자료.검사시작(검사코드);
                             Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop).Run(this.카메라1.splitImage[lop], null);
                             Debug.WriteLine($"치수검사 결과 {lop} : {결과}");
