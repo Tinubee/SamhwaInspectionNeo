@@ -65,12 +65,7 @@ namespace SamhwaInspectionNeo.UI.Control
             Global.VM제어.Save();
             Global.정보로그("도구설정", "설정저장", 번역.저장완료, true);
         }
-        //private void DeleteClick(object sender, ItemClickEventArgs e)
-        //{
-        //    GlobalVarInfo info = this.GetItem(this.GridView1, this.GridView1.FocusedRowHandle);
-        //    Global.VM제어.글로벌변수제어.Remove(info);
-        //}
-
+    
         private GlobalVarInfo GetItem(GridView view, Int32 RowHandle)
         {
             GlobalVarInfo info = new GlobalVarInfo();

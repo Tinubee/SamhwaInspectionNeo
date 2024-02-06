@@ -242,8 +242,6 @@
     <Compile Include="Schemas\MVSol.Enc.cs" />
     <Compile Include="Schemas\VisionMaster\VMGlobals.cs" />
     <Compile Include="Schemas\VisionMaster\VM제어.cs" />
-    <Compile Include="Schemas\VisionMaster\마스터데이터.cs" />
-    <Compile Include="Schemas\VisionMaster\보정값설정.cs" />
     <Compile Include="Schemas\검사자료.cs" />
     <Compile Include="Schemas\검사정보.cs" />
     <Compile Include="Schemas\그랩제어.cs" />

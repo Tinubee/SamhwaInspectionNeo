@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DeviceLamp));
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
-            this.e카메라4 = new DevExpress.XtraEditors.SvgImageBox();
             this.e조명장치 = new DevExpress.XtraEditors.SvgImageBox();
             this.e카메라1 = new DevExpress.XtraEditors.SvgImageBox();
             this.e카메라3 = new DevExpress.XtraEditors.SvgImageBox();
@@ -39,7 +38,6 @@
             this.e통신체크 = new DevExpress.XtraEditors.SvgImageBox();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.e카메라4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e조명장치)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e카메라1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e카메라3)).BeginInit();
@@ -58,7 +56,6 @@
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F)});
-            this.tablePanel1.Controls.Add(this.e카메라4);
             this.tablePanel1.Controls.Add(this.e조명장치);
             this.tablePanel1.Controls.Add(this.e카메라1);
             this.tablePanel1.Controls.Add(this.e카메라3);
@@ -72,31 +69,18 @@
             this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F)});
-            this.tablePanel1.Size = new System.Drawing.Size(200, 100);
+            this.tablePanel1.Size = new System.Drawing.Size(200, 107);
             this.tablePanel1.TabIndex = 1;
             this.tablePanel1.UseSkinIndents = true;
             // 
-            // e카메라4
-            // 
-            this.tablePanel1.SetColumn(this.e카메라4, 3);
-            this.e카메라4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.e카메라4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.e카메라4.Location = new System.Drawing.Point(151, 52);
-            this.e카메라4.Name = "e카메라4";
-            this.e카메라4.Size = new System.Drawing.Size(45, 44);
-            this.e카메라4.SizeMode = DevExpress.XtraEditors.SvgImageSizeMode.Zoom;
-            this.e카메라4.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("e카메라4.SvgImage")));
-            this.e카메라4.TabIndex = 17;
-            this.e카메라4.Tag = "4";
-            this.e카메라4.Text = "Camera4";
-            this.e카메라4.ToolTip = "Camera4";
-            // 
             // e조명장치
             // 
+            this.tablePanel1.SetColumn(this.e조명장치, 2);
             this.e조명장치.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.e조명장치.Location = new System.Drawing.Point(151, 4);
+            this.e조명장치.Location = new System.Drawing.Point(102, 4);
             this.e조명장치.Name = "e조명장치";
-            this.e조명장치.Size = new System.Drawing.Size(45, 44);
+            this.tablePanel1.SetRow(this.e조명장치, 0);
+            this.e조명장치.Size = new System.Drawing.Size(45, 48);
             this.e조명장치.SizeMode = DevExpress.XtraEditors.SvgImageSizeMode.Zoom;
             this.e조명장치.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("e조명장치.SvgImage")));
             this.e조명장치.TabIndex = 16;
@@ -107,9 +91,9 @@
             // 
             this.e카메라1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.e카메라1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.e카메라1.Location = new System.Drawing.Point(4, 52);
+            this.e카메라1.Location = new System.Drawing.Point(4, 56);
             this.e카메라1.Name = "e카메라1";
-            this.e카메라1.Size = new System.Drawing.Size(45, 44);
+            this.e카메라1.Size = new System.Drawing.Size(45, 47);
             this.e카메라1.SizeMode = DevExpress.XtraEditors.SvgImageSizeMode.Zoom;
             this.e카메라1.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("e카메라1.SvgImage")));
             this.e카메라1.TabIndex = 16;
@@ -121,9 +105,9 @@
             // 
             this.e카메라3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.e카메라3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.e카메라3.Location = new System.Drawing.Point(102, 52);
+            this.e카메라3.Location = new System.Drawing.Point(102, 56);
             this.e카메라3.Name = "e카메라3";
-            this.e카메라3.Size = new System.Drawing.Size(45, 44);
+            this.e카메라3.Size = new System.Drawing.Size(45, 47);
             this.e카메라3.SizeMode = DevExpress.XtraEditors.SvgImageSizeMode.Zoom;
             this.e카메라3.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("e카메라3.SvgImage")));
             this.e카메라3.TabIndex = 15;
@@ -136,7 +120,7 @@
             this.e장치통신.Dock = System.Windows.Forms.DockStyle.Fill;
             this.e장치통신.Location = new System.Drawing.Point(4, 4);
             this.e장치통신.Name = "e장치통신";
-            this.e장치통신.Size = new System.Drawing.Size(45, 44);
+            this.e장치통신.Size = new System.Drawing.Size(45, 47);
             this.e장치통신.SizeMode = DevExpress.XtraEditors.SvgImageSizeMode.Zoom;
             this.e장치통신.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("e장치통신.SvgImage")));
             this.e장치통신.TabIndex = 10;
@@ -147,9 +131,9 @@
             // 
             this.e카메라2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.e카메라2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.e카메라2.Location = new System.Drawing.Point(53, 52);
+            this.e카메라2.Location = new System.Drawing.Point(53, 56);
             this.e카메라2.Name = "e카메라2";
-            this.e카메라2.Size = new System.Drawing.Size(45, 44);
+            this.e카메라2.Size = new System.Drawing.Size(45, 47);
             this.e카메라2.SizeMode = DevExpress.XtraEditors.SvgImageSizeMode.Zoom;
             this.e카메라2.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("e카메라2.SvgImage")));
             this.e카메라2.TabIndex = 12;
@@ -160,9 +144,9 @@
             // e통신체크
             // 
             this.e통신체크.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.e통신체크.Location = new System.Drawing.Point(13, 12);
+            this.e통신체크.Location = new System.Drawing.Point(13, 13);
             this.e통신체크.Name = "e통신체크";
-            this.e통신체크.Size = new System.Drawing.Size(32, 33);
+            this.e통신체크.Size = new System.Drawing.Size(32, 35);
             this.e통신체크.SizeMode = DevExpress.XtraEditors.SvgImageSizeMode.Zoom;
             this.e통신체크.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("e통신체크.SvgImage")));
             this.e통신체크.TabIndex = 9;
@@ -175,14 +159,13 @@
             this.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.Appearance.Options.UseBackColor = true;
             this.Appearance.Options.UseForeColor = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tablePanel1);
             this.Name = "DeviceLamp";
-            this.Size = new System.Drawing.Size(200, 100);
+            this.Size = new System.Drawing.Size(200, 107);
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.e카메라4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e조명장치)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e카메라1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e카메라3)).EndInit();
@@ -202,6 +185,5 @@
         private DevExpress.XtraEditors.SvgImageBox e장치통신;
         private DevExpress.XtraEditors.SvgImageBox e카메라2;
         private DevExpress.XtraEditors.SvgImageBox e통신체크;
-        private DevExpress.XtraEditors.SvgImageBox e카메라4;
     }
 }

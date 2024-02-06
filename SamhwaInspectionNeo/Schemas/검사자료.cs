@@ -16,8 +16,6 @@ namespace SamhwaInspectionNeo.Schemas
     {
         public delegate void 검사진행알림(검사결과 결과);
         public event 검사진행알림 검사완료알림;
-        //public event 검사진행알림 현재검사변경;
-        //public event 검사진행알림 검사결과추가;
 
         [JsonIgnore]
         public static TranslationAttribute 로그영역 = new TranslationAttribute("Inspection", "검사내역");
@@ -99,13 +97,7 @@ namespace SamhwaInspectionNeo.Schemas
         private void 자료추가(검사결과 결과)
         {
             this.Insert(0, 결과);
-            //Task.Run(() => {
-            //    this.테이블.Add(결과);
-            //});
             this.테이블.Add(결과);
-            //if (Global.장치통신.자동수동여부)
-            //    this.테이블.Add(결과);
-            // 저장은 State 에서
         }
 
         public void 검사항목제거(List<검사정보> 자료) => this.테이블.Remove(자료);
@@ -135,19 +127,6 @@ namespace SamhwaInspectionNeo.Schemas
                 this.검사스플.Add(검사.검사코드, 검사);
                 Global.정보로그(로그영역.GetString(), $"검사시작", $"[{(Int32)Global.환경설정.선택모델} - {검사.검사코드}] 신규검사 시작.", false);
             }
-            //if (Global.장치통신.자동수동여부)
-            //{
-
-            //}
-            //else
-            //{
-            //    //검사 = this.수동검사;
-            //    검사.Reset();
-            //    검사.측정결과 = 결과구분.IN; // 검사중으로 바꿈
-            //}
-
-            //if (this.Count < 1 || this.현재검사찾기() == null)
-            //    this.현재검사변경?.Invoke(검사);
             return 검사;
         }
         public 검사결과 항목검사(Flow구분 구분, 지그위치 지그, String name, Single value)
@@ -164,14 +143,10 @@ namespace SamhwaInspectionNeo.Schemas
             return 검사;
         }
 
-        public 검사결과 검사결과계산(Int32 검사코드) //상부표면검사 진행완료시 해주면된다.
+        public 검사결과 검사결과계산(Int32 검사코드)
         {
-            검사결과 검사;
-            //if (Global.장치상태.자동수동)
-            //{
             검사코드 = Global.신호제어.마스터모드여부 ? 검사코드 + 100 : 검사코드;
-
-            검사 = this.검사항목찾기(검사코드);
+            검사결과 검사 = this.검사항목찾기(검사코드);
             if (검사 == null)
             {
                 Global.오류로그(로그영역.GetString(), "결과계산", $"[{(Int32)Global.환경설정.선택모델}.{검사코드}] 해당 검사가 없습니다.", false);
@@ -354,7 +329,6 @@ namespace SamhwaInspectionNeo.Schemas
         {
             DateTime 일자 = DateTime.Today.AddDays(-일수);
             String day = MvUtils.Utils.FormatDate(일자, "{0:yyyy-MM-dd}");
-            //String sql = $"DELETE FROM inspd WHERE idwdt < DATE('{day}');\nDELETE FROM inspl WHERE ilwdt < DATE('{day}');DELETE FROM inserial WHERE isday < CURRENT_DATE;";
             String sql = $"DELETE FROM inspd WHERE idwdt < DATE('{day}');\nDELETE FROM inspl WHERE ilwdt < DATE('{day}');";
             try
             {

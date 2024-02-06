@@ -26,17 +26,11 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.b검색.Click += B검색_Click;
         }
 
-        public void Shown()
-        {
-            this.GridView1.BestFitColumns();
-        }
+        public void Shown() => this.GridView1.BestFitColumns();
 
         public void Close() { }
 
-        private void B검색_Click(object sender, EventArgs e)
-        {
-            Global.로그자료.Load(this.e시작.DateTime, this.e종료.DateTime);
-        }
+        private void B검색_Click(object sender, EventArgs e) => Global.로그자료.Load(this.e시작.DateTime, this.e종료.DateTime);
 
         private class LocalizationLogs
         {

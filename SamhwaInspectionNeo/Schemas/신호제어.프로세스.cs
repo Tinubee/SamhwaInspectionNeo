@@ -60,39 +60,28 @@ namespace SamhwaInspectionNeo.Schemas
             this.입출변경알림?.Invoke();
         }
 
-        private void 제품검사수행()
-        {
-            영상촬영수행();
-            //검사결과전송();
-        }
+        private void 제품검사수행() => 영상촬영수행();
+       
         // 카메라 별 현재 검사 위치의 검사번호를 요청
         public Int32 촬영위치번호(카메라구분 구분)
         {
             if (구분 == 카메라구분.Cam01) return this.인덱스버퍼[정보주소.상부치수검사카메라트리거];
             if (구분 == 카메라구분.Cam02) return this.인덱스버퍼[정보주소.트레이확인카메라트리거];
             if (구분 == 카메라구분.Cam03) return this.인덱스버퍼[정보주소.상부표면검사카메라트리거];
-            //if (구분 == 카메라구분.Cam04) return this.인덱스버퍼[정보주소.하부표면검사카메라트리거];
             return 0;
         }
 
         private Int32 검사위치번호(정보주소 구분)
         {
-            if (!this.입출자료.Firing(구분, true, out Boolean 현재, out Boolean 변경))
-            {
-                //if (현재) 정보쓰기(구분, false);
-                return -1;
-            }
-            //if (!변경) return -1;
+            if (!this.입출자료.Firing(구분, true, out Boolean 현재, out Boolean 변경)) return -1;
 
             Int32 index = 0;
             if (구분 == 정보주소.상부치수검사카메라트리거) index = this.상부치수검사촬영번호;
             else if (구분 == 정보주소.상부표면검사카메라트리거) index = this.상부표면검사촬영번호;
-            else if (구분 == 정보주소.하부표면검사카메라트리거) index = this.하부표면검사촬영번호;
             else if (구분 == 정보주소.트레이확인카메라트리거) index = this.트레이확인촬영번호;
 
-            //Debug.WriteLine("----------------------------------");
-            if (index == 0) Global.경고로그(로그영역, 구분.ToString(), $"해당 위치에 검사할 제품이 없습니다.", false); // There are no index of products to inspect in that location.
-            //else Debug.WriteLine($"{Utils.FormatDate(DateTime.Now, "{0:HH:mm:ss.fff}")}  {구분} => {index}", "Trigger");
+            if (index == 0) Global.경고로그(로그영역, 구분.ToString(), $"해당 위치에 검사할 제품이 없습니다.", false); 
+      
             this.인덱스버퍼[구분] = index;
             return index;
         }
@@ -100,8 +89,8 @@ namespace SamhwaInspectionNeo.Schemas
         public List<Int32> 검사중인항목()
         {
             List<Int32> 대상 = new List<Int32>();
-            Int32 시작 = (Int32)정보주소.하부표면검사카메라트리거;
-            Int32 종료 = (Int32)정보주소.상부표면검사카메라트리거;
+            Int32 시작 = (Int32)정보주소.트레이확인카메라트리거;
+            Int32 종료 = (Int32)정보주소.상부치수검사카메라트리거;
             for (Int32 i = 종료; i >= 시작; i--)
             {
                 정보주소 구분 = (정보주소)i;
@@ -110,11 +99,7 @@ namespace SamhwaInspectionNeo.Schemas
             }
             return 대상;
         }
-        public void 검사결과전송()
-        {
-            for (Int32 검사코드 = 0; 검사코드 < 4; 검사코드++)
-                Global.검사자료.검사결과계산(검사코드);
-        }
+    
         public void 지그위치체크()
         {
             Debug.WriteLine($"Front 지그 신호 : {Global.신호제어.Front지그}");
@@ -172,29 +157,6 @@ namespace SamhwaInspectionNeo.Schemas
                 신호쓰기(정보주소.트레이확인카메라트리거, 0);
             }
         }
-
-        // 최종 검사 결과 보고
-        //private void 검사결과전송()
-        //{
-        //    Int32 검사번호 = this.검사위치번호(정보주소.결과요청);
-        //    if (검사번호 < 0) return;
-        //    Global.모델자료.선택모델.검사종료(검사번호);
-        //    Task.Run(() =>
-        //    {
-        //        검사결과 검사 = Global.검사자료.검사결과계산(검사번호);
-        //        if (Global.환경설정.강제배출) { 결과전송(Global.환경설정.양품불량); return; } // 강제배출
-        //        if (검사 == null) 결과전송(false);
-        //        else 결과전송(검사.측정결과 == 결과구분.OK); // 배출 수행
-        //    });
-        //}
-        //// 신호 Writing 순서 중요
-        //private void 결과전송(Boolean 양품여부)
-        //{
-        //    //Debug.WriteLine(양품여부, "결과전송");
-        //    this.양품여부요청 = 양품여부;
-        //    this.불량여부요청 = !양품여부;
-        //    this.검사결과요청 = false;
-        //}
 
         // 핑퐁
         private DateTime 최종송신 = DateTime.Now.AddMinutes(-5);

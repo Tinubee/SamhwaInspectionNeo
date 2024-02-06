@@ -85,7 +85,6 @@ namespace SamhwaInspectionNeo.Schemas
         public void SetValue(String name, String value)
         {
             this.Variables.SetGlobalVar(name, value);
-            //this.Where(e => e.Name == name).FirstOrDefault().StringValue = value;
         }
     }
 
@@ -110,7 +109,6 @@ namespace SamhwaInspectionNeo.Schemas
             else if (info.strValueType == "int") this.Type = typeof(Int32);
             else this.Type = typeof(String);
             this.Value = info.strValue;
-            //Debug.WriteLine($"{this.Type} => {this.Value}", this.Name);
         }
 
         public void Set(String value)

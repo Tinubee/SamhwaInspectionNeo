@@ -23,8 +23,6 @@ namespace SamhwaInspectionNeo.Schemas
             return a.Whether;
         }
     }
-
-    // 카메라구분 과 번호 맞춤
     public enum 장치구분
     {
         [Description("None"), DXDescription("NO"), Camera(false)]
@@ -302,8 +300,6 @@ namespace SamhwaInspectionNeo.Schemas
         public 검사정보 GetItem(Flow구분 플로우, 지그위치 지그) => 검사내역.Where(e => e.플로우 == 플로우 && e.지그 == 지그).FirstOrDefault();
 
         public 검사정보 GetItem(검사항목 항목) => 검사내역.Where(e => e.검사항목 == 항목).FirstOrDefault();
-        // 카메라 검사결과 적용
-        //public Boolean SetMasterResult(Flow구분 구분, 지그위치 지그, String name, Single value) => SetResult(마스터검사내역.Where(e => e.검사항목.ToString() == name).FirstOrDefault(), value, 구분, 지그);
         public Boolean SetResult(Flow구분 구분, 지그위치 지그, String name, Single value) => SetResult(검사내역.Where(e => e.검사항목.ToString() == name).FirstOrDefault(), value, 구분, 지그);
         public Boolean SetResult(검사정보 검사, Single value, Flow구분 구분, 지그위치 지그)
         {
@@ -313,13 +309,15 @@ namespace SamhwaInspectionNeo.Schemas
                 검사.측정결과 = 결과구분.ER;
                 return false;
             }
-
+            Boolean isOk = false;
             검사.플로우 = 구분;
             검사.지그 = 지그;
             검사.결과값 = (Decimal)Math.Round(value, Global.환경설정.결과자릿수);
             검사.측정값 = 검사.결과값 + 검사.보정값;
-            Boolean ok = 검사.결과값 >= 검사.최소값 && 검사.결과값 <= 검사.최대값;
-            검사.측정결과 = ok ? 결과구분.OK : 결과구분.NG;
+            if (Global.신호제어.마스터모드여부) isOk = 검사.결과값 >= 검사.마스터값 - 검사.마스터공차 && 검사.결과값 <= 검사.마스터값 + 검사.마스터공차;
+            else isOk = 검사.결과값 >= 검사.최소값 && 검사.결과값 <= 검사.최대값;
+
+            검사.측정결과 = isOk ? 결과구분.OK : 결과구분.NG;
 
             return true;
         }
@@ -328,13 +326,13 @@ namespace SamhwaInspectionNeo.Schemas
 
         public Boolean 검사중확인()
         {
-            if(Global.환경설정.동작구분 == 동작구분.LocalTest) return false;
+            if (Global.환경설정.동작구분 == 동작구분.LocalTest) return false;
 
             if (this.검사내역.Any(e => e.측정결과 == 결과구분.NO || e.측정결과 == 결과구분.IN))
             {
                 return true;
             }
-            else return false; 
+            else return false;
         }
 
         public 결과구분 결과계산()

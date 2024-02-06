@@ -254,10 +254,7 @@ namespace SamhwaInspectionNeo.Schemas
         {
             if (카메라 == 카메라구분.Cam03) //상부표면검사
             {
-                //Debug.WriteLine($"{카메라} 이미지획득 {this.카메라4.MatImage.Count}개 완료");
                 Global.조명제어.TurnOff(카메라);
-                //if (Global.비전마스터구동.Count == 0 || Global.신호제어.마스터모드여부 == 1)
-                //    return;
                 Task.Run(() =>
                 {
                     for (int lop = 0; lop < this.카메라3.MatImage.Count; lop++)
@@ -275,7 +272,6 @@ namespace SamhwaInspectionNeo.Schemas
 
         public void 그랩완료(카메라구분 카메라, Mat 이미지)
         {
-            //Int32 검사번호 = Global.신호제어.촬영위치번호(카메라);
             if (카메라 == 카메라구분.Cam02)
             {
                 Task.Run(() =>
@@ -289,7 +285,6 @@ namespace SamhwaInspectionNeo.Schemas
             Global.조명제어?.TurnOff(카메라);
             this.그랩완료보고?.Invoke(카메라, 이미지);
         }
-
 
         public void ImageSave(Mat 이미지, 카메라구분 카메라, Int32 검사번호, Boolean 결과)
         {
@@ -467,7 +462,6 @@ namespace SamhwaInspectionNeo.Schemas
             return this.상태;
         }
 
-        //private Boolean RequireSet(CIntValue val, Int32 current) => val.CurValue != current && val.Min >= current && val.Max <= current;
         public override Boolean Init()
         {
             Int32 nRet = this.Camera.CreateHandle(ref Device);
@@ -479,7 +473,6 @@ namespace SamhwaInspectionNeo.Schemas
             그랩제어.Validate("", this.Camera.SetBoolValue("BlackLevelEnable", true), false);
 
             this.Camera.SetImageNodeNum(ImageCount);
-            //this.Camera.SetEnumValue("TriggerMode", (uint)MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_ON);
             this.옵션적용();
 
             Global.정보로그(로그영역, "카메라 연결", $"[{this.구분}] 카메라 연결 성공!", false);
@@ -653,12 +646,8 @@ namespace SamhwaInspectionNeo.Schemas
                 MC.SetParam(this.Channel, "CamFile", Path.Combine(Global.환경설정.기본경로, this.CamFile));
                 MC.SetParam(this.Channel, "AcquisitionMode", this.AcquisitionMode.ToString());
                 MC.SetParam(this.Channel, "TrigMode", this.TrigMode.ToString());
-                //MC.SetParam(this.Channel, "NextTrigMode", this.NextTrigMode.ToString());
-                //MC.SetParam(this.Channel, "EndTrigMode", this.EndTrigMode.ToString());
-                //MC.SetParam(this.Channel, "BreakEffect", this.BreakEffect.ToString());
                 MC.SetParam(this.Channel, "PageLength_Ln", this.PageLength_Ln);
                 MC.SetParam(this.Channel, "SeqLength_pg", this.SeqLength_pg);
-                //MC.SetParam(this.Channel, "Gain", 3);
                 MC.GetParam(this.Channel, "ImageSizeY", out this.height);
                 MC.GetParam(this.Channel, "ImageSizeX", out this.width);
                 //콜백등록
@@ -672,9 +661,6 @@ namespace SamhwaInspectionNeo.Schemas
                 this.Page1Image = new Mat(height, width, MatType.CV_8UC1);
                 this.Page2Image = new Mat(height, width, MatType.CV_8UC1);
                 this.mergedImage = new Mat(height * 2, width, MatType.CV_8UC1);
-
-                //InitBuffers(this.width, this.height);
-                //this.mergedImage = new Mat(height_cam * 2, width_cam, MatType.CV_8UC1);
                 Debug.WriteLine($"{this.Channel}, {this.CurrentState()}", "READY currentState");
                 Global.정보로그(로그영역, "카메라 연결", $"[{this.구분}] 카메라 연결 성공!", false);
 
@@ -686,25 +672,7 @@ namespace SamhwaInspectionNeo.Schemas
                 return false;
             }
         }
-        internal void InitBuffers(Int32 width, Int32 height)
-        {
-            //if (width == 0 || height == 0) return;
-            //Int32 channels =  1;
-            //Int32 imageSize = width * height * channels;
-            //if (BufferAddress != IntPtr.Zero && imageSize == BufferSize) return;
-            //this.ImageWidth = width; this.ImageHeight = height;
-            //if (BufferAddress != IntPtr.Zero)
-            //{
-            //    Marshal.Release(BufferAddress);
-            //    BufferAddress = IntPtr.Zero;
-            //    BufferSize = 0;
-            //}
-
-            //BufferAddress = Marshal.AllocHGlobal(imageSize);
-            //if (BufferAddress == IntPtr.Zero) return;
-            //BufferSize = (UInt32)imageSize;
-            //Debug.WriteLine(this.구분.ToString(), "InitBuffers");
-        }
+       
         public override Boolean Close()
         {
             this.Free();
@@ -786,9 +754,6 @@ namespace SamhwaInspectionNeo.Schemas
 
                 if (this.AcquisitionMode == AcquisitionMode.PAGE)
                     this.ImageGrap(currentChannel, signalInfo.SignalInfo, imageSizeX, imageSizeY, bufferPitch);
-
-                //Mat image = new Mat(ImageSizeY, ImageSizeX, MatType.CV_8U, BufferAddress);
-                //Global.그랩제어.그랩완료(this.구분, image);
             }
             catch (Euresys.MultiCamException ex)
             {

@@ -24,11 +24,10 @@ namespace SamhwaInspectionNeo.Schemas
         private const Int32 스테이션번호 = 2;
         private const Int32 입출체크간격 = 10;
         private DateTime 시작일시 = DateTime.Now;
-        private Boolean 작업여부 = false;  // 동작 FLAG 
+        private Boolean 작업여부 = false;  
         private ActUtlType64 PLC = null;
         public Boolean 정상여부 = false;
 
-        //private List<정보주소> 검사번호주소 = new List<정보주소> { 정보주소.이송장치1, 정보주소.검사지그1, 정보주소.이송장치2, 정보주소.검사지그2, 정보주소.이송장치3, 정보주소.검사지그3 };
         public enum 정보주소 : Int32
         {
             [Address("W0010")]
@@ -39,8 +38,6 @@ namespace SamhwaInspectionNeo.Schemas
             결과값요청트리거,
             [Address("W0021")]
             트레이확인카메라트리거,
-            [Address("W0022")]
-            하부표면검사카메라트리거,
             [Address("W002E")]
             상부표면검사카메라트리거,
             [Address("W0028")]
@@ -49,8 +46,6 @@ namespace SamhwaInspectionNeo.Schemas
             상부변위센서확인트리거,
             [Address("W0041")]
             하부변위센서확인트리거,
-            //[Address("B1000")]
-            //Heartbit_PC,
             [Address("B1010")]
             통신확인핑퐁,
             [Address("B1018")]
@@ -58,21 +53,13 @@ namespace SamhwaInspectionNeo.Schemas
             [Address("B1019")]
             Rear지그,
             [Address("B1021")]
-            NG리트라이, //신호가 켜져있을때 , 1이 치수NG //2 외관불량
-            //[Address("B1020")]
-            //수동모드,
+            NG리트라이, 
             [Address("B1030")]
             자동모드,
             [Address("B1040")]
             운전시작,
             [Address("B1017")]
             마스터모드,
-            //[Address("B1050")]
-            //운전정지,
-            //[Address("B1060")]
-            //리셋,
-            //[Address("B1070")]
-            //알람,
             [Address("W13F")]
             생산수량,
         }
@@ -101,8 +88,6 @@ namespace SamhwaInspectionNeo.Schemas
 
         public Boolean 상부표면검사카메라트리거 { get { return 신호읽기(정보주소.상부표면검사카메라트리거); } set { 신호쓰기(정보주소.상부표면검사카메라트리거,value); } }
 
-        public Boolean 하부표면검사카메라트리거 { get { return 신호읽기(정보주소.하부표면검사카메라트리거); } set { 신호쓰기(정보주소.하부표면검사카메라트리거, value); } }
-
         public Boolean 상부치수검사카메라트리거 { get { return 신호읽기(정보주소.상부치수검사카메라트리거); } set { 신호쓰기(정보주소.상부치수검사카메라트리거, value); } }
 
         public Boolean 상부변위센서확인트리거 { get { return 신호읽기(정보주소.상부변위센서확인트리거); } set { 신호쓰기(정보주소.상부변위센서확인트리거, value); } }
@@ -110,9 +95,6 @@ namespace SamhwaInspectionNeo.Schemas
         public Boolean 하부변위센서확인트리거 { get { return 신호읽기(정보주소.하부변위센서확인트리거); } set { 신호쓰기(정보주소.하부변위센서확인트리거, value); } }
 
         public Boolean 결과값요청트리거 { get { return 신호읽기(정보주소.결과값요청트리거); } set { 신호쓰기(정보주소.결과값요청트리거, value); } }
-        //public Boolean 비상정지발생 { get => 신호읽기(정보주소.비상정지); }
-        //public Boolean 피씨알람발생 { get => 신호읽기(정보주소.피씨알람); set => 정보쓰기(정보주소.피씨알람, value); }
-        //public Boolean 통신확인핑퐁 { get => 신호읽기(정보주소.통신핑퐁); set => 정보쓰기(정보주소.통신핑퐁, value); }
         #endregion
 
         #region 검사현황
@@ -120,11 +102,8 @@ namespace SamhwaInspectionNeo.Schemas
 
         public Int32 트레이확인촬영번호 => this.입출자료.Get(정보주소.트레이확인카메라트리거); // 진행 시 카메라1 이미지 그랩
         public Int32 상부표면검사촬영번호 => this.입출자료.Get(정보주소.상부표면검사카메라트리거); // 진행 시 카메라1 이미지 그랩
-        public Int32 하부표면검사촬영번호 => this.입출자료.Get(정보주소.하부표면검사카메라트리거); // 진행 시 카메라2, 카메라3 이미지 그랩
         public Int32 상부치수검사촬영번호 => this.입출자료.Get(정보주소.상부치수검사카메라트리거); // 이송 시 카메라4, 카메라5 이미지 그랩
-        //public Int32 평탄센서번호 => this.입출자료.Get(정보주소.검사지그2); // 안착 후 센서 리딩
-        //public Int32 양불판정번호 => this.입출자료.Get(정보주소.검사지그3); // 안착 후 양불 판정
-        // 트리거 입력 시 버퍼에 입력
+       
         private Dictionary<정보주소, Int32> 인덱스버퍼 = new Dictionary<정보주소, Int32>();
         #endregion
        
@@ -222,7 +201,6 @@ namespace SamhwaInspectionNeo.Schemas
         {
             this.트레이확인카메라트리거 = false;
             this.상부표면검사카메라트리거 = false;
-            this.하부표면검사카메라트리거 = false;
             this.상부치수검사카메라트리거 = false;
             this.상부변위센서확인트리거 = false;
             this.하부변위센서확인트리거 = false;
@@ -254,22 +232,6 @@ namespace SamhwaInspectionNeo.Schemas
             Debug.WriteLine($"{Data}, {오류코드}", Address);
             return 오류코드 == 0;
         }
-
-        /*
-        private Int16 GetDevice2(String Address, out Int32 오류코드)
-        {
-            Int16 value;
-            오류코드 = PLC.GetDevice2(Address, out value);
-            return value;
-        }
-
-        private Boolean SetDevice2(String Address, Int16 Data, out Int32 오류코드)
-        {
-            오류코드 = PLC.SetDevice2(Address, Data);
-            //Debug.WriteLine($"{Data}, {오류코드}", Address);
-            return 오류코드 == 0;
-        }
-        */
         #endregion
 
         #region 기본 클래스 및 함수

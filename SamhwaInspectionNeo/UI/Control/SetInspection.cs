@@ -4,17 +4,8 @@ using DevExpress.XtraGrid.Views.Grid;
 using SamhwaInspectionNeo.Schemas;
 using SamhwaInspectionNeo.UI.Form;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MvUtils;
-using System.Drawing.Text;
-using static SamhwaInspectionNeo.Schemas.신호제어;
 using OpenCvSharp;
 
 namespace SamhwaInspectionNeo.UI.Control
@@ -61,9 +52,7 @@ namespace SamhwaInspectionNeo.UI.Control
             Localization.SetColumnCaption(this.e모델선택, typeof(모델정보));
             Localization.SetColumnCaption(this.GridView1, typeof(검사정보));
             this.b설정저장.Text = 번역.설정저장;
-            //this.모델선택(this.e모델선택, (DevExpress.XtraEditors.Controls.ChangingEventArgs)EventArgs.Empty);
             this.b도구설정.Click += B도구설정_Click;
-            //his.b교정값계산.Click += B교정값계산_Click;
             this.b수동검사.Click += B수동검사_Click;
             Loading = false;
         }
@@ -86,23 +75,10 @@ namespace SamhwaInspectionNeo.UI.Control
             Mat Image =  Global.모델자료.GetItem(선택모델).마스터이미지();
 
             Global.VM제어.GetItem(Flow구분.Flow1).Run(Image, null);
-            //Global.검사자료.검사결과계산(검사코드);
+           
             this.GridView1.RefreshData();
             Global.VM제어.GetItem(Flow구분.Flow1).imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceModuleCs.ImageSourceParam.ImageSourceTypeEnum.SDK;
         }
-
-        //private void B교정값계산_Click(object sender, EventArgs e)
-        //{
-        //    검사설정자료 자료 = Global.모델자료.GetItem(Global.환경설정.선택모델)?.검사설정;
-        //    foreach (var item in 자료)
-        //    {
-        //        if(item.교정값 == 1 && item.측정값 > 0 && item.검사장치 == 장치구분.Cam01)
-        //        {
-        //            item.교정값 =Convert.ToDecimal((item.측정값 / item.결과값).ToString("F4"));
-        //        }
-        //    }
-        //    this.GridView1.RefreshData();
-        //}
 
         private void GridView1_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
@@ -131,7 +107,6 @@ namespace SamhwaInspectionNeo.UI.Control
         public void Close() { }
 
         public 모델구분 선택모델 { get { return Global.환경설정.선택모델; } set { } }
-        //private 모델구분 선택모델 { get { return (모델구분)this.e모델선택.EditValue; } }
         public 검사설정자료 검사설정 { get { return Global.모델자료.GetItem(this.선택모델)?.검사설정; } }
 
         private void 모델변경알림(모델구분 모델코드)
@@ -161,26 +136,6 @@ namespace SamhwaInspectionNeo.UI.Control
                     return;
                 }
                 Global.환경설정.모델변경요청(모델);
-                //if (!Loading)
-                //{
-                //    if (!MvUtils.Utils.Confirm(번역.모델변경))
-                //    {
-                //        e.Cancel = true;
-                //        return;
-                //    }
-                //}
-
-                //모델구분 모델 = (모델구분)e.NewValue;
-                //this.GridControl1.DataSource = Global.모델자료.GetItem(모델)?.검사설정;
-                //if (this.검사설정 != null && this.검사설정.Count > 0)
-                //{
-                //    Task.Run(() => {
-                //        Task.Delay(500).Wait();
-                //        this.GridView1.MoveFirst();
-                //        this.검사항목변경?.Invoke(Global.모델자료.GetItem(this.선택모델), this.GetItem(this.GridView1, this.GridView1.FocusedRowHandle));
-                //        Global.환경설정.모델변경요청(모델);
-                //    });
-                //}
             }
             catch (Exception ex)
             {

@@ -41,7 +41,6 @@ namespace SamhwaInspectionNeo.Schemas
         public event 현재결과상태갱신 결과상태갱신알림;
         private String 도구파일 { get => Path.Combine(Global.환경설정.도구경로, $"{MvUtils.Utils.GetDescription(Global.환경설정.선택모델)}.sol"); }
         private String 기본도구파일 { get => Path.Combine(Global.환경설정.도구경로, $"Default.sol"); }
-        private String 스크립트파일 { get => Path.Combine(Global.환경설정.스크립트경로, $"Slot1계산.cs"); }
         public Dictionary<카메라구분, bool> grabFinishDic = new Dictionary<카메라구분, bool>();
         public VmGlobals 글로벌변수제어 = new VmGlobals();
 
@@ -85,7 +84,10 @@ namespace SamhwaInspectionNeo.Schemas
 
         private void VmSolution_OnWorkStatusEvent(ImvsSdkDefine.IMVS_MODULE_WORK_STAUS workStatusInfo)
         {
-            Debug.WriteLine("Solution OnWork Event");
+            //Debug.WriteLine("Solution OnWork Event");
+            //float[] value = new float[1];
+            //value[0] = (float)0.005;
+            //this.GetItem(Flow구분.Flow1).slot1ShellModuleTool.ModuParams.SetInputFloat("RearSlot1상부", value);
         }
 
         public 비전마스터플로우 GetItem(Flow구분 구분)
@@ -128,9 +130,6 @@ namespace SamhwaInspectionNeo.Schemas
         public IMVSGroupTool slot2GroupTool;
         public ShellModuleTool slot2ShellModuleTool;
         public GlobalVariableModuleTool GlobalVariableModuleTool;
-        public List<ImageSourceModuleTool> imageSourcesModuleToolList;
-        public List<GraphicsSetModuleTool> graphicsSetModuleToolList;
-        public List<ShellModuleTool> shellModuleToolList;
 
         public 비전마스터플로우(Flow구분 구분)
         {
@@ -186,56 +185,29 @@ namespace SamhwaInspectionNeo.Schemas
 
         private void SetResult(Flow구분 구분, 지그위치 지그) //1이면 Front, 0이면 Rear 
         {
-            if ((int)구분 >= 4)
+            ShellModuleTool shell = Global.VM제어.GetItem(구분).shellModuleTool;
+
+            Int32 startIndex = 구분 >= Flow구분.공트레이검사 ? 6 : 8;
+            for (int lop = startIndex; lop < shell.Outputs.Count; lop++)
             {
-                ShellModuleTool shell = Global.VM제어.GetItem(구분).shellModuleTool;
-                for (int i = 6; i < shell.Outputs.Count; i++)
+                List<VmIO> t = shell.Outputs[lop].GetAllIO();
+                String name = t[0].UniqueName.Split('%')[1];
+                if (t[0].Value != null)
                 {
-                    List<VmIO> t = shell.Outputs[i].GetAllIO();
-                    String name = t[0].UniqueName.Split('%')[1];
-                    if (t[0].Value != null)
+                    String str = ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[0].strValue;
+                    Debug.WriteLine($"{this.구분} str : {str}");
+                    try
                     {
-                        String str = ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[0].strValue;
-                        Debug.WriteLine($"{this.구분} str : {str}");
-                        try
-                        {
-                            String[] vals = str.Split(';');
-                            Boolean ok = false;
-                            Single val = Single.NaN;
-                            if (!String.IsNullOrEmpty(vals[0])) val = Convert.ToSingle(vals[0]);
-                            if (vals.Length > 1) ok = MvUtils.Utils.IntValue(vals[1]) == 1;
-                            Global.검사자료.항목검사(this.구분, 지그, name, val);
-                        }
-                        catch (Exception e)
-                        {
-                            Debug.WriteLine(e.Message, name);
-                        }
+                        String[] vals = str.Split(';');
+                        Boolean ok = false;
+                        Single val = Single.NaN;
+                        if (!String.IsNullOrEmpty(vals[0])) val = Convert.ToSingle(vals[0]);
+                        if (vals.Length > 1) ok = MvUtils.Utils.IntValue(vals[1]) == 1;
+                        Global.검사자료.항목검사(this.구분, 지그, name, val);
                     }
-                }
-            }
-            else
-            {
-                ShellModuleTool shell = Global.VM제어.GetItem(구분).shellModuleTool;
-                for (int i = 8; i < shell.Outputs.Count; i++)
-                {
-                    List<VmIO> t = shell.Outputs[i].GetAllIO();
-                    String name = t[0].UniqueName.Split('%')[1];
-                    if (t[0].Value != null)
+                    catch (Exception e)
                     {
-                        String str = ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[0].strValue;
-                        try
-                        {
-                            String[] vals = str.Split(';');
-                            Boolean ok = false;
-                            Single val = Single.NaN;
-                            if (!String.IsNullOrEmpty(vals[0])) val = Convert.ToSingle(vals[0]);
-                            if (vals.Length > 1) ok = MvUtils.Utils.IntValue(vals[1]) == 1;
-                            Global.검사자료.항목검사(this.구분, 지그, name, val);
-                        }
-                        catch (Exception e)
-                        {
-                            Debug.WriteLine(e.Message, name);
-                        }
+                        Debug.WriteLine(e.Message, name);
                     }
                 }
             }
@@ -267,7 +239,7 @@ namespace SamhwaInspectionNeo.Schemas
                     Global.오류로그(로그영역, "검사오류", $"[{this.구분}] VM 검사 모델이 없습니다.", false);
                     return false;
                 }
-                Int32 Front = Convert.ToInt32(Global.VM제어.글로벌변수제어.GetValue("Front지그"));
+                Boolean Front = Global.신호제어.Front지그; //Convert.ToInt32(Global.VM제어.글로벌변수제어.GetValue("Front지그"));
 
                 imageBaseData = mat == null ? imageBaseData : MatToImageBaseData(mat);
                 if (imageBaseData != null)
@@ -283,7 +255,7 @@ namespace SamhwaInspectionNeo.Schemas
                 else
                 {
                     Int32 검사코드 = (Int32)구분 < 5 ? (Int32)구분 : (Int32)구분 - 5;
-                    this.SetResult(this.구분, Front == 1 ? 지그위치.Front : 지그위치.Rear); //1이면 Front지그, 0이면 Rear지그
+                    this.SetResult(this.구분, Front ? 지그위치.Front : 지그위치.Rear);
                     Global.검사자료.검사결과계산(검사코드);
                     return true;
                 }

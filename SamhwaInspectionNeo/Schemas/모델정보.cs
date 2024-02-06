@@ -60,7 +60,7 @@ namespace SamhwaInspectionNeo.Schemas
         public Mat 마스터이미지()
         {
             if (!File.Exists(this.모델사진)) return null;
-            return Cv2.ImRead(this.모델사진, ImreadModes.Grayscale); //Image.FromFile(this.모델사진);
+            return Cv2.ImRead(this.모델사진, ImreadModes.Grayscale); 
         }
 
         public 모델정보() { }
@@ -293,22 +293,12 @@ namespace SamhwaInspectionNeo.Schemas
             }
         }
 
-        public 검사정보 GetItem(검사정보 정보)
+        public 검사정보 GetItem(검사정보 정보) 
         {
             return this.Where(e => e.검사항목 == 정보.검사항목).FirstOrDefault();
-            //return this.Where(e => e.검사번호 == 정보.검사번호 && e.장치구분 == 정보.장치구분 && e.검사그룹 == 정보.검사그룹).FirstOrDefault();
         }
 
         public void ResetItem(검사정보 설정) => this.ResetItem(this.IndexOf(설정));
-
-        //public Dictionary<String, Object> GetRunPrms(검사정보 검사)
-        //{
-        //    List<검사정보> 자료 = new List<검사정보>();
-        //    if (검사.검사유형 == 검사유형.원홀) 자료.Add(검사);
-        //    else if (검사.검사유형 == 검사유형.타원W || 검사.검사유형 == 검사유형.타원H)
-        //        자료 = this.Where(e => e.장치구분 == 검사.장치구분 && e.센서번호 == 검사.센서번호).ToList();
-        //    if (자료.Count < 1) return null;
-        //    return 검사결과.GetRunPrms(자료, 검사);
-        //}
+      
     }
 }

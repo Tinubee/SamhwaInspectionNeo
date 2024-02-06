@@ -24,7 +24,6 @@ namespace SamhwaInspectionNeo.UI.Control
 
         public void Init()
         {
-            ////MyGridView.SetFocusedRow(this.gridView1);
             this.GridControl1.DataSource = new 입력신호자료();
             this.입출변경알림();
             Global.신호제어.입출변경알림 += 입출변경알림;
@@ -56,7 +55,6 @@ namespace SamhwaInspectionNeo.UI.Control
         {
             public 신호제어.정보주소 구분 { get; set; }
             public Int32 번호 { get { return (Int32)구분; } }
-
             public String 주소 { get { return MvUtils.Utils.GetAttribute<AddressAttribute>(구분).Address; } }
             //public String 명칭 { get { return Localization.GetString(this.구분); } }
             public Boolean 여부 { get { return Global.신호제어.신호읽기(구분); } }

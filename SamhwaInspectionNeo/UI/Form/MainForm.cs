@@ -16,18 +16,13 @@ namespace SamhwaInspectionNeo
         public MainForm()
         {
             InitializeComponent();
-            //this.e결과뷰어.Visible = false;
             this.ShowWaitForm();
             this.e프로젝트.Caption = $"IVM: {환경설정.프로젝트번호}";
             this.SetLocalization();
             this.TabFormControl.SelectedPage = this.p검사하기;
             this.p환경설정.Enabled = false;
-            //this.p검사내역.Enabled = false;
-            //this.p그랩뷰어.Visible = false;
             this.Shown += MainFormShown;
             this.FormClosing += MainFormClosing;
-            //this.TabFormControl.SelectedPageChanged += SelectedPageChanged;
-            //this.t환경설정.SelectedPageChanged += SelectedTabPageChanged;
         }
 
         public void ShowWaitForm()
@@ -121,33 +116,14 @@ namespace SamhwaInspectionNeo
             }
         }
 
-        //private void SelectedPageChanged(object sender, DevExpress.XtraBars.TabFormSelectedPageChangedEventArgs e)
-        //{
-        //    ShowHideControl();
-        //}
-        //private void SelectedTabPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
-        //{
-        //    ShowHideControl();
-        //}
-        //private void ShowHideControl()
-        //{
-        //    //this.e그랩뷰어.Shown(this.TabFormControl.SelectedPage == this.p그랩뷰어);
-        //    //this.e장치설정.Shown(this.TabFormControl.SelectedPage == this.p환경설정 && this.t환경설정.SelectedTabPage == this.t장치설정);
-        //    //this.e환경설정.Shown(this.TabFormControl.SelectedPage == this.p환경설정 && this.t환경설정.SelectedTabPage == this.t검사설정);
-        //}
-
         private void SetLocalization()
         {
             this.Text = this.번역.타이틀;
             this.타이틀.Caption = this.번역.타이틀;
             this.p검사하기.Text = this.번역.검사하기;
-            //this.p그랩뷰어.Text = this.번역.카메라;
             this.p검사내역.Text = this.번역.검사내역;
             this.p환경설정.Text = this.번역.환경설정;
             this.p로그내역.Text = this.번역.로그내역;
-            //this.t검사설정.Text = this.번역.검사설정;
-            //this.t장치설정.Text = this.번역.장치설정;
-            //this.t로그내역.Text = this.번역.로그내역;
         }
 
         private class LocalizationMain

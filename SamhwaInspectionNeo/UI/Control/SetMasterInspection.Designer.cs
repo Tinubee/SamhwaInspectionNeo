@@ -33,7 +33,6 @@
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.b보정값설정 = new DevExpress.XtraEditors.SimpleButton();
             this.b수동검사 = new DevExpress.XtraEditors.SimpleButton();
-            this.b교정값계산 = new DevExpress.XtraEditors.SimpleButton();
             this.b도구설정 = new DevExpress.XtraEditors.SimpleButton();
             this.e모델선택 = new DevExpress.XtraEditors.LookUpEdit();
             this.b설정저장 = new DevExpress.XtraEditors.SimpleButton();
@@ -78,7 +77,6 @@
             // 
             this.panelControl1.Controls.Add(this.b보정값설정);
             this.panelControl1.Controls.Add(this.b수동검사);
-            this.panelControl1.Controls.Add(this.b교정값계산);
             this.panelControl1.Controls.Add(this.b도구설정);
             this.panelControl1.Controls.Add(this.e모델선택);
             this.panelControl1.Controls.Add(this.b설정저장);
@@ -108,25 +106,11 @@
             this.b수동검사.Appearance.Options.UseFont = true;
             this.b수동검사.Dock = System.Windows.Forms.DockStyle.Left;
             this.b수동검사.ImageOptions.SvgImage = global::SamhwaInspectionNeo.Properties.Resources.bo_security_permission_action;
-            this.b수동검사.Location = new System.Drawing.Point(746, 5);
+            this.b수동검사.Location = new System.Drawing.Point(551, 5);
             this.b수동검사.Name = "b수동검사";
             this.b수동검사.Size = new System.Drawing.Size(195, 46);
             this.b수동검사.TabIndex = 12;
             this.b수동검사.Text = "수동검사";
-            // 
-            // b교정값계산
-            // 
-            this.b교정값계산.Appearance.Font = new System.Drawing.Font("맑은 고딕", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.b교정값계산.Appearance.Options.UseFont = true;
-            this.b교정값계산.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.b교정값계산.Dock = System.Windows.Forms.DockStyle.Left;
-            this.b교정값계산.ImageOptions.SvgImage = global::SamhwaInspectionNeo.Properties.Resources.pivottablecalculationsfieldsitemssetsgroup;
-            this.b교정값계산.Location = new System.Drawing.Point(551, 5);
-            this.b교정값계산.Name = "b교정값계산";
-            this.b교정값계산.Size = new System.Drawing.Size(195, 46);
-            this.b교정값계산.TabIndex = 11;
-            this.b교정값계산.Text = "교정값 계산";
-            this.b교정값계산.Visible = false;
             // 
             // b도구설정
             // 
@@ -468,7 +452,6 @@
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
-        private DevExpress.XtraEditors.SimpleButton b교정값계산;
         private DevExpress.XtraEditors.SimpleButton b수동검사;
         private DevExpress.XtraEditors.SimpleButton b보정값설정;
         private MvUtils.CustomGrid GridControl1;

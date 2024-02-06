@@ -44,11 +44,6 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.e유저관리.Close();
         }
 
-        public void Shown(Boolean shown)
-        {
-
-        }
-
         private void 배출구분Changed(object sender, EventArgs e)
         {
             Global.환경설정.강제배출 = this.e강제배출.IsOn;

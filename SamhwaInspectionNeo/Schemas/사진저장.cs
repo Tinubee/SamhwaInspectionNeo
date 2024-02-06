@@ -71,9 +71,6 @@ namespace SamhwaInspectionNeo.Schemas
             {
                 Global.오류로그(로그영역.GetString(), "Load", ex.Message, true);
             }
-
-            //if (!Directory.Exists(Global.환경설정.원본보관폴더)) Directory.CreateDirectory(Global.환경설정.원본보관폴더);
-            //else Task.Run(원본사진정리);
         }
         public void Save() => File.WriteAllText(저장파일, JsonConvert.SerializeObject(this.Values.ToList()));
         public 사진저장 GetItem(카메라구분 카메라) => this.Values.Where(e => e.카메라 == 카메라).FirstOrDefault();
@@ -118,20 +115,6 @@ namespace SamhwaInspectionNeo.Schemas
             else return;
             if (!result) Global.오류로그(로그영역.GetString(), 정보.카메라.ToString(), error, false);
         }
-
-        //public void 원본사진정리()
-        //{
-        //    if (!Directory.Exists(Global.환경설정.원본보관폴더)) return;
-        //    DateTime allow = DateTime.Today.AddDays(-Global.환경설정.원본보관일수 - 1);
-        //    foreach (String folder in Directory.GetDirectories(Global.환경설정.원본보관폴더))
-        //    {
-        //        DirectoryInfo info = new DirectoryInfo(folder);
-        //        if (!DateTime.TryParse(info.Name, out DateTime day)) continue;
-        //        if (day >= allow) continue;
-        //        try { info.Delete(true); }
-        //        catch (Exception ex) { Debug.WriteLine(ex.Message, "원본사진정리"); }
-        //    }
-        //}
 
         public String OriginImagePath(DateTime 시간, 카메라구분 카메라)
         {

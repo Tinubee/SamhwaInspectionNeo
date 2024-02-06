@@ -36,7 +36,6 @@ namespace SamhwaInspectionNeo.UI.Control
             this.GridView1.AddEditSelectionMenuItem();
             this.GridView1.AddSelectPopMenuItems();
             this.GridView1.CellValueChanged += 교정값계산;
-            //this.GridView1.AddDeleteMenuItem(DeleteClick);
             this.col측정값.DisplayFormat.FormatString = Global.환경설정.결과표현;
             this.colcmm측정값.DisplayFormat.FormatString = Global.환경설정.결과표현;
             this.col교정값.DisplayFormat.FormatString = "0.#########";
@@ -62,7 +61,6 @@ namespace SamhwaInspectionNeo.UI.Control
             this.col측정값.AppearanceCell.ForeColor = Color.Black;
 
             this.b조회.Click += 자료조회;
-            //this.b적용.Click += 교정값적용;
             this.col측정값.DisplayFormat.FormatString = Global.환경설정.결과표현;
             this.GridControl1.DataSource = this.결과정보리스트;
 

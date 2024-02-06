@@ -46,7 +46,7 @@ namespace SamhwaInspectionNeo
             public static Boolean 카메라4 { get { return (그랩제어?.카메라4) != null && 그랩제어.카메라4.상태; } }
             public static Boolean 자동수동 { get => Global.신호제어.자동모드여부; }
             public static Boolean 장치통신 { get { return 신호제어.정상여부; } }
-            //public static Boolean 조명장치 { get { return 조명제어.정상여부; } }
+            public static Boolean 조명장치 { get { return 조명제어.정상여부; } }
         }
 
         public static Boolean Init()

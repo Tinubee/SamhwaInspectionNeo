@@ -46,8 +46,6 @@ namespace SamhwaInspectionNeo.Schemas
         public String 도구경로 { get { return Path.Combine(기본경로, "Tools"); } }
         [Description("마스터 이미지"), JsonIgnore]
         public String 마스터사진 { get { return Path.Combine(기본경로, "Masters"); } }
-        [Description("비젼 UserScriptTools"), JsonIgnore]
-        public String 스크립트경로 { get { return Path.Combine(도구경로, "UserScript"); } }
         [JsonIgnore]
         public Boolean 강제배출 { get; set; } = true;
         [JsonIgnore]
@@ -64,29 +62,6 @@ namespace SamhwaInspectionNeo.Schemas
         public Boolean 검사여부 { get; set; } = true; // 검사로직 활성화 여부
         [JsonIgnore, Description("티칭모드")]
         public Boolean 티칭모드 { get; set; } = false; // 활성화 시 사진 강제 저장 됨
-
-        [Description("큰원 치수 측정"), JsonProperty("BigCircleIns")]
-        public Boolean 큰원치수측정검사 { get; set; } = false;
-        [Description("작은원 치수 측정"), JsonProperty("SmallCircleIns")]
-        public Boolean 작은원치수측정검사 { get; set; } = false;
-        [Description("높이 측정"), JsonProperty("Height")]
-        public Boolean 높이측정검사 { get; set; } = false;
-        [Description("너비 측정"), JsonProperty("Width")]
-        public Boolean 너비측정검사 { get; set; } = false;
-        [Description("슬롯부 20Point 측정"), JsonProperty("Slot20PointIns")]
-        public Boolean 슬롯부20Point검사 { get; set; } = false;
-        [Description("슬롯부 200Point 측정"), JsonProperty("Slot200PointIns")]
-        public Boolean 슬롯부200Point검사 { get; set; } = false;
-        [Description("상부 표면검사"), JsonProperty("TopSurfaceIns")]
-        public Boolean 상부표면검사 { get; set; } = false;
-        [Description("하부 표면검사"), JsonProperty("BottomSurfaceIns")]
-        public Boolean 하부표면검사 { get; set; } = false;
-        [Description("50.5부 측정"), JsonProperty("50.5PointIns")]
-        public Boolean D50_5부측정 { get; set; } = false;
-        [Description("33.94부 측정"), JsonProperty("33.94PointIns")]
-        public Boolean D33_94부측정 { get; set; } = false;
-        [Description("15부 측정"), JsonProperty("15PointIns")]
-        public Boolean D15부측정 { get; set; } = false;
 
         public Boolean 권한여부(유저권한구분 요구권한)
         {

@@ -28,7 +28,6 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.col최소값.DisplayFormat.FormatString = Global.환경설정.결과표현;
             this.col기준값.DisplayFormat.FormatString = Global.환경설정.결과표현;
             this.col최대값.DisplayFormat.FormatString = Global.환경설정.결과표현;
-            //this.col보정값.DisplayFormat.FormatString = Global.환경설정.결과표현;
             this.col결과값.DisplayFormat.FormatString = Global.환경설정.결과표현;
             this.GridView1.Init(this.barManager1);
             this.GridView1.AddRowSelectedEvent(new CustomView.RowSelectedEventHandler(검사내역펼치기));
@@ -98,8 +97,7 @@ namespace SamhwaInspectionNeo.UI.Controls
 
         private void 검사삭제(object sender, ItemClickEventArgs e)
         {
-            검사결과 결과 = null;
-            검사정보 정보 = this.선택검사정보(out 결과);
+            검사정보 정보 = this.선택검사정보(out 검사결과 결과);
             if (결과 == null || 정보 == null) return;
             if (!MvUtils.Utils.Confirm("선택한 검사결과를 삭제하시겠습니까?", Localization.확인.GetString())) return;
             Global.검사자료.결과삭제(결과, 정보);
@@ -114,17 +112,6 @@ namespace SamhwaInspectionNeo.UI.Controls
 
             모델정보 모델 = Global.모델자료.GetItem(결과.모델구분);
             if (모델 == null) return;
-
-            //String ImagePath = Global.검사자료.사진파일(결과.모델구분, 결과.검사일시, 결과.검사코드, (카메라구분)검사.장치구분, 검사.검사그룹);
-            //if (!File.Exists(ImagePath))
-            //{
-            //    Utils.WarningMsg("해당 검사의 저장된 이미지가 없습니다.");
-            //    return;
-            //}
-
-            //ResultViewer viewer = new ResultViewer();
-            //viewer.Init(모델, 검사, ImagePath);
-            //Utils.ShowDialog(viewer, this.FindForm());
         }
 
         public void 검사내역펼치기(GridView gridView, Int32 RowHandle)
@@ -144,7 +131,6 @@ namespace SamhwaInspectionNeo.UI.Controls
                 if (e.Column.FieldName == this.col측정결과.FieldName) e.Appearance.ForeColor = 환경설정.결과표현색상(정보.측정결과);
                 if (e.Column.FieldName == this.colCTQ결과.FieldName) e.Appearance.ForeColor = 환경설정.결과표현색상(정보.CTQ결과);
                 if (e.Column.FieldName == this.col외관결과.FieldName) e.Appearance.ForeColor = 환경설정.결과표현색상(정보.외관결과);
-                //e.Appearance.ForeColor = 환경설정.결과표현색상(정보.외관결과);
             }
         }
 
@@ -161,15 +147,10 @@ namespace SamhwaInspectionNeo.UI.Controls
                 view.Columns["교정값"].Visible = false;
                 view.RefreshData();
             }
-       
 
-            검사정보 정보 = view.GetRow(e.RowHandle) as 검사정보;
-            if (정보 == null) return;
+            if (!(view.GetRow(e.RowHandle) is 검사정보 정보)) return;
 
-            if (e.Column.FieldName == this.col검사결과.FieldName)
-                e.Appearance.ForeColor = 환경설정.결과표현색상(정보.측정결과);
-            //else if (e.Column.FieldName == this.col결과값.FieldName)
-            //    e.Appearance.ForeColor = 환경설정.ResultColor(정보.계측결과());
+            if (e.Column.FieldName == this.col검사결과.FieldName) e.Appearance.ForeColor = 환경설정.결과표현색상(정보.측정결과);
         }
 
         private void 엑셀파일(object sender, EventArgs e)
