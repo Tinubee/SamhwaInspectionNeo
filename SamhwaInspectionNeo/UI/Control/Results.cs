@@ -134,13 +134,13 @@ namespace SamhwaInspectionNeo.UI.Controls
 
         private void GridView1_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
         {
-            if(e.RowHandle <0 || (e.Column.FieldName == this.col측정결과.FieldName || e.Column.FieldName == this.colCTQ결과.FieldName || e.Column.FieldName ==this.col외관결과.FieldName))
+            if (e.RowHandle < 0 || (e.Column.FieldName == this.col측정결과.FieldName || e.Column.FieldName == this.colCTQ결과.FieldName || e.Column.FieldName == this.col외관결과.FieldName))
             {
                 GridView view = sender as GridView;
                 검사결과 정보 = view.GetRow(e.RowHandle) as 검사결과;
                 if (정보 == null) return;
 
-                if(e.Column.FieldName == this.col측정결과.FieldName) e.Appearance.ForeColor = 환경설정.결과표현색상(정보.측정결과);
+                if (e.Column.FieldName == this.col측정결과.FieldName) e.Appearance.ForeColor = 환경설정.결과표현색상(정보.측정결과);
                 if (e.Column.FieldName == this.colCTQ결과.FieldName) e.Appearance.ForeColor = 환경설정.결과표현색상(정보.CTQ결과);
                 if (e.Column.FieldName == this.col외관결과.FieldName) e.Appearance.ForeColor = 환경설정.결과표현색상(정보.외관결과);
                 //e.Appearance.ForeColor = 환경설정.결과표현색상(정보.외관결과);
@@ -151,9 +151,12 @@ namespace SamhwaInspectionNeo.UI.Controls
         {
             if (e.RowHandle < 0) return;
             GridView view = sender as GridView;
-            view.Columns["마스터값"].Visible = false;
-            view.Columns["마스터공차"].Visible = false;
-            view.RefreshData();
+            if (view.Columns["마스터값"].Visible)
+            {
+                view.Columns["마스터값"].Visible = false;
+                view.Columns["마스터공차"].Visible = false;
+                view.RefreshData();
+            }
 
             검사정보 정보 = view.GetRow(e.RowHandle) as 검사정보;
             if (정보 == null) return;

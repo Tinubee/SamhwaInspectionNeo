@@ -280,25 +280,11 @@ namespace SamhwaInspectionNeo.Schemas
             {
                 Task.Run(() =>
                 {
-                    Global.VM제어.GetItem(Flow구분.공트레이검사).Run(이미지, null);
+                    Boolean 결과 = Global.VM제어.GetItem(Flow구분.공트레이검사).Run(이미지, null);
+                    Global.신호제어.SetDevice($"W0015", 결과 ? 1 : 2, out Int32 오류);
                 });
             }
-            //if (Global.신호제어.자동모드여부)
-            //{
-            //    Int32 검사번호 = Global.신호제어.촬영위치번호(카메라);
-            //    Debug.WriteLine($"{카메라}: {검사번호}", "그랩완료");
-            //    if (검사번호 > 0)
-            //    {
-            //        Task.Run(() =>
-            //        {
-            //            //Debug.WriteLine($"{구분} : Flow Run");
-            //            Global.VM제어.GetItem(카메라).Run(이미지, null);
-            //            ImageSave(이미지, 카메라, 검사번호, 결과구분.OK);
-            //        });
-            //    }
-            //    else Global.경고로그(로그영역, "비전검사", $"카메라 [{MvUtils.Utils.GetDescription(카메라)}]의 검사 Index가 없습니다.", true);
-            //}
-            //else this.그랩완료보고?.Invoke(카메라, 이미지);
+           
             Global.조명제어?.TurnOff(카메라);
             this.그랩완료보고?.Invoke(카메라, 이미지);
         }
@@ -607,15 +593,6 @@ namespace SamhwaInspectionNeo.Schemas
                         Global.그랩제어.그랩완료(this.구분, this.MatImage);
                     }
                 }
-                //else if (this.구분 == 카메라구분.Cam04)
-                //{
-                //    this.MatImage.Add(image);
-                //    if (Global.그랩제어.카메라4.MatImage.Count == this.ImageCount)
-                //    {
-                //        this.Stop();
-                //        Global.그랩제어.그랩완료(this.구분, this.MatImage);
-                //    }
-                //}
             }
             catch (Exception ex)
             {

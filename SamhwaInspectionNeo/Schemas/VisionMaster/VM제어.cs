@@ -170,16 +170,29 @@ namespace SamhwaInspectionNeo.Schemas
             }
         }
 
+        private Boolean GetResult(Flow구분 구분)
+        {
+            ShellModuleTool shell = Global.VM제어.GetItem(구분).shellModuleTool;
+            String str = "";
+            List<VmIO> t = shell.Outputs[6].GetAllIO();
+            String name = t[0].UniqueName.Split('%')[1];
+            if (t[0].Value != null)
+            {
+                str = ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[0].strValue;
+                Debug.WriteLine($"{this.구분} str : {str}");
+            }
+            return str == "OK";
+        }
+
         private void SetResult(Flow구분 구분, 지그위치 지그) //1이면 Front, 0이면 Rear 
         {
-            if ((int)구분 > 4)
+            if ((int)구분 >= 4)
             {
                 ShellModuleTool shell = Global.VM제어.GetItem(구분).shellModuleTool;
                 for (int i = 6; i < shell.Outputs.Count; i++)
                 {
                     List<VmIO> t = shell.Outputs[i].GetAllIO();
                     String name = t[0].UniqueName.Split('%')[1];
-                    Debug.WriteLine($"표면검사 SetResult : name : {name}");
                     if (t[0].Value != null)
                     {
                         String str = ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[0].strValue;
@@ -280,8 +293,8 @@ namespace SamhwaInspectionNeo.Schemas
                         this.imageSourceModuleTool.SetImageData(imageBaseData);
 
                     this.Procedure.Run();
-                    검사결과 검사 = Global.검사자료.검사결과계산((int)this.구분);
-                    return true;
+                    Boolean 트레이검사결과 = this.GetResult(this.구분);
+                    return 트레이검사결과;
                 }
                 else
                 {

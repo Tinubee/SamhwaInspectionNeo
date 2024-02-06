@@ -152,6 +152,17 @@ namespace SamhwaInspectionNeo.UI.Controls
         {
             if (e.RowHandle < 0) return;
             GridView view = sender as GridView;
+            if (view.Columns["기준값"].Visible)
+            {
+                view.Columns["기준값"].Visible = false;
+                view.Columns["최소값"].Visible = false;
+                view.Columns["최대값"].Visible = false;
+                view.Columns["보정값"].Visible = false;
+                view.Columns["교정값"].Visible = false;
+                view.RefreshData();
+            }
+       
+
             검사정보 정보 = view.GetRow(e.RowHandle) as 검사정보;
             if (정보 == null) return;
 

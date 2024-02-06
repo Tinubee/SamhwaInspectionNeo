@@ -231,6 +231,7 @@
             this.GridView1.OptionsPrint.UsePrintStyles = false;
             this.GridView1.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.False;
             this.GridView1.OptionsView.ShowAutoFilterRow = true;
+            this.GridView1.OptionsView.ShowGroupPanel = false;
             this.GridView1.OptionsView.ShowIndicator = false;
             this.GridView1.RowHeight = 20;
             // 

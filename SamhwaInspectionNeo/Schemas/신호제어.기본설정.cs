@@ -89,6 +89,8 @@ namespace SamhwaInspectionNeo.Schemas
         public Boolean 운전시작여부 { get { return 신호읽기(정보주소.운전시작); } }
 
         public Boolean 마스터모드여부 { get { return 신호읽기(정보주소.마스터모드); } }
+
+        public Boolean NG리트라이모드여부 { get { return 신호읽기(정보주소.NG리트라이); } }
         //B1018,1819
         public Boolean Front지그 { get { return 신호읽기(정보주소.Front지그); } }
         public Boolean Rear지그 { get { return 신호읽기(정보주소.Rear지그); } }
@@ -144,9 +146,20 @@ namespace SamhwaInspectionNeo.Schemas
 
         private void 검사완료알림(검사결과 결과)
         {
+            Int32 오류 = 0;
             Boolean ok = 결과.측정결과 == 결과구분.OK;
-            Debug.WriteLine($"{결과.검사코드} 검사결과 : {ok}");
-            Global.신호제어.SetDevice($"W000{결과.검사코드}", ok ? 1 : 2, out Int32 오류);
+            Debug.WriteLine($"검사코드[ {결과.검사코드} ] 검사결과 : {ok}");
+            if (Global.신호제어.NG리트라이모드여부)
+            {
+                Boolean 치수결과 = 결과.CTQ결과 == 결과구분.OK;
+                Boolean 표면결과 = 결과.외관결과 == 결과구분.OK;
+
+                if(!치수결과) Global.신호제어.SetDevice($"W000{결과.검사코드}", 1 , out 오류);
+                else if(!표면결과) Global.신호제어.SetDevice($"W000{결과.검사코드}", 2, out 오류);
+            }
+            else
+                Global.신호제어.SetDevice($"W000{결과.검사코드}", ok ? 1 : 2, out 오류);
+           
             통신오류알림(오류);
         }
 
@@ -235,7 +248,7 @@ namespace SamhwaInspectionNeo.Schemas
             return value;
         }
 
-        private Boolean SetDevice(String Address, Int32 Data, out Int32 오류코드)
+        public Boolean SetDevice(String Address, Int32 Data, out Int32 오류코드)
         {
             오류코드 = PLC.SetDevice(Address, Data);
             Debug.WriteLine($"{Data}, {오류코드}", Address);
