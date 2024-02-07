@@ -221,11 +221,11 @@ namespace SamhwaInspectionNeo.Schemas
         [JsonIgnore]
         private string 저장파일 { get { return Path.Combine(Global.환경설정.기본경로, "Lights.json"); } }
         [JsonIgnore]
-        private LCP100DC 컨트롤러1;
+        public LCP100DC 컨트롤러1;
         [JsonIgnore]
-        private LCP12150P 컨트롤러2;
+        public LCP12150P 컨트롤러2;
         [JsonIgnore]
-        private LCP24100Q 컨트롤러3;
+        public LCP24100Q 컨트롤러3;
 
         [JsonIgnore]
         public Boolean 정상여부 { get { return this.컨트롤러1.IsOpen() && this.컨트롤러2.IsOpen() && this.컨트롤러3.IsOpen(); } }
