@@ -195,7 +195,6 @@ namespace SamhwaInspectionNeo.Schemas
                 if (t[0].Value != null)
                 {
                     String str = ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[0].strValue;
-                    Debug.WriteLine($"{this.구분} str : {str}");
                     try
                     {
                         String[] vals = str.Split(';');

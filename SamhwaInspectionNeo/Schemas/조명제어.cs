@@ -12,8 +12,8 @@ namespace SamhwaInspectionNeo.Schemas
     public enum 조명포트
     {
         None,
-        COM3,
-        COM4,
+        COM3, // 트리거보드에 연결되어있음.
+        COM4, // 트리거보드에 연결되어있음.
         COM5,
         COM6,
         COM7,
@@ -97,7 +97,7 @@ namespace SamhwaInspectionNeo.Schemas
         {
             SerialPort sp = (SerialPort)sender;
             String data = sp.ReadExisting();
-            Debug.WriteLine($"DataReceived 포트={this.포트}, {data}", this.로그영역);
+            //Debug.WriteLine($"DataReceived 포트={this.포트}, {data}", this.로그영역);
         }
 
         public virtual Boolean SendCommand(String 구분, String Command)
@@ -124,7 +124,7 @@ namespace SamhwaInspectionNeo.Schemas
     public class LCP100DC : 조명컨트롤러
     {
         public override String 로그영역 { get; set; } = nameof(LCP100DC);
-        public override 조명포트 포트 { get; set; } = 조명포트.COM6;
+        public override 조명포트 포트 { get; set; } = 조명포트.COM5;
         public override Int32 통신속도 { get; set; } = 19200;
         public override Int32 최대밝기 { get; } = 100;
         public override String STX { get; set; } = $"{Convert.ToChar(2)}";
@@ -232,8 +232,8 @@ namespace SamhwaInspectionNeo.Schemas
 
         public void Init()
         {
-            this.컨트롤러1 = new LCP100DC() { 포트 = 조명포트.COM6 };   // 상부치수검사 LLXP조명
-            this.컨트롤러2 = new LCP12150P() { 포트 = 조명포트.COM5 };  // 표면검사 4개 Bar조명
+            this.컨트롤러1 = new LCP100DC() { 포트 = 조명포트.COM5 };   // 상부치수검사 LLXP조명
+            this.컨트롤러2 = new LCP12150P() { 포트 = 조명포트.COM6 };  // 표면검사 4개 Bar조명
             this.컨트롤러3 = new LCP24100Q() { 포트 = 조명포트.COM7 }; // 공트레이 2개 Bar조명(사용안함)
 
             this.컨트롤러1.Init();

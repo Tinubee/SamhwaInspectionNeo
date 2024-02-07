@@ -127,7 +127,6 @@ namespace SamhwaInspectionNeo.Schemas
         {
             Int32 오류 = 0;
             Boolean ok = 결과.측정결과 == 결과구분.OK;
-            Debug.WriteLine($"검사코드[ {결과.검사코드} ] 검사결과 : {ok}");
             if (Global.신호제어.NG리트라이모드여부)
             {
                 Boolean 치수결과 = 결과.CTQ결과 == 결과구분.OK;
@@ -137,7 +136,10 @@ namespace SamhwaInspectionNeo.Schemas
                 else if(!표면결과) Global.신호제어.SetDevice($"W000{결과.검사코드}", 2, out 오류);
             }
             else
+            {
                 Global.신호제어.SetDevice($"W000{결과.검사코드}", ok ? 1 : 2, out 오류);
+            }
+                
            
             통신오류알림(오류);
         }

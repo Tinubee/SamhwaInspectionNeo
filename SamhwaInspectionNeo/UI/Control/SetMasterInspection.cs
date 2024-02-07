@@ -78,26 +78,26 @@ namespace SamhwaInspectionNeo.UI.Control
 
         private void GridView1_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
-            int rowIndex = e.RowHandle;
+            //int rowIndex = e.RowHandle;
 
-            object 최소값 = GridView1.GetRowCellValue(rowIndex, "최소값");
-            object 최대값 = GridView1.GetRowCellValue(rowIndex, "최대값");
-            object 검사항목 = GridView1.GetRowCellValue(rowIndex, "검사항목");
+            //object 최소값 = GridView1.GetRowCellValue(rowIndex, "최소값");
+            //object 최대값 = GridView1.GetRowCellValue(rowIndex, "최대값");
+            //object 검사항목 = GridView1.GetRowCellValue(rowIndex, "검사항목");
 
-            if (검사항목.ToString().Contains("Slot"))
-            {
-                Global.VM제어.글로벌변수제어.SetValue("슬롯부최소값", $"{최소값}");
-                Global.VM제어.글로벌변수제어.SetValue("슬롯부최대값", $"{최대값}");
-            }
-            else if (검사항목.ToString().Contains("홀경"))
-            {
-                Global.VM제어.글로벌변수제어.SetValue("홀경최소값", $"{최소값}");
-                Global.VM제어.글로벌변수제어.SetValue("홀경최대값", $"{최대값}");
-            }
+            //if (검사항목.ToString().Contains("Slot"))
+            //{
+            //    Global.VM제어.글로벌변수제어.SetValue("슬롯부최소값", $"{최소값}");
+            //    Global.VM제어.글로벌변수제어.SetValue("슬롯부최대값", $"{최대값}");
+            //}
+            //else if (검사항목.ToString().Contains("홀경"))
+            //{
+            //    Global.VM제어.글로벌변수제어.SetValue("홀경최소값", $"{최소값}");
+            //    Global.VM제어.글로벌변수제어.SetValue("홀경최대값", $"{최대값}");
+            //}
 
-            Global.VM제어.Save();
-            Global.VM제어.글로벌변수제어.Init();
-            Global.MainForm.e변수설정.UpdateGridView();
+            //Global.VM제어.Save();
+            //Global.VM제어.글로벌변수제어.Init();
+            //Global.MainForm.e변수설정.UpdateGridView();
         }
 
         public void Close() { }

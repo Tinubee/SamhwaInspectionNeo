@@ -198,11 +198,22 @@ namespace SamhwaInspectionNeo.Schemas
 
                         Cv2.VConcat(this.카메라1.Page1Image, this.카메라1.Page2Image, this.카메라1.mergedImage);
                         Debug.WriteLine($"Start : {SplitPointStart} , PointX : {SplitPointX}, PointY : {SplitPointY}");
+                        Debug.WriteLine($"Height : {this.카메라1.mergedImage.Height} , Width : {this.카메라1.mergedImage.Width}");
 
-                        this.카메라1.roi[0] = new Rect(SplitPointX, SplitPointStart, this.카메라1.width, 18000);
-                        this.카메라1.roi[1] = new Rect(SplitPointX, SplitPointY * 1, this.카메라1.width, 18000);
-                        this.카메라1.roi[2] = new Rect(SplitPointX, SplitPointY * 2, this.카메라1.width, 18000);
-                        this.카메라1.roi[3] = new Rect(SplitPointX, SplitPointY * 3, this.카메라1.width, 18000);
+                        for (int lop = 0; lop < this.카메라1.roi.Length; lop++)
+                        {
+                            this.카메라1.roi[lop] = new Rect(SplitPointX, SplitPointStart + (SplitPointY * lop), this.카메라1.width, 18000);
+                        }
+
+                        //this.카메라1.roi[0] = new Rect(SplitPointX, Global.모델자료.GetItem(Global.환경설정.선택모델).Y1Pos, this.카메라1.width, 18000);
+                        //this.카메라1.roi[1] = new Rect(SplitPointX, Global.모델자료.GetItem(Global.환경설정.선택모델).Y2Pos, this.카메라1.width, 18000);
+                        //this.카메라1.roi[2] = new Rect(SplitPointX, Global.모델자료.GetItem(Global.환경설정.선택모델).Y3Pos, this.카메라1.width, 18000);
+                        //this.카메라1.roi[3] = new Rect(SplitPointX, Global.모델자료.GetItem(Global.환경설정.선택모델).Y4Pos, this.카메라1.width, 18000);
+
+                        //this.카메라1.roi[0] = new Rect(SplitPointX, SplitPointStart, this.카메라1.width, 18000);
+                        //this.카메라1.roi[1] = new Rect(SplitPointX, SplitPointStart + (SplitPointY * 1), this.카메라1.width, 18000);
+                        //this.카메라1.roi[2] = new Rect(SplitPointX, SplitPointStart + (SplitPointY * 2), this.카메라1.width, 18000);
+                        //this.카메라1.roi[3] = new Rect(SplitPointX, SplitPointStart + (SplitPointY * 3), this.카메라1.width, 18000);
 
                         for (int lop = 0; lop < this.카메라1.roi.Length; lop++)
                         {
@@ -210,7 +221,6 @@ namespace SamhwaInspectionNeo.Schemas
                             Int32 검사코드 = Global.신호제어.마스터모드여부 ? Convert.ToInt32((Flow구분)lop + 100) : Convert.ToInt32((Flow구분)lop);
                             검사결과 검사 = Global.검사자료.검사시작(검사코드);
                             Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop).Run(this.카메라1.splitImage[lop], null);
-                            Debug.WriteLine($"치수검사 결과 {lop} : {결과}");
                             //이미지 저장함수 추가하면됨.
                             this.ImageSave(this.카메라1.splitImage[lop], 카메라구분.Cam01, lop, 결과);
                         }
@@ -260,7 +270,6 @@ namespace SamhwaInspectionNeo.Schemas
                     for (int lop = 0; lop < this.카메라3.MatImage.Count; lop++)
                     {
                         Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop + 5).Run(이미지[lop], null);
-                        Debug.WriteLine($"표면검사 결과 {lop} : {결과}");
                         //이미지 저장함수 추가하면됨.
                         this.ImageSave(이미지[lop], 카메라구분.Cam03, lop, 결과);
                         if (lop == this.카메라3.MatImage.Count - 1) this.카메라3.MatImage.Clear();
@@ -292,14 +301,12 @@ namespace SamhwaInspectionNeo.Schemas
             List<String> paths = new List<String> { Global.환경설정.사진저장경로, MvUtils.Utils.FormatDate(DateTime.Now, "{0:yyyy-MM-dd}"), Global.환경설정.선택모델.ToString(), 카메라.ToString() };
             String name = $"{검사번호.ToString("d4")}_{MvUtils.Utils.FormatDate(DateTime.Now, "{0:HHmmss}")}.png";//_{결과.ToString()}
             String path = Common.CreateDirectory(paths);
-            Debug.WriteLine($"이미지 저장 경로 : {path}");
             if (String.IsNullOrEmpty(path))
             {
                 Global.오류로그(로그영역, "이미지 저장", $"[{Path.Combine(paths.ToArray())}] 디렉토리를 만들 수 없습니다.", true);
                 return;
             }
             String file = Path.Combine(path, name);
-            Debug.WriteLine($"{이미지.Size()}: {file}", $"{카메라} 그랩완료");
             Task.Run(() =>
             {
                 Int32 level = 3; // 0에서 9까지의 값 중 선택
@@ -580,7 +587,6 @@ namespace SamhwaInspectionNeo.Schemas
                 else if (this.구분 == 카메라구분.Cam03)
                 {
                     this.MatImage.Add(image);
-                    Debug.WriteLine($"카메라3 이미지개수 : {this.MatImage.Count}");
                     if (Global.그랩제어.카메라3.MatImage.Count == this.ImageCount)
                     {
                         this.Stop();
@@ -657,11 +663,12 @@ namespace SamhwaInspectionNeo.Schemas
                 MC.SetParam(this.Channel, MC.SignalEnable + MC.SIG_SURFACE_PROCESSING, "ON");
                 MC.SetParam(this.Channel, MC.SignalEnable + MC.SIG_ACQUISITION_FAILURE, "ON");
                 MC.SetParam(this.Channel, "ChannelState", ChannelState.READY);
+                Debug.WriteLine($"{this.Channel}, {this.CurrentState()}", "READY currentState");
 
                 this.Page1Image = new Mat(height, width, MatType.CV_8UC1);
                 this.Page2Image = new Mat(height, width, MatType.CV_8UC1);
                 this.mergedImage = new Mat(height * 2, width, MatType.CV_8UC1);
-                Debug.WriteLine($"{this.Channel}, {this.CurrentState()}", "READY currentState");
+
                 Global.정보로그(로그영역, "카메라 연결", $"[{this.구분}] 카메라 연결 성공!", false);
 
                 return true;
@@ -672,7 +679,7 @@ namespace SamhwaInspectionNeo.Schemas
                 return false;
             }
         }
-       
+
         public override Boolean Close()
         {
             this.Free();
@@ -695,9 +702,11 @@ namespace SamhwaInspectionNeo.Schemas
         [Description("채널 활성화 준비")]
         public override Boolean Ready()
         {
-            Debug.WriteLine("LineScanCamera Active");
             if (this.CurrentState() != ChannelState.ACTIVE)
+            {
+                Debug.WriteLine("LineScanCamera Active");
                 MC.SetParam(this.Channel, "ChannelState", ChannelState.ACTIVE);
+            }
             return true;
         }
 
@@ -742,6 +751,8 @@ namespace SamhwaInspectionNeo.Schemas
             try
             {
                 UInt32 currentChannel = (UInt32)signalInfo.Context;
+                Debug.WriteLine($"{currentChannel}", "currentChannel");
+
                 Int32 imageSizeX, imageSizeY, bufferPitch;
 
                 MC.GetParam(currentChannel, "ImageSizeX", out imageSizeX);
@@ -762,7 +773,7 @@ namespace SamhwaInspectionNeo.Schemas
         }
         private void ImageGrap(UInt32 channel, UInt32 bufferAddress, Int32 width, Int32 height, Int32 bufferPitch)
         {
-            Debug.WriteLine("LineCamera ImageGrab");
+            Debug.WriteLine($"LineCamera ImageGrab :{PageIndex}");
             AcquisitionData acq = new AcquisitionData(this.구분, PageIndex);
             Mat image = new Mat();
             PageIndex += 1;

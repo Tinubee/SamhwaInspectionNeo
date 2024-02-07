@@ -271,10 +271,10 @@ namespace SamhwaInspectionNeo.Schemas
         public 결과구분 외관결과 { get; set; } = 결과구분.NO;
         [Column("ilngs"), JsonProperty("ilngs"), Translation("NG Info.", "불량정보")]
         public String 불량정보 { get; set; } = String.Empty;
-
         [NotMapped, JsonProperty("inspd")]
         public List<검사정보> 검사내역 { get; set; } = new List<검사정보>();
-
+        [NotMapped, JsonIgnore]
+        private const string 로그영역 = "검사정보";
         public 검사결과()
         {
             this.검사일시 = DateTime.Now;
@@ -328,6 +328,8 @@ namespace SamhwaInspectionNeo.Schemas
         {
             if (Global.환경설정.동작구분 == 동작구분.LocalTest) return false;
 
+            //if(!Global.신호제어.자동모드여부) return false;
+
             if (this.검사내역.Any(e => e.측정결과 == 결과구분.NO || e.측정결과 == 결과구분.IN))
             {
                 return true;
@@ -360,7 +362,7 @@ namespace SamhwaInspectionNeo.Schemas
             List<String> 불량내역 = this.검사내역.Where(e => e.측정결과 != 결과구분.OK && e.측정결과 != 결과구분.PS).Select(e => e.검사항목.ToString()).ToList();
             if (불량내역.Count > 0) this.불량정보 = String.Join(",", 불량내역);
 
-            Debug.WriteLine($"{this.검사코드} = {this.측정결과}", "검사완료");
+            Global.정보로그(로그영역, "결과계산", $"[{(Int32)Global.환경설정.선택모델} - {this.검사코드}] : ${this.측정결과}", false);
             return this.측정결과;
         }
     }

@@ -60,26 +60,17 @@ namespace SamhwaInspectionNeo
                 검사자료 = new 검사자료();
 
                 로그자료.Init();
-                Debug.WriteLine("그랩제어 클래스 Init");
                 환경설정.Init();
-                Debug.WriteLine("환경설정 클래스 Init");
                 VM제어.Init();
-                Debug.WriteLine("VM제어 클래스 Init");
                 유저자료.Init();
-                Debug.WriteLine("유저자료 클래스 Init");
                 if (Global.환경설정.동작구분 == 동작구분.Live)
                 {
                     조명제어.Init();
-                    Debug.WriteLine("조명제어 클래스 Init");
                     신호제어.Init();
-                    Debug.WriteLine("신호제어 클래스 Init");
                     그랩제어.Init();
-                    Debug.WriteLine("그랩제어 클래스 Init");
                 }
                 모델자료.Init();
-                Debug.WriteLine("모델자료 클래스 Init");
                 검사자료.Init();
-                Debug.WriteLine("검사자료 클래스 Init");
 
                 if (!신호제어.Open()) new Exception("PLC 서버에 연결할 수 없습니다.");
 
@@ -101,23 +92,14 @@ namespace SamhwaInspectionNeo
             try
             {
                 그랩제어?.Close();
-                Debug.WriteLine("그랩제어 클래스 Closed");
                 신호제어?.Close();
-                Debug.WriteLine("신호제어 클래스 Closed");
                 VM제어?.Close();
-                Debug.WriteLine("VM제어 클래스 Closed");
                 조명제어?.Close();
-                Debug.WriteLine("조명제어 클래스 Closed");
                 로그자료?.Close();
-                Debug.WriteLine("로그자료 클래스 Closed");
                 환경설정?.Close();
-                Debug.WriteLine("환경설정 클래스 Closed");
                 유저자료?.Close();
-                Debug.WriteLine("유저자료 클래스 Closed");
                 모델자료?.Close();
-                Debug.WriteLine("모델자료 클래스 Closed");
                 검사자료?.Close();
-                Debug.WriteLine("검사자료 클래스 Closed");
                 Properties.Settings.Default.Save();
                 return true;
             }
