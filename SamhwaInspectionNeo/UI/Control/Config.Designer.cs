@@ -98,8 +98,8 @@
             this.g환경설정.Dock = System.Windows.Forms.DockStyle.Fill;
             this.g환경설정.Location = new System.Drawing.Point(0, 0);
             this.g환경설정.Name = "g환경설정";
-            this.g환경설정.Padding = new System.Windows.Forms.Padding(10, 9, 10, 9);
-            this.g환경설정.Size = new System.Drawing.Size(620, 950);
+            this.g환경설정.Padding = new System.Windows.Forms.Padding(10, 10, 10, 10);
+            this.g환경설정.Size = new System.Drawing.Size(620, 1018);
             this.g환경설정.TabIndex = 8;
             // 
             // b설정저장
@@ -109,9 +109,9 @@
             this.b설정저장.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.b설정저장.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("b설정저장.ImageOptions.SvgImage")));
             this.b설정저장.ImageOptions.SvgImageSize = new System.Drawing.Size(24, 24);
-            this.b설정저장.Location = new System.Drawing.Point(12, 909);
+            this.b설정저장.Location = new System.Drawing.Point(12, 974);
             this.b설정저장.Name = "b설정저장";
-            this.b설정저장.Size = new System.Drawing.Size(596, 30);
+            this.b설정저장.Size = new System.Drawing.Size(596, 32);
             this.b설정저장.TabIndex = 5;
             this.b설정저장.Text = "저  장";
             // 
@@ -119,10 +119,10 @@
             // 
             this.layoutControl2.AutoScroll = false;
             this.layoutControl2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.layoutControl2.Location = new System.Drawing.Point(12, 532);
+            this.layoutControl2.Location = new System.Drawing.Point(12, 568);
             this.layoutControl2.Name = "layoutControl2";
             this.layoutControl2.Root = this.layoutControlGroup2;
-            this.layoutControl2.Size = new System.Drawing.Size(596, 219);
+            this.layoutControl2.Size = new System.Drawing.Size(596, 235);
             this.layoutControl2.TabIndex = 2;
             this.layoutControl2.Text = "layoutControl2";
             // 
@@ -136,7 +136,7 @@
             this.layoutControlGroup3});
             this.layoutControlGroup2.Name = "Root";
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup2.Size = new System.Drawing.Size(596, 219);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(596, 235);
             this.layoutControlGroup2.TextVisible = false;
             // 
             // layoutControlGroup3
@@ -144,7 +144,7 @@
             this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup3.Name = "layoutControlGroup1";
             this.layoutControlGroup3.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 4, 4);
-            this.layoutControlGroup3.Size = new System.Drawing.Size(596, 219);
+            this.layoutControlGroup3.Size = new System.Drawing.Size(596, 235);
             this.layoutControlGroup3.Text = "Inspection";
             // 
             // layoutControl1
@@ -158,11 +158,11 @@
             this.layoutControl1.Controls.Add(this.e로그보관);
             this.layoutControl1.Controls.Add(this.e기본경로);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.layoutControl1.Location = new System.Drawing.Point(12, 36);
+            this.layoutControl1.Location = new System.Drawing.Point(12, 37);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(655, 240, 650, 400);
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(596, 496);
+            this.layoutControl1.Size = new System.Drawing.Size(596, 531);
             this.layoutControl1.TabIndex = 1;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -189,7 +189,6 @@
             this.e양품저장.Properties.OffText = "Off";
             this.e양품저장.Properties.OnText = "On";
             this.e양품저장.Size = new System.Drawing.Size(172, 28);
-            this.e양품저장.StyleController = this.layoutControl1;
             this.e양품저장.TabIndex = 13;
             // 
             // e사진저장
@@ -335,7 +334,7 @@
             this.layoutControlGroup1});
             this.Root.Name = "Root";
             this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.Root.Size = new System.Drawing.Size(596, 496);
+            this.Root.Size = new System.Drawing.Size(596, 531);
             this.Root.TextVisible = false;
             // 
             // layoutControlGroup1
@@ -353,7 +352,7 @@
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 4, 4);
-            this.layoutControlGroup1.Size = new System.Drawing.Size(596, 496);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(596, 531);
             this.layoutControlGroup1.Text = "Basic";
             // 
             // layoutControlItem1
@@ -406,7 +405,7 @@
             this.layoutControlItem2.Control = this.e소수자리;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 160);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(291, 297);
+            this.layoutControlItem2.Size = new System.Drawing.Size(291, 332);
             this.layoutControlItem2.Text = "검사 결과 자릿수";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(101, 17);
             // 
@@ -433,16 +432,16 @@
             this.emptySpaceItem2.AllowHotTrack = false;
             this.emptySpaceItem2.Location = new System.Drawing.Point(291, 160);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(291, 297);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(291, 332);
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
             // Config
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.g환경설정);
             this.Name = "Config";
-            this.Size = new System.Drawing.Size(620, 950);
+            this.Size = new System.Drawing.Size(620, 1018);
             ((System.ComponentModel.ISupportInitialize)(this.g환경설정)).EndInit();
             this.g환경설정.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).EndInit();

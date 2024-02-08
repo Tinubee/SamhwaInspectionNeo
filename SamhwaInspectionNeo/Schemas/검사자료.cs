@@ -157,12 +157,15 @@ namespace SamhwaInspectionNeo.Schemas
             if (!검사.검사중확인())
             {
                 Debug.WriteLine($"검사코드 [ {검사코드} ] 제거");
-                this.검사스플.Remove(검사코드);
+                this.검사스플제거(검사코드);
                 this.검사완료알림?.Invoke(검사);
             }
 
             return 검사;
         }
+
+        public void 검사스플제거(Int32 검사코드) => this.검사스플.Remove(검사코드);
+
         // 현재 검사중인 정보를 검색
         public 검사결과 검사항목찾기(Int32 검사코드, Boolean 신규여부 = false)
         {
