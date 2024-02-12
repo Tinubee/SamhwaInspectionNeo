@@ -63,7 +63,7 @@
             this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.p치수검사;
-            this.xtraTabControl1.Size = new System.Drawing.Size(1587, 963);
+            this.xtraTabControl1.Size = new System.Drawing.Size(1587, 1032);
             this.xtraTabControl1.TabIndex = 0;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.p치수검사,
@@ -75,7 +75,7 @@
             this.p치수검사.Controls.Add(this.tablePanel1);
             this.p치수검사.Margin = new System.Windows.Forms.Padding(0);
             this.p치수검사.Name = "p치수검사";
-            this.p치수검사.Size = new System.Drawing.Size(1585, 933);
+            this.p치수검사.Size = new System.Drawing.Size(1585, 1001);
             this.p치수검사.Text = "치수검사";
             // 
             // tablePanel1
@@ -94,7 +94,7 @@
             this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 26F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 26F)});
-            this.tablePanel1.Size = new System.Drawing.Size(1585, 933);
+            this.tablePanel1.Size = new System.Drawing.Size(1585, 1001);
             this.tablePanel1.TabIndex = 0;
             this.tablePanel1.UseSkinIndents = true;
             // 
@@ -106,12 +106,12 @@
             this.Flow4Viewer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Flow4Viewer.ImageSource = null;
             this.Flow4Viewer.IsShowCustomROIMenu = false;
-            this.Flow4Viewer.Location = new System.Drawing.Point(797, 471);
+            this.Flow4Viewer.Location = new System.Drawing.Point(797, 505);
             this.Flow4Viewer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Flow4Viewer.ModuleSource = null;
             this.Flow4Viewer.Name = "Flow4Viewer";
             this.tablePanel1.SetRow(this.Flow4Viewer, 1);
-            this.Flow4Viewer.Size = new System.Drawing.Size(774, 446);
+            this.Flow4Viewer.Size = new System.Drawing.Size(774, 480);
             this.Flow4Viewer.TabIndex = 3;
             // 
             // Flow3Viewer
@@ -122,12 +122,12 @@
             this.Flow3Viewer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Flow3Viewer.ImageSource = null;
             this.Flow3Viewer.IsShowCustomROIMenu = false;
-            this.Flow3Viewer.Location = new System.Drawing.Point(15, 471);
+            this.Flow3Viewer.Location = new System.Drawing.Point(15, 505);
             this.Flow3Viewer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Flow3Viewer.ModuleSource = null;
             this.Flow3Viewer.Name = "Flow3Viewer";
             this.tablePanel1.SetRow(this.Flow3Viewer, 1);
-            this.Flow3Viewer.Size = new System.Drawing.Size(774, 446);
+            this.Flow3Viewer.Size = new System.Drawing.Size(774, 480);
             this.Flow3Viewer.TabIndex = 2;
             // 
             // Flow2Viewer
@@ -143,7 +143,7 @@
             this.Flow2Viewer.ModuleSource = null;
             this.Flow2Viewer.Name = "Flow2Viewer";
             this.tablePanel1.SetRow(this.Flow2Viewer, 0);
-            this.Flow2Viewer.Size = new System.Drawing.Size(774, 446);
+            this.Flow2Viewer.Size = new System.Drawing.Size(774, 480);
             this.Flow2Viewer.TabIndex = 1;
             // 
             // Flow1Viewer
@@ -159,7 +159,7 @@
             this.Flow1Viewer.ModuleSource = null;
             this.Flow1Viewer.Name = "Flow1Viewer";
             this.tablePanel1.SetRow(this.Flow1Viewer, 0);
-            this.Flow1Viewer.Size = new System.Drawing.Size(774, 448);
+            this.Flow1Viewer.Size = new System.Drawing.Size(774, 482);
             this.Flow1Viewer.TabIndex = 0;
             // 
             // p상부표면검사
@@ -167,7 +167,7 @@
             this.p상부표면검사.Controls.Add(this.tablePanel2);
             this.p상부표면검사.Margin = new System.Windows.Forms.Padding(0);
             this.p상부표면검사.Name = "p상부표면검사";
-            this.p상부표면검사.Size = new System.Drawing.Size(1585, 933);
+            this.p상부표면검사.Size = new System.Drawing.Size(1585, 1001);
             this.p상부표면검사.Text = "상부표면검사";
             // 
             // tablePanel2
@@ -186,7 +186,7 @@
             this.tablePanel2.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 26F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 26F)});
-            this.tablePanel2.Size = new System.Drawing.Size(1585, 933);
+            this.tablePanel2.Size = new System.Drawing.Size(1585, 1001);
             this.tablePanel2.TabIndex = 1;
             this.tablePanel2.UseSkinIndents = true;
             // 
@@ -198,12 +198,12 @@
             this.UpSurfaceViewer4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UpSurfaceViewer4.ImageSource = null;
             this.UpSurfaceViewer4.IsShowCustomROIMenu = false;
-            this.UpSurfaceViewer4.Location = new System.Drawing.Point(797, 471);
+            this.UpSurfaceViewer4.Location = new System.Drawing.Point(797, 505);
             this.UpSurfaceViewer4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.UpSurfaceViewer4.ModuleSource = null;
             this.UpSurfaceViewer4.Name = "UpSurfaceViewer4";
             this.tablePanel2.SetRow(this.UpSurfaceViewer4, 1);
-            this.UpSurfaceViewer4.Size = new System.Drawing.Size(774, 446);
+            this.UpSurfaceViewer4.Size = new System.Drawing.Size(774, 480);
             this.UpSurfaceViewer4.TabIndex = 3;
             // 
             // UpSurfaceViewer3
@@ -214,12 +214,12 @@
             this.UpSurfaceViewer3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UpSurfaceViewer3.ImageSource = null;
             this.UpSurfaceViewer3.IsShowCustomROIMenu = false;
-            this.UpSurfaceViewer3.Location = new System.Drawing.Point(15, 471);
+            this.UpSurfaceViewer3.Location = new System.Drawing.Point(15, 505);
             this.UpSurfaceViewer3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.UpSurfaceViewer3.ModuleSource = null;
             this.UpSurfaceViewer3.Name = "UpSurfaceViewer3";
             this.tablePanel2.SetRow(this.UpSurfaceViewer3, 1);
-            this.UpSurfaceViewer3.Size = new System.Drawing.Size(774, 446);
+            this.UpSurfaceViewer3.Size = new System.Drawing.Size(774, 480);
             this.UpSurfaceViewer3.TabIndex = 2;
             // 
             // UpSurfaceViewer2
@@ -235,7 +235,7 @@
             this.UpSurfaceViewer2.ModuleSource = null;
             this.UpSurfaceViewer2.Name = "UpSurfaceViewer2";
             this.tablePanel2.SetRow(this.UpSurfaceViewer2, 0);
-            this.UpSurfaceViewer2.Size = new System.Drawing.Size(774, 446);
+            this.UpSurfaceViewer2.Size = new System.Drawing.Size(774, 480);
             this.UpSurfaceViewer2.TabIndex = 1;
             // 
             // UpSurfaceViewer1
@@ -251,7 +251,7 @@
             this.UpSurfaceViewer1.ModuleSource = null;
             this.UpSurfaceViewer1.Name = "UpSurfaceViewer1";
             this.tablePanel2.SetRow(this.UpSurfaceViewer1, 0);
-            this.UpSurfaceViewer1.Size = new System.Drawing.Size(774, 448);
+            this.UpSurfaceViewer1.Size = new System.Drawing.Size(774, 482);
             this.UpSurfaceViewer1.TabIndex = 0;
             // 
             // p트레이검사
@@ -259,7 +259,7 @@
             this.p트레이검사.Controls.Add(this.tablePanel4);
             this.p트레이검사.Margin = new System.Windows.Forms.Padding(0);
             this.p트레이검사.Name = "p트레이검사";
-            this.p트레이검사.Size = new System.Drawing.Size(1585, 933);
+            this.p트레이검사.Size = new System.Drawing.Size(1585, 1001);
             this.p트레이검사.Text = "트레이검사";
             // 
             // tablePanel4
@@ -273,7 +273,7 @@
             this.tablePanel4.Name = "tablePanel4";
             this.tablePanel4.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
-            this.tablePanel4.Size = new System.Drawing.Size(1585, 933);
+            this.tablePanel4.Size = new System.Drawing.Size(1585, 1001);
             this.tablePanel4.TabIndex = 1;
             this.tablePanel4.UseSkinIndents = true;
             // 
@@ -290,17 +290,17 @@
             this.trayViewer.ModuleSource = null;
             this.trayViewer.Name = "trayViewer";
             this.tablePanel4.SetRow(this.trayViewer, 0);
-            this.trayViewer.Size = new System.Drawing.Size(1555, 904);
+            this.trayViewer.Size = new System.Drawing.Size(1555, 972);
             this.trayViewer.TabIndex = 0;
             // 
             // CamViewers
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.xtraTabControl1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "CamViewers";
-            this.Size = new System.Drawing.Size(1587, 963);
+            this.Size = new System.Drawing.Size(1587, 1032);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
             this.p치수검사.ResumeLayout(false);

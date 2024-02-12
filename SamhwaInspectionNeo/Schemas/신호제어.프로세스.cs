@@ -153,6 +153,7 @@ namespace SamhwaInspectionNeo.Schemas
                 {
                     Global.조명제어.TurnOn(카메라구분.Cam02);
                     Global.그랩제어.Ready(카메라구분.Cam02);
+                    Global.그랩제어.SoftTrigger(카메라구분.Cam02);
                 }).Start();
                 신호쓰기(정보주소.트레이확인카메라트리거, 0);
             }

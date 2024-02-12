@@ -205,21 +205,6 @@ namespace SamhwaInspectionNeo.Schemas
                             this.카메라1.roi[lop] = new Rect(SplitPointX, SplitPointStart + (SplitPointY * lop), this.카메라1.width, 18000);
                         }
 
-                        //this.카메라1.roi[0] = new Rect(SplitPointX, 11000, this.카메라1.width, 18000);
-                        //this.카메라1.roi[1] = new Rect(SplitPointX, 25000, this.카메라1.width, 18000);
-                        //this.카메라1.roi[2] = new Rect(SplitPointX, 39000, this.카메라1.width, 18000);
-                        //this.카메라1.roi[3] = new Rect(SplitPointX, 52000, this.카메라1.width, 18000);
-
-                        //this.카메라1.roi[0] = new Rect(SplitPointX, Global.모델자료.GetItem(Global.환경설정.선택모델).Y1Pos, this.카메라1.width, 18000);
-                        //this.카메라1.roi[1] = new Rect(SplitPointX, Global.모델자료.GetItem(Global.환경설정.선택모델).Y2Pos, this.카메라1.width, 18000);
-                        //this.카메라1.roi[2] = new Rect(SplitPointX, Global.모델자료.GetItem(Global.환경설정.선택모델).Y3Pos, this.카메라1.width, 18000);
-                        //this.카메라1.roi[3] = new Rect(SplitPointX, Global.모델자료.GetItem(Global.환경설정.선택모델).Y4Pos, this.카메라1.width, 18000);
-
-                        //this.카메라1.roi[0] = new Rect(SplitPointX, SplitPointStart, this.카메라1.width, 18000);
-                        //this.카메라1.roi[1] = new Rect(SplitPointX, SplitPointStart + (SplitPointY * 1), this.카메라1.width, 18000);
-                        //this.카메라1.roi[2] = new Rect(SplitPointX, SplitPointStart + (SplitPointY * 2), this.카메라1.width, 18000);
-                        //this.카메라1.roi[3] = new Rect(SplitPointX, SplitPointStart + (SplitPointY * 3), this.카메라1.width, 18000);
-
                         for (int lop = 0; lop < this.카메라1.roi.Length; lop++)
                         {
                             this.카메라1.splitImage[lop] = new Mat(this.카메라1.mergedImage, this.카메라1.roi[lop]);
@@ -264,6 +249,8 @@ namespace SamhwaInspectionNeo.Schemas
         }
 
         public void Ready(카메라구분 카메라) => this.GetItem(카메라)?.Ready();
+
+        public void SoftTrigger(카메라구분 카메라) => this.GetItem(카메라)?.SoftTrigger();
 
         public void 그랩완료(카메라구분 카메라, List<Mat> 이미지)
         {
@@ -423,6 +410,7 @@ namespace SamhwaInspectionNeo.Schemas
             this.OffsetX = 장치.OffsetX;
         }
 
+        public virtual Boolean SoftTrigger() => false;
         public virtual Boolean Init() => false;
         public virtual Boolean Ready() => false;
         public virtual Boolean Start() => false;
@@ -486,7 +474,7 @@ namespace SamhwaInspectionNeo.Schemas
             그랩제어.Validate("", this.Camera.SetBoolValue("BlackLevelEnable", true), false);
 
             this.Camera.SetImageNodeNum(ImageCount);
-            this.옵션적용();
+            //this.옵션적용();
 
             Global.정보로그(로그영역, "카메라 연결", $"[{this.구분}] 카메라 연결 성공!", false);
 
@@ -533,6 +521,10 @@ namespace SamhwaInspectionNeo.Schemas
         public void 트리거소스적용()
         {
             if (this.Camera == null) return;
+
+            if(this.구분 == 카메라구분.Cam02)
+                this.TrigSource = MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_SOFTWARE;
+
             Int32 nRet = this.Camera.SetEnumValue("TriggerSource", (uint)this.TrigSource);
             그랩제어.Validate($"[{this.구분}] 트리거소스 설정에 실패하였습니다.", nRet, true);
         }
@@ -575,6 +567,7 @@ namespace SamhwaInspectionNeo.Schemas
             Camera.ClearImageBuffer();
             return 그랩제어.Validate($"{this.구분} 정지오류!", Camera.StopGrabbing(), false);
         }
+        public override Boolean SoftTrigger() => 그랩제어.Validate($"{this.구분} TriggerSoftware", this.Camera.SetCommandValue("TriggerSoftware"), true);
 
         #region 이미지 그랩
         public Boolean TrigForce() => 그랩제어.Validate($"{this.구분} TriggerSoftware", this.Camera.SetCommandValue("TriggerSoftware"), true);

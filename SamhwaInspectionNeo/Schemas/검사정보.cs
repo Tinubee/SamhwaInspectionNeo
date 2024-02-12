@@ -78,81 +78,63 @@ namespace SamhwaInspectionNeo.Schemas
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
         Slot1위치도 = 4,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot2상부 = 5,
+        Slot1길이 = 5,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot2중앙부 = 6,
+        Slot2상부 = 6,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot2하부 = 7,
+        Slot2중앙부 = 7,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot2위치도 = 8,
+        Slot2하부 = 8,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot3상부 = 9,
+        Slot2위치도 = 9,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot3중앙부 = 10,
+        Slot2길이 = 10,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot3하부 = 11,
+        Slot3상부 = 11,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot3위치도 = 12,
+        Slot3중앙부 = 12,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot4상부 = 13,
+        Slot3하부 = 13,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot4중앙부 = 14,
+        Slot3위치도 = 14,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot4하부 = 15,
+        Slot3길이 = 15,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot4위치도 = 16,
+        Slot4상부 = 16,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        기준홀경 = 17,
+        Slot4중앙부 = 17,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        상측홀경 = 18,
+        Slot4하부 = 18,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌상홀경 = 19,
+        Slot4위치도 = 19,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌하홀경 = 20,
+        Slot4길이 = 20,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        중앙홀경 = 21,
+        기준홀경 = 21,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우상홀경 = 22,
+        상측홀경 = 22,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우하홀경 = 23,
+        좌상홀경 = 23,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        상측가로거리 = 24,
+        좌하홀경 = 24,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌상가로거리 = 25,
+        중앙홀경 = 25,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌하가로거리 = 26,
+        우상홀경 = 26,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        중앙가로거리 = 27,
+        우하홀경 = 27,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우상가로거리 = 28,
+        상측위치도 = 28,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우하가로거리 = 29,
+        좌상위치도 = 29,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        상측세로거리 = 30,
+        좌하위치도 = 30,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌상세로거리 = 31,
+        중앙위치도 = 31,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌하세로거리 = 32,
+        우상위치도 = 32,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        중앙세로거리 = 33,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우상세로거리 = 34,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우하세로거리 = 35,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        상측위치도 = 36,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌상위치도 = 37,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌하위치도 = 38,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        중앙위치도 = 39,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우상위치도 = 40,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우하위치도 = 41,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot길이 = 42,
+        우하위치도 = 33,
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03)]
         상부표면검사 = 500,
     }
@@ -351,10 +333,10 @@ namespace SamhwaInspectionNeo.Schemas
                 else if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.CTQ && e.측정결과 == 결과구분.NG)) this.CTQ결과 = 결과구분.NG;
                 else this.CTQ결과 = 결과구분.OK;
                 //임시
-                // this.외관결과 = 결과구분.OK;
-                if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.Surface && e.측정결과 == 결과구분.ER)) this.외관결과 = 결과구분.ER;
-                else if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.Surface && e.측정결과 == 결과구분.NG)) this.외관결과 = 결과구분.NG;
-                else this.외관결과 = 결과구분.OK;
+                this.외관결과 = 결과구분.OK;
+                //if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.Surface && e.측정결과 == 결과구분.ER)) this.외관결과 = 결과구분.ER;
+                //else if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.Surface && e.측정결과 == 결과구분.NG)) this.외관결과 = 결과구분.NG;
+                //else this.외관결과 = 결과구분.OK;
             }
 
             List<String> 불량내역 = this.검사내역.Where(e => e.측정결과 == 결과구분.ER || e.측정결과 == 결과구분.NG).Select(e => e.검사항목.ToString()).ToList();

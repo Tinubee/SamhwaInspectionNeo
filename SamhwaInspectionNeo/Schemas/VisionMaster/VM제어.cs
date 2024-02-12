@@ -238,7 +238,7 @@ namespace SamhwaInspectionNeo.Schemas
                     Global.오류로그(로그영역, "검사오류", $"[{this.구분}] VM 검사 모델이 없습니다.", false);
                     return false;
                 }
-                Boolean Front = Global.신호제어.Front지그; //Convert.ToInt32(Global.VM제어.글로벌변수제어.GetValue("Front지그"));
+                Boolean Front = Global.VM제어.글로벌변수제어.GetValue("Front지그") == "1" ? true : false; ///Global.신호제어.Front지그;
 
                 imageBaseData = mat == null ? imageBaseData : MatToImageBaseData(mat);
                 if (imageBaseData != null)
