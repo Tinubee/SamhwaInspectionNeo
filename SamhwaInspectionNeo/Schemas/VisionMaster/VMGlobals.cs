@@ -38,9 +38,9 @@ namespace SamhwaInspectionNeo.Schemas
             List<VmVariable> calValueList = new List<VmVariable>();
             foreach (GlobalVarInfo info in lists)
             {
-                if (info.strValueType.ToLower() == typeof(String).Name.ToLower()) continue;
+                if (info.strValueType.ToLower() != typeof(String).Name.ToLower()) continue;
 
-                if (info.strValueName.Contains("calValue"))
+                if (info.strValueName.Contains("CalValue"))
                     calValueList.Add(new VmVariable(info));
             }
 

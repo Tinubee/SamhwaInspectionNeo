@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraEditors;
+﻿using DevExpress.Data.Extensions;
+using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using SamhwaInspectionNeo.Schemas;
 using System;
@@ -17,6 +18,19 @@ namespace SamhwaInspectionNeo.UI.Control
 {
     public partial class Calibration : XtraUserControl
     {
+        public enum 보정값설정
+        {
+            Flow1Front,
+            Flow1Rear,
+            Flow2Front,
+            Flow2Rear,
+            Flow3Front,
+            Flow3Rear,
+            Flow4Front,
+            Flow4Rear,
+        }
+
+
         String 로그영역 = "보정값설정";
         private 지그위치 위치 { get; set; } = 지그위치.Front;
         private Flow구분 플로우 { get; set; } = Flow구분.Flow1;
@@ -123,6 +137,11 @@ namespace SamhwaInspectionNeo.UI.Control
                 return;
             }
 
+            List<VmVariable> calValue = Global.VM제어.글로벌변수제어.보정값불러오기();
+            Int32 index = 보정위치();
+
+            if (index == -1) return;
+
             for (int lop = 0; lop < 선택자료.검사내역.Count; lop++)
             {
                 결과정보 조회정보 = new 결과정보();
@@ -131,10 +150,23 @@ namespace SamhwaInspectionNeo.UI.Control
                 조회정보.검사항목 = 정보.검사항목;
                 조회정보.검사장치 = 정보.검사장치;
                 조회정보.측정단위 = 정보.측정단위;
+                조회정보.교정값 = 보정값조회(정보.검사항목, calValue, index);
                 this.결과정보리스트.Add(조회정보);
             }
             GridControl1.DataSource = this.결과정보리스트;
         }
+
+        private Decimal 보정값조회(검사항목 항목, List<VmVariable> list, Int32 보정값위치)
+        {
+            VmVariable 변수 = list.Where(e => e.Name.Contains(항목.ToString())).FirstOrDefault();
+            if (변수 == null) return 1;
+
+            string value = 변수.StringValue;
+            string[] splitValue = value.Split(';');
+
+            return  Convert.ToDecimal(splitValue[보정값위치]);
+        }
+
         private void 교정값계산(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
             if (isCalculating) return;
@@ -161,14 +193,40 @@ namespace SamhwaInspectionNeo.UI.Control
                 }
             }
 
-            //VM Slot쪽에 넣어주기 //Flow와 Jig & 이름 체크.
-            string setName = $"{this.위치}{name}";
+            List<VmVariable> 보정값변수들 = Global.VM제어.글로벌변수제어.보정값불러오기();
+            Int32 index = 보정위치();
 
-            //Global.VM제어.GetItem(this.플로우).Procedure.Inputs[0].Value =  calvalue;
+            if (index == -1) return;
 
-            Global.VM제어.GetItem(this.플로우).slot1ShellModuleTool.ModuParams.SetInputFloat(setName, calvalue);
-            //Global.VM제어.GetItem(this.플로우).slot1ShellModuleTool.ResetParam();
+            VmVariable 적용할변수 = 보정값변수들.Where(f => f.Name.Contains(name.ToString())).FirstOrDefault();
+
+            if(적용할변수 == null) return;
+
+            string value = 적용할변수.StringValue;
+            string[] splitValue = value.Split(';');
+
+            splitValue[index] = calvalue[0].ToString();
+
+            value = String.Join(";", splitValue);
+
+            Global.VM제어.글로벌변수제어.SetValue(적용할변수.Name, value);
+            Global.VM제어.Save();
         }
+
+        private Int32 보정위치()
+        {
+            String check = $"{this.플로우}{this.위치}";
+            if (Enum.TryParse(check, out 보정값설정 설정))
+            {
+                int compIntValue = (int)설정; // Cast the enum to int to get its underlying value
+                return compIntValue; // Output the value. Replace this with your output method.
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
     }
 
     public class 결과정보

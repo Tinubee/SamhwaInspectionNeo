@@ -12,6 +12,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using VM.Core;
 using VM.PlatformSDKCS;
+using static SamhwaInspectionNeo.Schemas.검사자료;
 
 namespace SamhwaInspectionNeo.Schemas
 {
@@ -143,6 +144,7 @@ namespace SamhwaInspectionNeo.Schemas
                 this.shellModuleTool.ModuleResultCallBackArrived += ShellModuleTool_ModuleResultCallBackArrived;
             }
         }
+
         private void ShellModuleTool_ModuleResultCallBackArrived(object sender, EventArgs e) { }
 
         public void Init()
@@ -183,7 +185,7 @@ namespace SamhwaInspectionNeo.Schemas
             return str == "OK";
         }
 
-        private void SetResult(Flow구분 구분, 지그위치 지그) //1이면 Front, 0이면 Rear 
+        private void SetResult(Flow구분 구분, 지그위치 지그) //0이면 Front, 1이면 Rear 
         {
             ShellModuleTool shell = Global.VM제어.GetItem(구분).shellModuleTool;
 
@@ -238,7 +240,7 @@ namespace SamhwaInspectionNeo.Schemas
                     Global.오류로그(로그영역, "검사오류", $"[{this.구분}] VM 검사 모델이 없습니다.", false);
                     return false;
                 }
-                Boolean Front = Global.VM제어.글로벌변수제어.GetValue("Front지그") == "1" ? true : false; ///Global.신호제어.Front지그;
+                Boolean Front = Global.신호제어.Front지그; //Global.VM제어.글로벌변수제어.GetValue("Front지그") == "1" ? true : false; ///
 
                 imageBaseData = mat == null ? imageBaseData : MatToImageBaseData(mat);
                 if (imageBaseData != null)
@@ -253,7 +255,7 @@ namespace SamhwaInspectionNeo.Schemas
                 }
                 else
                 {
-                    Int32 검사코드 = (Int32)구분 < 5 ? (Int32)구분 : (Int32)구분 - 5;
+                    Int32 검사코드 = (Int32)구분 < (int)Flow구분.상부표면검사1 ? (Int32)구분 : (Int32)구분 - 5;
                     this.SetResult(this.구분, Front ? 지그위치.Front : 지그위치.Rear);
                     Global.검사자료.검사결과계산(검사코드);
                     return true;

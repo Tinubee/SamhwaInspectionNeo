@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GraphicsSetModuleCs;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Newtonsoft.Json;
 using Npgsql;
@@ -9,6 +10,7 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using VM.PlatformSDKCS;
 
 namespace SamhwaInspectionNeo.Schemas
 {
@@ -138,8 +140,10 @@ namespace SamhwaInspectionNeo.Schemas
             검사결과 검사 = this.검사항목찾기(검사코드);
             if (검사 == null) return null;
 
+            if (Global.환경설정.동작구분 == 동작구분.LocalTest) 검사.표면검사강제OK(구분, 지그);
+           
             검사.SetResult(구분, 지그, name, value);
-
+          
             return 검사;
         }
 
@@ -156,7 +160,7 @@ namespace SamhwaInspectionNeo.Schemas
             Global.모델자료.수량추가(검사.모델구분, 검사.측정결과);
             if (!검사.검사중확인())
             {
-                Debug.WriteLine($"검사코드 [ {검사코드} ] 제거");
+                Debug.WriteLine($"검사코드 [ {검사코드} - {검사.측정결과} ] 제거");
                 this.검사스플제거(검사코드);
                 this.검사완료알림?.Invoke(검사);
             }

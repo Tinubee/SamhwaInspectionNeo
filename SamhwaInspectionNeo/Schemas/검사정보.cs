@@ -1,5 +1,6 @@
 ﻿using MvUtils;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Xml.Linq;
 
 namespace SamhwaInspectionNeo.Schemas
 {
@@ -282,6 +284,8 @@ namespace SamhwaInspectionNeo.Schemas
         public 검사정보 GetItem(Flow구분 플로우, 지그위치 지그) => 검사내역.Where(e => e.플로우 == 플로우 && e.지그 == 지그).FirstOrDefault();
 
         public 검사정보 GetItem(검사항목 항목) => 검사내역.Where(e => e.검사항목 == 항목).FirstOrDefault();
+        
+        public Boolean 표면검사강제OK(Flow구분 구분, 지그위치 지그) => SetResult(검사내역.Where(e => e.검사항목.ToString() == "상부표면검사").FirstOrDefault(), 0, 구분, 지그);
         public Boolean SetResult(Flow구분 구분, 지그위치 지그, String name, Single value) => SetResult(검사내역.Where(e => e.검사항목.ToString() == name).FirstOrDefault(), value, 구분, 지그);
         public Boolean SetResult(검사정보 검사, Single value, Flow구분 구분, 지그위치 지그)
         {
@@ -333,10 +337,10 @@ namespace SamhwaInspectionNeo.Schemas
                 else if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.CTQ && e.측정결과 == 결과구분.NG)) this.CTQ결과 = 결과구분.NG;
                 else this.CTQ결과 = 결과구분.OK;
                 //임시
-                this.외관결과 = 결과구분.OK;
-                //if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.Surface && e.측정결과 == 결과구분.ER)) this.외관결과 = 결과구분.ER;
-                //else if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.Surface && e.측정결과 == 결과구분.NG)) this.외관결과 = 결과구분.NG;
-                //else this.외관결과 = 결과구분.OK;
+                //this.외관결과 = 결과구분.OK;
+                if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.Surface && e.측정결과 == 결과구분.ER)) this.외관결과 = 결과구분.ER;
+                else if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.Surface && e.측정결과 == 결과구분.NG)) this.외관결과 = 결과구분.NG;
+                else this.외관결과 = 결과구분.OK;
             }
 
             List<String> 불량내역 = this.검사내역.Where(e => e.측정결과 == 결과구분.ER || e.측정결과 == 결과구분.NG).Select(e => e.검사항목.ToString()).ToList();
