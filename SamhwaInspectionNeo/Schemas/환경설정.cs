@@ -197,11 +197,13 @@ namespace SamhwaInspectionNeo.Schemas
 
         public void 모델변경요청(모델구분 모델구분)
         {
-            if (this.선택모델 == 모델구분) return;
+            if (this.선택모델 != 모델구분)
+            {
+                this.선택모델 = 모델구분;
+                Global.정보로그(로그영역.GetString(), "모델변경", $"{this.선택모델} 모델로 변경되었습니다.", true);
+                this.모델변경알림?.Invoke(this.선택모델);
+            }
             //Global.MainForm.ShowWaitForm();
-            this.선택모델 = 모델구분;
-            Global.정보로그(로그영역.GetString(), "모델변경", $"{this.선택모델} 모델로 변경되었습니다.", true);
-            this.모델변경알림?.Invoke(this.선택모델);
         }
 
         public static Color 결과표현색상(결과구분 구분)

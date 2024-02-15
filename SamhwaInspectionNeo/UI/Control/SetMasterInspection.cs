@@ -107,6 +107,11 @@ namespace SamhwaInspectionNeo.UI.Control
 
         private void 모델변경알림(모델구분 모델코드)
         {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(new Action(() => 모델변경알림(모델코드)));
+                return;
+            }
             this.GridControl1.DataSource = Global.모델자료.GetItem(모델코드)?.검사설정;
             if (this.검사설정 != null && this.검사설정.Count > 0)
             {

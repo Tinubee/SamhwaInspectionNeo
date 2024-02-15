@@ -1,7 +1,9 @@
-﻿using System;
+﻿using DevExpress.Internal.WinApi;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace SamhwaInspectionNeo.Schemas
 {
@@ -43,6 +45,7 @@ namespace SamhwaInspectionNeo.Schemas
             제품검사수행();
             장치상태확인();
             통신핑퐁수행();
+            //모델변경확인();
             return true;
         }
 
@@ -50,6 +53,48 @@ namespace SamhwaInspectionNeo.Schemas
         {
             if (this.입출자료.Changed(정보주소.자동모드) || this.입출자료.Changed(정보주소.운전시작))
                 this.동작상태알림?.Invoke();
+        }
+
+        private void 모델변경확인()
+        {
+      
+            Int32 모델번호 = Global.신호제어.모델변경트리거;
+            모델구분 현재모델 = Global.환경설정.선택모델;
+            Int32 모델명 = 모델명변환(모델번호);
+
+            if ((모델구분)모델명 != 현재모델)
+            {
+                Task.Run(() =>
+                {
+                    Global.환경설정.모델변경요청((모델구분)모델명);
+                });
+            }
+        }
+
+        private Int32 모델명변환(Int32 모델번호)
+        {
+            String hexString = 모델번호.ToString("X");
+            // Ensure the hexadecimal string has an even number of digits for proper conversion
+            hexString = hexString.PadLeft(hexString.Length + hexString.Length % 2, '0');
+            // Convert each pair of hexadecimal digits to a character and store in a temporary string
+            string tempString = "";
+            for (int i = 0; i < hexString.Length; i += 2)
+            {
+                string hexChar = hexString.Substring(i, 2);
+                int charValue = Convert.ToInt32(hexChar, 16); // Convert from hex to int
+                tempString += (char)charValue; // Convert int to char and append to the temp string
+            }
+            // Reverse the characters in the temporary string to get the final result
+            string resultString = "";
+            for (int i = tempString.Length - 1; i >= 0; i--)
+                resultString += tempString[i];
+
+            if (resultString == "-A") return 1;
+            else if (resultString == "-B") return 2;
+            else if (resultString == "-C") return 3;
+            else if (resultString == "-D") return 4;
+
+            return 0;
         }
 
         // 검사위치 변경 확인
@@ -163,6 +208,11 @@ namespace SamhwaInspectionNeo.Schemas
         private DateTime 최종송신 = DateTime.Now.AddMinutes(-5);
         private void 통신핑퐁수행()
         {
+            Boolean 연결신호확인 = 신호읽기(정보주소.통신확인전송);
+            //Debug.WriteLine($"연결신호 : {연결신호확인}");
+            신호쓰기(정보주소.통신확인전송, !연결신호확인);
+
+            //신호쓰기(정보주소.상부치수검사카메라트리거, 0);
             //if (!this.입출자료[정보주소.통신핑퐁].Passed()) return;
             //if (this.시작일시.Day != DateTime.Today.Day)
             //{

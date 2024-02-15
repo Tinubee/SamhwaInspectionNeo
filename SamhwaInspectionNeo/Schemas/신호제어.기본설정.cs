@@ -46,6 +46,8 @@ namespace SamhwaInspectionNeo.Schemas
             상부변위센서확인트리거,
             [Address("W0041")]
             하부변위센서확인트리거,
+            [Address("B1000")]
+            통신확인전송,
             [Address("B1010")]
             통신확인핑퐁,
             [Address("B1018")]
@@ -82,8 +84,11 @@ namespace SamhwaInspectionNeo.Schemas
         public Boolean Front지그 { get { return 신호읽기(정보주소.Front지그); } }
         public Boolean Rear지그 { get { return 신호읽기(정보주소.Rear지그); } }
         public Boolean 통신확인핑퐁 { get { return 신호읽기(정보주소.통신확인핑퐁); } }
+        
+        public Int32 모델변경트리거 { get { return 정보읽기(정보주소.모델변경트리거); } }
 
         //Output Part
+        public Boolean 통신확인전송 { get { return 신호읽기(정보주소.통신확인전송); } set { 신호쓰기(정보주소.통신확인전송, value); } }
         public Boolean 트레이확인카메라트리거 { get { return 신호읽기(정보주소.트레이확인카메라트리거); } set { 신호쓰기(정보주소.트레이확인카메라트리거, value); } }
 
         public Boolean 상부표면검사카메라트리거 { get { return 신호읽기(정보주소.상부표면검사카메라트리거); } set { 신호쓰기(정보주소.상부표면검사카메라트리거,value); } }
@@ -231,7 +236,7 @@ namespace SamhwaInspectionNeo.Schemas
         public Boolean SetDevice(String Address, Int32 Data, out Int32 오류코드)
         {
             오류코드 = PLC.SetDevice(Address, Data);
-            Debug.WriteLine($"{Data}, {오류코드}", Address);
+            //Debug.WriteLine($"{Data}, {오류코드}", Address);
             return 오류코드 == 0;
         }
         #endregion
