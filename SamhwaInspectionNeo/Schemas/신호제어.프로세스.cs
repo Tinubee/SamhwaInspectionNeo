@@ -45,8 +45,15 @@ namespace SamhwaInspectionNeo.Schemas
             제품검사수행();
             장치상태확인();
             통신핑퐁수행();
-            //모델변경확인();
+            모델변경확인();
+            원점복귀확인();
             return true;
+        }
+        
+        private void 원점복귀확인()
+        {
+            if (this.입출자료.Changed(정보주소.원점복귀완료))
+                this.원점복귀알림?.Invoke();
         }
 
         private void 장치상태확인()

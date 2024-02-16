@@ -15,6 +15,7 @@ namespace SamhwaInspectionNeo.Schemas
     public partial class 신호제어
     {
         public event Global.BaseEvent 동작상태알림;
+        public event Global.BaseEvent 원점복귀알림;
         //public event Global.BaseEvent 통신상태알림;
         //public event Global.BaseEvent 검사위치알림;
         public event Global.BaseEvent 입출변경알림;
@@ -24,7 +25,7 @@ namespace SamhwaInspectionNeo.Schemas
         private const Int32 스테이션번호 = 2;
         private const Int32 입출체크간격 = 10;
         private DateTime 시작일시 = DateTime.Now;
-        private Boolean 작업여부 = false;  
+        private Boolean 작업여부 = false;
         private ActUtlType64 PLC = null;
         public Boolean 정상여부 = false;
 
@@ -34,6 +35,8 @@ namespace SamhwaInspectionNeo.Schemas
             모델변경트리거,
             [Address("W0011")]
             트레이개수,
+            [Address("W0012")]
+            원점복귀완료,
             [Address("W0020")]
             결과값요청트리거,
             [Address("W0021")]
@@ -55,7 +58,7 @@ namespace SamhwaInspectionNeo.Schemas
             [Address("B1019")]
             Rear지그,
             [Address("B1021")]
-            NG리트라이, 
+            NG리트라이,
             [Address("B1030")]
             자동모드,
             [Address("B1040")]
@@ -84,14 +87,14 @@ namespace SamhwaInspectionNeo.Schemas
         public Boolean Front지그 { get { return 신호읽기(정보주소.Front지그); } }
         public Boolean Rear지그 { get { return 신호읽기(정보주소.Rear지그); } }
         public Boolean 통신확인핑퐁 { get { return 신호읽기(정보주소.통신확인핑퐁); } }
-        
+
         public Int32 모델변경트리거 { get { return 정보읽기(정보주소.모델변경트리거); } }
 
         //Output Part
         public Boolean 통신확인전송 { get { return 신호읽기(정보주소.통신확인전송); } set { 신호쓰기(정보주소.통신확인전송, value); } }
         public Boolean 트레이확인카메라트리거 { get { return 신호읽기(정보주소.트레이확인카메라트리거); } set { 신호쓰기(정보주소.트레이확인카메라트리거, value); } }
 
-        public Boolean 상부표면검사카메라트리거 { get { return 신호읽기(정보주소.상부표면검사카메라트리거); } set { 신호쓰기(정보주소.상부표면검사카메라트리거,value); } }
+        public Boolean 상부표면검사카메라트리거 { get { return 신호읽기(정보주소.상부표면검사카메라트리거); } set { 신호쓰기(정보주소.상부표면검사카메라트리거, value); } }
 
         public Boolean 상부치수검사카메라트리거 { get { return 신호읽기(정보주소.상부치수검사카메라트리거); } set { 신호쓰기(정보주소.상부치수검사카메라트리거, value); } }
 
@@ -100,6 +103,8 @@ namespace SamhwaInspectionNeo.Schemas
         public Boolean 하부변위센서확인트리거 { get { return 신호읽기(정보주소.하부변위센서확인트리거); } set { 신호쓰기(정보주소.하부변위센서확인트리거, value); } }
 
         public Boolean 결과값요청트리거 { get { return 신호읽기(정보주소.결과값요청트리거); } set { 신호쓰기(정보주소.결과값요청트리거, value); } }
+
+        public Boolean 원점복귀완료 { get { return 신호읽기(정보주소.원점복귀완료); } set { 신호쓰기(정보주소.원점복귀완료, value); } }
         #endregion
 
         #region 검사현황
@@ -108,10 +113,10 @@ namespace SamhwaInspectionNeo.Schemas
         public Int32 트레이확인촬영번호 => this.입출자료.Get(정보주소.트레이확인카메라트리거); // 진행 시 카메라1 이미지 그랩
         public Int32 상부표면검사촬영번호 => this.입출자료.Get(정보주소.상부표면검사카메라트리거); // 진행 시 카메라1 이미지 그랩
         public Int32 상부치수검사촬영번호 => this.입출자료.Get(정보주소.상부치수검사카메라트리거); // 이송 시 카메라4, 카메라5 이미지 그랩
-       
+
         private Dictionary<정보주소, Int32> 인덱스버퍼 = new Dictionary<정보주소, Int32>();
         #endregion
-       
+
         #endregion
 
         #region 기본함수
@@ -137,15 +142,15 @@ namespace SamhwaInspectionNeo.Schemas
                 Boolean 치수결과 = 결과.CTQ결과 == 결과구분.OK;
                 Boolean 표면결과 = 결과.외관결과 == 결과구분.OK;
 
-                if(!치수결과) Global.신호제어.SetDevice($"W000{결과.검사코드}", 1 , out 오류);
-                else if(!표면결과) Global.신호제어.SetDevice($"W000{결과.검사코드}", 2, out 오류);
+                if (!치수결과) Global.신호제어.SetDevice($"W000{결과.검사코드}", 1, out 오류);
+                else if (!표면결과) Global.신호제어.SetDevice($"W000{결과.검사코드}", 2, out 오류);
             }
             else
             {
                 Global.신호제어.SetDevice($"W000{결과.검사코드}", ok ? 1 : 2, out 오류);
             }
-                
-           
+
+
             통신오류알림(오류);
         }
 
@@ -213,7 +218,7 @@ namespace SamhwaInspectionNeo.Schemas
             this.하부변위센서확인트리거 = false;
             this.결과값요청트리거 = false;
         }
-        
+
         public void 생산수량전송() =>
             this.생산수량정보 = Global.모델자료.선택모델.전체갯수;
         #endregion
@@ -357,7 +362,8 @@ namespace SamhwaInspectionNeo.Schemas
                     if (!this[구분].Set(value, true)) return;
                     this.Transmit?.Invoke(구분, value);
                 }
-                Task.Run(() => {
+                Task.Run(() =>
+                {
                     Task.Delay(resetTime).Wait();
                     if (this[구분].Set(value, true))
                         this.Transmit?.Invoke(구분, value);

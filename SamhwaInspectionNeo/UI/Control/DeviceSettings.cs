@@ -1,14 +1,6 @@
 ﻿using DevExpress.XtraEditors;
 using SamhwaInspectionNeo.Schemas;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace SamhwaInspectionNeo.UI.Controls
 {
@@ -27,7 +19,13 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.e기본설정.Init();
             this.e유저관리.Init();
             this.e입출신호.Init();
+
+            b트리거보드리셋.Click += 트리거보드리셋;
+            Global.신호제어.원점복귀알림 += 원점복귀알림;
         }
+
+        private void 원점복귀알림() => 트리거보드초기화();
+
         private void SetLocalization()
         {
             this.p설정.Text = this.번역.설정;
@@ -39,6 +37,30 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.e카메라.Close();
             this.e기본설정.Close();
             this.e유저관리.Close();
+        }
+
+        private void 트리거보드리셋(object sender, EventArgs e)
+        {
+            if (!MvUtils.Utils.Confirm("트리거 보드의 위치를 초기화 하시겠습니까?")) return;
+
+            트리거보드초기화();
+        }
+
+        private void 트리거보드초기화()
+        {
+            try
+            {
+                Enc852 트리거보드 = new Enc852(Global.환경설정.트리거보드포트);
+                트리거보드.Init();
+                트리거보드.Close();
+                Global.신호제어.원점복귀완료 = false;
+                Global.정보로그("트리거보드", "초기화", "초기화 되었습니다.", true);
+            }
+            catch(Exception ex)
+            {
+                Global.오류로그("트리거보드", "초기화", $"{ex.Message}", true);
+            }
+          
         }
 
         private class LocalizationConfig

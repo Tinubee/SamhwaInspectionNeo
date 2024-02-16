@@ -46,13 +46,14 @@ namespace SamhwaInspectionNeo.Schemas
         public String 도구경로 { get { return Path.Combine(기본경로, "Tools"); } }
         [Description("마스터 이미지"), JsonIgnore]
         public String 마스터사진 { get { return Path.Combine(기본경로, "Masters"); } }
+        [JsonProperty("TriggerBoardPort")]
+        public String 트리거보드포트 { get; set; } = "COM3";
         [JsonIgnore]
         public Boolean 강제배출 { get; set; } = true;
         [JsonIgnore]
         public String Format { get { return "#,0." + String.Empty.PadLeft(this.결과자릿수, '0'); } }
         [JsonIgnore]
         public String 결과표현 { get { return "{0:" + Format + "}"; } }
-
         [JsonIgnore, Description("사용자명")]
         public String 사용자명 { get; set; } = String.Empty;
         [JsonIgnore, Description("권한구분")]

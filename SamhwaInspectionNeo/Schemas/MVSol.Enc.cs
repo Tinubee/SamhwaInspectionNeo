@@ -1,5 +1,4 @@
-﻿using MvUtils;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
@@ -249,19 +248,24 @@ namespace SamhwaInspectionNeo.Schemas
         }
         #endregion
 
-        // com포트변경 by LHD
+        public String 포트 { get; }
+        public Enc852(String 포트)
+        {
+            this.포트 = 포트;
+        }
+
         public Boolean Init()
         {
             try
             {
-                this.Open("COM8");
+                this.Open(this.포트);
                 this.ClearEncoderPositionAll();
                 this.ClearTriggerAll();
-                //Debug.WriteLine("트리거보드 초기화 완료", "트리거보드");
+                Debug.WriteLine("트리거보드 초기화 완료", "트리거보드");
             }
             catch (Exception e)
             {
-                //Debug.WriteLine(e.ToString(), "트리거보드 오류");
+                Debug.WriteLine(e.ToString(), "트리거보드 오류");
                 MvUtils.Utils.MessageBox("트리거보드", e.ToString(), 2000);
                 return false;
             }
@@ -805,3 +809,4 @@ namespace SamhwaInspectionNeo.Schemas
         #endregion
     }
 }
+

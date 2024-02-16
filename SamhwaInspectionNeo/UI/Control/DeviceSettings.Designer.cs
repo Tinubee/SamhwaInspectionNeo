@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DeviceSettings));
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.e카메라 = new SamhwaInspectionNeo.UI.Controls.CamSettings();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
@@ -37,6 +38,7 @@
             this.e기본설정 = new SamhwaInspectionNeo.UI.Controls.Config();
             this.p유저정보 = new DevExpress.XtraTab.XtraTabPage();
             this.e유저관리 = new SamhwaInspectionNeo.UI.Controls.Users();
+            this.b트리거보드리셋 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).BeginInit();
             this.splitContainerControl1.Panel1.SuspendLayout();
@@ -94,6 +96,7 @@
             // 
             // p제어
             // 
+            this.p제어.Controls.Add(this.b트리거보드리셋);
             this.p제어.Controls.Add(this.e입출신호);
             this.p제어.Name = "p제어";
             this.p제어.Size = new System.Drawing.Size(620, 1019);
@@ -137,6 +140,17 @@
             this.e유저관리.Size = new System.Drawing.Size(620, 396);
             this.e유저관리.TabIndex = 0;
             // 
+            // b트리거보드리셋
+            // 
+            this.b트리거보드리셋.Appearance.Font = new System.Drawing.Font("맑은 고딕", 18F, System.Drawing.FontStyle.Bold);
+            this.b트리거보드리셋.Appearance.Options.UseFont = true;
+            this.b트리거보드리셋.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("b캠트리거리셋.ImageOptions.SvgImage")));
+            this.b트리거보드리셋.Location = new System.Drawing.Point(3, 3);
+            this.b트리거보드리셋.Name = "b트리거보드리셋";
+            this.b트리거보드리셋.Size = new System.Drawing.Size(305, 40);
+            this.b트리거보드리셋.TabIndex = 7;
+            this.b트리거보드리셋.Text = "카메라 트리거 리셋";
+            // 
             // DeviceSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -170,5 +184,6 @@
         private DevExpress.XtraTab.XtraTabPage p유저정보;
         private Users e유저관리;
         private Control.IOControl e입출신호;
+        private DevExpress.XtraEditors.SimpleButton b트리거보드리셋;
     }
 }
