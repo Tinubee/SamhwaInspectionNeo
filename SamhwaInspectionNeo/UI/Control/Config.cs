@@ -38,6 +38,28 @@ namespace SamhwaInspectionNeo.UI.Controls
 
             this.e양품저장.Toggled += E양품저장_Toggled;
             this.e불량저장.Toggled += E불량저장_Toggled;
+            this.e치수검사.Toggled += E치수검사_Toggled;
+            this.e표면검사.Toggled += E표면검사_Toggled;
+        }
+
+        private void E표면검사_Toggled(object sender, EventArgs e)
+        {
+            if (e표면검사.IsOn)
+            {
+                Global.환경설정.표면검사사용여부 = true;
+                return;
+            }
+            Global.환경설정.표면검사사용여부 = false;
+        }
+
+        private void E치수검사_Toggled(object sender, EventArgs e)
+        {
+            if (e치수검사.IsOn)
+            {
+                Global.환경설정.치수검사사용여부 = true;
+                return;
+            }
+            Global.환경설정.치수검사사용여부 = false;
         }
 
         private void UpdateView()
