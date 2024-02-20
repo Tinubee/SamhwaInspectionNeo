@@ -139,6 +139,8 @@ namespace SamhwaInspectionNeo.Schemas
         우하위치도 = 33,
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03)]
         상부표면검사 = 500,
+        [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam04)]
+        하부표면검사 = 501,
     }
 
     public enum 단위구분

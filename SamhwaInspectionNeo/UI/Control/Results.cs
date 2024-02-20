@@ -55,7 +55,11 @@ namespace SamhwaInspectionNeo.UI.Controls
             Localization.SetColumnCaption(this.GridView2, typeof(검사정보));
             this.col검사일자.Caption = Localization.일자.GetString();
             this.col검사시간.Caption = Localization.시간.GetString();
+
+            Global.검사자료.검사완료알림 += 검사완료알림;
         }
+
+        private void 검사완료알림(검사결과 결과) => this.GridView1.RefreshData();
 
         public void Close() { }
 

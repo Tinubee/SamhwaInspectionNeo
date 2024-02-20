@@ -26,6 +26,7 @@ namespace SamhwaInspectionNeo.UI.Controls
         private 장치상태 카메라1;
         private 장치상태 카메라2;
         private 장치상태 카메라3;
+        private 장치상태 카메라4;
 
         public void Init()
         {
@@ -34,12 +35,14 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.카메라1 = new 장치상태(this.e카메라1);
             this.카메라2 = new 장치상태(this.e카메라2);
             this.카메라3 = new 장치상태(this.e카메라3);
+            this.카메라4 = new 장치상태(this.e카메라4);
             //Global.신호제어.통신상태알림 += 통신상태알림;
             this.통신상태알림();
 
             this.e카메라1.Click += 수동촬영;
             this.e카메라2.Click += 수동촬영;
             this.e카메라3.Click += 수동촬영;
+            this.e카메라4.Click += 수동촬영;
         }
 
         private void 수동촬영(object sender, EventArgs e)
@@ -103,6 +106,7 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.카메라1.Set(Global.장치상태.카메라1);
             this.카메라2.Set(Global.장치상태.카메라2);
             this.카메라3.Set(Global.장치상태.카메라3);
+            this.카메라4.Set(Global.장치상태.카메라4);
             this.장치통신.Set(Global.장치상태.장치통신);
             this.조명장치.Set(Global.장치상태.조명장치);
         }

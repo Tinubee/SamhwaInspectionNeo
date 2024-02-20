@@ -27,6 +27,10 @@ namespace SamhwaInspectionNeo.Schemas
         상부표면검사2,
         상부표면검사3,
         상부표면검사4,
+        하부표면검사1,
+        하부표면검사2,
+        하부표면검사3,
+        하부표면검사4,
     }
 
     public enum 지그위치
@@ -42,7 +46,6 @@ namespace SamhwaInspectionNeo.Schemas
         public event 현재결과상태갱신 결과상태갱신알림;
         private String 도구파일 { get => Path.Combine(Global.환경설정.도구경로, $"{MvUtils.Utils.GetDescription(Global.환경설정.선택모델)}.sol"); }
         private String 기본도구파일 { get => Path.Combine(Global.환경설정.도구경로, $"Default.sol"); }
-        public Dictionary<카메라구분, bool> grabFinishDic = new Dictionary<카메라구분, bool>();
         public VmGlobals 글로벌변수제어 = new VmGlobals();
 
         public Boolean Init() => Load();

@@ -25,8 +25,8 @@ namespace SamhwaInspectionNeo.Schemas
         Cam02 = 2,
         [Description("상부표면검사")]
         Cam03 = 3,
-        //[Description("하부표면검사")]
-        //Cam04 = 4,
+        [Description("하부표면검사")]
+        Cam04 = 4,
     }
 
     #region Enum Setting by LHD
@@ -101,10 +101,10 @@ namespace SamhwaInspectionNeo.Schemas
         //[JsonIgnore]
         //public Boolean 정상여부 { get { return !this.Values.Any(e => !e.상태); } }
 
-        public EuresysLink 카메라1 = null;
-        public HikeGigE 카메라2 = null;
-        public HikeGigE 카메라3 = null;
-        public HikeGigE 카메라4 = null;
+        public EuresysLink 치수검사카메라 = null;
+        public HikeGigE 공트레이검사카메라 = null;
+        public HikeGigE 상부표면검사카메라 = null;
+        public HikeGigE 하부표면검사카메라 = null;
 
         public Boolean Init()
         {
@@ -112,17 +112,17 @@ namespace SamhwaInspectionNeo.Schemas
             {
                 MC.OpenDriver();
 
-                this.카메라1 = new EuresysLink(카메라구분.Cam01) { 코드 = "" }; //치수검사
+                this.치수검사카메라 = new EuresysLink(카메라구분.Cam01) { 코드 = "" }; //치수검사
                 //2호기 : K38332371  3호기 : K38332337
-                this.카메라2 = new HikeGigE() { 구분 = 카메라구분.Cam02 }; //공트레이검사
+                this.공트레이검사카메라 = new HikeGigE() { 구분 = 카메라구분.Cam02 }; //공트레이검사
                 //2호기 : DA1996738  3호기 : DA1996739
-                this.카메라3 = new HikeGigE() { 구분 = 카메라구분.Cam03 }; //상부표면검사
+                this.상부표면검사카메라 = new HikeGigE() { 구분 = 카메라구분.Cam03 }; //상부표면검사
 
-                this.Add(카메라구분.Cam01, this.카메라1);
-                this.Add(카메라구분.Cam02, this.카메라2);
-                this.Add(카메라구분.Cam03, this.카메라3);
+                this.Add(카메라구분.Cam01, this.치수검사카메라);
+                this.Add(카메라구분.Cam02, this.공트레이검사카메라);
+                this.Add(카메라구분.Cam03, this.상부표면검사카메라);
 
-                this.카메라1.AcquisitionFinishedEvent += 카메라1_AcquisitionFinishedEvent;
+                this.치수검사카메라.AcquisitionFinishedEvent += 카메라1_AcquisitionFinishedEvent;
 
                 // 카메라 설정 저장정보 로드
                 카메라장치 정보;
@@ -174,21 +174,21 @@ namespace SamhwaInspectionNeo.Schemas
                 {
                     if (Data.PageIndex == 1)
                     {
-                        this.카메라1.Page1Image = Data.MatImage;
-                        Debug.WriteLine(this.카메라1.CurrentState(), "첫번째");
-                        this.카메라1.isGrabCompleted_Page1 = true;
+                        this.치수검사카메라.Page1Image = Data.MatImage;
+                        Debug.WriteLine(this.치수검사카메라.CurrentState(), "첫번째");
+                        this.치수검사카메라.isGrabCompleted_Page1 = true;
                     }
                     if (Data.PageIndex == 2)
                     {
-                        this.카메라1.Page2Image = Data.MatImage;
-                        this.카메라1.isGrabCompleted_Page2 = true;
-                        Debug.WriteLine(this.카메라1.CurrentState(), "두번쨰");
+                        this.치수검사카메라.Page2Image = Data.MatImage;
+                        this.치수검사카메라.isGrabCompleted_Page2 = true;
+                        Debug.WriteLine(this.치수검사카메라.CurrentState(), "두번쨰");
                     }
 
-                    if (this.카메라1.isGrabCompleted_Page1 & this.카메라1.isGrabCompleted_Page2)
+                    if (this.치수검사카메라.isGrabCompleted_Page1 & this.치수검사카메라.isGrabCompleted_Page2)
                     {
-                        this.카메라1.isGrabCompleted_Page1 = false;
-                        this.카메라1.isGrabCompleted_Page2 = false;
+                        this.치수검사카메라.isGrabCompleted_Page1 = false;
+                        this.치수검사카메라.isGrabCompleted_Page2 = false;
                         //조명 끔
                         Global.조명제어.TurnOff(카메라구분.Cam01);
                         // 이미지 연결
@@ -196,29 +196,29 @@ namespace SamhwaInspectionNeo.Schemas
                         Int32 SplitPointX = Convert.ToInt32(Global.VM제어.글로벌변수제어.GetValue("SplitPointX"));
                         Int32 SplitPointY = Convert.ToInt32(Global.VM제어.글로벌변수제어.GetValue("SplitPointY"));
 
-                        Cv2.VConcat(this.카메라1.Page1Image, this.카메라1.Page2Image, this.카메라1.mergedImage);
+                        Cv2.VConcat(this.치수검사카메라.Page1Image, this.치수검사카메라.Page2Image, this.치수검사카메라.mergedImage);
                         Debug.WriteLine($"Start : {SplitPointStart} , PointX : {SplitPointX}, PointY : {SplitPointY}");
-                        Debug.WriteLine($"Height : {this.카메라1.mergedImage.Height} , Width : {this.카메라1.mergedImage.Width}");
+                        Debug.WriteLine($"Height : {this.치수검사카메라.mergedImage.Height} , Width : {this.치수검사카메라.mergedImage.Width}");
 
-                        for (int lop = 0; lop < this.카메라1.roi.Length; lop++)
+                        for (int lop = 0; lop < this.치수검사카메라.roi.Length; lop++)
                         {
-                            this.카메라1.roi[lop] = new Rect(SplitPointX, SplitPointStart + (SplitPointY * lop), this.카메라1.width, 18000);
+                            this.치수검사카메라.roi[lop] = new Rect(SplitPointX, SplitPointStart + (SplitPointY * lop), this.치수검사카메라.width, 18000);
                         }
 
-                        for (int lop = 0; lop < this.카메라1.roi.Length; lop++)
+                        for (int lop = 0; lop < this.치수검사카메라.roi.Length; lop++)
                         {
-                            this.카메라1.splitImage[lop] = new Mat(this.카메라1.mergedImage, this.카메라1.roi[lop]);
+                            this.치수검사카메라.splitImage[lop] = new Mat(this.치수검사카메라.mergedImage, this.치수검사카메라.roi[lop]);
                             Int32 검사코드 = Global.신호제어.마스터모드여부 ? Convert.ToInt32((Flow구분)lop + 100) : Convert.ToInt32((Flow구분)lop);
                             검사결과 검사 = Global.검사자료.검사시작(검사코드);
-                            Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop).Run(this.카메라1.splitImage[lop], null);
+                            Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop).Run(this.치수검사카메라.splitImage[lop], null);
                             //이미지 저장함수 추가하면됨.
-                            this.ImageSave(this.카메라1.splitImage[lop], 카메라구분.Cam01, lop, 결과);
+                            this.ImageSave(this.치수검사카메라.splitImage[lop], 카메라구분.Cam01, lop, 결과);
                         }
-                        this.카메라1.isCompleted_Camera1 = true;
+                        this.치수검사카메라.isCompleted_Camera1 = true;
                     }
-                    if (this.카메라1.isCompleted_Camera1)
+                    if (this.치수검사카메라.isCompleted_Camera1)
                     {
-                        this.카메라1.isCompleted_Camera1 = false;
+                        this.치수검사카메라.isCompleted_Camera1 = false;
                     }
                 }
             }
@@ -259,16 +259,32 @@ namespace SamhwaInspectionNeo.Schemas
                 Global.조명제어.TurnOff(카메라);
                 Task.Run(() =>
                 {
-                    for (int lop = 0; lop < this.카메라3.MatImage.Count; lop++)
+                    for (int lop = 0; lop < this.상부표면검사카메라.MatImage.Count; lop++)
                     {
                         Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop + 5).Run(이미지[lop], null);
-                        Debug.WriteLine($"표면검사 {lop} 검사완료 : {결과}");
+                        Debug.WriteLine($"상부표면검사 {lop} 검사완료 : {결과}");
                         //이미지 저장함수 추가하면됨.
                         this.ImageSave(이미지[lop], 카메라구분.Cam03, lop, 결과);
-                        if (lop == this.카메라3.MatImage.Count - 1) this.카메라3.MatImage.Clear();
+                        if (lop == this.상부표면검사카메라.MatImage.Count - 1) this.상부표면검사카메라.MatImage.Clear();
+                    }
+                });
+            } 
+            else if(카메라 == 카메라구분.Cam04) //하부표면검사
+            {
+                Global.조명제어.TurnOff(카메라);
+                Task.Run(() =>
+                {
+                    for (int lop = 0; lop < this.하부표면검사카메라.MatImage.Count; lop++)
+                    {
+                        Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop + 9).Run(이미지[lop], null);
+                        Debug.WriteLine($"하부표면검사 {lop} 검사완료 : {결과}");
+                        //이미지 저장함수 추가하면됨.
+                        this.ImageSave(이미지[lop], 카메라구분.Cam04, lop, 결과);
+                        if (lop == this.하부표면검사카메라.MatImage.Count - 1) this.하부표면검사카메라.MatImage.Clear();
                     }
                 });
             }
+
             this.그랩완료보고2?.Invoke(카메라, 이미지);
         }
 
@@ -586,9 +602,19 @@ namespace SamhwaInspectionNeo.Schemas
                 else if (this.구분 == 카메라구분.Cam03)
                 {
                     this.MatImage.Add(image);
-                    if (Global.그랩제어.카메라3.MatImage.Count == this.ImageCount)
+                    if (Global.그랩제어.상부표면검사카메라.MatImage.Count == this.ImageCount)
                     {
                         Debug.WriteLine("상부 표면검사 이미지 전부획득 완료.");
+                        this.Stop();
+                        Global.그랩제어.그랩완료(this.구분, this.MatImage);
+                    }
+                }
+                else if (this.구분 == 카메라구분.Cam04)
+                {
+                    this.MatImage.Add(image);
+                    if (Global.그랩제어.하부표면검사카메라.MatImage.Count == this.ImageCount)
+                    {
+                        Debug.WriteLine("하부 표면검사 이미지 전부획득 완료.");
                         this.Stop();
                         Global.그랩제어.그랩완료(this.구분, this.MatImage);
                     }

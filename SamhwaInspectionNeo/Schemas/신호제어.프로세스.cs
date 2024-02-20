@@ -52,7 +52,8 @@ namespace SamhwaInspectionNeo.Schemas
         
         private void 원점복귀확인()
         {
-            if (this.입출자료.Changed(정보주소.원점복귀완료))
+            //원점복귀 완료됐을때, 트리거보드 초기화
+            if (this.입출자료.Changed(정보주소.원점복귀완료) || this.입출자료.Get(정보주소.원점복귀완료) > 0)
                 this.원점복귀알림?.Invoke();
         }
 
@@ -64,7 +65,6 @@ namespace SamhwaInspectionNeo.Schemas
 
         private void 모델변경확인()
         {
-      
             Int32 모델번호 = Global.신호제어.모델변경트리거;
             모델구분 현재모델 = Global.환경설정.선택모델;
             Int32 모델명 = 모델명변환(모델번호);
@@ -171,6 +171,7 @@ namespace SamhwaInspectionNeo.Schemas
         {
             Int32 상부치수검사번호 = this.검사위치번호(정보주소.상부치수검사카메라트리거);
             Int32 상부표면검사번호 = this.검사위치번호(정보주소.상부표면검사카메라트리거);
+            Int32 하부표면검사번호 = this.검사위치번호(정보주소.하부표면검사카메라트리거);
             Int32 트레이확인검사번호 = this.검사위치번호(정보주소.트레이확인카메라트리거);
 
             // 16K 상부 카메라 영상취득 시작
@@ -196,7 +197,17 @@ namespace SamhwaInspectionNeo.Schemas
                 }).Start();
                 신호쓰기(정보주소.상부표면검사카메라트리거, 0);
             }
-
+            // 하부 GigE 카메라 영상취득 시작
+            if (하부표면검사번호 > 0)
+            {
+                Debug.WriteLine("하부 표면검사 신호 들어옴");
+                new Thread(() =>
+                {
+                    Global.조명제어.TurnOn(카메라구분.Cam04);
+                    Global.그랩제어.Ready(카메라구분.Cam04);
+                }).Start();
+                신호쓰기(정보주소.하부표면검사카메라트리거, 0);
+            }
             // 트레이 검사 카메라 영상취득 시작
             if (트레이확인검사번호 > 0)
             {

@@ -41,6 +41,8 @@ namespace SamhwaInspectionNeo.Schemas
             결과값요청트리거,
             [Address("W0021")]
             트레이확인카메라트리거,
+            [Address("W0022")]
+            하부표면검사카메라트리거,
             [Address("W002E")]
             상부표면검사카메라트리거,
             [Address("W0028")]
@@ -95,7 +97,7 @@ namespace SamhwaInspectionNeo.Schemas
         public Boolean 트레이확인카메라트리거 { get { return 신호읽기(정보주소.트레이확인카메라트리거); } set { 신호쓰기(정보주소.트레이확인카메라트리거, value); } }
 
         public Boolean 상부표면검사카메라트리거 { get { return 신호읽기(정보주소.상부표면검사카메라트리거); } set { 신호쓰기(정보주소.상부표면검사카메라트리거, value); } }
-
+        public Boolean 하부표면검사카메라트리거 { get { return 신호읽기(정보주소.하부표면검사카메라트리거); } set { 신호쓰기(정보주소.하부표면검사카메라트리거, value); } }
         public Boolean 상부치수검사카메라트리거 { get { return 신호읽기(정보주소.상부치수검사카메라트리거); } set { 신호쓰기(정보주소.상부치수검사카메라트리거, value); } }
 
         public Boolean 상부변위센서확인트리거 { get { return 신호읽기(정보주소.상부변위센서확인트리거); } set { 신호쓰기(정보주소.상부변위센서확인트리거, value); } }
@@ -213,6 +215,7 @@ namespace SamhwaInspectionNeo.Schemas
         {
             this.트레이확인카메라트리거 = false;
             this.상부표면검사카메라트리거 = false;
+            this.하부표면검사카메라트리거 = false;
             this.상부치수검사카메라트리거 = false;
             this.상부변위센서확인트리거 = false;
             this.하부변위센서확인트리거 = false;

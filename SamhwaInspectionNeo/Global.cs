@@ -36,10 +36,10 @@ namespace SamhwaInspectionNeo
 
         public static class 장치상태
         {
-            public static Boolean 카메라1 { get { return (그랩제어.카메라1) != null && 그랩제어.카메라1.상태; } }
-            public static Boolean 카메라2 { get { return (그랩제어?.카메라2) != null && 그랩제어.카메라2.상태; } }
-            public static Boolean 카메라3 { get { return (그랩제어?.카메라3) != null && 그랩제어.카메라3.상태; } }
-            public static Boolean 카메라4 { get { return (그랩제어?.카메라4) != null && 그랩제어.카메라4.상태; } }
+            public static Boolean 카메라1 { get { return (그랩제어.치수검사카메라) != null && 그랩제어.치수검사카메라.상태; } }
+            public static Boolean 카메라2 { get { return (그랩제어?.공트레이검사카메라) != null && 그랩제어.공트레이검사카메라.상태; } }
+            public static Boolean 카메라3 { get { return (그랩제어?.상부표면검사카메라) != null && 그랩제어.상부표면검사카메라.상태; } }
+            public static Boolean 카메라4 { get { return (그랩제어?.하부표면검사카메라) != null && 그랩제어.하부표면검사카메라.상태; } }
             public static Boolean 자동수동 { get => Global.신호제어.자동모드여부; }
             public static Boolean 장치통신 { get { return 신호제어.정상여부; } }
             public static Boolean 조명장치 { get { return (조명제어.컨트롤러1) != null && (조명제어.컨트롤러2) != null && (조명제어.컨트롤러3) != null && 조명제어.정상여부; } }
