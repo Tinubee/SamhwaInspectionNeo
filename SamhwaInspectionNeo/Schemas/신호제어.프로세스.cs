@@ -47,13 +47,12 @@ namespace SamhwaInspectionNeo.Schemas
             통신핑퐁수행();
             if(!Global.신호제어.자동모드여부)
                 모델변경확인();
-            //원점복귀확인();
+            원점복귀확인();
             return true;
         }
         
         private void 원점복귀확인()
         {
-            //원점복귀 완료됐을때, 트리거보드 초기화
             if (this.입출자료.Changed(정보주소.원점복귀완료) || this.입출자료.Get(정보주소.원점복귀완료) > 0)
                 this.원점복귀알림?.Invoke();
         }

@@ -135,11 +135,10 @@ namespace SamhwaInspectionNeo.UI.Control
             try
             {
                 if (e.NewValue == null) return;
-                Global.환경설정.모델변경중 = true;
                 모델구분 모델 = (모델구분)e.NewValue;
                 if (Global.환경설정.선택모델 == 모델) return;
                 if (Global.환경설정.모델변경중) return;
-
+                Global.환경설정.모델변경중 = true;
                 if (!MvUtils.Utils.Confirm(번역.모델변경))
                 {
                     e.Cancel = true;
