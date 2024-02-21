@@ -176,9 +176,9 @@ namespace SamhwaInspectionNeo.UI.Control
             object measvalue = GridView1.GetRowCellValue(rowIndex, "측정값");
             object cmmvalue = GridView1.GetRowCellValue(rowIndex, "CMM측정값");
             object name = GridView1.GetRowCellValue(rowIndex, "검사항목");
+            object calvalue = GridView1.GetRowCellValue(rowIndex, "교정값");
 
             double measdvalue, cmmdvalue;
-            float[] calvalue = new float[1];
 
             if (measvalue != null && cmmvalue != null &&
                     double.TryParse(measvalue.ToString(), out measdvalue) &&
@@ -187,8 +187,8 @@ namespace SamhwaInspectionNeo.UI.Control
                 if (measdvalue != 0)
                 {
                     isCalculating = true;
-                    calvalue[0] = (float)(cmmdvalue / measdvalue);
-                    GridView1.SetRowCellValue(rowIndex, "교정값", Math.Round(calvalue[0], 6));
+                    calvalue = (float)(cmmdvalue / measdvalue);
+                    GridView1.SetRowCellValue(rowIndex, "교정값", Math.Round(Convert.ToDouble(calvalue), 6));
                     isCalculating = false;
                 }
             }
@@ -205,7 +205,7 @@ namespace SamhwaInspectionNeo.UI.Control
             string value = 적용할변수.StringValue;
             string[] splitValue = value.Split(';');
 
-            splitValue[index] = calvalue[0].ToString();
+            splitValue[index] = calvalue.ToString();
 
             value = String.Join(";", splitValue);
 

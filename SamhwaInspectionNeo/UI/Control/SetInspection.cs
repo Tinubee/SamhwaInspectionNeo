@@ -117,6 +117,7 @@ namespace SamhwaInspectionNeo.UI.Control
                 return;
             }
             this.GridControl1.DataSource = Global.모델자료.GetItem(모델코드)?.검사설정;
+            //this.e모델선택.EditValue = 모델코드;
             if (this.검사설정 != null && this.검사설정.Count > 0)
             {
                 Task.Run(() =>
@@ -124,6 +125,7 @@ namespace SamhwaInspectionNeo.UI.Control
                     Task.Delay(500).Wait();
                     this.GridView1.MoveFirst();
                     this.검사항목변경?.Invoke(Global.모델자료.GetItem(this.선택모델), this.GetItem(this.GridView1, this.GridView1.FocusedRowHandle));
+                    Global.환경설정.모델변경중 = false;
                 });
             }
         }
@@ -133,11 +135,15 @@ namespace SamhwaInspectionNeo.UI.Control
             try
             {
                 if (e.NewValue == null) return;
+                Global.환경설정.모델변경중 = true;
                 모델구분 모델 = (모델구분)e.NewValue;
                 if (Global.환경설정.선택모델 == 모델) return;
+                if (Global.환경설정.모델변경중) return;
+
                 if (!MvUtils.Utils.Confirm(번역.모델변경))
                 {
                     e.Cancel = true;
+                    Global.환경설정.모델변경중 = false;
                     return;
                 }
                 Global.환경설정.모델변경요청(모델);

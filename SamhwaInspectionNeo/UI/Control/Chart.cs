@@ -24,7 +24,7 @@ namespace SamhwaInspectionNeo.UI.Control
 
         public void 검사완료알림(검사결과 결과)
         {
-            this.ChartControl1.Series[0].Points.AddPoint(1, 1);
+            //this.ChartControl1.Series[0].Points.AddPoint(1, 1);
         }
     }
 }

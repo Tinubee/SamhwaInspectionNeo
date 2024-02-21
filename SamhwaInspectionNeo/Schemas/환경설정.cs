@@ -67,7 +67,8 @@ namespace SamhwaInspectionNeo.Schemas
         public Boolean 검사여부 { get; set; } = true; // 검사로직 활성화 여부
         [JsonIgnore, Description("티칭모드")]
         public Boolean 티칭모드 { get; set; } = false; // 활성화 시 사진 강제 저장 됨
-
+        [JsonIgnore, Description("티칭모드")]
+        public Boolean 모델변경중 { get; set; } = false;
         public Boolean 권한여부(유저권한구분 요구권한)
         {
             return (Int32)사용권한 >= (Int32)요구권한;
@@ -205,6 +206,7 @@ namespace SamhwaInspectionNeo.Schemas
             if (this.선택모델 != 모델구분)
             {
                 this.선택모델 = 모델구분;
+                Global.환경설정.모델변경중 = true;
                 Global.정보로그(로그영역.GetString(), "모델변경", $"{this.선택모델} 모델로 변경되었습니다.", true);
                 this.모델변경알림?.Invoke(this.선택모델);
             }

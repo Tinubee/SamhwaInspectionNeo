@@ -45,7 +45,8 @@ namespace SamhwaInspectionNeo.Schemas
             제품검사수행();
             장치상태확인();
             통신핑퐁수행();
-            모델변경확인();
+            if(!Global.신호제어.자동모드여부)
+                모델변경확인();
             //원점복귀확인();
             return true;
         }
@@ -78,7 +79,7 @@ namespace SamhwaInspectionNeo.Schemas
             }
         }
 
-        private Int32 모델명변환(Int32 모델번호)
+        private Int32 모델명변환(Int32 모델번호) //PLC에서 받은 모델명 String으로 변환
         {
             String hexString = 모델번호.ToString("X");
             // Ensure the hexadecimal string has an even number of digits for proper conversion
@@ -152,7 +153,7 @@ namespace SamhwaInspectionNeo.Schemas
             return 대상;
         }
     
-        public void 지그위치체크()
+        public void 지그위치체크() //필요없을수도..?
         {
             Debug.WriteLine($"Front 지그 신호 : {Global.신호제어.Front지그}");
             Debug.WriteLine($"Rear 지그 신호 : {Global.신호제어.Rear지그}");

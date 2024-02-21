@@ -53,14 +53,6 @@ namespace SamhwaInspectionNeo.Schemas
         public String 모델코드 { get { return MvUtils.Utils.GetDescription(this.모델구분); } }
         [JsonIgnore]
         public String 모델사진 { get { return Path.Combine(Global.환경설정.사진경로, 모델번호.ToString("d2") + ".jpg"); } }
-        [JsonProperty("Y1Pos")]
-        public Int32 Y1Pos { get; set; } = 0;
-        [JsonProperty("Y2Pos")]
-        public Int32 Y2Pos { get; set; } = 0;
-        [JsonProperty("Y3Pos")]
-        public Int32 Y3Pos { get; set; } = 0;
-        [JsonProperty("Y4Pos")]
-        public Int32 Y4Pos { get; set; } = 0;
         [JsonIgnore]
         public 검사설정자료 검사설정 = null;
      

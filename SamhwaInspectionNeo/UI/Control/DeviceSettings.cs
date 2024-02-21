@@ -24,7 +24,15 @@ namespace SamhwaInspectionNeo.UI.Controls
             Global.신호제어.원점복귀알림 += 원점복귀알림;
         }
 
-        private void 원점복귀알림() => 트리거보드초기화();
+        private void 원점복귀알림()
+        {
+            Global.그랩제어.GetItem(카메라구분.Cam01)?.Stop();
+            Global.그랩제어.GetItem(카메라구분.Cam02)?.Stop();
+            Global.그랩제어.GetItem(카메라구분.Cam03)?.Stop();
+            Global.그랩제어.GetItem(카메라구분.Cam04)?.Stop();
+            트리거보드초기화();
+            Global.신호제어.원점복귀완료 = false;
+        }
 
         private void SetLocalization()
         {
