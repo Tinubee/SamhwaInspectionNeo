@@ -46,7 +46,7 @@ namespace SamhwaInspectionNeo.Schemas
             장치상태확인();
             통신핑퐁수행();
             모델변경확인();
-            원점복귀확인();
+            //원점복귀확인();
             return true;
         }
         
@@ -200,13 +200,13 @@ namespace SamhwaInspectionNeo.Schemas
             // 하부 GigE 카메라 영상취득 시작
             if (하부표면검사번호 > 0)
             {
-                Debug.WriteLine("하부 표면검사 신호 들어옴");
-                new Thread(() =>
-                {
-                    Global.조명제어.TurnOn(카메라구분.Cam04);
-                    Global.그랩제어.Ready(카메라구분.Cam04);
-                }).Start();
-                신호쓰기(정보주소.하부표면검사카메라트리거, 0);
+                //Debug.WriteLine("하부 표면검사 신호 들어옴");
+                //new Thread(() =>
+                //{
+                //    Global.조명제어.TurnOn(카메라구분.Cam04);
+                //    Global.그랩제어.Ready(카메라구분.Cam04);
+                //}).Start();
+                //신호쓰기(정보주소.하부표면검사카메라트리거, 0);
             }
             // 트레이 검사 카메라 영상취득 시작
             if (트레이확인검사번호 > 0)

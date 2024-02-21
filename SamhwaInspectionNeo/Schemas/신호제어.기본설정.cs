@@ -147,6 +147,13 @@ namespace SamhwaInspectionNeo.Schemas
                 if (!치수결과) Global.신호제어.SetDevice($"W000{결과.검사코드}", 1, out 오류);
                 else if (!표면결과) Global.신호제어.SetDevice($"W000{결과.검사코드}", 2, out 오류);
             }
+            else if (Global.신호제어.마스터모드여부)
+            {
+                Int32 주소 = 결과.검사코드 - 100;
+                Int32 결과값 = ok ? 1 : 2;
+                Global.정보로그(로그영역, "PLC로 마스터모드 결과값 전송", $"W000{주소} : {결과값}", false);
+                Global.신호제어.SetDevice($"W000{주소}", ok ? 1 : 2, out 오류);
+            }
             else
             {
                 Global.신호제어.SetDevice($"W000{결과.검사코드}", ok ? 1 : 2, out 오류);

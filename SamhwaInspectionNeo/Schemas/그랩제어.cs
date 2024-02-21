@@ -209,6 +209,10 @@ namespace SamhwaInspectionNeo.Schemas
                         {
                             this.치수검사카메라.splitImage[lop] = new Mat(this.치수검사카메라.mergedImage, this.치수검사카메라.roi[lop]);
                             Int32 검사코드 = Global.신호제어.마스터모드여부 ? Convert.ToInt32((Flow구분)lop + 100) : Convert.ToInt32((Flow구분)lop);
+
+                            //마스터 모드일때 Flow1,2만 실행하도록
+                            if (Global.신호제어.마스터모드여부 && lop > 1) break;
+
                             검사결과 검사 = Global.검사자료.검사시작(검사코드);
                             Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop).Run(this.치수검사카메라.splitImage[lop], null);
                             //이미지 저장함수 추가하면됨.
@@ -257,6 +261,7 @@ namespace SamhwaInspectionNeo.Schemas
             if (카메라 == 카메라구분.Cam03) //상부표면검사
             {
                 Global.조명제어.TurnOff(카메라);
+                if (Global.신호제어.마스터모드여부) return;
                 Task.Run(() =>
                 {
                     for (int lop = 0; lop < this.상부표면검사카메라.MatImage.Count; lop++)
