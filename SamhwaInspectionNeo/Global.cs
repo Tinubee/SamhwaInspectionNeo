@@ -33,6 +33,7 @@ namespace SamhwaInspectionNeo
         public static VM제어 VM제어;
         public static 모델자료 모델자료;
         public static 검사자료 검사자료;
+        public static 트리거보드제어 트리거보드제어;
 
         public static class 장치상태
         {
@@ -58,6 +59,7 @@ namespace SamhwaInspectionNeo
                 그랩제어 = new 그랩제어();
                 모델자료 = new 모델자료();
                 검사자료 = new 검사자료();
+                트리거보드제어 = new 트리거보드제어();
 
                 로그자료.Init();
                 환경설정.Init();
@@ -68,6 +70,7 @@ namespace SamhwaInspectionNeo
                     조명제어.Init();
                     신호제어.Init();
                     그랩제어.Init();
+                    트리거보드제어.Init();
                 }
                 모델자료.Init();
                 검사자료.Init();
@@ -93,6 +96,7 @@ namespace SamhwaInspectionNeo
             {
                 그랩제어?.Close();
                 신호제어?.Close();
+                트리거보드제어?.Close();
                 VM제어?.Close();
                 조명제어?.Close();
                 로그자료?.Close();
@@ -113,6 +117,7 @@ namespace SamhwaInspectionNeo
         public static void Start()
         {
             신호제어.Start();
+            트리거보드제어.Start();
         }
 
         public static void DxLocalization()

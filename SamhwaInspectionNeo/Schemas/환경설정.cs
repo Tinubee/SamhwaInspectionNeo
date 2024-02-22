@@ -46,8 +46,6 @@ namespace SamhwaInspectionNeo.Schemas
         public String 도구경로 { get { return Path.Combine(기본경로, "Tools"); } }
         [Description("마스터 이미지"), JsonIgnore]
         public String 마스터사진 { get { return Path.Combine(기본경로, "Masters"); } }
-        [JsonProperty("TriggerBoardPort")]
-        public String 트리거보드포트 { get; set; } = "COM3";
         [Translation("Dimension Inspection Used", "치수검사 사용여부"), JsonProperty("DimensionInspectUsed")]
         public Boolean 치수검사사용여부 { get; set; } = false;
         [Translation("Surface Inspection Used", "표면검사 사용여부"), JsonProperty("SurfaceInspectUsed")]

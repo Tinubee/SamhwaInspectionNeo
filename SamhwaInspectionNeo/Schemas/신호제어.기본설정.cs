@@ -73,7 +73,7 @@ namespace SamhwaInspectionNeo.Schemas
         private 통신자료 입출자료 = new 통신자료();
         private static Boolean ToBool(Int32 val) { return val != 0; }
         private static Int32 ToInt(Boolean val) { return val ? 1 : 0; }
-        private Int32 정보읽기(정보주소 구분) { return this.입출자료.Get(구분); }
+        public Int32 정보읽기(정보주소 구분) { return this.입출자료.Get(구분); }
         public Boolean 신호읽기(정보주소 구분) { return ToBool(this.입출자료.Get(구분)); }
         public void 신호쓰기(정보주소 구분, Int32 val) { this.입출자료.Set(구분, val); }
         public void 신호쓰기(정보주소 구분, Boolean val) { this.입출자료.Set(구분, ToInt(val)); }

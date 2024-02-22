@@ -19,19 +19,19 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.e기본설정.Init();
             this.e유저관리.Init();
             this.e입출신호.Init();
-
-            b트리거보드리셋.Click += 트리거보드리셋;
+            this.e트리거보드.Init();
+           
             Global.신호제어.원점복귀알림 += 원점복귀알림;
         }
 
         private void 원점복귀알림()
         {
             Global.신호제어.원점복귀완료 = false;
-            //Global.그랩제어.GetItem(카메라구분.Cam01)?.Stop();
-            //Global.그랩제어.GetItem(카메라구분.Cam02)?.Stop();
-            //Global.그랩제어.GetItem(카메라구분.Cam03)?.Stop();
-            //Global.그랩제어.GetItem(카메라구분.Cam04)?.Stop();
-            //트리거보드초기화();
+            Global.그랩제어.GetItem(카메라구분.Cam01)?.Stop();
+            Global.그랩제어.GetItem(카메라구분.Cam02)?.Stop();
+            Global.그랩제어.GetItem(카메라구분.Cam03)?.Stop();
+            Global.그랩제어.GetItem(카메라구분.Cam04)?.Stop();
+            Global.트리거보드제어.ClearAll();
         }
 
         private void SetLocalization()
@@ -50,25 +50,6 @@ namespace SamhwaInspectionNeo.UI.Controls
         private void 트리거보드리셋(object sender, EventArgs e)
         {
             if (!MvUtils.Utils.Confirm("트리거 보드의 위치를 초기화 하시겠습니까?")) return;
-
-            트리거보드초기화();
-        }
-
-        private void 트리거보드초기화()
-        {
-            try
-            {
-                Enc852 트리거보드 = new Enc852(Global.환경설정.트리거보드포트);
-                트리거보드.Init();
-                트리거보드.Close();
-                Global.신호제어.원점복귀완료 = false;
-                Global.정보로그("트리거보드", "초기화", "초기화 되었습니다.", true);
-            }
-            catch(Exception ex)
-            {
-                Global.오류로그("트리거보드", "초기화", $"{ex.Message}", true);
-            }
-          
         }
 
         private class LocalizationConfig

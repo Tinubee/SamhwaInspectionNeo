@@ -168,6 +168,12 @@
     <Reference Include="MvCamCtrl.Net">
       <HintPath>..\..\..\..\..\Program Files (x86)\MVS\Development\DotNet\AnyCpu\MvCamCtrl.Net.dll</HintPath>
     </Reference>
+    <Reference Include="MVSol.Core">
+      <HintPath>..\..\..\..\..\MvSol\MVSol.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MVSol.Enc852">
+      <HintPath>..\..\..\..\..\MvSol\MVSol.Enc852.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="Script.Methods">
@@ -244,7 +250,6 @@
     <Compile Include="Migrations\검사결과테이블Migrations\검사결과테이블ModelSnapshot.cs" />
     <Compile Include="Migrations\로그테이블ModelSnapshot.cs" />
     <Compile Include="Schemas\Data\BaseTable.cs" />
-    <Compile Include="Schemas\MVSol.Enc.cs" />
     <Compile Include="Schemas\VisionMaster\VMGlobals.cs" />
     <Compile Include="Schemas\VisionMaster\VM제어.cs" />
     <Compile Include="Schemas\검사자료.cs" />
@@ -257,6 +262,7 @@
     <Compile Include="Schemas\신호제어.프로세스.cs" />
     <Compile Include="Schemas\유저정보.cs" />
     <Compile Include="Schemas\조명제어.cs" />
+    <Compile Include="Schemas\트리거보드제어.cs" />
     <Compile Include="Schemas\평탄도계산.cs" />
     <Compile Include="Schemas\환경설정.cs" />
     <Compile Include="UI\Control\Calibration.cs">
@@ -546,6 +552,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\bitmap2.bmp" />
+    <None Include="Resources\bitmap1.bmp" />
+    <None Include="Resources\actions_refresh.svg" />
+    <None Include="Resources\actions_rollback2.svg" />
+    <None Include="Resources\actions_rollback1.svg" />
+    <None Include="Resources\actions_rollback.svg" />
+    <None Include="Resources\resetlayoutoptions.svg" />
     <None Include="Resources\bo_security_permission_action.svg" />
     <None Include="Resources\properties.svg" />
     <None Include="Resources\insertcombobox.svg" />

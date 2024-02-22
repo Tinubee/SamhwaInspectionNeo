@@ -54,7 +54,7 @@
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(774, 819);
+            this.groupControl1.Size = new System.Drawing.Size(774, 878);
             this.groupControl1.TabIndex = 2;
             this.groupControl1.Text = "Input";
             // 
@@ -68,7 +68,7 @@
             this.GridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemToggleSwitch1,
             this.repositoryItemToggleSwitch2});
-            this.GridControl1.Size = new System.Drawing.Size(770, 790);
+            this.GridControl1.Size = new System.Drawing.Size(770, 849);
             this.GridControl1.TabIndex = 0;
             this.GridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.GridView1});
@@ -92,10 +92,10 @@
             this.col번호,
             this.col주소,
             this.col여부});
-            this.GridView1.DetailHeight = 375;
-            this.GridView1.FooterPanelHeight = 22;
+            this.GridView1.DetailHeight = 402;
+            this.GridView1.FooterPanelHeight = 24;
             this.GridView1.GridControl = this.GridControl1;
-            this.GridView1.GroupRowHeight = 22;
+            this.GridView1.GroupRowHeight = 24;
             this.GridView1.IndicatorWidth = 44;
             this.GridView1.MinColumnRowHeight = 24;
             this.GridView1.MinRowHeight = 1;
@@ -111,7 +111,7 @@
             this.GridView1.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
             this.GridView1.OptionsView.ShowGroupPanel = false;
             this.GridView1.OptionsView.ShowIndicator = false;
-            this.GridView1.RowHeight = 21;
+            this.GridView1.RowHeight = 22;
             // 
             // col구분
             // 
@@ -146,7 +146,6 @@
             // 
             this.col여부.AppearanceHeader.Options.UseTextOptions = true;
             this.col여부.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.col여부.ColumnEdit = this.repositoryItemToggleSwitch2;
             this.col여부.FieldName = "여부";
             this.col여부.Name = "col여부";
             this.col여부.OptionsColumn.ReadOnly = true;
@@ -169,11 +168,11 @@
             // 
             // IOControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupControl1);
             this.Name = "IOControl";
-            this.Size = new System.Drawing.Size(774, 819);
+            this.Size = new System.Drawing.Size(774, 878);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GridControl1)).EndInit();
