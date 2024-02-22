@@ -20,18 +20,27 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.e유저관리.Init();
             this.e입출신호.Init();
             this.e트리거보드.Init();
-           
+
             Global.신호제어.원점복귀알림 += 원점복귀알림;
         }
 
         private void 원점복귀알림()
         {
-            Global.신호제어.원점복귀완료 = false;
-            Global.그랩제어.GetItem(카메라구분.Cam01)?.Stop();
-            Global.그랩제어.GetItem(카메라구분.Cam02)?.Stop();
-            Global.그랩제어.GetItem(카메라구분.Cam03)?.Stop();
-            Global.그랩제어.GetItem(카메라구분.Cam04)?.Stop();
-            Global.트리거보드제어.ClearAll();
+            try
+            {
+                Global.신호제어.원점복귀완료 = false;
+                //Global.그랩제어.GetItem(카메라구분.Cam01)?.Stop();
+                Global.그랩제어.GetItem(카메라구분.Cam02)?.Stop();
+                Global.그랩제어.GetItem(카메라구분.Cam03)?.Stop();
+                Global.그랩제어.GetItem(카메라구분.Cam04)?.Stop();
+                Global.트리거보드제어.ClearAll();
+                Global.정보로그("원점복귀", "원점복귀완료", "카메라 Stop 및 트리거보드 초기화 완료", false);
+            }
+            catch (Exception ex)
+            {
+                Global.오류로그("원점복귀", "원점복귀완료", $"원점복귀오류 {ex.Message}", true);
+            }
+
         }
 
         private void SetLocalization()

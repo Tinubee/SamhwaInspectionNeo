@@ -26,7 +26,7 @@ namespace SamhwaInspectionNeo.Schemas
         public event 트리거횟수변경 트리거카운트변경알림;
 
         private Boolean 작업여부 = false;
-        private Boolean 정상여부 = false;
+        public Boolean 정상여부 = false;
         private const Int32 상태체크간격 = 10;
 
         public enum 트리거번호

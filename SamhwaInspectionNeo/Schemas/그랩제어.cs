@@ -450,6 +450,8 @@ namespace SamhwaInspectionNeo.Schemas
         [JsonIgnore]
         private cbOutputExdelegate ImageCallBackDelegate;
         [JsonIgnore]
+        private Boolean IsGrabbing = false;
+        [JsonIgnore]
         public uint ImageCount = 4;
         [JsonIgnore]
         public List<Mat> MatImage = new List<Mat>();
@@ -566,7 +568,7 @@ namespace SamhwaInspectionNeo.Schemas
 
         public override Boolean Start()
         {
-            return 그랩제어.Validate($"{this.구분} 그래버 시작 오류!", Camera.StartGrabbing(), true);
+            return IsGrabbing = 그랩제어.Validate($"{this.구분} 그래버 시작 오류!", Camera.StartGrabbing(), true);
         }
 
         public override Boolean Ready()
@@ -578,15 +580,16 @@ namespace SamhwaInspectionNeo.Schemas
         public override Boolean Close()
         {
             if (this.Camera == null || !this.상태) return true;
-            //this.Stop();
-            //this.Camera.ClearImageBuffer();
+            IsGrabbing = false;
             return 그랩제어.Validate($"{this.구분} 종료오류!", Camera.CloseDevice(), false);
         }
 
         public override Boolean Stop()
         {
             Camera.ClearImageBuffer();
-            return 그랩제어.Validate($"{this.구분} 정지오류!", Camera.StopGrabbing(), false);
+            if(!IsGrabbing) return true;
+
+            return IsGrabbing = !그랩제어.Validate($"{this.구분} 정지오류!", Camera.StopGrabbing(), false);
         }
         public override Boolean SoftTrigger() => 그랩제어.Validate($"{this.구분} TriggerSoftware", this.Camera.SetCommandValue("TriggerSoftware"), true);
 
