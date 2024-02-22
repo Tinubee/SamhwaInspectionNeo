@@ -1,12 +1,13 @@
 # BusBar 검사기
 
-## ⭐TodoList [ Update : 2024-02-21 ]
+## ⭐TodoList [ Update : 2024-02-22 ]
 
 - 하부표면검사카메라 트리거보드 Setting [ ]
 - 하부표면검사 로직 [ ]
 - CopyMemory 함수 만들기 [ ]
 - 각 항목에 대한 검사 Data ChartControl 만들기 [ ]
-- 원점복귀 완료 시 트리거보드 Reset [ ]
+- 원점복귀 완료 시 트리거보드 Reset [✅]
+- 트리거보드 정보UI 추가 [✅]
 - Main화면에서 Model 변경 시 Setting화면 Modelname 안바뀌는 현상 [✅]
 - Model 수동변경 기능 [ ]
 - 보정값 셋팅에서 데이터불러오는 날짜 지정할 수 있도록 변경 [ ]
