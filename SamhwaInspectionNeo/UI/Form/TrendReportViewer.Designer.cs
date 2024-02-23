@@ -35,7 +35,7 @@
             // 
             this.cSlot1상부.Location = new System.Drawing.Point(12, 12);
             this.cSlot1상부.Name = "cSlot1상부";
-            this.cSlot1상부.Size = new System.Drawing.Size(1319, 187);
+            this.cSlot1상부.Size = new System.Drawing.Size(1336, 193);
             this.cSlot1상부.TabIndex = 0;
             // 
             // TrendReportViewer

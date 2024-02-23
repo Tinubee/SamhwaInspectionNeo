@@ -5,6 +5,7 @@ using SamhwaInspectionNeo.Schemas;
 using DevExpress.XtraBars;
 using SamhwaInspectionNeo.UI.Form;
 using DevExpress.XtraWaitForm;
+using System.Diagnostics;
 
 namespace SamhwaInspectionNeo
 {
@@ -78,25 +79,16 @@ namespace SamhwaInspectionNeo
             if (Global.환경설정.동작구분 == 동작구분.Live)
                 this.WindowState = FormWindowState.Maximized;
 
-            if (Global.환경설정.동작구분 != 동작구분.Live) return;
+            //if (Global.환경설정.동작구분 != 동작구분.Live) return;
 
-            /*
             foreach (Screen s in Screen.AllScreens)
             {
                 Debug.WriteLine(s.Bounds, s.DeviceName);
                 if (s.Primary) continue;
-                if (s.Bounds.Width <= 1920)
-                {
-                    ShowFlowForm(s);
-                    continue;
-                }
-                else ShowStateForm(s);
+                ShowTrendReportForm(s);
             }
-
             // 창이 생성되지 않았으면 메인 모니터에 띄움
-            ShowFlowForm(Screen.PrimaryScreen);
-            ShowStateForm(Screen.PrimaryScreen);
-            */
+            ShowTrendReportForm(Screen.PrimaryScreen);
         }
         private void ShowTrendReportForm(Screen s)
         {
