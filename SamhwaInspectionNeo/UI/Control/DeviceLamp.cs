@@ -38,6 +38,7 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.카메라4 = new 장치상태(this.e카메라4);
             this.트리거보드 = new 장치상태(this.e트리거보드);
             //Global.신호제어.통신상태알림 += 통신상태알림;
+            Global.트리거보드제어.트리거보드상태알림 += 통신상태알림;
             this.통신상태알림();
 
             this.e카메라1.Click += 수동촬영;

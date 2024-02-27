@@ -19,7 +19,8 @@ namespace SamhwaInspectionNeo.Schemas
     public class 트리거보드제어
     {
         public event Global.BaseEvent 트리거보드상태알림;
-        public delegate void 엔코더위치변경(Decimal 현재위치, Int32 위치);
+        public event Global.BaseEvent 트리거보드연결알림;
+        public delegate void 엔코더위치변경(Int32 현재위치, Int32 위치);
         public delegate void 트리거횟수변경(Decimal 현재횟수, Int32 위치);
 
         public event 엔코더위치변경 엔코더위치알림;
@@ -58,8 +59,11 @@ namespace SamhwaInspectionNeo.Schemas
         [JsonIgnore]
         public const String 로그영역 = "트리거보드장치";
 
-        public void Init()
+        public void Init(조명포트 포트)
         {
+            if(포트 == 조명포트.None) return;
+
+            this.포트 = 포트;
             this.트리거보드 = new MVEnc852v3Comm(this.포트.ToString());
             try
             {
@@ -67,6 +71,7 @@ namespace SamhwaInspectionNeo.Schemas
                 {
                     this.트리거보드.Open();
                     this.Load();
+                    this.트리거보드연결알림?.Invoke();
                     Global.정보로그(로그영역, "초기화", $"트리거보드 연결 완료. [ {this.트리거보드.PortName} ]", false);
                 }
             }
@@ -91,6 +96,12 @@ namespace SamhwaInspectionNeo.Schemas
 
             this.엔코더들.Add(new 엔코더정보((Int32)엔코더번호.Encoder0));
             this.엔코더들.Add(new 엔코더정보((Int32)엔코더번호.Encoder1));
+
+            foreach (트리거정보 트리거 in 트리거들)
+                트리거.횟수 = this.ReadTriggerCount((트리거번호)트리거.번호);
+
+            foreach (엔코더정보 엔코더 in 엔코더들)
+                엔코더.현재위치 = this.ReadPosition((엔코더번호)엔코더.번호);
         }
 
         public void Start()
@@ -102,7 +113,7 @@ namespace SamhwaInspectionNeo.Schemas
                 this.트리거보드상태알림?.Invoke();
             }
 
-            new Thread(트리거보드상태확인) { Priority = ThreadPriority.Highest }.Start();
+            new Thread(트리거보드상태확인).Start();
         }
 
         private void 트리거보드상태확인()
@@ -119,7 +130,7 @@ namespace SamhwaInspectionNeo.Schemas
 
         public Boolean 트리거보드상태분석()
         {
-            if (Global.환경설정.동작구분 == 동작구분.LocalTest) return false;
+            if (Global.환경설정.동작구분 == 동작구분.LocalTest || Global.트리거보드제어.트리거보드 == null) return false;
 
             엔코더위치갱신();
             트리거횟수갱신();
@@ -128,6 +139,8 @@ namespace SamhwaInspectionNeo.Schemas
 
         public void 트리거횟수갱신()
         {
+            if (this.트리거들 == null) return;
+
             foreach (트리거정보 트리거 in this.트리거들)
             {
                 Decimal 횟수 = this.ReadTriggerCount((트리거번호)트리거.번호);
@@ -142,9 +155,11 @@ namespace SamhwaInspectionNeo.Schemas
 
         public void 엔코더위치갱신()
         {
+            if(this.엔코더들 == null ) return;  
+
             foreach (엔코더정보 엔코더 in this.엔코더들)
             {
-                Decimal 현재위치 = this.ReadPosition((엔코더번호)엔코더.번호);
+                Int32 현재위치 = this.ReadPosition((엔코더번호)엔코더.번호);
 
                 if (엔코더.현재위치 != 현재위치)
                 {
@@ -178,34 +193,35 @@ namespace SamhwaInspectionNeo.Schemas
             this.트리거보드?.Close();
             this.트리거보드?.Dispose();
             this.트리거보드 = null;
+            this.트리거보드상태알림?.Invoke();
         }
 
         public void ClearAll()
         {
-            this.트리거보드?.ClearDigitalInputCountAll();
+            //his.트리거보드?.ClearDigitalInputCountAll();
             this.트리거보드?.ClearTriggerCountAll();
             this.트리거보드?.ClearEncoderPositionAll();
-            this.트리거보드?.ClearErrorCountAll();
+            //this.트리거보드?.ClearErrorCountAll();
         }
 
         public void ClearAllPosition() => this.트리거보드.ClearEncoderPositionAll();
 
         public void ClearAllTrigger() => this.트리거보드.ClearTriggerCountAll();
 
-        public Decimal ReadPosition(엔코더번호 번호) => this.트리거보드.GetEncoderPosition((Int32)번호);
+        public Int32 ReadPosition(엔코더번호 번호) => this.트리거보드.GetEncoderPosition((Int32)번호);
 
         public Decimal ReadTriggerCount(트리거번호 번호) => this.트리거보드.GetTriggerCount((Int32)번호);
 
-        public Decimal ReadStartPosition(트리거번호 번호) => this.트리거보드.GetTriggerPositionStart((Int32)번호);
+        public Int32 ReadStartPosition(트리거번호 번호) => this.트리거보드.GetTriggerPositionStart((Int32)번호);
 
-        public Decimal ReadEndPosition(트리거번호 번호) => this.트리거보드.GetTriggerPositionEnd((Int32)번호);
+        public Int32 ReadEndPosition(트리거번호 번호) => this.트리거보드.GetTriggerPositionEnd((Int32)번호);
 
         public class 트리거정보
         {
             public Int32 번호 { get; set; }
             public Decimal 횟수 { get; set; } = 0;
-            public Decimal 시작점 { get; set; } = 0;
-            public Decimal 종료점 { get; set; } = 0;
+            public Int32 시작점 { get; set; } = 0;
+            public Int32 종료점 { get; set; } = 0;
             public 트리거정보(Int32 번호)
             {
                 this.번호 = 번호;
@@ -216,7 +232,7 @@ namespace SamhwaInspectionNeo.Schemas
         public class 엔코더정보
         {
             public Int32 번호 { get; set; }
-            public Decimal 현재위치 { get; set; } = 0;
+            public Int32 현재위치 { get; set; } = 0;
 
             public 엔코더정보(Int32 번호)
             {

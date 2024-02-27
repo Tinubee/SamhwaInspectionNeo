@@ -113,6 +113,26 @@ namespace SamhwaInspectionNeo.Properties {
         /// <summary>
         ///   DevExpress.Utils.Svg.SvgImage 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static DevExpress.Utils.Svg.SvgImage appointmentchangedoccurrence {
+            get {
+                object obj = ResourceManager.GetObject("appointmentchangedoccurrence", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   DevExpress.Utils.Svg.SvgImage 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static DevExpress.Utils.Svg.SvgImage appointmentoccurrence {
+            get {
+                object obj = ResourceManager.GetObject("appointmentoccurrence", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   DevExpress.Utils.Svg.SvgImage 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static DevExpress.Utils.Svg.SvgImage bo_security_permission_action {
             get {
                 object obj = ResourceManager.GetObject("bo_security_permission_action", resourceCulture);
@@ -243,6 +263,16 @@ namespace SamhwaInspectionNeo.Properties {
         /// <summary>
         ///   DevExpress.Utils.Svg.SvgImage 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static DevExpress.Utils.Svg.SvgImage forward {
+            get {
+                object obj = ResourceManager.GetObject("forward", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   DevExpress.Utils.Svg.SvgImage 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static DevExpress.Utils.Svg.SvgImage insertcombobox {
             get {
                 object obj = ResourceManager.GetObject("insertcombobox", resourceCulture);
@@ -286,6 +316,16 @@ namespace SamhwaInspectionNeo.Properties {
         internal static DevExpress.Utils.Svg.SvgImage resetlayoutoptions {
             get {
                 object obj = ResourceManager.GetObject("resetlayoutoptions", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   DevExpress.Utils.Svg.SvgImage 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static DevExpress.Utils.Svg.SvgImage rightangleconnector {
+            get {
+                object obj = ResourceManager.GetObject("rightangleconnector", resourceCulture);
                 return ((DevExpress.Utils.Svg.SvgImage)(obj));
             }
         }
