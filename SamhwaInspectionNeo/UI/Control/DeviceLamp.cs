@@ -15,7 +15,6 @@ namespace SamhwaInspectionNeo.UI.Controls
         private const String 로그영역 = "장치상태표시";
         private LocalizationConfig 번역 = new LocalizationConfig();
         private Int32 구분;
-        private Int32 촬영횟수;
         public DeviceLamp()
         {
             InitializeComponent();
@@ -51,41 +50,7 @@ namespace SamhwaInspectionNeo.UI.Controls
         {
             try
             {
-                //Global.그랩제어.GetItem(카메라구분.Cam03)?.Stop();
-                //if (!MvUtils.Utils.Confirm(번역.수동촬영, Localization.확인.GetString())) return;
-
-                //SvgImageBox bx = sender as SvgImageBox;
-                //구분 = Convert.ToInt32(bx.Tag);
-                //if (구분 == 1)
-                //{
-                //    //Global.신호제어.신호쓰기(정보주소.상부치수검사카메라트리거, false);
-                //    Global.그랩제어.Ready(카메라구분.Cam01);
-                //    return;
-                //}
-
-                //if (구분 == 2) this.촬영횟수 = 1;
-                //else this.촬영횟수 = 4;
-
-                //HikeGigE 장치 = Global.그랩제어.GetItem((카메라구분)구분) as HikeGigE;
-                ////트리거소스 소프트웨어 트리거로 변경.
-
-                //for (int lop = 0; lop < this.촬영횟수; lop++)
-                //{
-                //    if (장치.MatImage.Count == 0)
-                //    {
-                //        장치.TrigSource = MvCamCtrl.NET.CameraParams.MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_SOFTWARE;
-                //        장치.트리거소스적용();
-                //        장치.Ready();
-                //    }
-                //    Thread.Sleep(200);
-                //    장치.TrigForce();
-
-                //    if(lop == this.촬영횟수 - 1)
-                //    {
-                //        장치.TrigSource = MvCamCtrl.NET.CameraParams.MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_LINE0;
-                //        장치.트리거소스적용();
-                //    }
-                //}
+               
             }
             catch (Exception ex)
             {

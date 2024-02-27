@@ -22,6 +22,8 @@ namespace SamhwaInspectionNeo.UI.Control
 
         public void Init()
         {
+            if (Global.트리거보드제어.트리거보드 == null) return;
+
             this.t펌웨어버전.Text = $"Ver. {Global.트리거보드제어.펌웨어버전}"; 
             this.t로직버전.Text = $"Ver. {Global.트리거보드제어.로직버전}";
            
@@ -48,7 +50,7 @@ namespace SamhwaInspectionNeo.UI.Control
         private void B트리거보드초기화_Click(object sender, EventArgs e)
         {
             if (!MvUtils.Utils.Confirm("트리거 보드 위치값&트리거카운트를 초기화 하시겠습니까?")) return;
-            Global.트리거보드제어.ClearAll();
+            Global.트리거보드제어?.ClearAll();
         }
 
         private void 트리거카운트변경알림(decimal 현재횟수, Int32 위치)

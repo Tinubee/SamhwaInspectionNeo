@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using static SamhwaInspectionNeo.Schemas.EuresysLink;
 
@@ -164,7 +165,7 @@ namespace SamhwaInspectionNeo.Schemas
 
         }
 
-        private void 카메라1_AcquisitionFinishedEvent(EuresysLink.AcquisitionData Data)
+        private void 카메라1_AcquisitionFinishedEvent(AcquisitionData Data)
         {
             try
             {
@@ -183,6 +184,7 @@ namespace SamhwaInspectionNeo.Schemas
                         this.치수검사카메라.Page2Image = Data.MatImage;
                         this.치수검사카메라.isGrabCompleted_Page2 = true;
                         Debug.WriteLine(this.치수검사카메라.CurrentState(), "두번쨰");
+                        //this.치수검사카메라.Stop();
                     }
 
                     if (this.치수검사카메라.isGrabCompleted_Page1 & this.치수검사카메라.isGrabCompleted_Page2)
@@ -208,20 +210,14 @@ namespace SamhwaInspectionNeo.Schemas
                         for (int lop = 0; lop < this.치수검사카메라.roi.Length; lop++)
                         {
                             this.치수검사카메라.splitImage[lop] = new Mat(this.치수검사카메라.mergedImage, this.치수검사카메라.roi[lop]);
-                            Int32 검사코드 = Global.신호제어.마스터모드여부 ? Convert.ToInt32((Flow구분)lop + 100) : Convert.ToInt32((Flow구분)lop);
-
-                            //마스터 모드일때 Flow1,2만 실행하도록
-                            if (Global.신호제어.마스터모드여부 && lop > 1) break;
-
-                            검사결과 검사 = Global.검사자료.검사시작(검사코드);
                             Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop).Run(this.치수검사카메라.splitImage[lop], null);
-                            //이미지 저장함수 추가하면됨.
                             this.ImageSave(this.치수검사카메라.splitImage[lop], 카메라구분.Cam01, lop, 결과);
                         }
                         this.치수검사카메라.isCompleted_Camera1 = true;
                     }
                     if (this.치수검사카메라.isCompleted_Camera1)
                     {
+                        //GC.Collect();
                         this.치수검사카메라.isCompleted_Camera1 = false;
                     }
                 }
@@ -273,8 +269,8 @@ namespace SamhwaInspectionNeo.Schemas
                         if (lop == this.상부표면검사카메라.MatImage.Count - 1) this.상부표면검사카메라.MatImage.Clear();
                     }
                 });
-            } 
-            else if(카메라 == 카메라구분.Cam04) //하부표면검사
+            }
+            else if (카메라 == 카메라구분.Cam04) //하부표면검사
             {
                 Global.조명제어.TurnOff(카메라);
                 Task.Run(() =>
@@ -416,7 +412,7 @@ namespace SamhwaInspectionNeo.Schemas
         public Rect[] roi = new Rect[4];
         public Rect roiAlign;
         public Mat[] splitImage = new Mat[4];
-
+       
         public virtual void Set(카메라장치 장치)
         {
             if (장치 == null) return;
@@ -430,13 +426,14 @@ namespace SamhwaInspectionNeo.Schemas
             this.세로 = 장치.세로;
             this.OffsetX = 장치.OffsetX;
         }
-
+       
         public virtual Boolean SoftTrigger() => false;
         public virtual Boolean Init() => false;
         public virtual Boolean Ready() => false;
         public virtual Boolean Start() => false;
         public virtual Boolean Stop() => false;
         public virtual Boolean Close() => false;
+        public virtual Boolean ClearImage() => false;
         public virtual void TurnOn() => Global.조명제어.TurnOn(this.구분);
         public virtual void TurnOff() => Global.조명제어.TurnOff(this.구분);
     }
@@ -449,8 +446,8 @@ namespace SamhwaInspectionNeo.Schemas
         private CCameraInfo Device;
         [JsonIgnore]
         private cbOutputExdelegate ImageCallBackDelegate;
-        [JsonIgnore]
-        private Boolean IsGrabbing = false;
+        //[JsonIgnore]
+        //private Boolean IsGrabbing = false;
         [JsonIgnore]
         public uint ImageCount = 4;
         [JsonIgnore]
@@ -545,7 +542,7 @@ namespace SamhwaInspectionNeo.Schemas
         {
             if (this.Camera == null) return;
 
-            if(this.구분 == 카메라구분.Cam02)
+            if (this.구분 == 카메라구분.Cam02)
                 this.TrigSource = MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_SOFTWARE;
 
             Int32 nRet = this.Camera.SetEnumValue("TriggerSource", (uint)this.TrigSource);
@@ -565,10 +562,16 @@ namespace SamhwaInspectionNeo.Schemas
         //    Int32 nRet = this.Camera.SetEnumValue("TriggerSource", (uint)MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_LINE0);
         //    그랩제어.Validate($"[{this.구분}] 하드웨어트리거 모드 설정에 실패하였습니다.", nRet, true);
         //}
+        public override Boolean ClearImage()
+        {
+            this.MatImage.Clear();
+            //GC.Collect();
+            return true;
+        }
 
         public override Boolean Start()
         {
-            return IsGrabbing = 그랩제어.Validate($"{this.구분} 그래버 시작 오류!", Camera.StartGrabbing(), true);
+            return 그랩제어.Validate($"{this.구분} 그래버 시작 오류!", Camera.StartGrabbing(), true);
         }
 
         public override Boolean Ready()
@@ -580,16 +583,14 @@ namespace SamhwaInspectionNeo.Schemas
         public override Boolean Close()
         {
             if (this.Camera == null || !this.상태) return true;
-            IsGrabbing = false;
+         
             return 그랩제어.Validate($"{this.구분} 종료오류!", Camera.CloseDevice(), false);
         }
 
         public override Boolean Stop()
         {
             Camera.ClearImageBuffer();
-            if(!IsGrabbing) return true;
-
-            return IsGrabbing = !그랩제어.Validate($"{this.구분} 정지오류!", Camera.StopGrabbing(), false);
+            return 그랩제어.Validate($"{this.구분} 정지오류!", Camera.StopGrabbing(), false);
         }
         public override Boolean SoftTrigger() => 그랩제어.Validate($"{this.구분} TriggerSoftware", this.Camera.SetCommandValue("TriggerSoftware"), true);
 
@@ -642,7 +643,7 @@ namespace SamhwaInspectionNeo.Schemas
         [Description("이미지 그랩 이벤트")]
         public delegate void AcquisitionFinished(AcquisitionData Data);
         public event AcquisitionFinished AcquisitionFinishedEvent;
-        private Int32 PageIndex = 1;
+        public Int32 PageIndex = 1;
         public ProductIndex ProductIndex = ProductIndex.PRODUCT_INDEX1;
 
         [JsonIgnore, Description("채널번호")]
@@ -698,6 +699,7 @@ namespace SamhwaInspectionNeo.Schemas
                 MC.SetParam(this.Channel, MC.SignalEnable + MC.SIG_ACQUISITION_FAILURE, "ON");
                 MC.SetParam(this.Channel, "ChannelState", ChannelState.READY);
                 Debug.WriteLine($"{this.Channel}, {this.CurrentState()}", "READY currentState");
+                this.Ready();
 
                 this.Page1Image = new Mat(height, width, MatType.CV_8UC1);
                 this.Page2Image = new Mat(height, width, MatType.CV_8UC1);
@@ -741,6 +743,8 @@ namespace SamhwaInspectionNeo.Schemas
                 Debug.WriteLine("LineScanCamera Active");
                 MC.SetParam(this.Channel, "ChannelState", ChannelState.ACTIVE);
             }
+            this.PageIndex = 1;
+            Debug.WriteLine($"PageIndex : {this.PageIndex}");
             return true;
         }
 
@@ -761,6 +765,7 @@ namespace SamhwaInspectionNeo.Schemas
         [Description("MultiCam CallBack Event")]
         private void MultiCamCallback(ref MC.SIGNALINFO signalInfo)
         {
+            Debug.WriteLine("MultiCam CallBack Event");
             switch (signalInfo.Signal)
             {
                 case MC.SIG_SURFACE_PROCESSING:
@@ -780,7 +785,7 @@ namespace SamhwaInspectionNeo.Schemas
         [Description("Acquisition Process")]
         private void ProcessingCallback(MC.SIGNALINFO signalInfo)
         {
-            Debug.WriteLine("ProcessingCallback");
+            Debug.WriteLine("LineCamera ProcessingCallback");
             currentSurface = signalInfo.SignalInfo;
             try
             {
@@ -788,24 +793,26 @@ namespace SamhwaInspectionNeo.Schemas
                 Debug.WriteLine($"{currentChannel}", "currentChannel");
 
                 Int32 imageSizeX, imageSizeY, bufferPitch;
+                IntPtr SurfaceAddr;
 
                 MC.GetParam(currentChannel, "ImageSizeX", out imageSizeX);
                 MC.GetParam(currentChannel, "ImageSizeY", out imageSizeY);
                 MC.GetParam(currentChannel, "BufferPitch", out bufferPitch);
+                MC.GetParam(currentSurface, "SurfaceAddr", out SurfaceAddr);
                 Debug.WriteLine($"{imageSizeX}", "ImageSizeX");
                 Debug.WriteLine($"{imageSizeY}", "ImageSizeY");
                 Debug.WriteLine($"{bufferPitch}", "BufferPitch");
 
 
                 if (this.AcquisitionMode == AcquisitionMode.PAGE)
-                    this.ImageGrap(currentChannel, signalInfo.SignalInfo, imageSizeX, imageSizeY, bufferPitch);
+                    this.ImageGrap(SurfaceAddr, imageSizeX, imageSizeY);
             }
             catch (Euresys.MultiCamException ex)
             {
                 MvUtils.Utils.MessageBox("영상획득", ex.ToString(), 2000);
             }
         }
-        private void ImageGrap(UInt32 channel, UInt32 bufferAddress, Int32 width, Int32 height, Int32 bufferPitch)
+        private void ImageGrap(IntPtr surfaceAddress, Int32 width, Int32 height)
         {
             Debug.WriteLine($"LineCamera ImageGrab :{PageIndex}");
             AcquisitionData acq = new AcquisitionData(this.구분, PageIndex);
@@ -815,10 +822,7 @@ namespace SamhwaInspectionNeo.Schemas
 
             try
             {
-                IntPtr surfaceAddr;
-                MC.GetParam(bufferAddress, "SurfaceAddr", out surfaceAddr);
-                image = new Mat(height, width, MatType.CV_8U, surfaceAddr);
-
+                image = new Mat(height, width, MatType.CV_8U, surfaceAddress);
                 acq.SetImage(image);
             }
             catch (Exception ex)
@@ -896,7 +900,8 @@ namespace SamhwaInspectionNeo.Schemas
         [Description("Acquisition Failed")]
         private void AcqFailureCallback(MC.SIGNALINFO signalInfo)
         {
-            MvUtils.Utils.MessageBox("영상획득", "유레시스영상획득 실패", 2000);
+            Debug.WriteLine($"Context : {signalInfo.Context} / SignalInfo : {signalInfo.SignalInfo}");
+            MvUtils.Utils.MessageBox("영상획득", $"{signalInfo.Context} : 유레시스영상획득 실패", 2000);
         }
     }
 }

@@ -48,7 +48,7 @@
             this.ChartControl1.Location = new System.Drawing.Point(0, 0);
             this.ChartControl1.Name = "ChartControl1";
             series1.Name = "Series 1";
-            series1.SeriesID = 0;
+            series1.SeriesID = 3;
             series1.View = lineSeriesView1;
             this.ChartControl1.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
         series1};

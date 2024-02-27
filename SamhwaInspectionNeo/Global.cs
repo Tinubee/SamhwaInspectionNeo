@@ -71,7 +71,7 @@ namespace SamhwaInspectionNeo
                     조명제어.Init();
                     신호제어.Init();
                     그랩제어.Init();
-                    트리거보드제어.Init();
+                    //트리거보드제어.Init();
                 }
                 모델자료.Init();
                 검사자료.Init();
@@ -118,7 +118,7 @@ namespace SamhwaInspectionNeo
         public static void Start()
         {
             신호제어.Start();
-            트리거보드제어.Start();
+            //트리거보드제어.Start();
         }
 
         public static void DxLocalization()

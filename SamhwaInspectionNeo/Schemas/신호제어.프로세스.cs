@@ -45,12 +45,12 @@ namespace SamhwaInspectionNeo.Schemas
             제품검사수행();
             장치상태확인();
             통신핑퐁수행();
-            if(!Global.신호제어.자동모드여부)
+            if (!Global.신호제어.자동모드여부)
                 모델변경확인();
-            원점복귀확인();
+            //원점복귀확인();
             return true;
         }
-        
+
         private void 원점복귀확인()
         {
             if (this.입출자료.Changed(정보주소.원점복귀완료) || this.입출자료.Get(정보주소.원점복귀완료) > 0)
@@ -113,7 +113,7 @@ namespace SamhwaInspectionNeo.Schemas
         }
 
         private void 제품검사수행() => 영상촬영수행();
-       
+
         // 카메라 별 현재 검사 위치의 검사번호를 요청
         public Int32 촬영위치번호(카메라구분 구분)
         {
@@ -132,8 +132,8 @@ namespace SamhwaInspectionNeo.Schemas
             else if (구분 == 정보주소.상부표면검사카메라트리거) index = this.상부표면검사촬영번호;
             else if (구분 == 정보주소.트레이확인카메라트리거) index = this.트레이확인촬영번호;
 
-            if (index == 0) Global.경고로그(로그영역, 구분.ToString(), $"해당 위치에 검사할 제품이 없습니다.", false); 
-      
+            if (index == 0) Global.경고로그(로그영역, 구분.ToString(), $"해당 위치에 검사할 제품이 없습니다.", false);
+
             this.인덱스버퍼[구분] = index;
             return index;
         }
@@ -151,7 +151,7 @@ namespace SamhwaInspectionNeo.Schemas
             }
             return 대상;
         }
-    
+
         public void 지그위치체크() //필요없을수도..?
         {
             Debug.WriteLine($"Front 지그 신호 : {Global.신호제어.Front지그}");
@@ -167,11 +167,24 @@ namespace SamhwaInspectionNeo.Schemas
                 Global.VM제어.글로벌변수제어.SetValue("Rear지그", "1");
             }
         }
+
+        private void 검사스플생성()
+        {
+            for (int lop = 0; lop < 4; lop++)
+            {
+                Int32 검사코드 = Global.신호제어.마스터모드여부 ? Convert.ToInt32((Flow구분)lop + 100) : Convert.ToInt32((Flow구분)lop);
+                //마스터 모드일때 Flow1,2만 실행하도록
+                if (Global.신호제어.마스터모드여부 && lop > 1) break;
+
+                Global.검사자료.검사시작(검사코드);
+            }
+        }
+
         private void 영상촬영수행()
         {
             Int32 상부치수검사번호 = this.검사위치번호(정보주소.상부치수검사카메라트리거);
             Int32 상부표면검사번호 = this.검사위치번호(정보주소.상부표면검사카메라트리거);
-            Int32 하부표면검사번호 = this.검사위치번호(정보주소.하부표면검사카메라트리거);
+            //Int32 하부표면검사번호 = this.검사위치번호(정보주소.하부표면검사카메라트리거);
             Int32 트레이확인검사번호 = this.검사위치번호(정보주소.트레이확인카메라트리거);
 
             // 16K 상부 카메라 영상취득 시작
@@ -179,6 +192,7 @@ namespace SamhwaInspectionNeo.Schemas
             {
                 Debug.WriteLine("상부 치수검사 신호 들어옴");
                 지그위치체크();
+                검사스플생성();
                 new Thread(() =>
                 {
                     Global.조명제어.TurnOn(카메라구분.Cam01);
@@ -190,6 +204,7 @@ namespace SamhwaInspectionNeo.Schemas
             if (상부표면검사번호 > 0)
             {
                 Debug.WriteLine("상부 표면검사 신호 들어옴");
+                Global.그랩제어.GetItem(카메라구분.Cam03).ClearImage();
                 new Thread(() =>
                 {
                     Global.조명제어.TurnOn(카메라구분.Cam03);
@@ -198,16 +213,16 @@ namespace SamhwaInspectionNeo.Schemas
                 신호쓰기(정보주소.상부표면검사카메라트리거, 0);
             }
             // 하부 GigE 카메라 영상취득 시작
-            if (하부표면검사번호 > 0)
-            {
-                //Debug.WriteLine("하부 표면검사 신호 들어옴");
-                //new Thread(() =>
-                //{
-                //    Global.조명제어.TurnOn(카메라구분.Cam04);
-                //    Global.그랩제어.Ready(카메라구분.Cam04);
-                //}).Start();
-                //신호쓰기(정보주소.하부표면검사카메라트리거, 0);
-            }
+            //if (하부표면검사번호 > 0)
+            //{
+            //Debug.WriteLine("하부 표면검사 신호 들어옴");
+            //new Thread(() =>
+            //{
+            //    Global.조명제어.TurnOn(카메라구분.Cam04);
+            //    Global.그랩제어.Ready(카메라구분.Cam04);
+            //}).Start();
+            //신호쓰기(정보주소.하부표면검사카메라트리거, 0);
+            //}
             // 트레이 검사 카메라 영상취득 시작
             if (트레이확인검사번호 > 0)
             {

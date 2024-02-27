@@ -104,7 +104,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Remote|x64'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>\\192.168.3.100\ivm\Excute\</OutputPath>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <LangVersion>7.3</LangVersion>
@@ -552,6 +552,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\charttype_line4.svg" />
+    <None Include="Resources\charttype_line3.svg" />
+    <None Include="Resources\charttype_line2.svg" />
+    <None Include="Resources\enablesearch.svg" />
+    <None Include="Resources\charttype_swiftplot.svg" />
+    <None Include="Resources\charttype_line1.svg" />
+    <None Include="Resources\charttype_linestacked.svg" />
+    <None Include="Resources\charttype_line.svg" />
+    <None Include="Resources\createfullstackedlinechart.svg" />
     <None Include="Resources\bitmap2.bmp" />
     <None Include="Resources\bitmap1.bmp" />
     <None Include="Resources\actions_refresh.svg" />

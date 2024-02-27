@@ -23,8 +23,11 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.BindLocalization.DataSource = this.번역;
             this.e시작일자.DateTime = DateTime.Today;
             this.e종료일자.DateTime = DateTime.Today;
+            
             this.b자료조회.Click += 자료조회;
             this.b엑셀파일.Click += 엑셀파일;
+            this.b그래프보기.Click += 그래프보기;
+
             this.col최소값.DisplayFormat.FormatString = Global.환경설정.결과표현;
             this.col기준값.DisplayFormat.FormatString = Global.환경설정.결과표현;
             this.col최대값.DisplayFormat.FormatString = Global.환경설정.결과표현;
@@ -57,6 +60,12 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.col검사시간.Caption = Localization.시간.GetString();
 
             Global.검사자료.검사완료알림 += 검사완료알림;
+        }
+
+        private void 그래프보기(object sender, EventArgs e)
+        {
+            Global.MainForm.TrendReportViewer = new Form.TrendReportViewer();
+            Global.MainForm.TrendReportViewer.Show();
         }
 
         private void 검사완료알림(검사결과 결과) => this.GridView1.RefreshData();

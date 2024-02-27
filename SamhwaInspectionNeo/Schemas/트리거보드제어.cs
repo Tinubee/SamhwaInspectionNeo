@@ -120,6 +120,7 @@ namespace SamhwaInspectionNeo.Schemas
         public Boolean 트리거보드상태분석()
         {
             if (Global.환경설정.동작구분 == 동작구분.LocalTest) return false;
+
             엔코더위치갱신();
             트리거횟수갱신();
             return true;
@@ -181,10 +182,10 @@ namespace SamhwaInspectionNeo.Schemas
 
         public void ClearAll()
         {
-            this.트리거보드.ClearDigitalInputCountAll();
-            this.트리거보드.ClearTriggerCountAll();
-            this.트리거보드.ClearEncoderPositionAll();
-            this.트리거보드.ClearErrorCountAll();
+            this.트리거보드?.ClearDigitalInputCountAll();
+            this.트리거보드?.ClearTriggerCountAll();
+            this.트리거보드?.ClearEncoderPositionAll();
+            this.트리거보드?.ClearErrorCountAll();
         }
 
         public void ClearAllPosition() => this.트리거보드.ClearEncoderPositionAll();

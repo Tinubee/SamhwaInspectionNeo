@@ -13,7 +13,7 @@ namespace SamhwaInspectionNeo
     {
         private LocalizationMain 번역 = new LocalizationMain();
         private UI.Form.WaitForm WaitForm;
-        private UI.Form.TrendReportViewer TrendReportViewer;
+        public TrendReportViewer TrendReportViewer;
 
         public MainForm()
         {
@@ -93,7 +93,7 @@ namespace SamhwaInspectionNeo
         private void ShowTrendReportForm(Screen s)
         {
             if (this.TrendReportViewer != null) return;
-            this.TrendReportViewer = new UI.Form.TrendReportViewer() { StartPosition = FormStartPosition.Manual, WindowState = FormWindowState.Maximized };
+            this.TrendReportViewer = new TrendReportViewer() { StartPosition = FormStartPosition.Manual, WindowState = FormWindowState.Maximized };
             this.TrendReportViewer.SetBounds(s.WorkingArea.X, s.WorkingArea.Y, s.WorkingArea.Width, s.WorkingArea.Height);
             this.TrendReportViewer.FormClosed += StateFormClosed;
             this.TrendReportViewer.Show(this);
