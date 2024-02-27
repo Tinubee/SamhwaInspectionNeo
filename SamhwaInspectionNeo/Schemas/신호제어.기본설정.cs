@@ -33,6 +33,8 @@ namespace SamhwaInspectionNeo.Schemas
         {
             [Address("W0010")]
             모델변경트리거,
+            [Address("W001A")]
+            인덱스요청신호,
             [Address("W0011")]
             트레이개수,
             [Address("W0012")]
@@ -107,14 +109,17 @@ namespace SamhwaInspectionNeo.Schemas
         public Boolean 결과값요청트리거 { get { return 신호읽기(정보주소.결과값요청트리거); } set { 신호쓰기(정보주소.결과값요청트리거, value); } }
 
         public Boolean 원점복귀완료 { get { return 신호읽기(정보주소.원점복귀완료); } set { 신호쓰기(정보주소.원점복귀완료, value); } }
+
+        public Boolean 인덱스요청신호 { get { return 신호읽기(정보주소.인덱스요청신호); } set { 신호쓰기(정보주소.인덱스요청신호, value); } }
         #endregion
 
         #region 검사현황
         public Int32 생산수량정보 { get => this.입출자료.Get(정보주소.생산수량); set => 신호쓰기(정보주소.생산수량, value); }
 
-        public Int32 트레이확인촬영번호 => this.입출자료.Get(정보주소.트레이확인카메라트리거); // 진행 시 카메라1 이미지 그랩
-        public Int32 상부표면검사촬영번호 => this.입출자료.Get(정보주소.상부표면검사카메라트리거); // 진행 시 카메라1 이미지 그랩
-        public Int32 상부치수검사촬영번호 => this.입출자료.Get(정보주소.상부치수검사카메라트리거); // 이송 시 카메라4, 카메라5 이미지 그랩
+        public Int32 트레이확인촬영번호 => this.입출자료.Get(정보주소.트레이확인카메라트리거); 
+        public Int32 상부표면검사촬영번호 => this.입출자료.Get(정보주소.상부표면검사카메라트리거); 
+        public Int32 상부치수검사촬영번호 => this.입출자료.Get(정보주소.상부치수검사카메라트리거);
+        public Int32 하부표면검사촬영번호 => this.입출자료.Get(정보주소.하부표면검사카메라트리거);
 
         private Dictionary<정보주소, Int32> 인덱스버퍼 = new Dictionary<정보주소, Int32>();
         #endregion

@@ -185,7 +185,10 @@ namespace SamhwaInspectionNeo.Schemas
                 str = ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[0].strValue;
                 Debug.WriteLine($"{this.구분} str : {str}");
             }
-            return str == "OK";
+
+            Boolean resBool = str == "0" ? true : false;
+
+            return resBool;
         }
 
         private void SetResult(Flow구분 구분, 지그위치 지그) //0이면 Front, 1이면 Rear 
@@ -255,6 +258,11 @@ namespace SamhwaInspectionNeo.Schemas
                 {
                     Boolean 트레이검사결과 = this.GetResult(this.구분);
                     return 트레이검사결과;
+                }
+                else if(this.구분 >= Flow구분.하부표면검사1)
+                {
+                    Boolean 하부표면검사결과 = this.GetResult(this.구분);
+                    return 하부표면검사결과;
                 }
                 else
                 {

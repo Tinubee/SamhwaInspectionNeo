@@ -118,10 +118,13 @@ namespace SamhwaInspectionNeo.Schemas
                 this.공트레이검사카메라 = new HikeGigE() { 구분 = 카메라구분.Cam02 }; //공트레이검사
                 //2호기 : DA1996738  3호기 : DA1996739
                 this.상부표면검사카메라 = new HikeGigE() { 구분 = 카메라구분.Cam03 }; //상부표면검사
+                //2호기 :   3호기 : L28502411
+                this.하부표면검사카메라 = new HikeGigE() { 구분 = 카메라구분.Cam04 }; //하부표면검사
 
                 this.Add(카메라구분.Cam01, this.치수검사카메라);
                 this.Add(카메라구분.Cam02, this.공트레이검사카메라);
                 this.Add(카메라구분.Cam03, this.상부표면검사카메라);
+                this.Add(카메라구분.Cam04, this.하부표면검사카메라);
 
                 this.치수검사카메라.AcquisitionFinishedEvent += 카메라1_AcquisitionFinishedEvent;
 
@@ -279,6 +282,7 @@ namespace SamhwaInspectionNeo.Schemas
                     {
                         Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop + 9).Run(이미지[lop], null);
                         Debug.WriteLine($"하부표면검사 {lop} 검사완료 : {결과}");
+                        Global.신호제어.SetDevice($"W009{lop}", 결과 ? 1 : 2, out Int32 오류);
                         //이미지 저장함수 추가하면됨.
                         this.ImageSave(이미지[lop], 카메라구분.Cam04, lop, 결과);
                         if (lop == this.하부표면검사카메라.MatImage.Count - 1) this.하부표면검사카메라.MatImage.Clear();

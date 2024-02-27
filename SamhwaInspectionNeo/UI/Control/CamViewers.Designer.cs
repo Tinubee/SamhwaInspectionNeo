@@ -52,6 +52,12 @@
             this.p트레이검사 = new DevExpress.XtraTab.XtraTabPage();
             this.tablePanel4 = new DevExpress.Utils.Layout.TablePanel();
             this.trayViewer = new VMControls.Winform.Release.VmRenderControl();
+            this.p하부표면검사 = new DevExpress.XtraTab.XtraTabPage();
+            this.tablePanel8 = new DevExpress.Utils.Layout.TablePanel();
+            this.DownSurfaceViewer4 = new VMControls.Winform.Release.VmRenderControl();
+            this.DownSurfaceViewer3 = new VMControls.Winform.Release.VmRenderControl();
+            this.DownSurfaceViewer2 = new VMControls.Winform.Release.VmRenderControl();
+            this.DownSurfaceViewer1 = new VMControls.Winform.Release.VmRenderControl();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.p치수검사.SuspendLayout();
@@ -71,6 +77,9 @@
             this.p트레이검사.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel4)).BeginInit();
             this.tablePanel4.SuspendLayout();
+            this.p하부표면검사.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tablePanel8)).BeginInit();
+            this.tablePanel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // xtraTabControl1
@@ -84,6 +93,7 @@
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.p치수검사,
             this.p상부표면검사,
+            this.p하부표면검사,
             this.p트레이검사});
             // 
             // p치수검사
@@ -457,6 +467,97 @@
             this.trayViewer.Size = new System.Drawing.Size(1555, 972);
             this.trayViewer.TabIndex = 0;
             // 
+            // p하부표면검사
+            // 
+            this.p하부표면검사.Controls.Add(this.tablePanel8);
+            this.p하부표면검사.Name = "p하부표면검사";
+            this.p하부표면검사.Size = new System.Drawing.Size(1585, 1001);
+            this.p하부표면검사.Text = "하부표면검사";
+            // 
+            // tablePanel8
+            // 
+            this.tablePanel8.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F),
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F)});
+            this.tablePanel8.Controls.Add(this.DownSurfaceViewer4);
+            this.tablePanel8.Controls.Add(this.DownSurfaceViewer3);
+            this.tablePanel8.Controls.Add(this.DownSurfaceViewer2);
+            this.tablePanel8.Controls.Add(this.DownSurfaceViewer1);
+            this.tablePanel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tablePanel8.Location = new System.Drawing.Point(0, 0);
+            this.tablePanel8.Margin = new System.Windows.Forms.Padding(0);
+            this.tablePanel8.Name = "tablePanel8";
+            this.tablePanel8.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 26F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 26F)});
+            this.tablePanel8.Size = new System.Drawing.Size(1585, 1001);
+            this.tablePanel8.TabIndex = 2;
+            this.tablePanel8.UseSkinIndents = true;
+            // 
+            // DownSurfaceViewer4
+            // 
+            this.DownSurfaceViewer4.BackColor = System.Drawing.Color.Black;
+            this.tablePanel8.SetColumn(this.DownSurfaceViewer4, 1);
+            this.DownSurfaceViewer4.CoordinateInfoVisible = true;
+            this.DownSurfaceViewer4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DownSurfaceViewer4.ImageSource = null;
+            this.DownSurfaceViewer4.IsShowCustomROIMenu = false;
+            this.DownSurfaceViewer4.Location = new System.Drawing.Point(797, 505);
+            this.DownSurfaceViewer4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.DownSurfaceViewer4.ModuleSource = null;
+            this.DownSurfaceViewer4.Name = "DownSurfaceViewer4";
+            this.tablePanel8.SetRow(this.DownSurfaceViewer4, 1);
+            this.DownSurfaceViewer4.Size = new System.Drawing.Size(774, 480);
+            this.DownSurfaceViewer4.TabIndex = 3;
+            // 
+            // DownSurfaceViewer3
+            // 
+            this.DownSurfaceViewer3.BackColor = System.Drawing.Color.Black;
+            this.tablePanel8.SetColumn(this.DownSurfaceViewer3, 0);
+            this.DownSurfaceViewer3.CoordinateInfoVisible = true;
+            this.DownSurfaceViewer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DownSurfaceViewer3.ImageSource = null;
+            this.DownSurfaceViewer3.IsShowCustomROIMenu = false;
+            this.DownSurfaceViewer3.Location = new System.Drawing.Point(15, 505);
+            this.DownSurfaceViewer3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.DownSurfaceViewer3.ModuleSource = null;
+            this.DownSurfaceViewer3.Name = "DownSurfaceViewer3";
+            this.tablePanel8.SetRow(this.DownSurfaceViewer3, 1);
+            this.DownSurfaceViewer3.Size = new System.Drawing.Size(774, 480);
+            this.DownSurfaceViewer3.TabIndex = 2;
+            // 
+            // DownSurfaceViewer2
+            // 
+            this.DownSurfaceViewer2.BackColor = System.Drawing.Color.Black;
+            this.tablePanel8.SetColumn(this.DownSurfaceViewer2, 1);
+            this.DownSurfaceViewer2.CoordinateInfoVisible = true;
+            this.DownSurfaceViewer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DownSurfaceViewer2.ImageSource = null;
+            this.DownSurfaceViewer2.IsShowCustomROIMenu = false;
+            this.DownSurfaceViewer2.Location = new System.Drawing.Point(797, 15);
+            this.DownSurfaceViewer2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.DownSurfaceViewer2.ModuleSource = null;
+            this.DownSurfaceViewer2.Name = "DownSurfaceViewer2";
+            this.tablePanel8.SetRow(this.DownSurfaceViewer2, 0);
+            this.DownSurfaceViewer2.Size = new System.Drawing.Size(774, 480);
+            this.DownSurfaceViewer2.TabIndex = 1;
+            // 
+            // DownSurfaceViewer1
+            // 
+            this.DownSurfaceViewer1.BackColor = System.Drawing.Color.Black;
+            this.tablePanel8.SetColumn(this.DownSurfaceViewer1, 0);
+            this.DownSurfaceViewer1.CoordinateInfoVisible = true;
+            this.DownSurfaceViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DownSurfaceViewer1.ImageSource = null;
+            this.DownSurfaceViewer1.IsShowCustomROIMenu = false;
+            this.DownSurfaceViewer1.Location = new System.Drawing.Point(15, 14);
+            this.DownSurfaceViewer1.Margin = new System.Windows.Forms.Padding(4);
+            this.DownSurfaceViewer1.ModuleSource = null;
+            this.DownSurfaceViewer1.Name = "DownSurfaceViewer1";
+            this.tablePanel8.SetRow(this.DownSurfaceViewer1, 0);
+            this.DownSurfaceViewer1.Size = new System.Drawing.Size(774, 482);
+            this.DownSurfaceViewer1.TabIndex = 0;
+            // 
             // CamViewers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -488,6 +589,9 @@
             this.p트레이검사.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel4)).EndInit();
             this.tablePanel4.ResumeLayout(false);
+            this.p하부표면검사.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tablePanel8)).EndInit();
+            this.tablePanel8.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -518,5 +622,11 @@
         private DevExpress.XtraEditors.LabelControl Flow3결과;
         private VMControls.Winform.Release.VmRenderControl Flow3Viewer;
         private DevExpress.XtraEditors.LabelControl Flow1결과;
+        private DevExpress.XtraTab.XtraTabPage p하부표면검사;
+        private DevExpress.Utils.Layout.TablePanel tablePanel8;
+        private VMControls.Winform.Release.VmRenderControl DownSurfaceViewer4;
+        private VMControls.Winform.Release.VmRenderControl DownSurfaceViewer3;
+        private VMControls.Winform.Release.VmRenderControl DownSurfaceViewer2;
+        private VMControls.Winform.Release.VmRenderControl DownSurfaceViewer1;
     }
 }
