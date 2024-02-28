@@ -45,9 +45,9 @@ namespace SamhwaInspectionNeo.Schemas
             제품검사수행();
             장치상태확인();
             통신핑퐁수행();
+            원점복귀확인();
             if (!Global.신호제어.자동모드여부)
                 모델변경확인();
-            원점복귀확인();
             return true;
         }
 
@@ -111,8 +111,6 @@ namespace SamhwaInspectionNeo.Schemas
             if (변경.Count < 1) return;
             this.입출변경알림?.Invoke();
         }
-
-        private void 제품검사수행() => 영상촬영수행();
 
         // 카메라 별 현재 검사 위치의 검사번호를 요청
         public Int32 촬영위치번호(카메라구분 구분)
@@ -181,7 +179,7 @@ namespace SamhwaInspectionNeo.Schemas
             }
         }
 
-        private void 영상촬영수행()
+        private void 제품검사수행()
         {
             Int32 상부치수검사번호 = this.검사위치번호(정보주소.상부치수검사카메라트리거);
             Int32 상부표면검사번호 = this.검사위치번호(정보주소.상부표면검사카메라트리거);
@@ -217,6 +215,7 @@ namespace SamhwaInspectionNeo.Schemas
             if (하부표면검사번호 > 0)
             {
                 Debug.WriteLine("하부 표면검사 신호 들어옴");
+                Global.그랩제어.GetItem(카메라구분.Cam04).ClearImage();
                 new Thread(() =>
                 {
                     Global.조명제어.TurnOn(카메라구분.Cam04);
@@ -245,6 +244,9 @@ namespace SamhwaInspectionNeo.Schemas
             Boolean 연결신호확인 = 신호읽기(정보주소.통신확인전송);
             //Debug.WriteLine($"연결신호 : {연결신호확인}");
             신호쓰기(정보주소.통신확인전송, !연결신호확인);
+
+            if (this.입출자료.Changed(정보주소.통신확인핑퐁))
+                this.통신상태알림?.Invoke();
 
             //신호쓰기(정보주소.상부치수검사카메라트리거, 0);
             //if (!this.입출자료[정보주소.통신핑퐁].Passed()) return;

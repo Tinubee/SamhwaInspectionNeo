@@ -173,7 +173,21 @@ namespace SamhwaInspectionNeo.Schemas
                     this.imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;
             }
         }
-
+        private String GetResultStr(Flow구분 구분)
+        {
+            ShellModuleTool shell = Global.VM제어.GetItem(구분).shellModuleTool;
+            String str = "";
+            List<VmIO> t = shell.Outputs[6].GetAllIO();
+            String name = t[0].UniqueName.Split('%')[1];
+            if (t[0].Value != null)
+            {
+                str = ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[0].strValue;
+                Debug.WriteLine($"{this.구분} str : {str}");
+            }
+            //String.Empty일때는 제품이 없는거.
+            //String resStr = str == String.Empty ? "3" : str;
+            return str;
+        }
         private Boolean GetResult(Flow구분 구분)
         {
             ShellModuleTool shell = Global.VM제어.GetItem(구분).shellModuleTool;
@@ -235,6 +249,41 @@ namespace SamhwaInspectionNeo.Schemas
             return true;
         }
 
+        public String RunStr(Mat mat, ImageBaseData imageBaseData)
+        {
+            this.결과 = false;
+            //this.결과업데이트완료 = false;
+            try
+            {
+                if (this.imageSourceModuleTool == null)
+                {
+                    Global.오류로그(로그영역, "검사오류", $"[{this.구분}] VM 검사 모델이 없습니다.", false);
+                    return String.Empty;
+                }
+                Boolean Front = Global.신호제어.Front지그; //Global.VM제어.글로벌변수제어.GetValue("Front지그") == "1" ? true : false; ///
+
+                imageBaseData = mat == null ? imageBaseData : MatToImageBaseData(mat);
+                if (imageBaseData != null)
+                    this.imageSourceModuleTool.SetImageData(imageBaseData);
+                
+                this.Procedure.Run();
+
+                if (this.구분 >= Flow구분.하부표면검사1)
+                {
+                    //String.Empty 면 제품이 없는거, 
+                    String 하부표면검사결과 = this.GetResultStr(this.구분);
+                    return 하부표면검사결과;
+                }
+
+                return String.Empty;
+            }
+            catch (Exception ex)
+            {
+                Global.오류로그(로그영역, "검사오류", $"[{this.구분}] VM 검사오류: {ex.Message}", false);
+                return String.Empty;
+            }
+        }
+
         public Boolean Run(Mat mat, ImageBaseData imageBaseData)
         {
             this.결과 = false;
@@ -258,11 +307,6 @@ namespace SamhwaInspectionNeo.Schemas
                 {
                     Boolean 트레이검사결과 = this.GetResult(this.구분);
                     return 트레이검사결과;
-                }
-                else if(this.구분 >= Flow구분.하부표면검사1)
-                {
-                    Boolean 하부표면검사결과 = this.GetResult(this.구분);
-                    return 하부표면검사결과;
                 }
                 else
                 {

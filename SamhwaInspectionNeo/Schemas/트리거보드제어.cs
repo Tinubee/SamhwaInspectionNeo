@@ -125,7 +125,6 @@ namespace SamhwaInspectionNeo.Schemas
                 Thread.Sleep(상태체크간격);
             }
             Global.정보로그(로그영역, "트리거보드", "트리거보드 연결이 해제되었습니다..", false);
-            //this.Close();
         }
 
         public Boolean 트리거보드상태분석()
@@ -167,19 +166,6 @@ namespace SamhwaInspectionNeo.Schemas
                     this.엔코더위치알림?.Invoke(엔코더.현재위치, 엔코더.번호);
                 }
             }
-            //Decimal Encoder0Pos = this.ReadPosition(엔코더번호.Encoder0);
-            //Decimal Encoder1Pos = this.ReadPosition(엔코더번호.Encoder0);
-
-            //if(Encoder0Pos != this.엔코더0)
-            //{
-            //    this.엔코더0 = Encoder0Pos;
-            //    this.엔코더위치알림?.Invoke(this.엔코더0, (Int32)엔코더번호.Encoder0);
-            //}
-            //if (Encoder1Pos != this.엔코더1)
-            //{
-            //    this.엔코더1 = Encoder1Pos;
-            //    this.엔코더위치알림?.Invoke(this.엔코더1, (Int32)엔코더번호.Encoder1);
-            //}
         }
 
         public void Stop()
@@ -198,10 +184,8 @@ namespace SamhwaInspectionNeo.Schemas
 
         public void ClearAll()
         {
-            //his.트리거보드?.ClearDigitalInputCountAll();
             this.트리거보드?.ClearTriggerCountAll();
             this.트리거보드?.ClearEncoderPositionAll();
-            //this.트리거보드?.ClearErrorCountAll();
         }
 
         public void ClearAllPosition() => this.트리거보드.ClearEncoderPositionAll();

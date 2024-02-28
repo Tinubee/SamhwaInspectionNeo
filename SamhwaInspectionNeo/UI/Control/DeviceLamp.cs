@@ -39,6 +39,7 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.트리거보드 = new 장치상태(this.e트리거보드);
             //Global.신호제어.통신상태알림 += 통신상태알림;
             Global.트리거보드제어.트리거보드상태알림 += 통신상태알림;
+            Global.신호제어.통신상태알림 += 통신상태알림;
             this.통신상태알림();
 
             this.e카메라1.Click += 수동촬영;
@@ -51,7 +52,7 @@ namespace SamhwaInspectionNeo.UI.Controls
         {
             try
             {
-               
+                //Global.신호제어.SetDevice($"W0082", 1 , out Int32 오류);
             }
             catch (Exception ex)
             {

@@ -118,7 +118,13 @@ namespace SamhwaInspectionNeo.UI.Controls
         private void 동작상태알림()
         {
             if (this.InvokeRequired) { this.BeginInvoke(new Action(동작상태알림)); return; }
-            this.b동작구분.Text = Global.장치상태.자동수동 ? 번역.자동 : 번역.수동;
+
+            Boolean 상태 = Global.장치상태.자동수동;
+
+            this.b동작구분.Text = 상태 ? 번역.자동 : 번역.수동;
+            if (상태) //자동모드일때 트리거보드 연결되어있는거 해제하기.
+                Global.트리거보드제어.Close();
+
             this.b동작구분.Appearance.ForeColor = Global.장치상태.자동수동 ? DXSkinColors.ForeColors.Information : DXSkinColors.ForeColors.DisabledText;
         }
 

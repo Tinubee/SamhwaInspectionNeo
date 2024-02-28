@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TrendReportViewer));
-            this.cSlot1 = new SamhwaInspectionNeo.UI.Control.Chart();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.e종료일자 = new DevExpress.XtraEditors.DateEdit();
             this.b자료조회 = new DevExpress.XtraEditors.SimpleButton();
             this.e시작일자 = new DevExpress.XtraEditors.DateEdit();
+            this.checkEdit1 = new DevExpress.XtraEditors.ToggleSwitch();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -41,18 +41,22 @@
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.checkEdit1 = new DevExpress.XtraEditors.ToggleSwitch();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
-            this.cSlot2 = new SamhwaInspectionNeo.UI.Control.Chart();
-            this.cSlot길이 = new SamhwaInspectionNeo.UI.Control.Chart();
-            this.c홀치수 = new SamhwaInspectionNeo.UI.Control.Chart();
+            this.cSlot위치도 = new SamhwaInspectionNeo.UI.Control.Chart();
+            this.cSlot4 = new SamhwaInspectionNeo.UI.Control.Chart();
+            this.cSlot3 = new SamhwaInspectionNeo.UI.Control.Chart();
             this.c홀위치도 = new SamhwaInspectionNeo.UI.Control.Chart();
+            this.c홀치수 = new SamhwaInspectionNeo.UI.Control.Chart();
+            this.cSlot길이 = new SamhwaInspectionNeo.UI.Control.Chart();
+            this.cSlot2 = new SamhwaInspectionNeo.UI.Control.Chart();
+            this.cSlot1 = new SamhwaInspectionNeo.UI.Control.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.e종료일자.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e종료일자.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e시작일자.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e시작일자.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
@@ -60,20 +64,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // cSlot1
-            // 
-            this.tablePanel1.SetColumn(this.cSlot1, 0);
-            this.cSlot1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cSlot1.Location = new System.Drawing.Point(13, 12);
-            this.cSlot1.Name = "cSlot1";
-            this.tablePanel1.SetRow(this.cSlot1, 0);
-            this.cSlot1.Size = new System.Drawing.Size(1894, 186);
-            this.cSlot1.TabIndex = 0;
             // 
             // layoutControl1
             // 
@@ -132,6 +125,20 @@
             this.e시작일자.Size = new System.Drawing.Size(119, 22);
             this.e시작일자.StyleController = this.layoutControl1;
             this.e시작일자.TabIndex = 0;
+            // 
+            // checkEdit1
+            // 
+            this.checkEdit1.Location = new System.Drawing.Point(538, 9);
+            this.checkEdit1.Name = "checkEdit1";
+            this.checkEdit1.Properties.Appearance.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.checkEdit1.Properties.Appearance.Options.UseFont = true;
+            this.checkEdit1.Properties.ContentAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.checkEdit1.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
+            this.checkEdit1.Properties.OffText = "Off";
+            this.checkEdit1.Properties.OnText = "On";
+            this.checkEdit1.Size = new System.Drawing.Size(278, 24);
+            this.checkEdit1.StyleController = this.layoutControl1;
+            this.checkEdit1.TabIndex = 4;
             // 
             // Root
             // 
@@ -218,24 +225,14 @@
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
-            // checkEdit1
-            // 
-            this.checkEdit1.Location = new System.Drawing.Point(538, 9);
-            this.checkEdit1.Name = "checkEdit1";
-            this.checkEdit1.Properties.Appearance.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.checkEdit1.Properties.Appearance.Options.UseFont = true;
-            this.checkEdit1.Properties.ContentAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.checkEdit1.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
-            this.checkEdit1.Properties.OffText = "Off";
-            this.checkEdit1.Properties.OnText = "On";
-            this.checkEdit1.Size = new System.Drawing.Size(278, 24);
-            this.checkEdit1.StyleController = this.layoutControl1;
-            this.checkEdit1.TabIndex = 4;
-            // 
             // tablePanel1
             // 
             this.tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F)});
+            this.tablePanel1.Controls.Add(this.cSlot위치도);
+            this.tablePanel1.Controls.Add(this.cSlot4);
+            this.tablePanel1.Controls.Add(this.cSlot3);
             this.tablePanel1.Controls.Add(this.c홀위치도);
             this.tablePanel1.Controls.Add(this.c홀치수);
             this.tablePanel1.Controls.Add(this.cSlot길이);
@@ -248,51 +245,90 @@
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 26F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 26F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 26F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 26F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 26F)});
             this.tablePanel1.Size = new System.Drawing.Size(1920, 969);
             this.tablePanel1.TabIndex = 17;
             this.tablePanel1.UseSkinIndents = true;
             // 
-            // cSlot2
+            // cSlot위치도
             // 
-            this.tablePanel1.SetColumn(this.cSlot2, 0);
-            this.cSlot2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cSlot2.Location = new System.Drawing.Point(13, 202);
-            this.cSlot2.Name = "cSlot2";
-            this.tablePanel1.SetRow(this.cSlot2, 1);
-            this.cSlot2.Size = new System.Drawing.Size(1894, 186);
-            this.cSlot2.TabIndex = 18;
+            this.tablePanel1.SetColumn(this.cSlot위치도, 1);
+            this.cSlot위치도.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cSlot위치도.Location = new System.Drawing.Point(962, 486);
+            this.cSlot위치도.Name = "cSlot위치도";
+            this.tablePanel1.SetRow(this.cSlot위치도, 2);
+            this.cSlot위치도.Size = new System.Drawing.Size(945, 233);
+            this.cSlot위치도.TabIndex = 24;
             // 
-            // cSlot길이
+            // cSlot4
             // 
-            this.tablePanel1.SetColumn(this.cSlot길이, 0);
-            this.cSlot길이.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cSlot길이.Location = new System.Drawing.Point(13, 392);
-            this.cSlot길이.Name = "cSlot길이";
-            this.tablePanel1.SetRow(this.cSlot길이, 2);
-            this.cSlot길이.Size = new System.Drawing.Size(1894, 186);
-            this.cSlot길이.TabIndex = 19;
+            this.tablePanel1.SetColumn(this.cSlot4, 1);
+            this.cSlot4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cSlot4.Location = new System.Drawing.Point(962, 249);
+            this.cSlot4.Name = "cSlot4";
+            this.tablePanel1.SetRow(this.cSlot4, 1);
+            this.cSlot4.Size = new System.Drawing.Size(945, 233);
+            this.cSlot4.TabIndex = 23;
+            // 
+            // cSlot3
+            // 
+            this.tablePanel1.SetColumn(this.cSlot3, 0);
+            this.cSlot3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cSlot3.Location = new System.Drawing.Point(13, 249);
+            this.cSlot3.Name = "cSlot3";
+            this.tablePanel1.SetRow(this.cSlot3, 1);
+            this.cSlot3.Size = new System.Drawing.Size(945, 233);
+            this.cSlot3.TabIndex = 22;
+            // 
+            // c홀위치도
+            // 
+            this.tablePanel1.SetColumn(this.c홀위치도, 1);
+            this.c홀위치도.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.c홀위치도.Location = new System.Drawing.Point(962, 723);
+            this.c홀위치도.Name = "c홀위치도";
+            this.tablePanel1.SetRow(this.c홀위치도, 3);
+            this.c홀위치도.Size = new System.Drawing.Size(945, 233);
+            this.c홀위치도.TabIndex = 21;
             // 
             // c홀치수
             // 
             this.tablePanel1.SetColumn(this.c홀치수, 0);
             this.c홀치수.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.c홀치수.Location = new System.Drawing.Point(13, 582);
+            this.c홀치수.Location = new System.Drawing.Point(13, 723);
             this.c홀치수.Name = "c홀치수";
             this.tablePanel1.SetRow(this.c홀치수, 3);
-            this.c홀치수.Size = new System.Drawing.Size(1894, 186);
+            this.c홀치수.Size = new System.Drawing.Size(945, 233);
             this.c홀치수.TabIndex = 20;
             // 
-            // c홀위치도
+            // cSlot길이
             // 
-            this.tablePanel1.SetColumn(this.c홀위치도, 0);
-            this.c홀위치도.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.c홀위치도.Location = new System.Drawing.Point(13, 772);
-            this.c홀위치도.Name = "c홀위치도";
-            this.tablePanel1.SetRow(this.c홀위치도, 4);
-            this.c홀위치도.Size = new System.Drawing.Size(1894, 184);
-            this.c홀위치도.TabIndex = 21;
+            this.tablePanel1.SetColumn(this.cSlot길이, 0);
+            this.cSlot길이.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cSlot길이.Location = new System.Drawing.Point(13, 486);
+            this.cSlot길이.Name = "cSlot길이";
+            this.tablePanel1.SetRow(this.cSlot길이, 2);
+            this.cSlot길이.Size = new System.Drawing.Size(945, 233);
+            this.cSlot길이.TabIndex = 19;
+            // 
+            // cSlot2
+            // 
+            this.tablePanel1.SetColumn(this.cSlot2, 1);
+            this.cSlot2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cSlot2.Location = new System.Drawing.Point(962, 12);
+            this.cSlot2.Name = "cSlot2";
+            this.tablePanel1.SetRow(this.cSlot2, 0);
+            this.cSlot2.Size = new System.Drawing.Size(945, 233);
+            this.cSlot2.TabIndex = 18;
+            // 
+            // cSlot1
+            // 
+            this.tablePanel1.SetColumn(this.cSlot1, 0);
+            this.cSlot1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cSlot1.Location = new System.Drawing.Point(13, 12);
+            this.cSlot1.Name = "cSlot1";
+            this.tablePanel1.SetRow(this.cSlot1, 0);
+            this.cSlot1.Size = new System.Drawing.Size(945, 233);
+            this.cSlot1.TabIndex = 0;
             // 
             // TrendReportViewer
             // 
@@ -309,6 +345,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.e종료일자.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e시작일자.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e시작일자.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
@@ -316,7 +353,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -343,5 +379,8 @@
         private Control.Chart c홀치수;
         private Control.Chart cSlot길이;
         private Control.Chart cSlot2;
+        private Control.Chart cSlot위치도;
+        private Control.Chart cSlot4;
+        private Control.Chart cSlot3;
     }
 }

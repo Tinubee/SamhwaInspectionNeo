@@ -280,12 +280,17 @@ namespace SamhwaInspectionNeo.Schemas
                 {
                     for (int lop = 0; lop < this.하부표면검사카메라.MatImage.Count; lop++)
                     {
-                        Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop + 9).Run(이미지[lop], null);
-                        Debug.WriteLine($"하부표면검사 {lop} 검사완료 : {결과}");
-                        Global.신호제어.SetDevice($"W009{lop}", 결과 ? 1 : 2, out Int32 오류);
+                        String 결과 = Global.VM제어.GetItem((Flow구분)lop + 9).RunStr(이미지[lop], null);
+                        Global.신호제어.SetDevice($"W008{lop}", 결과 == String.Empty ? 3 : Convert.ToInt32(결과) == 0 ? 1 : 2, out Int32 오류);
                         //이미지 저장함수 추가하면됨.
-                        this.ImageSave(이미지[lop], 카메라구분.Cam04, lop, 결과);
+                        Boolean b결과 = 결과 != string.Empty && (Convert.ToInt32(결과) == 0);
+
+                        Debug.WriteLine($"하부표면검사 {lop} 검사완료 : {결과} / {b결과}");
+
+                        this.ImageSave(이미지[lop], 카메라구분.Cam04, lop, b결과);
                         if (lop == this.하부표면검사카메라.MatImage.Count - 1) this.하부표면검사카메라.MatImage.Clear();
+
+                        //Debug.WriteLine($"{this.하부표면검사카메라.MatImage.Count} 개.");
                     }
                 });
             }

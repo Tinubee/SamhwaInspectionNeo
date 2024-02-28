@@ -16,7 +16,7 @@ namespace SamhwaInspectionNeo.Schemas
     {
         public event Global.BaseEvent 동작상태알림;
         public event Global.BaseEvent 원점복귀알림;
-        //public event Global.BaseEvent 통신상태알림;
+        public event Global.BaseEvent 통신상태알림;
         //public event Global.BaseEvent 검사위치알림;
         public event Global.BaseEvent 입출변경알림;
 
