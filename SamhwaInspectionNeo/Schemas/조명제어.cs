@@ -90,8 +90,8 @@ namespace SamhwaInspectionNeo.Schemas
 
         public virtual void ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
         {
-            Debug.WriteLine($"ErrorReceived 포트={this.포트}, {e.EventType}", this.로그영역);
-            Debug.WriteLine(e.ToString());
+            Common.DebugWriteLine(로그영역, 로그구분.정보, $"ErrorReceived 포트={this.포트}, {e.EventType}");
+            Common.DebugWriteLine(로그영역, 로그구분.정보, $"{e}");
         }
         public virtual void DataReceived(object sender, SerialDataReceivedEventArgs e)
         {

@@ -10,6 +10,7 @@ using System.Diagnostics;
 using Newtonsoft.Json;
 using System.Runtime.InteropServices;
 using OpenCvSharp;
+using SamhwaInspectionNeo.Schemas;
 
 namespace SamhwaInspectionNeo
 {
@@ -258,6 +259,10 @@ namespace SamhwaInspectionNeo
             return s;
         }
 
+        public static void DebugWriteLine(string 영역, 로그구분 구분, string 내용)
+        {
+            Debug.WriteLine($"{MvUtils.Utils.FormatDate(DateTime.Now, "{0:HH:mm:ss}")}\t{구분}\t{영역}\t{내용}");
+        }
 
     }
 }

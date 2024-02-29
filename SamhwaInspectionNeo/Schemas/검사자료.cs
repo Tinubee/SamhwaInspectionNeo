@@ -161,7 +161,7 @@ namespace SamhwaInspectionNeo.Schemas
             if (!검사.검사중확인())
             {
                 검사.결과계산();
-                Debug.WriteLine($"검사코드 [ {검사코드} - {검사.측정결과} ] 제거");
+                Common.DebugWriteLine(로그영역.GetString(), 로그구분.정보, $"검사코드 [ {검사코드} - {검사.측정결과} ] 제거");
                 Global.모델자료.수량추가(검사.모델구분, 검사.측정결과);
                 this.검사스플제거(검사코드);
                 this.검사완료알림?.Invoke(검사);

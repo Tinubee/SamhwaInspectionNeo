@@ -80,8 +80,7 @@ namespace SamhwaInspectionNeo.Schemas
             }
             catch (Exception e)
             {
-                Global.오류로그(로그영역, "솔루션 로드", "솔루션을 로드하는 중 오류가 발생하였습니다.", true);
-                Debug.WriteLine(e.Message, "솔루션 로드");
+                Global.오류로그(로그영역, "솔루션 로드", $"솔루션을 로드하는 중 오류가 발생하였습니다. / {e.Message}", true);
                 return false;
             }
         }
@@ -182,7 +181,7 @@ namespace SamhwaInspectionNeo.Schemas
             if (t[0].Value != null)
             {
                 str = ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[0].strValue;
-                Debug.WriteLine($"{this.구분} str : {str}");
+                Common.DebugWriteLine(로그영역, 로그구분.정보, $"{this.구분} - {str}");
             }
             //String.Empty일때는 제품이 없는거.
             //String resStr = str == String.Empty ? "3" : str;
@@ -197,7 +196,7 @@ namespace SamhwaInspectionNeo.Schemas
             if (t[0].Value != null)
             {
                 str = ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[0].strValue;
-                Debug.WriteLine($"{this.구분} str : {str}");
+                Common.DebugWriteLine(로그영역, 로그구분.정보, $"{this.구분} - {str}");
             }
 
             Boolean resBool = str == "0" ? true : false;

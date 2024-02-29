@@ -1,4 +1,5 @@
-﻿using Euresys.MultiCam;
+﻿using DevExpress.XtraPrinting;
+using Euresys.MultiCam;
 using MvCamCtrl.NET;
 using MvCamCtrl.NET.CameraParams;
 using Newtonsoft.Json;
@@ -154,8 +155,7 @@ namespace SamhwaInspectionNeo.Schemas
                     gige.Init(gigeInfo);
                     //if (gige.상태) gige.Start();
                 }
-
-                Debug.WriteLine($"카메라 갯수: {this.Count}");
+                Common.DebugWriteLine(로그영역, 로그구분.정보, $"카메라 갯수: {this.Count}");
                 GC.Collect();
                 return true;
             }
@@ -179,14 +179,14 @@ namespace SamhwaInspectionNeo.Schemas
                     if (Data.PageIndex == 1)
                     {
                         this.치수검사카메라.Page1Image = Data.MatImage;
-                        Debug.WriteLine(this.치수검사카메라.CurrentState(), "첫번째");
                         this.치수검사카메라.isGrabCompleted_Page1 = true;
+                        Common.DebugWriteLine(로그영역, 로그구분.정보, $"LineCamera State page Index 1 : {this.치수검사카메라.CurrentState()}");
                     }
                     if (Data.PageIndex == 2)
                     {
                         this.치수검사카메라.Page2Image = Data.MatImage;
                         this.치수검사카메라.isGrabCompleted_Page2 = true;
-                        Debug.WriteLine(this.치수검사카메라.CurrentState(), "두번쨰");
+                        Common.DebugWriteLine(로그영역, 로그구분.정보, $"LineCamera State page Index 2 : {this.치수검사카메라.CurrentState()}");
                         //this.치수검사카메라.Stop();
                     }
 
@@ -203,8 +203,9 @@ namespace SamhwaInspectionNeo.Schemas
                         Int32 SplitPointY = Convert.ToInt32(Global.VM제어.글로벌변수제어.GetValue("SplitPointY"));
 
                         Cv2.VConcat(this.치수검사카메라.Page1Image, this.치수검사카메라.Page2Image, this.치수검사카메라.mergedImage);
-                        Debug.WriteLine($"Start : {SplitPointStart} , PointX : {SplitPointX}, PointY : {SplitPointY}");
-                        Debug.WriteLine($"Height : {this.치수검사카메라.mergedImage.Height} , Width : {this.치수검사카메라.mergedImage.Width}");
+
+                        Common.DebugWriteLine(로그영역, 로그구분.정보, $"Start : {SplitPointStart} , PointX : {SplitPointX}, PointY : {SplitPointY}");
+                        Common.DebugWriteLine(로그영역, 로그구분.정보, $"Height : {this.치수검사카메라.mergedImage.Height} , Width : {this.치수검사카메라.mergedImage.Width}");
 
                         for (int lop = 0; lop < this.치수검사카메라.roi.Length; lop++)
                         {
@@ -289,7 +290,7 @@ namespace SamhwaInspectionNeo.Schemas
                         //이미지 저장함수 추가하면됨.
                         Boolean b결과 = 결과 != string.Empty && (Convert.ToInt32(결과) == 0);
 
-                        Debug.WriteLine($"하부표면검사 {lop} 검사완료 : {결과} / {b결과}");
+                        Common.DebugWriteLine(로그영역, 로그구분.정보, $"하부표면검사 {lop} 검사완료 : {결과} / {b결과}");
 
                         this.ImageSave(이미지[lop], 카메라구분.Cam04, lop, b결과);
                         if (lop == this.하부표면검사카메라.MatImage.Count - 1) this.하부표면검사카메라.MatImage.Clear();
@@ -425,7 +426,7 @@ namespace SamhwaInspectionNeo.Schemas
         public Rect[] roi = new Rect[4];
         public Rect roiAlign;
         public Mat[] splitImage = new Mat[4];
-       
+
         public virtual void Set(카메라장치 장치)
         {
             if (장치 == null) return;
@@ -439,7 +440,7 @@ namespace SamhwaInspectionNeo.Schemas
             this.세로 = 장치.세로;
             this.OffsetX = 장치.OffsetX;
         }
-       
+
         public virtual Boolean SoftTrigger() => false;
         public virtual Boolean Init() => false;
         public virtual Boolean Ready() => false;
@@ -492,7 +493,8 @@ namespace SamhwaInspectionNeo.Schemas
                 this.상태 = false;
             }
 
-            Debug.WriteLine($"{this.명칭}, {this.코드}, {this.주소}, {this.상태}");
+            Common.DebugWriteLine(로그영역, 로그구분.정보, $"{this.명칭}, {this.코드}, {this.주소}, {this.상태}");
+
             return this.상태;
         }
 
@@ -596,7 +598,7 @@ namespace SamhwaInspectionNeo.Schemas
         public override Boolean Close()
         {
             if (this.Camera == null || !this.상태) return true;
-         
+
             return 그랩제어.Validate($"{this.구분} 종료오류!", Camera.CloseDevice(), false);
         }
 
@@ -626,7 +628,7 @@ namespace SamhwaInspectionNeo.Schemas
                     this.MatImage.Add(image);
                     if (Global.그랩제어.상부표면검사카메라.MatImage.Count == this.ImageCount)
                     {
-                        Debug.WriteLine("상부 표면검사 이미지 전부획득 완료.");
+                        Common.DebugWriteLine(로그영역, 로그구분.정보, $"상부표면검사 이미지 [ {this.MatImage.Count} ]개 그랩완료.");
                         this.Stop();
                         Global.그랩제어.그랩완료(this.구분, this.MatImage);
                     }
@@ -636,7 +638,7 @@ namespace SamhwaInspectionNeo.Schemas
                     this.MatImage.Add(image);
                     if (Global.그랩제어.하부표면검사카메라.MatImage.Count == this.ImageCount)
                     {
-                        Debug.WriteLine("하부 표면검사 이미지 전부획득 완료.");
+                        Common.DebugWriteLine(로그영역, 로그구분.정보, $"하부표면검사 이미지 [ {this.MatImage.Count} ]개 그랩완료.");
                         this.Stop();
                         Global.그랩제어.그랩완료(this.구분, this.MatImage);
                     }
@@ -711,7 +713,7 @@ namespace SamhwaInspectionNeo.Schemas
                 MC.SetParam(this.Channel, MC.SignalEnable + MC.SIG_SURFACE_PROCESSING, "ON");
                 MC.SetParam(this.Channel, MC.SignalEnable + MC.SIG_ACQUISITION_FAILURE, "ON");
                 MC.SetParam(this.Channel, "ChannelState", ChannelState.READY);
-                Debug.WriteLine($"{this.Channel}, {this.CurrentState()}", "READY currentState");
+                Common.DebugWriteLine(로그영역, 로그구분.정보, $"Channel[{this.Channel}] State : {this.CurrentState()}");
                 this.Ready();
 
                 this.Page1Image = new Mat(height, width, MatType.CV_8UC1);
@@ -754,7 +756,7 @@ namespace SamhwaInspectionNeo.Schemas
             this.PageIndex = 1;
             if (this.CurrentState() != ChannelState.ACTIVE)
             {
-                Debug.WriteLine("LineScanCamera Active");
+                Common.DebugWriteLine(로그영역, 로그구분.정보, "LineCamera Active");
                 MC.SetParam(this.Channel, "ChannelState", ChannelState.ACTIVE);
             }
             return true;
@@ -777,7 +779,7 @@ namespace SamhwaInspectionNeo.Schemas
         [Description("MultiCam CallBack Event")]
         private void MultiCamCallback(ref MC.SIGNALINFO signalInfo)
         {
-            Debug.WriteLine("MultiCam CallBack Event");
+            Common.DebugWriteLine(로그영역, 로그구분.정보, "MultiCam CallBack Event");
             switch (signalInfo.Signal)
             {
                 case MC.SIG_SURFACE_PROCESSING:
@@ -797,7 +799,7 @@ namespace SamhwaInspectionNeo.Schemas
         [Description("Acquisition Process")]
         private void ProcessingCallback(MC.SIGNALINFO signalInfo)
         {
-            Debug.WriteLine("LineCamera ProcessingCallback");
+            Common.DebugWriteLine(로그영역, 로그구분.정보, "LineCamera ProcessingCallback");
             currentSurface = signalInfo.SignalInfo;
             try
             {
@@ -811,10 +813,10 @@ namespace SamhwaInspectionNeo.Schemas
                 MC.GetParam(currentChannel, "ImageSizeY", out imageSizeY);
                 MC.GetParam(currentChannel, "BufferPitch", out bufferPitch);
                 MC.GetParam(currentSurface, "SurfaceAddr", out SurfaceAddr);
-                Debug.WriteLine($"{imageSizeX}", "ImageSizeX");
-                Debug.WriteLine($"{imageSizeY}", "ImageSizeY");
-                Debug.WriteLine($"{bufferPitch}", "BufferPitch");
 
+                Common.DebugWriteLine(로그영역, 로그구분.정보, $"ImageSizeX : {imageSizeX}");
+                Common.DebugWriteLine(로그영역, 로그구분.정보, $"imageSizeY : {imageSizeY}");
+                Common.DebugWriteLine(로그영역, 로그구분.정보, $"bufferPitch : {bufferPitch}");
 
                 if (this.AcquisitionMode == AcquisitionMode.PAGE)
                     this.ImageGrap(SurfaceAddr, imageSizeX, imageSizeY);
@@ -826,7 +828,7 @@ namespace SamhwaInspectionNeo.Schemas
         }
         private void ImageGrap(IntPtr surfaceAddress, Int32 width, Int32 height)
         {
-            Debug.WriteLine($"LineCamera ImageGrab :{PageIndex}");
+            Common.DebugWriteLine(로그영역, 로그구분.정보, $"LineCamera ImageGrab :{PageIndex}");
             AcquisitionData acq = new AcquisitionData(this.구분, PageIndex);
             Mat image = new Mat();
             PageIndex += 1;
@@ -841,7 +843,7 @@ namespace SamhwaInspectionNeo.Schemas
             {
                 acq.Dispose();
                 acq.Error = ex.Message;
-                Debug.WriteLine($"그랩오류: {ex.Message}");
+                Common.DebugWriteLine(로그영역, 로그구분.정보, $"그랩오류: {ex.Message}");
             }
             this.AcquisitionFinishedEvent?.Invoke(acq);
         }
@@ -912,7 +914,6 @@ namespace SamhwaInspectionNeo.Schemas
         [Description("Acquisition Failed")]
         private void AcqFailureCallback(MC.SIGNALINFO signalInfo)
         {
-            Debug.WriteLine($"Context : {signalInfo.Context} / SignalInfo : {signalInfo.SignalInfo}");
             Global.오류로그(로그영역, "영상획득", $"[{this.구분}] 유레시스 영상획득 실패 : {signalInfo.Context} / {signalInfo.SignalContext} / {signalInfo.Instance} / {signalInfo.SignalInfo} / {signalInfo.Signal}", false);
             MvUtils.Utils.MessageBox("영상획득", $"{signalInfo.Context} : 유레시스영상획득 실패", 2000);
         }

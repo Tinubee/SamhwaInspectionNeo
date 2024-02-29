@@ -153,8 +153,9 @@ namespace SamhwaInspectionNeo.Schemas
 
         public void 지그위치체크() //필요없을수도..?
         {
-            Debug.WriteLine($"Front 지그 신호 : {Global.신호제어.Front지그}");
-            Debug.WriteLine($"Rear 지그 신호 : {Global.신호제어.Rear지그}");
+            Common.DebugWriteLine(로그영역, 로그구분.정보, $"Front 지그 신호 : {Global.신호제어.Front지그}");
+            Common.DebugWriteLine(로그영역, 로그구분.정보, $"Rear 지그 신호 : {Global.신호제어.Rear지그}");
+ 
             if (Global.신호제어.Front지그)
             {
                 Global.VM제어.글로벌변수제어.SetValue("Front지그", "1");
@@ -190,7 +191,7 @@ namespace SamhwaInspectionNeo.Schemas
             // 16K 상부 카메라 영상취득 시작
             if (상부치수검사번호 > 0)
             {
-                Debug.WriteLine("상부 치수검사 신호 들어옴");
+                Common.DebugWriteLine(로그영역, 로그구분.정보, "상부치수검사 트리거 수신.");
                 지그위치체크();
                 //검사스플생성();
                 new Thread(() =>
@@ -203,7 +204,7 @@ namespace SamhwaInspectionNeo.Schemas
             // 상부 GigE 카메라 영상취득 시작
             if (상부표면검사번호 > 0)
             {
-                Debug.WriteLine("상부 표면검사 신호 들어옴");
+                Common.DebugWriteLine(로그영역, 로그구분.정보, "상부표면검사 트리거 수신.");
                 Global.그랩제어.GetItem(카메라구분.Cam03).ClearImage();
                 new Thread(() =>
                 {
@@ -215,7 +216,7 @@ namespace SamhwaInspectionNeo.Schemas
             // 하부 GigE 카메라 영상취득 시작
             if (하부표면검사번호 > 0)
             {
-                Debug.WriteLine("하부 표면검사 신호 들어옴");
+                Common.DebugWriteLine(로그영역, 로그구분.정보, "하부표면검사 트리거 수신.");
                 Global.그랩제어.GetItem(카메라구분.Cam04).ClearImage();
                 new Thread(() =>
                 {
@@ -227,7 +228,7 @@ namespace SamhwaInspectionNeo.Schemas
             // 트레이 검사 카메라 영상취득 시작
             if (트레이확인검사번호 > 0)
             {
-                Debug.WriteLine("공트레이 신호 들어옴");
+                Common.DebugWriteLine(로그영역, 로그구분.정보, "트레이검사 트리거 수신.");
                 new Thread(() =>
                 {
                     Global.조명제어.TurnOn(카메라구분.Cam02);
