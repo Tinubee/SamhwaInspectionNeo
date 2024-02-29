@@ -165,7 +165,15 @@ namespace SamhwaInspectionNeo.Schemas
                 Global.오류로그(로그영역, "카메라 연결 실패", $"{ex.Message}", true);
                 return false;
             }
+        }
 
+        public void 검사스플생성(Int32 번호)
+        {
+            Int32 검사코드 = Global.신호제어.마스터모드여부 ? Convert.ToInt32((Flow구분)번호 + 100) : Convert.ToInt32((Flow구분)번호);
+            //마스터 모드일때 Flow1,2만 실행하도록
+            if (Global.신호제어.마스터모드여부 && 번호 > 1) return;
+
+            Global.검사자료.검사시작(검사코드);
         }
 
         private void 카메라1_AcquisitionFinishedEvent(AcquisitionData Data)
@@ -196,7 +204,7 @@ namespace SamhwaInspectionNeo.Schemas
                         this.치수검사카메라.isGrabCompleted_Page2 = false;
                         //조명 끔
                         Global.조명제어.TurnOff(카메라구분.Cam01);
-                        Global.신호제어.검사스플생성();
+                        //Global.신호제어.검사스플생성();
                         // 이미지 연결
                         Int32 SplitPointStart = Convert.ToInt32(Global.VM제어.글로벌변수제어.GetValue("SplitPointStart"));
                         Int32 SplitPointX = Convert.ToInt32(Global.VM제어.글로벌변수제어.GetValue("SplitPointX"));
@@ -215,8 +223,9 @@ namespace SamhwaInspectionNeo.Schemas
                         for (int lop = 0; lop < this.치수검사카메라.roi.Length; lop++)
                         {
                             this.치수검사카메라.splitImage[lop] = new Mat(this.치수검사카메라.mergedImage, this.치수검사카메라.roi[lop]);
+                            this.검사스플생성(lop);
                             Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop).Run(this.치수검사카메라.splitImage[lop], null);
-                            //Global.정보로그(로그영역, "검사완료", $"[ 상부치수검사 - {lop}] 검사완료 : {결과}.", false);
+                            Common.DebugWriteLine(로그영역, 로그구분.정보, $"[ 상부치수검사 - {lop}] 검사완료 : {결과}.");
                             this.ImageSave(this.치수검사카메라.splitImage[lop], 카메라구분.Cam01, lop, 결과);
                         }
                         this.치수검사카메라.isCompleted_Camera1 = true;
@@ -269,8 +278,7 @@ namespace SamhwaInspectionNeo.Schemas
                     for (int lop = 0; lop < this.상부표면검사카메라.MatImage.Count; lop++)
                     {
                         Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop + 5).Run(이미지[lop], null);
-                        //Global.정보로그(로그영역, "검사완료", $"[ 상부표면검사 - {lop}] 검사완료 : {결과}.", false);
-                        //이미지 저장함수 추가하면됨.
+                        Common.DebugWriteLine(로그영역, 로그구분.정보, $"[ 상부표면검사 - {lop}] 검사완료 : {결과}.");
                         this.ImageSave(이미지[lop], 카메라구분.Cam03, lop, 결과);
                         if (lop == this.상부표면검사카메라.MatImage.Count - 1) this.상부표면검사카메라.MatImage.Clear();
                     }
@@ -285,17 +293,14 @@ namespace SamhwaInspectionNeo.Schemas
                     for (int lop = 0; lop < this.하부표면검사카메라.MatImage.Count; lop++)
                     {
                         String 결과 = Global.VM제어.GetItem((Flow구분)lop + 9).RunStr(이미지[lop], null);
-                        //Global.정보로그(로그영역, "검사완료", $"[ 하부표면검사 - {lop}] 검사완료 : {결과}.", false);
+                        Common.DebugWriteLine(로그영역, 로그구분.정보, $"[ 하부표면검사 - {lop}] 검사완료 : {결과}.");
                         Global.신호제어.SetDevice($"W008{lop}", 결과 == String.Empty ? 3 : Convert.ToInt32(결과) == 0 ? 1 : 2, out Int32 오류);
-                        //이미지 저장함수 추가하면됨.
                         Boolean b결과 = 결과 != string.Empty && (Convert.ToInt32(결과) == 0);
 
                         Common.DebugWriteLine(로그영역, 로그구분.정보, $"하부표면검사 {lop} 검사완료 : {결과} / {b결과}");
 
                         this.ImageSave(이미지[lop], 카메라구분.Cam04, lop, b결과);
                         if (lop == this.하부표면검사카메라.MatImage.Count - 1) this.하부표면검사카메라.MatImage.Clear();
-
-                        //Debug.WriteLine($"{this.하부표면검사카메라.MatImage.Count} 개.");
                     }
                 });
             }
@@ -804,7 +809,7 @@ namespace SamhwaInspectionNeo.Schemas
             try
             {
                 UInt32 currentChannel = (UInt32)signalInfo.Context;
-                Debug.WriteLine($"{currentChannel}", "currentChannel");
+                Common.DebugWriteLine(로그영역, 로그구분.정보, $"currentChannel : {currentChannel}");
 
                 Int32 imageSizeX, imageSizeY, bufferPitch;
                 IntPtr SurfaceAddr;
