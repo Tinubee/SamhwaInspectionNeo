@@ -215,7 +215,7 @@ namespace SamhwaInspectionNeo.Schemas
                         {
                             this.치수검사카메라.splitImage[lop] = new Mat(this.치수검사카메라.mergedImage, this.치수검사카메라.roi[lop]);
                             Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop).Run(this.치수검사카메라.splitImage[lop], null);
-                            Global.정보로그(로그영역, "검사완료", $"[ 상부치수검사 - {lop}] 검사완료 : {결과}.", false);
+                            //Global.정보로그(로그영역, "검사완료", $"[ 상부치수검사 - {lop}] 검사완료 : {결과}.", false);
                             this.ImageSave(this.치수검사카메라.splitImage[lop], 카메라구분.Cam01, lop, 결과);
                         }
                         this.치수검사카메라.isCompleted_Camera1 = true;
@@ -268,7 +268,7 @@ namespace SamhwaInspectionNeo.Schemas
                     for (int lop = 0; lop < this.상부표면검사카메라.MatImage.Count; lop++)
                     {
                         Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop + 5).Run(이미지[lop], null);
-                        Global.정보로그(로그영역, "검사완료", $"[ 상부표면검사 - {lop}] 검사완료 : {결과}.", false);
+                        //Global.정보로그(로그영역, "검사완료", $"[ 상부표면검사 - {lop}] 검사완료 : {결과}.", false);
                         //이미지 저장함수 추가하면됨.
                         this.ImageSave(이미지[lop], 카메라구분.Cam03, lop, 결과);
                         if (lop == this.상부표면검사카메라.MatImage.Count - 1) this.상부표면검사카메라.MatImage.Clear();
@@ -284,7 +284,7 @@ namespace SamhwaInspectionNeo.Schemas
                     for (int lop = 0; lop < this.하부표면검사카메라.MatImage.Count; lop++)
                     {
                         String 결과 = Global.VM제어.GetItem((Flow구분)lop + 9).RunStr(이미지[lop], null);
-                        Global.정보로그(로그영역, "검사완료", $"[ 하부표면검사 - {lop}] 검사완료 : {결과}.", false);
+                        //Global.정보로그(로그영역, "검사완료", $"[ 하부표면검사 - {lop}] 검사완료 : {결과}.", false);
                         Global.신호제어.SetDevice($"W008{lop}", 결과 == String.Empty ? 3 : Convert.ToInt32(결과) == 0 ? 1 : 2, out Int32 오류);
                         //이미지 저장함수 추가하면됨.
                         Boolean b결과 = 결과 != string.Empty && (Convert.ToInt32(결과) == 0);

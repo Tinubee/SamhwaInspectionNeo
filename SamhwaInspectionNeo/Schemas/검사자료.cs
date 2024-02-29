@@ -127,7 +127,7 @@ namespace SamhwaInspectionNeo.Schemas
                 검사.측정결과 = 결과구분.IN; // 검사중으로 바꿈
                 this.자료추가(검사);
                 this.검사스플.Add(검사.검사코드, 검사);
-                Global.정보로그(로그영역.GetString(), $"검사시작", $"[{(Int32)Global.환경설정.선택모델} - {검사.검사코드}] 신규검사 시작.", false);
+                //Global.정보로그(로그영역.GetString(), $"검사시작", $"[{(Int32)Global.환경설정.선택모델} - {검사.검사코드}] 신규검사 시작.", false);
             }
             return 검사;
         }

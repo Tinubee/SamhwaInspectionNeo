@@ -162,11 +162,6 @@
       <HintPath>obj\x64\Debug\Interop.ActUtlType64Lib.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files\VisionMaster4.3.0\Development\V4.x\ComControls\Assembly\log4net.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="MvCamCtrl.Net">
       <HintPath>..\..\..\..\..\Program Files (x86)\MVS\Development\DotNet\AnyCpu\MvCamCtrl.Net.dll</HintPath>
     </Reference>
@@ -235,6 +230,12 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="VMControls.Winform.Release, Version=1.0.0.0, Culture=neutral, PublicKeyToken=2efa940dfee4dc7e, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VMControls.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=fef8a9e4baab915f, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VMControls.WPF.Release, Version=1.0.0.0, Culture=neutral, PublicKeyToken=fdd2c8be7291c30c, processorArchitecture=MSIL">
       <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase" />
@@ -565,8 +566,6 @@
     <None Include="Resources\charttype_linestacked.svg" />
     <None Include="Resources\charttype_line.svg" />
     <None Include="Resources\createfullstackedlinechart.svg" />
-    <None Include="Resources\bitmap2.bmp" />
-    <None Include="Resources\bitmap1.bmp" />
     <None Include="Resources\actions_refresh.svg" />
     <None Include="Resources\actions_rollback2.svg" />
     <None Include="Resources\actions_rollback1.svg" />
@@ -595,6 +594,9 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="log4net">
+      <Version>2.0.15</Version>
+    </PackageReference>
     <PackageReference Include="MathNet.Numerics">
       <Version>5.0.0</Version>
     </PackageReference>

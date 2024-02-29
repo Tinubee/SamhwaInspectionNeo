@@ -348,7 +348,7 @@ namespace SamhwaInspectionNeo.Schemas
             List<String> 불량내역 = this.검사내역.Where(e => e.측정결과 == 결과구분.ER || e.측정결과 == 결과구분.NG).Select(e => e.검사항목.ToString()).ToList();
             if (불량내역.Count > 0) this.불량정보 = String.Join(",", 불량내역);
 
-            Global.정보로그(로그영역, "결과계산", $"[{(Int32)Global.환경설정.선택모델} - {this.검사코드}] : ${this.측정결과}", false);
+            //Global.정보로그(로그영역, "결과계산", $"[{(Int32)Global.환경설정.선택모델} - {this.검사코드}] : ${this.측정결과}", false);
             return this.측정결과;
         }
     }
