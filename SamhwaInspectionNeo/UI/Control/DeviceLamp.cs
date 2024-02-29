@@ -14,7 +14,7 @@ namespace SamhwaInspectionNeo.UI.Controls
     {
         private const String 로그영역 = "장치상태표시";
         private LocalizationConfig 번역 = new LocalizationConfig();
-        private Int32 구분;
+        private Int32 구분 = 0;
         public DeviceLamp()
         {
             InitializeComponent();

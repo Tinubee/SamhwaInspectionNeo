@@ -133,7 +133,7 @@ namespace SamhwaInspectionNeo.Schemas
 
             if (index == 0) Global.경고로그(로그영역, 구분.ToString(), $"해당 위치에 검사할 제품이 없습니다.", false);
 
-            this.인덱스버퍼[구분] = index;
+            //this.인덱스버퍼[구분] = index;
             return index;
         }
 
@@ -167,11 +167,12 @@ namespace SamhwaInspectionNeo.Schemas
             }
         }
 
-        private void 검사스플생성()
+        public void 검사스플생성()
         {
+            Int32 검사코드 = 0;
             for (int lop = 0; lop < 4; lop++)
             {
-                Int32 검사코드 = Global.신호제어.마스터모드여부 ? Convert.ToInt32((Flow구분)lop + 100) : Convert.ToInt32((Flow구분)lop);
+                검사코드 = Global.신호제어.마스터모드여부 ? Convert.ToInt32((Flow구분)lop + 100) : Convert.ToInt32((Flow구분)lop);
                 //마스터 모드일때 Flow1,2만 실행하도록
                 if (Global.신호제어.마스터모드여부 && lop > 1) break;
 
@@ -191,7 +192,7 @@ namespace SamhwaInspectionNeo.Schemas
             {
                 Debug.WriteLine("상부 치수검사 신호 들어옴");
                 지그위치체크();
-                검사스플생성();
+                //검사스플생성();
                 new Thread(() =>
                 {
                     Global.조명제어.TurnOn(카메라구분.Cam01);

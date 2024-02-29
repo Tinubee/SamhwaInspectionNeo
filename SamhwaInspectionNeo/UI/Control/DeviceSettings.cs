@@ -28,23 +28,17 @@ namespace SamhwaInspectionNeo.UI.Controls
         {
             try
             {
-                //Global.정보로그("원점복귀", "원점복귀시작", "트리거보드 초기화 작업진행 시작", true);
-                //Global.그랩제어.GetItem(카메라구분.Cam02).Close();
-                //Global.그랩제어.GetItem(카메라구분.Cam03).Close();
-                //Global.그랩제어.Close();
-                //Global.그랩제어.Init();
-                //Global.조명제어?.TurnOff();
-                //Global.트리거보드제어?.ClearAll();
-                //for (int lop = 0; lop < 4; lop++)
-                //    Global.검사자료.검사스플제거(lop);
+                Global.조명제어?.TurnOff();
+                for (int lop = 0; lop < 4; lop++)
+                    Global.검사자료.검사스플제거(lop);
 
-                //Global.그랩제어.치수검사카메라.PageIndex = 1;
-                //Global.그랩제어.치수검사카메라.Stop();
-
-                //Global.그랩제어.상부표면검사카메라.ClearImage();
+                Global.그랩제어.상부표면검사카메라.ClearImage();
+                Global.그랩제어.하부표면검사카메라.ClearImage();
+                Global.신호제어.출력자료리셋();
 
                 Global.신호제어.원점복귀완료 = false;
-                //Global.정보로그("원점복귀", "원점복귀완료", "트리거보드 초기화 완료", false);
+               
+                Global.정보로그("원점복귀", "원점복귀완료", "초기화 작업 완료.", false);
             }
             catch (Exception ex)
             {

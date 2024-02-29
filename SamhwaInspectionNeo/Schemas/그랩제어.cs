@@ -196,6 +196,7 @@ namespace SamhwaInspectionNeo.Schemas
                         this.치수검사카메라.isGrabCompleted_Page2 = false;
                         //조명 끔
                         Global.조명제어.TurnOff(카메라구분.Cam01);
+                        Global.신호제어.검사스플생성();
                         // 이미지 연결
                         Int32 SplitPointStart = Convert.ToInt32(Global.VM제어.글로벌변수제어.GetValue("SplitPointStart"));
                         Int32 SplitPointX = Convert.ToInt32(Global.VM제어.글로벌변수제어.GetValue("SplitPointX"));
@@ -214,6 +215,7 @@ namespace SamhwaInspectionNeo.Schemas
                         {
                             this.치수검사카메라.splitImage[lop] = new Mat(this.치수검사카메라.mergedImage, this.치수검사카메라.roi[lop]);
                             Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop).Run(this.치수검사카메라.splitImage[lop], null);
+                            Global.정보로그(로그영역, "검사완료", $"[ 상부치수검사 - {lop}] 검사완료 : {결과}.", false);
                             this.ImageSave(this.치수검사카메라.splitImage[lop], 카메라구분.Cam01, lop, 결과);
                         }
                         this.치수검사카메라.isCompleted_Camera1 = true;
@@ -266,7 +268,7 @@ namespace SamhwaInspectionNeo.Schemas
                     for (int lop = 0; lop < this.상부표면검사카메라.MatImage.Count; lop++)
                     {
                         Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop + 5).Run(이미지[lop], null);
-                        Debug.WriteLine($"상부표면검사 {lop} 검사완료 : {결과}");
+                        Global.정보로그(로그영역, "검사완료", $"[ 상부표면검사 - {lop}] 검사완료 : {결과}.", false);
                         //이미지 저장함수 추가하면됨.
                         this.ImageSave(이미지[lop], 카메라구분.Cam03, lop, 결과);
                         if (lop == this.상부표면검사카메라.MatImage.Count - 1) this.상부표면검사카메라.MatImage.Clear();
@@ -276,11 +278,13 @@ namespace SamhwaInspectionNeo.Schemas
             else if (카메라 == 카메라구분.Cam04) //하부표면검사
             {
                 Global.조명제어.TurnOff(카메라);
+                if (Global.신호제어.마스터모드여부) return;
                 Task.Run(() =>
                 {
                     for (int lop = 0; lop < this.하부표면검사카메라.MatImage.Count; lop++)
                     {
                         String 결과 = Global.VM제어.GetItem((Flow구분)lop + 9).RunStr(이미지[lop], null);
+                        Global.정보로그(로그영역, "검사완료", $"[ 하부표면검사 - {lop}] 검사완료 : {결과}.", false);
                         Global.신호제어.SetDevice($"W008{lop}", 결과 == String.Empty ? 3 : Convert.ToInt32(결과) == 0 ? 1 : 2, out Int32 오류);
                         //이미지 저장함수 추가하면됨.
                         Boolean b결과 = 결과 != string.Empty && (Convert.ToInt32(결과) == 0);
@@ -747,13 +751,12 @@ namespace SamhwaInspectionNeo.Schemas
         [Description("채널 활성화 준비")]
         public override Boolean Ready()
         {
+            this.PageIndex = 1;
             if (this.CurrentState() != ChannelState.ACTIVE)
             {
                 Debug.WriteLine("LineScanCamera Active");
                 MC.SetParam(this.Channel, "ChannelState", ChannelState.ACTIVE);
             }
-            this.PageIndex = 1;
-            Debug.WriteLine($"PageIndex : {this.PageIndex}");
             return true;
         }
 
@@ -910,6 +913,7 @@ namespace SamhwaInspectionNeo.Schemas
         private void AcqFailureCallback(MC.SIGNALINFO signalInfo)
         {
             Debug.WriteLine($"Context : {signalInfo.Context} / SignalInfo : {signalInfo.SignalInfo}");
+            Global.오류로그(로그영역, "영상획득", $"[{this.구분}] 유레시스 영상획득 실패 : {signalInfo.Context} / {signalInfo.SignalContext} / {signalInfo.Instance} / {signalInfo.SignalInfo} / {signalInfo.Signal}", false);
             MvUtils.Utils.MessageBox("영상획득", $"{signalInfo.Context} : 유레시스영상획득 실패", 2000);
         }
     }

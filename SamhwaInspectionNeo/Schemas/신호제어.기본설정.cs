@@ -23,7 +23,7 @@ namespace SamhwaInspectionNeo.Schemas
         #region 기본상수 및 멤버
         private static String 로그영역 = "PLC";
         private const Int32 스테이션번호 = 2;
-        private const Int32 입출체크간격 = 10;
+        private const Int32 입출체크간격 = 20;
         private DateTime 시작일시 = DateTime.Now;
         private Boolean 작업여부 = false;
         private ActUtlType64 PLC = null;
@@ -223,7 +223,7 @@ namespace SamhwaInspectionNeo.Schemas
             this.연결종료();
         }
 
-        private void 출력자료리셋()
+        public void 출력자료리셋()
         {
             this.트레이확인카메라트리거 = false;
             this.상부표면검사카메라트리거 = false;
@@ -232,6 +232,7 @@ namespace SamhwaInspectionNeo.Schemas
             this.상부변위센서확인트리거 = false;
             this.하부변위센서확인트리거 = false;
             this.결과값요청트리거 = false;
+            this.원점복귀완료 = false;
         }
 
         public void 생산수량전송() =>
