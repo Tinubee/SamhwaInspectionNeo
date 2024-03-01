@@ -327,6 +327,7 @@ namespace SamhwaInspectionNeo.Schemas
         {
             if (this.검사내역.Any(e => e.측정결과 == 결과구분.ER)) this.측정결과 = 결과구분.ER;
             else if (this.검사내역.Any(e => e.측정결과 != 결과구분.PS && e.측정결과 != 결과구분.OK)) this.측정결과 = 결과구분.NG;
+            else if (this.검사내역.Any(e => e.측정결과 == 결과구분.NO || e.측정결과 == 결과구분.IN)) this.측정결과 = 결과구분.IN;
             else this.측정결과 = 결과구분.OK;
             if (this.측정결과 == 결과구분.OK)
             {
@@ -337,11 +338,13 @@ namespace SamhwaInspectionNeo.Schemas
             {
                 if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.CTQ && e.측정결과 == 결과구분.ER)) this.CTQ결과 = 결과구분.ER;
                 else if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.CTQ && e.측정결과 == 결과구분.NG)) this.CTQ결과 = 결과구분.NG;
+                else if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.CTQ && e.측정결과 == 결과구분.NO)) this.CTQ결과 = 결과구분.NO;
                 else this.CTQ결과 = 결과구분.OK;
                 //임시
                 //this.외관결과 = 결과구분.OK;
                 if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.Surface && e.측정결과 == 결과구분.ER)) this.외관결과 = 결과구분.ER;
                 else if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.Surface && e.측정결과 == 결과구분.NG)) this.외관결과 = 결과구분.NG;
+                else if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.Surface && e.측정결과 == 결과구분.NO)) this.외관결과 = 결과구분.NO;
                 else this.외관결과 = 결과구분.OK;
             }
 

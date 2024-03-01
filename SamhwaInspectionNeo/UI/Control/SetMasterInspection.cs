@@ -14,7 +14,7 @@ namespace SamhwaInspectionNeo.UI.Control
         public delegate void 검사항목선택(모델정보 모델, 검사정보 설정);
         public event 검사항목선택 검사항목변경;
         private readonly LocalizationInspection 번역 = new LocalizationInspection();
-        private Boolean Loading = false;
+        //private Boolean Loading = false;
         public SetMasterInspection()
         {
             InitializeComponent();
@@ -22,7 +22,7 @@ namespace SamhwaInspectionNeo.UI.Control
 
         public void Init()
         {
-            Loading = true;
+            //Loading = true;
             this.GridView1.Init(this.barManager1);
             this.GridView1.OptionsBehavior.Editable = true;
             this.GridView1.OptionsSelection.MultiSelect = true;
@@ -55,7 +55,7 @@ namespace SamhwaInspectionNeo.UI.Control
             this.b설정저장.Text = 번역.설정저장;
             this.b도구설정.Click += B도구설정_Click;
             this.b수동검사.Click += B수동검사_Click;
-            Loading = false;
+            //Loading = false;
         }
 
         private void B보정값설정_Click(object sender, EventArgs e)

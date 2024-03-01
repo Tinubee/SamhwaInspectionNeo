@@ -156,11 +156,11 @@ namespace SamhwaInspectionNeo.Schemas
                 Global.오류로그(로그영역.GetString(), "결과계산", $"[{(Int32)Global.환경설정.선택모델}.{검사코드}] 해당 검사가 없습니다.", false);
                 return null;
             }
-            //검사.결과계산();
+            검사.결과계산();
             //Global.모델자료.수량추가(검사.모델구분, 검사.측정결과);
             if (!검사.검사중확인())
             {
-                검사.결과계산();
+                //검사.결과계산();
                 Common.DebugWriteLine(로그영역.GetString(), 로그구분.정보, $"검사코드 [ {검사코드} - {검사.측정결과} ] 제거");
                 Global.모델자료.수량추가(검사.모델구분, 검사.측정결과);
                 this.검사스플제거(검사코드);

@@ -77,7 +77,8 @@ namespace SamhwaInspectionNeo.Schemas
             }
             catch (Exception ex)
             {
-                Global.정보로그(로그영역, "연결오류", $"트리거보드 연결 실패. [ {ex.Message} ]", false);
+                this.트리거보드 = null;
+                Global.오류로그(로그영역, "연결오류", $"트리거보드 연결 실패. [ {ex.Message} ]", true);
             }
         }
 
