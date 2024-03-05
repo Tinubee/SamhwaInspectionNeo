@@ -115,7 +115,6 @@ namespace SamhwaInspectionNeo.Schemas
         }
         public 검사결과 결과조회(DateTime 일자, 모델구분 모델, Int32 코드) => this.테이블.Select(일자, 모델, 코드);
 
-
         #region 검사로직
         public 검사결과 검사시작(Int32 검사코드)
         {
@@ -129,6 +128,7 @@ namespace SamhwaInspectionNeo.Schemas
                 this.검사스플.Add(검사.검사코드, 검사);
                 Common.DebugWriteLine(로그영역.GetString(), 로그구분.정보, $"[{(Int32)Global.환경설정.선택모델} - {검사.검사코드}] 신규검사 시작.");
             }
+            //Common.DebugWriteLine(로그영역.GetString(), 로그구분.정보, $"[{(Int32)Global.환경설정.선택모델} - {검사.검사코드}] 검사코드 있음.");
             return 검사;
         }
         public 검사결과 항목검사(Flow구분 구분, 지그위치 지그, String name, Single value)

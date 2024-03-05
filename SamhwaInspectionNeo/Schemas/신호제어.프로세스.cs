@@ -100,6 +100,7 @@ namespace SamhwaInspectionNeo.Schemas
             else if (resultString == "-B") return 2;
             else if (resultString == "-C") return 3;
             else if (resultString == "-D") return 4;
+            else if (resultString == "-H") return 5;
 
             return 0;
         }

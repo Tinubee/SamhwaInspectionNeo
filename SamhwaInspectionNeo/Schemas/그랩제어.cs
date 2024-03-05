@@ -277,6 +277,7 @@ namespace SamhwaInspectionNeo.Schemas
                 {
                     for (int lop = 0; lop < this.상부표면검사카메라.MatImage.Count; lop++)
                     {
+                        this.검사스플생성(lop);
                         Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop + 5).Run(이미지[lop], null);
                         Common.DebugWriteLine(로그영역, 로그구분.정보, $"[ 상부표면검사 - {lop}] 검사완료 : {결과}.");
                         this.ImageSave(이미지[lop], 카메라구분.Cam03, lop, 결과);
@@ -582,6 +583,16 @@ namespace SamhwaInspectionNeo.Schemas
         //    Int32 nRet = this.Camera.SetEnumValue("TriggerSource", (uint)MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_LINE0);
         //    그랩제어.Validate($"[{this.구분}] 하드웨어트리거 모드 설정에 실패하였습니다.", nRet, true);
         //}
+        public Int32 GetStatus()
+        {
+            Boolean pbStatus = false;
+            CCameraInfo Ccinfo = this.Device;
+
+            Int32 resulte = this.Camera.GIGE_GetMulticastStatus(ref Ccinfo, ref pbStatus);
+            Common.DebugWriteLine(로그영역, 로그구분.정보, $"{this.Camera} [{resulte}] [{pbStatus}]");
+            return resulte;
+        }
+
         public override Boolean ClearImage()
         {
             this.MatImage.Clear();

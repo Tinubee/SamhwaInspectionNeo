@@ -180,20 +180,45 @@ namespace SamhwaInspectionNeo.UI.Control
 
             double measdvalue, cmmdvalue;
 
+            List<VmVariable> 보정값변수들 = Global.VM제어.글로벌변수제어.보정값불러오기();
+
             if (measvalue != null && cmmvalue != null &&
                     double.TryParse(measvalue.ToString(), out measdvalue) &&
                         double.TryParse(cmmvalue.ToString(), out cmmdvalue))
             {
+                //위치도일때 교정값 계산방식 다르게
                 if (measdvalue != 0)
                 {
                     isCalculating = true;
-                    calvalue = (float)(cmmdvalue / measdvalue);
+                    if (name.ToString().Contains("위치도"))
+                    {
+                        VmVariable 적용변수 = 보정값변수들.Where(f => f.Name.Contains(name.ToString())).FirstOrDefault();
+                        string value2 = 적용변수.StringValue;
+                        string[] splitValue2 = value2.Split(';');
+
+                        double dis1 = Convert.ToDouble(splitValue2[8]);
+                        double dis2 = Convert.ToDouble(splitValue2[9]);
+
+                        Double 기준거리 = Math.Sqrt(dis1 * dis1 + dis2 * dis2);
+                        기준거리 = Math.Round(기준거리, 2);
+
+                        double pixcel = 기준거리 - Convert.ToDouble(measvalue);
+                        
+                        calvalue = (기준거리 - (double)cmmdvalue) / pixcel;
+                        
+                        //기준거리 - (measdvalue * calvalue) = cmmdvalue;
+                    }
+                    else
+                    {
+                        calvalue = (float)(cmmdvalue / measdvalue);
+                    }
+                   
                     GridView1.SetRowCellValue(rowIndex, "교정값", Math.Round(Convert.ToDouble(calvalue), 6));
                     isCalculating = false;
                 }
             }
 
-            List<VmVariable> 보정값변수들 = Global.VM제어.글로벌변수제어.보정값불러오기();
+            
             Int32 index = 보정위치();
 
             if (index == -1) return;

@@ -52,7 +52,8 @@ namespace SamhwaInspectionNeo.UI.Controls
         {
             try
             {
-                //Global.신호제어.SetDevice($"W0082", 1 , out Int32 오류);
+                //Global.그랩제어.상부표면검사카메라.Stop();
+                //Global.그랩제어.상부표면검사카메라.GetStatus();
             }
             catch (Exception ex)
             {
