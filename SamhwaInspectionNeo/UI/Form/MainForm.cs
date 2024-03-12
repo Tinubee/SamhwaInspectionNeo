@@ -81,14 +81,14 @@ namespace SamhwaInspectionNeo
 
             //if (Global.환경설정.동작구분 != 동작구분.Live) return;
 
-            foreach (Screen s in Screen.AllScreens)
-            {
-                Debug.WriteLine(s.Bounds, s.DeviceName);
-                if (s.Primary) continue;
-                ShowTrendReportForm(s);
-            }
-            // 창이 생성되지 않았으면 메인 모니터에 띄움
-            ShowTrendReportForm(Screen.PrimaryScreen);
+            //foreach (Screen s in Screen.AllScreens)
+            //{
+            //    Debug.WriteLine(s.Bounds, s.DeviceName);
+            //    if (s.Primary) continue;
+            //    ShowTrendReportForm(s);
+            //}
+            //// 창이 생성되지 않았으면 메인 모니터에 띄움
+            //ShowTrendReportForm(Screen.PrimaryScreen);
         }
         private void ShowTrendReportForm(Screen s)
         {

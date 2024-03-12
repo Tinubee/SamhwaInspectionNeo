@@ -60,7 +60,7 @@ namespace SamhwaInspectionNeo.Schemas
                 {
                     VmSolution.Load(도구파일, null);
                     글로벌변수제어.Init();
-                    Global.정보로그(로그영역, 로그영역, "VmSolution파일 로드 완료.", false);
+                    Global.정보로그(로그영역, 로그영역, $"[ {Global.환경설정.선택모델} ] VmSolution파일 로드 완료.", false);
                 }
                 else
                 {

@@ -137,6 +137,46 @@ namespace SamhwaInspectionNeo.Schemas
         우상위치도 = 32,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
         우하위치도 = 33,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot1_1 = 40,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot1_2 = 41,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot1_3 = 42,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot1_4 = 43,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot1_5 = 44,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot2_1 = 45,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot2_2 = 46,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot2_3 = 47,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot2_4 = 48,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot2_5 = 49,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot3_1 = 50,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot3_2 = 51,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot3_3 = 52,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot3_4 = 53,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot3_5 = 54,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot4_1 = 55,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot4_2 = 56,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot4_3 = 57,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot4_4 = 58,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot4_5 = 59,
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03)]
         상부표면검사 = 500,
         [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam04)]
