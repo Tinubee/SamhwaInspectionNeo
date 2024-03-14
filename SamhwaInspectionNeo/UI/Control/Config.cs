@@ -31,6 +31,9 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.e양품저장.IsOn = Global.환경설정.사진저장OK;
             this.e불량저장.IsOn = Global.환경설정.사진저장NG;
 
+            this.e강제OK.IsOn = Global.환경설정.강제OK배출;
+            this.e강제NG.IsOn = Global.환경설정.강제NG배출;
+
             this.e기본경로.ButtonClick += E기본경로_ButtonClick;
             this.e문서저장.ButtonClick += E문서저장_ButtonClick;
             this.e사진저장.ButtonClick += E사진저장_ButtonClick;
@@ -40,6 +43,37 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.e불량저장.Toggled += E불량저장_Toggled;
             this.e치수검사.Toggled += E치수검사_Toggled;
             this.e표면검사.Toggled += E표면검사_Toggled;
+
+            this.e강제OK.Toggled += 강제결과배출;
+            this.e강제NG.Toggled += 강제결과배출;
+        }
+
+        private void 강제결과배출(object sender, EventArgs e)
+        {
+            ToggleSwitch ts = sender as ToggleSwitch;
+
+            if (e강제OK.IsOn && ts.Name == "e강제OK")
+            {
+                Global.환경설정.강제OK배출 = true;
+                Global.환경설정.강제NG배출 = false;
+                if (e강제NG.IsOn)
+                {
+                    e강제NG.IsOn = false;
+                }
+            }else if (e강제NG.IsOn)
+            {
+                Global.환경설정.강제OK배출 = false;
+                Global.환경설정.강제NG배출 = true;
+                if (e강제OK.IsOn)
+                {
+                    e강제OK.IsOn = false;
+                }
+            }
+            else
+            {
+                Global.환경설정.강제OK배출 = false;
+                Global.환경설정.강제NG배출 = false;
+            }
         }
 
         private void E표면검사_Toggled(object sender, EventArgs e)

@@ -159,7 +159,8 @@ namespace SamhwaInspectionNeo.UI.Control
 
         private Decimal 보정값조회(검사항목 항목, List<VmVariable> list, Int32 보정값위치)
         {
-            VmVariable 변수 = list.Where(e => e.Name.Contains(항목.ToString())).FirstOrDefault();
+            //CalValue
+            VmVariable 변수 = list.Where(e => e.Name == $"{항목}_CalValue" || e.Name == $"{항목}CalValue").FirstOrDefault();
             if (변수 == null) return 1;
 
             string value = 변수.StringValue;
@@ -191,42 +192,8 @@ namespace SamhwaInspectionNeo.UI.Control
                 if (measdvalue != 0)
                 {
                     isCalculating = true;
-                    if (name.ToString().Contains("위치도"))
-                    {
-                        VmVariable 적용변수 = 보정값변수들.Where(f => f.Name.Contains(name.ToString())).FirstOrDefault();
-                        string value2 = 적용변수.StringValue;
-                        string[] splitValue2 = value2.Split(';');
-                     
-                        foreach (char c in splitValue2[8])
-                        {
-                            Debug.WriteLine($"Original Char: '{c}' Unicode: {(int)c}");
-                        }
-                        string cleanedString = Regex.Replace(splitValue2[8], @"[^\u0020-\u007E]", string.Empty);
-                        if (double.TryParse(cleanedString, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out double dis1))
-                        {
-                            // Parsing succeeded
-                            Debug.WriteLine($"Parsed successfully: {dis1}");
-                        }
-                        else
-                        {
-                            // Parsing failed
-                            Debug.WriteLine($"Failed to parse '{splitValue2[8]}'");
-                        }
-                        //double dis1 = Convert.ToDouble(splitValue2[8].Trim(), System.Globalization.CultureInfo.InvariantCulture);
-                        double dis2 = Convert.ToDouble(splitValue2[9].Trim(), System.Globalization.CultureInfo.InvariantCulture);
-
-                        Double 기준거리 = Math.Sqrt(dis1 * dis1 + dis2 * dis2);
-                        기준거리 = Math.Round(기준거리, 2);
-
-                        double pixcel = 기준거리 - Convert.ToDouble(measvalue);
-                        Debug.WriteLine($"{pixcel}");
-                       
-                        calvalue = (기준거리 - (double)cmmdvalue) / pixcel;
-                    }
-                    else
-                    {
-                        calvalue = (float)(cmmdvalue / measdvalue);
-                    }
+                   
+                    calvalue = (float)(cmmdvalue / measdvalue);
 
                     GridView1.SetRowCellValue(rowIndex, "교정값", Math.Round(Convert.ToDouble(calvalue), 6));
                     isCalculating = false;

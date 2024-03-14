@@ -138,6 +138,30 @@ namespace SamhwaInspectionNeo.Schemas
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
         우하위치도 = 33,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        상측위치도X거리 = 128,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        좌상위치도X거리 = 129,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        좌하위치도X거리 = 130,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        중앙위치도X거리 = 131,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우상위치도X거리 = 132,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우하위치도X거리 = 133,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        상측위치도Y거리 = 228,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        좌상위치도Y거리 = 229,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        좌하위치도Y거리 = 230,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        중앙위치도Y거리 = 231,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우상위치도Y거리 = 232,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우하위치도Y거리 = 233,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
         Slot1_1 = 40,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
         Slot1_2 = 41,

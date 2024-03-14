@@ -131,6 +131,7 @@ namespace SamhwaInspectionNeo.Schemas
             else if (구분 == 정보주소.상부표면검사카메라트리거) index = this.상부표면검사촬영번호;
             else if (구분 == 정보주소.하부표면검사카메라트리거) index = this.하부표면검사촬영번호;
             else if (구분 == 정보주소.트레이확인카메라트리거) index = this.트레이확인촬영번호;
+            else if (구분 == 정보주소.역방향및모델확인카메라트리거) index = this.역방향및모델확인촬영번호;
 
             if (index == 0) Global.경고로그(로그영역, 구분.ToString(), $"해당 위치에 검사할 제품이 없습니다.", false);
 
@@ -188,6 +189,7 @@ namespace SamhwaInspectionNeo.Schemas
             Int32 상부표면검사번호 = this.검사위치번호(정보주소.상부표면검사카메라트리거);
             Int32 하부표면검사번호 = this.검사위치번호(정보주소.하부표면검사카메라트리거);
             Int32 트레이확인검사번호 = this.검사위치번호(정보주소.트레이확인카메라트리거);
+            Int32 역방향및모델확인검사번호 = this.검사위치번호(정보주소.역방향및모델확인카메라트리거);
 
             // 16K 상부 카메라 영상취득 시작
             if (상부치수검사번호 > 0)
@@ -237,6 +239,11 @@ namespace SamhwaInspectionNeo.Schemas
                     Global.그랩제어.SoftTrigger(카메라구분.Cam02);
                 }).Start();
                 신호쓰기(정보주소.트레이확인카메라트리거, 0);
+            }
+
+            if(역방향및모델확인검사번호 > 0)
+            {
+
             }
         }
 

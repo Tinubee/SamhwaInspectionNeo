@@ -41,6 +41,7 @@ namespace SamhwaInspectionNeo
             public static Boolean 카메라2 { get { return (그랩제어?.공트레이검사카메라) != null && 그랩제어.공트레이검사카메라.상태; } }
             public static Boolean 카메라3 { get { return (그랩제어?.상부표면검사카메라) != null && 그랩제어.상부표면검사카메라.상태; } }
             public static Boolean 카메라4 { get { return (그랩제어?.하부표면검사카메라) != null && 그랩제어.하부표면검사카메라.상태; } }
+            public static Boolean 카메라5 { get { return (그랩제어?.역방향및모델검사카메라) != null && 그랩제어.역방향및모델검사카메라.상태; } }
             public static Boolean 자동수동 { get => Global.신호제어.자동모드여부; }
             public static Boolean 장치통신 { get { return 신호제어.정상여부; } }
             public static Boolean 조명장치 { get { return (조명제어.컨트롤러1) != null && (조명제어.컨트롤러2) != null && (조명제어.컨트롤러3) != null && 조명제어.정상여부; } }
@@ -100,11 +101,11 @@ namespace SamhwaInspectionNeo
                 트리거보드제어?.Close();
                 VM제어?.Close();
                 조명제어?.Close();
-                로그자료?.Close();
                 환경설정?.Close();
                 유저자료?.Close();
                 모델자료?.Close();
                 검사자료?.Close();
+                로그자료?.Close();
                 Properties.Settings.Default.Save();
                 return true;
             }

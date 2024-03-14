@@ -29,6 +29,8 @@ namespace SamhwaInspectionNeo.Schemas
         Cam03 = 3,
         [Description("하부표면검사")]
         Cam04 = 4,
+        [Description("역방향및모델검사")]
+        Cam05 = 5,
     }
 
     #region Enum Setting by LHD
@@ -107,6 +109,7 @@ namespace SamhwaInspectionNeo.Schemas
         public HikeGigE 공트레이검사카메라 = null;
         public HikeGigE 상부표면검사카메라 = null;
         public HikeGigE 하부표면검사카메라 = null;
+        public HikeGigE 역방향및모델검사카메라 = null;
 
         public Boolean Init()
         {
@@ -121,11 +124,14 @@ namespace SamhwaInspectionNeo.Schemas
                 this.상부표면검사카메라 = new HikeGigE() { 구분 = 카메라구분.Cam03 }; //상부표면검사
                 //2호기 :   3호기 : L28502411
                 this.하부표면검사카메라 = new HikeGigE() { 구분 = 카메라구분.Cam04 }; //하부표면검사
+                //2호기 :   3호기 : 
+                this.역방향및모델검사카메라 = new HikeGigE() { 구분 = 카메라구분.Cam05 }; //역방향및모델확인검사
 
                 this.Add(카메라구분.Cam01, this.치수검사카메라);
                 this.Add(카메라구분.Cam02, this.공트레이검사카메라);
                 this.Add(카메라구분.Cam03, this.상부표면검사카메라);
                 this.Add(카메라구분.Cam04, this.하부표면검사카메라);
+                this.Add(카메라구분.Cam05, this.역방향및모델검사카메라);
 
                 this.치수검사카메라.AcquisitionFinishedEvent += 카메라1_AcquisitionFinishedEvent;
 

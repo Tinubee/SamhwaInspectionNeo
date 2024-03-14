@@ -32,6 +32,10 @@ namespace SamhwaInspectionNeo.Schemas
         public Boolean 사진저장OK { get; set; } = false;
         [Translation("NG Image Save", "NG 이미지 저장"), JsonProperty("SaveNG")]
         public Boolean 사진저장NG { get; set; } = false;
+        [Translation("Force OK", "강제OK"), JsonProperty("ForceOK")]
+        public Boolean 강제OK배출 { get; set; } = false;
+        [Translation("Force NG", "강제NG"), JsonProperty("ForceNG")]
+        public Boolean 강제NG배출 { get; set; } = false;
         [Translation("Results Storage Days", "검사 결과 보관일"), JsonProperty("DaysToKeepResults")]
         public Int32 결과보관 { get; set; } = 900;
         [Translation("Logs Storage Days", "로그 보관일"), JsonProperty("DaysToKeepLogs")]
