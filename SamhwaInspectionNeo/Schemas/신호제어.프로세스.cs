@@ -160,11 +160,13 @@ namespace SamhwaInspectionNeo.Schemas
  
             if (Global.신호제어.Front지그)
             {
+                Global.환경설정.Front지그 = true;
                 Global.VM제어.글로벌변수제어.SetValue("Front지그", "1");
                 Global.VM제어.글로벌변수제어.SetValue("Rear지그", "0");
             }
             else if (Global.신호제어.Rear지그)
             {
+                Global.환경설정.Front지그 = false;
                 Global.VM제어.글로벌변수제어.SetValue("Front지그", "0");
                 Global.VM제어.글로벌변수제어.SetValue("Rear지그", "1");
             }
@@ -208,7 +210,7 @@ namespace SamhwaInspectionNeo.Schemas
             if (상부표면검사번호 > 0)
             {
                 Common.DebugWriteLine(로그영역, 로그구분.정보, "상부표면검사 트리거 수신.");
-                Global.그랩제어.GetItem(카메라구분.Cam03).ClearImage();
+                //Global.그랩제어.GetItem(카메라구분.Cam03).ClearImage();
                 new Thread(() =>
                 {
                     Global.조명제어.TurnOn(카메라구분.Cam03);

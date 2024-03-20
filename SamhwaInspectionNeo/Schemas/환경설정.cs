@@ -75,7 +75,8 @@ namespace SamhwaInspectionNeo.Schemas
         {
             return (Int32)사용권한 >= (Int32)요구권한;
         }
-
+        [JsonIgnore, Description("지그위치")]
+        public Boolean Front지그 { get; set; } = false;
         [JsonIgnore, Description("슈퍼유저")]
         public const String 시스템관리자 = "ivmadmin";
         public 유저권한구분 시스템관리자인증(string 사용자명, string 비밀번호)

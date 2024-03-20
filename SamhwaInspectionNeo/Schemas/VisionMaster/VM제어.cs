@@ -208,7 +208,7 @@ namespace SamhwaInspectionNeo.Schemas
         {
             ShellModuleTool shell = Global.VM제어.GetItem(구분).shellModuleTool;
 
-            Int32 startIndex = 구분 >= Flow구분.공트레이검사 ? 6 : 8;
+            Int32 startIndex = 6;//= 구분 >= Flow구분.공트레이검사 ? 6 : 8;
             for (int lop = startIndex; lop < shell.Outputs.Count; lop++)
             {
                 List<VmIO> t = shell.Outputs[lop].GetAllIO();
@@ -294,7 +294,7 @@ namespace SamhwaInspectionNeo.Schemas
                     Global.오류로그(로그영역, "검사오류", $"[{this.구분}] VM 검사 모델이 없습니다.", false);
                     return false;
                 }
-                Boolean Front = Global.신호제어.Front지그; //Global.VM제어.글로벌변수제어.GetValue("Front지그") == "1" ? true : false; ///
+                //Boolean Front = Global.신호제어.Front지그; //Global.VM제어.글로벌변수제어.GetValue("Front지그") == "1" ? true : false; 
 
                 imageBaseData = mat == null ? imageBaseData : MatToImageBaseData(mat);
                 if (imageBaseData != null)
@@ -310,7 +310,7 @@ namespace SamhwaInspectionNeo.Schemas
                 else
                 {
                     Int32 검사코드 = (Int32)구분 < (int)Flow구분.상부표면검사1 ? (Int32)구분 : (Int32)구분 - 5;
-                    this.SetResult(this.구분, Front ? 지그위치.Front : 지그위치.Rear);
+                    this.SetResult(this.구분, Global.환경설정.Front지그 ? 지그위치.Front : 지그위치.Rear);
                     Global.검사자료.검사결과계산(검사코드);
                     return true;
                 }

@@ -162,6 +162,14 @@ namespace SamhwaInspectionNeo.Schemas
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
         우하위치도Y거리 = 233,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot1위치도거리 = 234,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot2위치도거리 = 235,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot3위치도거리 = 236,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot4위치도거리 = 237,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
         Slot1_1 = 40,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
         Slot1_2 = 41,

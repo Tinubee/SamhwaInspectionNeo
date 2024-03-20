@@ -192,7 +192,18 @@ namespace SamhwaInspectionNeo.UI.Control
                 if (measdvalue != 0)
                 {
                     isCalculating = true;
-                   
+
+                    if (name.ToString().Contains("위치도"))
+                    {
+                        if(name.ToString().Contains("거리") == false) 
+                        {
+                            isCalculating = false;
+                            MvUtils.Utils.MessageBox("보정값계산", "위치도값은 보정할 수 없습니다. X,Y 거리를 보정해주세요.", 2000);
+                            return;
+                        }
+                    }
+
+
                     calvalue = (float)(cmmdvalue / measdvalue);
 
                     GridView1.SetRowCellValue(rowIndex, "교정값", Math.Round(Convert.ToDouble(calvalue), 6));

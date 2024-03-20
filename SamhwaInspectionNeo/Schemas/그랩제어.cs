@@ -118,11 +118,11 @@ namespace SamhwaInspectionNeo.Schemas
                 MC.OpenDriver();
 
                 this.치수검사카메라 = new EuresysLink(카메라구분.Cam01) { 코드 = "" }; //치수검사
-                //2호기 : K38332371  3호기 : K38332337
+                //2호기 : K38332371     3호기 : K38332337
                 this.공트레이검사카메라 = new HikeGigE() { 구분 = 카메라구분.Cam02 }; //공트레이검사
-                //2호기 : DA1996738  3호기 : DA1996739
+                //2호기 : DA1996738     3호기 : DA1996739
                 this.상부표면검사카메라 = new HikeGigE() { 구분 = 카메라구분.Cam03 }; //상부표면검사
-                //2호기 :   3호기 : L28502411
+                //2호기 : DA19966737   3호기 : L28502411
                 this.하부표면검사카메라 = new HikeGigE() { 구분 = 카메라구분.Cam04 }; //하부표면검사
                 //2호기 :   3호기 : 
                 this.역방향및모델검사카메라 = new HikeGigE() { 구분 = 카메라구분.Cam05 }; //역방향및모델확인검사
@@ -521,7 +521,7 @@ namespace SamhwaInspectionNeo.Schemas
             그랩제어.Validate("", this.Camera.SetBoolValue("BlackLevelEnable", true), false);
 
             this.Camera.SetImageNodeNum(ImageCount);
-            //this.옵션적용();
+            this.옵션적용();
 
             Global.정보로그(로그영역, "카메라 연결", $"[{this.구분}] 카메라 연결 성공!", false);
 
@@ -608,6 +608,7 @@ namespace SamhwaInspectionNeo.Schemas
 
         public override Boolean Start()
         {
+            Common.DebugWriteLine(로그영역, 로그구분.정보, $"{this.Camera} StartGrabbing.");
             return 그랩제어.Validate($"{this.구분} 그래버 시작 오류!", Camera.StartGrabbing(), true);
         }
 
@@ -627,6 +628,7 @@ namespace SamhwaInspectionNeo.Schemas
         public override Boolean Stop()
         {
             Camera.ClearImageBuffer();
+            Common.DebugWriteLine(로그영역, 로그구분.정보, $"{this.Camera} StopGrabbing.");
             return 그랩제어.Validate($"{this.구분} 정지오류!", Camera.StopGrabbing(), false);
         }
         public override Boolean SoftTrigger() => 그랩제어.Validate($"{this.구분} TriggerSoftware", this.Camera.SetCommandValue("TriggerSoftware"), true);
@@ -648,9 +650,10 @@ namespace SamhwaInspectionNeo.Schemas
                 else if (this.구분 == 카메라구분.Cam03)
                 {
                     this.MatImage.Add(image);
+                    Common.DebugWriteLine(로그영역, 로그구분.정보, $"상부표면검사 이미지 [ {this.MatImage.Count} ]개 그랩완료.");
                     if (Global.그랩제어.상부표면검사카메라.MatImage.Count == this.ImageCount)
                     {
-                        Common.DebugWriteLine(로그영역, 로그구분.정보, $"상부표면검사 이미지 [ {this.MatImage.Count} ]개 그랩완료.");
+                        //Common.DebugWriteLine(로그영역, 로그구분.정보, $"상부표면검사 이미지 [ {this.MatImage.Count} ]개 그랩완료.");
                         this.Stop();
                         Global.그랩제어.그랩완료(this.구분, this.MatImage);
                     }
@@ -660,7 +663,7 @@ namespace SamhwaInspectionNeo.Schemas
                     this.MatImage.Add(image);
                     if (Global.그랩제어.하부표면검사카메라.MatImage.Count == this.ImageCount)
                     {
-                        Common.DebugWriteLine(로그영역, 로그구분.정보, $"하부표면검사 이미지 [ {this.MatImage.Count} ]개 그랩완료.");
+                        //Common.DebugWriteLine(로그영역, 로그구분.정보, $"하부표면검사 이미지 [ {this.MatImage.Count} ]개 그랩완료.");
                         this.Stop();
                         Global.그랩제어.그랩완료(this.구분, this.MatImage);
                     }
