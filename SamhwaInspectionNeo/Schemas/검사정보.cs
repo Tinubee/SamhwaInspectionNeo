@@ -283,6 +283,8 @@ namespace SamhwaInspectionNeo.Schemas
         [Column("idres"), JsonProperty("idres"), Translation("Result", "판정")]
         public 결과구분 측정결과 { get; set; } = 결과구분.NO;
         [NotMapped, JsonIgnore]
+        public Decimal MMC공차 { get; set; } = 0m;
+        [NotMapped, JsonIgnore]
         public Double 검사시간 = 0;
 
         public 검사정보() { }
@@ -375,11 +377,28 @@ namespace SamhwaInspectionNeo.Schemas
             검사.결과값 = (Decimal)Math.Round(value, Global.환경설정.결과자릿수);
             검사.측정값 = 검사.결과값 + 검사.보정값;
             if (Global.신호제어.마스터모드여부) isOk = 검사.결과값 >= 검사.마스터값 - 검사.마스터공차 && 검사.결과값 <= 검사.마스터값 + 검사.마스터공차;
-            else isOk = 검사.결과값 >= 검사.최소값 && 검사.결과값 <= 검사.최대값;
+            else
+            {
+                if (검사.검사항목.ToString().Contains("위치도"))
+                    MMC공차적용(검사);
+
+                isOk = 검사.결과값 >= 검사.최소값 && 검사.결과값 <= 검사.최대값 + 검사.MMC공차;
+            }
 
             검사.측정결과 = isOk ? 결과구분.OK : 결과구분.NG;
 
             return true;
+        }
+
+        public void MMC공차적용(검사정보 검사)
+        {
+            if(검사.검사항목.ToString().Contains("거리") == false && 검사.검사항목.ToString().Contains("Slot") == false)
+            {
+                String 홀이름 = 검사.검사항목.ToString().Substring(0, 2);
+                Debug.WriteLine($"{홀이름}");
+                검사정보 정보 =  this.검사내역.Where(e => e.검사항목.ToString() == $"{홀이름}홀경").FirstOrDefault();
+                검사.MMC공차 = 정보.결과값 - 정보.최소값;
+            }
         }
 
         public void AddRange(List<검사정보> 자료) => this.검사내역.AddRange(자료);

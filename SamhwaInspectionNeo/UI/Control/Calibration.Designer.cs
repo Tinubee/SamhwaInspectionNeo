@@ -339,7 +339,7 @@
             this.GridView1.OptionsNavigation.EnterMoveNextColumn = true;
             this.GridView1.OptionsPrint.AutoWidth = false;
             this.GridView1.OptionsPrint.UsePrintStyles = false;
-            this.GridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
+            this.GridView1.OptionsSelection.MultiSelect = true;
             this.GridView1.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.False;
             this.GridView1.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom;
             this.GridView1.OptionsView.ShowGroupPanel = false;

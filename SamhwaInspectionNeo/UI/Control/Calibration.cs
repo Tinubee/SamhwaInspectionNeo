@@ -37,6 +37,7 @@ namespace SamhwaInspectionNeo.UI.Control
         private Flow구분 플로우 { get; set; } = Flow구분.Flow1;
         BindingList<결과정보> 결과정보리스트 = new BindingList<결과정보>();
         private bool isCalculating = false;
+
         public Calibration()
         {
             InitializeComponent();
@@ -49,7 +50,8 @@ namespace SamhwaInspectionNeo.UI.Control
             this.GridView1.OptionsSelection.MultiSelect = true;
             this.GridView1.OptionsView.NewItemRowPosition = NewItemRowPosition.Bottom;
             this.GridView1.AddEditSelectionMenuItem();
-            this.GridView1.AddSelectPopMenuItems();
+            //this.GridView1.AddSelectPopMenuItems();
+            this.GridView1.AddCalibrationPopMenuItems();
             this.GridView1.CellValueChanged += 교정값계산;
             this.col측정값.DisplayFormat.FormatString = Global.환경설정.결과표현;
             this.colcmm측정값.DisplayFormat.FormatString = Global.환경설정.결과표현;
@@ -188,23 +190,23 @@ namespace SamhwaInspectionNeo.UI.Control
                     double.TryParse(measvalue.ToString(), out measdvalue) &&
                         double.TryParse(cmmvalue.ToString(), out cmmdvalue))
             {
-                //위치도일때 교정값 계산방식 다르게
                 if (measdvalue != 0)
                 {
                     isCalculating = true;
-
-                    if (name.ToString().Contains("위치도"))
+                    if (cmmdvalue != 0)
                     {
-                        if(name.ToString().Contains("거리") == false) 
+                        if (name.ToString().Contains("위치도"))
                         {
-                            isCalculating = false;
-                            MvUtils.Utils.MessageBox("보정값계산", "위치도값은 보정할 수 없습니다. X,Y 거리를 보정해주세요.", 2000);
-                            return;
+                            if (name.ToString().Contains("거리") == false)
+                            {
+                                isCalculating = false;
+                                MvUtils.Utils.MessageBox("보정값계산", "위치도값은 보정할 수 없습니다. X,Y 거리를 보정해주세요.", 2000);
+                                return;
+                            }
                         }
+
+                        calvalue = (float)(cmmdvalue / measdvalue);
                     }
-
-
-                    calvalue = (float)(cmmdvalue / measdvalue);
 
                     GridView1.SetRowCellValue(rowIndex, "교정값", Math.Round(Convert.ToDouble(calvalue), 6));
                     isCalculating = false;
