@@ -6,6 +6,9 @@ using DevExpress.XtraBars;
 using SamhwaInspectionNeo.UI.Form;
 using DevExpress.XtraWaitForm;
 using System.Diagnostics;
+using System.Net.Http;
+using Newtonsoft.Json.Linq;
+using static DevExpress.XtraEditors.Mask.MaskSettings;
 
 namespace SamhwaInspectionNeo
 {
@@ -27,6 +30,40 @@ namespace SamhwaInspectionNeo
             this.FormClosing += MainFormClosing;
         }
 
+        public async void GetProgramGitDate()
+        {
+            try
+            {
+                HttpClient client = new HttpClient();
+                string url = $"https://api.github.com/repos/Tinubee/SamhwaInspectionNeo/commits?per_page=1";
+                client.DefaultRequestHeaders.UserAgent.TryParseAdd("request"); // GitHub API requires a user-agent
+
+                var response = await client.GetAsync(url);
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var jsonArray = JArray.Parse(jsonString);
+
+                var lastCommit = jsonArray[0];
+                var lastCommitDateStr = lastCommit["commit"]["committer"]["date"].ToString();
+                if (!lastCommitDateStr.EndsWith("Z") && !lastCommitDateStr.Contains("+"))
+                {
+                    lastCommitDateStr += "Z";
+                }
+                // Parse the UTC time
+                DateTimeOffset utcDateTime = DateTimeOffset.Parse(lastCommitDateStr);
+
+                // Convert to Korean Standard Time (KST)
+                TimeZoneInfo kstZone = TimeZoneInfo.FindSystemTimeZoneById("Korea Standard Time");
+                DateTimeOffset kstDateTime = TimeZoneInfo.ConvertTime(utcDateTime, kstZone);
+
+                Global.환경설정.마지막커밋시간 = kstDateTime.ToString("yyyy-MM-dd HH:mm:ss");
+            }
+            catch(Exception ee)
+            {
+                Common.DebugWriteLine("Git Message", 로그구분.오류, ee.Message);
+            }
+        }
+
+
         public void ShowWaitForm()
         {
             WaitForm = new UI.Form.WaitForm() { ShowOnTopMode = ShowFormOnTopMode.AboveAll };
@@ -46,6 +83,8 @@ namespace SamhwaInspectionNeo
         private void GlobalInitialized(object sender, Boolean e)
         {
             this.BeginInvoke(new Action(() => GlobalInitialized(e)));
+
+            GetProgramGitDate();
         }
         private void GlobalInitialized(Boolean e)
         {
@@ -75,6 +114,7 @@ namespace SamhwaInspectionNeo
             this.p환경설정.Enabled = Global.환경설정.권한여부(유저권한구분.시스템);
             this.TabFormControl.AllowMoveTabs = false;
             this.TabFormControl.AllowMoveTabsToOuterForm = false;
+            this.e최근커밋.Caption = $"Last Commit : {Global.환경설정.마지막커밋시간}"; ;
 
             if (Global.환경설정.동작구분 == 동작구분.Live)
                 this.WindowState = FormWindowState.Maximized;

@@ -18,6 +18,8 @@ namespace SamhwaInspectionNeo.Schemas
 
         [JsonIgnore]
         public const String 프로젝트번호 = "23-1228-002";
+        [Translation("Last Commit Time", "마지막 커밋 시간"), JsonProperty("LastCommit")]
+        public String 마지막커밋시간 { get; set; } = String.Empty;
         [Description("프로그램 동작구분"), JsonProperty("RunType")]
         public 동작구분 동작구분 { get; set; } = 동작구분.Live;
         [Translation("Config Path", "설정 저장 경로"), JsonProperty("ConfigSavePath")]

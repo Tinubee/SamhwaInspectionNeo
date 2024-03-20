@@ -34,6 +34,7 @@
             this.타이틀 = new DevExpress.XtraBars.BarStaticItem();
             this.e프로젝트 = new DevExpress.XtraBars.BarStaticItem();
             this.skinPaletteDropDownButtonItem1 = new DevExpress.XtraBars.SkinPaletteDropDownButtonItem();
+            this.e최근커밋 = new DevExpress.XtraBars.BarStaticItem();
             this.p검사하기 = new DevExpress.XtraBars.TabFormPage();
             this.tabFormContentContainer1 = new DevExpress.XtraBars.TabFormContentContainer();
             this.e결과뷰어 = new SamhwaInspectionNeo.UI.Control.CamViewers();
@@ -87,7 +88,8 @@
             this.tabFormControl1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.타이틀,
             this.e프로젝트,
-            this.skinPaletteDropDownButtonItem1});
+            this.skinPaletteDropDownButtonItem1,
+            this.e최근커밋});
             this.tabFormControl1.Location = new System.Drawing.Point(0, 0);
             this.tabFormControl1.Name = "tabFormControl1";
             this.tabFormControl1.Pages.Add(this.p검사하기);
@@ -103,6 +105,7 @@
             this.tabFormControl1.TabForm = this;
             this.tabFormControl1.TabIndex = 0;
             this.tabFormControl1.TabLeftItemLinks.Add(this.타이틀);
+            this.tabFormControl1.TabRightItemLinks.Add(this.e최근커밋);
             this.tabFormControl1.TabRightItemLinks.Add(this.e프로젝트);
             this.tabFormControl1.TabRightItemLinks.Add(this.skinPaletteDropDownButtonItem1);
             this.tabFormControl1.TabStop = false;
@@ -125,6 +128,12 @@
             // 
             this.skinPaletteDropDownButtonItem1.Id = 1;
             this.skinPaletteDropDownButtonItem1.Name = "skinPaletteDropDownButtonItem1";
+            // 
+            // e최근커밋
+            // 
+            this.e최근커밋.Caption = "Last Commit : yyyy-MM-dd HH:mm:ss";
+            this.e최근커밋.Id = 0;
+            this.e최근커밋.Name = "e최근커밋";
             // 
             // p검사하기
             // 
@@ -401,6 +410,7 @@
         private UI.Control.SetMasterInspection e마스터설정;
         private UI.Control.SetMasterInspection setMasterInspection1;
         private UI.Controls.ResultsMaster e마스터검사내역;
+        public DevExpress.XtraBars.BarStaticItem e최근커밋;
     }
 }
 
