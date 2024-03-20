@@ -176,8 +176,8 @@ namespace SamhwaInspectionNeo.Schemas
         public void 검사스플생성(Int32 번호)
         {
             Int32 검사코드 = Global.신호제어.마스터모드여부 ? Convert.ToInt32((Flow구분)번호 + 100) : Convert.ToInt32((Flow구분)번호);
-            //마스터 모드일때 Flow1,2만 실행하도록
-            if (Global.신호제어.마스터모드여부 && 번호 > 1) return;
+            //마스터 모드일때 Flow3,4만 실행하도록
+            if (Global.신호제어.마스터모드여부 && 번호 < 2) return;
 
             Global.검사자료.검사시작(검사코드);
         }
@@ -230,6 +230,9 @@ namespace SamhwaInspectionNeo.Schemas
                         {
                             this.치수검사카메라.splitImage[lop] = new Mat(this.치수검사카메라.mergedImage, this.치수검사카메라.roi[lop]);
                             this.검사스플생성(lop);
+
+                            if (Global.신호제어.마스터모드여부 && lop < 2) continue;
+
                             Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop).Run(this.치수검사카메라.splitImage[lop], null);
                             Common.DebugWriteLine(로그영역, 로그구분.정보, $"[ 상부치수검사 - {lop}] 검사완료 : {결과}.");
                             this.ImageSave(this.치수검사카메라.splitImage[lop], 카메라구분.Cam01, lop, 결과);

@@ -382,7 +382,7 @@ namespace SamhwaInspectionNeo.Schemas
                 if (검사.검사항목.ToString().Contains("위치도"))
                     MMC공차적용(검사);
 
-                isOk = 검사.결과값 >= 검사.최소값 && 검사.결과값 <= 검사.최대값 + 검사.MMC공차;
+                isOk = 검사.결과값 >= 검사.최소값 && 검사.결과값 <= 검사.최대값;
             }
 
             검사.측정결과 = isOk ? 결과구분.OK : 결과구분.NG;
@@ -395,9 +395,9 @@ namespace SamhwaInspectionNeo.Schemas
             if(검사.검사항목.ToString().Contains("거리") == false && 검사.검사항목.ToString().Contains("Slot") == false)
             {
                 String 홀이름 = 검사.검사항목.ToString().Substring(0, 2);
-                Debug.WriteLine($"{홀이름}");
                 검사정보 정보 =  this.검사내역.Where(e => e.검사항목.ToString() == $"{홀이름}홀경").FirstOrDefault();
-                검사.MMC공차 = 정보.결과값 - 정보.최소값;
+                //Debug.WriteLine($"{홀이름} : {정보.결과값 - 정보.최소값}");
+                검사.최대값 += 정보.결과값 - 정보.최소값;
             }
         }
 

@@ -141,7 +141,9 @@ namespace SamhwaInspectionNeo.Schemas
             if (검사 == null) return null;
 
             if (Global.환경설정.동작구분 == 동작구분.LocalTest) 검사.표면검사강제OK(구분, 지그);
-           
+
+            if (Global.신호제어.마스터모드여부) 검사.표면검사강제OK(구분, 지그);
+
             검사.SetResult(구분, 지그, name, value);
           
             return 검사;

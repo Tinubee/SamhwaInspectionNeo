@@ -179,7 +179,7 @@ namespace SamhwaInspectionNeo.Schemas
             {
                 검사코드 = Global.신호제어.마스터모드여부 ? Convert.ToInt32((Flow구분)lop + 100) : Convert.ToInt32((Flow구분)lop);
                 //마스터 모드일때 Flow1,2만 실행하도록
-                if (Global.신호제어.마스터모드여부 && lop > 1) break;
+                if (Global.신호제어.마스터모드여부 && lop < 2) continue;
 
                 Global.검사자료.검사시작(검사코드);
             }
@@ -210,7 +210,7 @@ namespace SamhwaInspectionNeo.Schemas
             if (상부표면검사번호 > 0)
             {
                 Common.DebugWriteLine(로그영역, 로그구분.정보, "상부표면검사 트리거 수신.");
-                //Global.그랩제어.GetItem(카메라구분.Cam03).ClearImage();
+                Global.그랩제어.GetItem(카메라구분.Cam03).ClearImage();
                 new Thread(() =>
                 {
                     Global.조명제어.TurnOn(카메라구분.Cam03);
