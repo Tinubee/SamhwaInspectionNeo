@@ -283,8 +283,6 @@ namespace SamhwaInspectionNeo.Schemas
         [Column("idres"), JsonProperty("idres"), Translation("Result", "판정")]
         public 결과구분 측정결과 { get; set; } = 결과구분.NO;
         [NotMapped, JsonIgnore]
-        public Decimal MMC공차 { get; set; } = 0m;
-        [NotMapped, JsonIgnore]
         public Double 검사시간 = 0;
 
         public 검사정보() { }

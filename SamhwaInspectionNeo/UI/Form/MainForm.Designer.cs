@@ -131,7 +131,7 @@
             // 
             // e최근커밋
             // 
-            this.e최근커밋.Caption = "Last Commit : yyyy-MM-dd HH:mm:ss";
+            this.e최근커밋.Caption = "Last Commit : 0000-00-00 00:00:00";
             this.e최근커밋.Id = 0;
             this.e최근커밋.Name = "e최근커밋";
             // 

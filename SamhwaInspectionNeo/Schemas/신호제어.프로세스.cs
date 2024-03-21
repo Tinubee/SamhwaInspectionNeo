@@ -187,14 +187,14 @@ namespace SamhwaInspectionNeo.Schemas
 
         private void 제품검사수행()
         {
-            Int32 상부치수검사번호 = this.검사위치번호(정보주소.상부치수검사카메라트리거);
-            Int32 상부표면검사번호 = this.검사위치번호(정보주소.상부표면검사카메라트리거);
-            Int32 하부표면검사번호 = this.검사위치번호(정보주소.하부표면검사카메라트리거);
-            Int32 트레이확인검사번호 = this.검사위치번호(정보주소.트레이확인카메라트리거);
-            Int32 역방향및모델확인검사번호 = this.검사위치번호(정보주소.역방향및모델확인카메라트리거);
+            //Int32 상부치수검사번호 = this.검사위치번호(정보주소.상부치수검사카메라트리거);
+            //Int32 상부표면검사번호 = this.검사위치번호(정보주소.상부표면검사카메라트리거);
+            //Int32 하부표면검사번호 = this.검사위치번호(정보주소.하부표면검사카메라트리거);
+            //Int32 트레이확인검사번호 = this.검사위치번호(정보주소.트레이확인카메라트리거);
+            //Int32 역방향및모델확인검사번호 = this.검사위치번호(정보주소.역방향및모델확인카메라트리거);
 
             // 16K 상부 카메라 영상취득 시작
-            if (상부치수검사번호 > 0)
+            if (this.상부치수검사촬영번호 > 0)
             {
                 Common.DebugWriteLine(로그영역, 로그구분.정보, "상부치수검사 트리거 수신.");
                 지그위치체크();
@@ -207,7 +207,7 @@ namespace SamhwaInspectionNeo.Schemas
                 신호쓰기(정보주소.상부치수검사카메라트리거, 0);
             }
             // 상부 GigE 카메라 영상취득 시작
-            if (상부표면검사번호 > 0)
+            if (this.상부표면검사촬영번호 > 0)
             {
                 Common.DebugWriteLine(로그영역, 로그구분.정보, "상부표면검사 트리거 수신.");
                 Global.그랩제어.GetItem(카메라구분.Cam03).ClearImage();
@@ -219,7 +219,7 @@ namespace SamhwaInspectionNeo.Schemas
                 신호쓰기(정보주소.상부표면검사카메라트리거, 0);
             }
             // 하부 GigE 카메라 영상취득 시작
-            if (하부표면검사번호 > 0)
+            if (this.하부표면검사촬영번호 > 0)
             {
                 Common.DebugWriteLine(로그영역, 로그구분.정보, "하부표면검사 트리거 수신.");
                 Global.그랩제어.GetItem(카메라구분.Cam04).ClearImage();
@@ -231,7 +231,7 @@ namespace SamhwaInspectionNeo.Schemas
                 신호쓰기(정보주소.하부표면검사카메라트리거, 0);
             }
             // 트레이 검사 카메라 영상취득 시작
-            if (트레이확인검사번호 > 0)
+            if (this.트레이확인촬영번호 > 0)
             {
                 Common.DebugWriteLine(로그영역, 로그구분.정보, "트레이검사 트리거 수신.");
                 new Thread(() =>
@@ -243,7 +243,7 @@ namespace SamhwaInspectionNeo.Schemas
                 신호쓰기(정보주소.트레이확인카메라트리거, 0);
             }
 
-            if(역방향및모델확인검사번호 > 0)
+            if(this.역방향및모델확인촬영번호 > 0)
             {
 
             }

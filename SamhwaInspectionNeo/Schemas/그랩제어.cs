@@ -223,13 +223,14 @@ namespace SamhwaInspectionNeo.Schemas
 
                         for (int lop = 0; lop < this.치수검사카메라.roi.Length; lop++)
                         {
+                            this.검사스플생성(lop);
                             this.치수검사카메라.roi[lop] = new Rect(SplitPointX, SplitPointStart + (SplitPointY * lop), this.치수검사카메라.width, 18000);
                         }
 
                         for (int lop = 0; lop < this.치수검사카메라.roi.Length; lop++)
                         {
                             this.치수검사카메라.splitImage[lop] = new Mat(this.치수검사카메라.mergedImage, this.치수검사카메라.roi[lop]);
-                            this.검사스플생성(lop);
+                            //this.검사스플생성(lop);
 
                             if (Global.신호제어.마스터모드여부 && lop < 2) continue;
 
