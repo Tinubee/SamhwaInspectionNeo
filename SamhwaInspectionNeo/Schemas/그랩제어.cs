@@ -290,7 +290,8 @@ namespace SamhwaInspectionNeo.Schemas
                         this.검사스플생성(lop);
                         Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop + 5).Run(이미지[lop], null);
                         Common.DebugWriteLine(로그영역, 로그구분.정보, $"[ 상부표면검사 - {lop}] 검사완료 : {결과}.");
-                        this.ImageSave(이미지[lop], 카메라구분.Cam03, lop, 결과);
+                        if (이미지[lop] != null)
+                            this.ImageSave(이미지[lop], 카메라구분.Cam03, lop, 결과);
                         if (lop == this.상부표면검사카메라.MatImage.Count - 1) this.상부표면검사카메라.MatImage.Clear();
                     }
                 });
@@ -310,7 +311,8 @@ namespace SamhwaInspectionNeo.Schemas
 
                         Common.DebugWriteLine(로그영역, 로그구분.정보, $"하부표면검사 {lop} 검사완료 : {결과} / {b결과}");
 
-                        this.ImageSave(이미지[lop], 카메라구분.Cam04, lop, b결과);
+                        if (이미지[lop] != null)
+                            this.ImageSave(이미지[lop], 카메라구분.Cam04, lop, b결과);
                         if (lop == this.하부표면검사카메라.MatImage.Count - 1) this.하부표면검사카메라.MatImage.Clear();
                     }
                 });
@@ -326,7 +328,8 @@ namespace SamhwaInspectionNeo.Schemas
                 Task.Run(() =>
                 {
                     Boolean 결과 = Global.VM제어.GetItem(Flow구분.공트레이검사).Run(이미지, null);
-                    this.ImageSave(이미지, 카메라구분.Cam02, 0, 결과);
+                    if (이미지 != null)
+                        this.ImageSave(이미지, 카메라구분.Cam02, 0, 결과);
                     Global.신호제어.SetDevice($"W0015", 결과 ? 1 : 2, out Int32 오류);
                 });
             }

@@ -55,6 +55,8 @@ namespace SamhwaInspectionNeo.Schemas
             상부변위센서확인트리거,
             [Address("W0041")]
             하부변위센서확인트리거,
+            [Address("W0090")]
+            하부조명상태,
             [Address("B1000")]
             통신확인전송,
             [Address("B1010")]

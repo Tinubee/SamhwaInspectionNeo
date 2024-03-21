@@ -382,6 +382,7 @@ namespace SamhwaInspectionNeo.Schemas
 
         public void TurnOff(카메라구분 카메라)
         {
+            Common.DebugWriteLine(로그영역, 로그구분.정보, $"[ {카메라} ] 조명 OFF");
             foreach (조명정보 정보 in this)
                 if (정보.카메라 == 카메라)
                     정보.TurnOff();
