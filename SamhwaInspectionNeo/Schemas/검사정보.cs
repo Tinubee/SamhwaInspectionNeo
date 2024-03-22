@@ -61,10 +61,12 @@ namespace SamhwaInspectionNeo.Schemas
         None,
         [Description("CTQ"), Translation("CTQ")]
         CTQ,
-        [Description("Surface"), Translation("Surface", "외관검사")]
-        Surface,
-        [Description("TrayCheck"), Translation("TrayCheck", "트레이검사")]
-        TrayCheck,
+        [Description("SURFACE"), Translation("SURFACE", "외관검사")]
+        SURFACE,
+        [Description("TRAYCHECK"), Translation("TRAYCHECK", "트레이검사")]
+        TRAYCHECK,
+        [Description("BUR"), Translation("BUR", "BUR검사")]
+        BUR,
     }
 
     public enum 검사항목 : Int32
@@ -209,9 +211,9 @@ namespace SamhwaInspectionNeo.Schemas
         Slot4_4 = 58,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
         Slot4_5 = 59,
-        [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam03)]
+        [Result(검사그룹.SURFACE, 결과분류.Summary, 장치구분.Cam03)]
         상부표면검사 = 500,
-        [Result(검사그룹.Surface, 결과분류.Summary, 장치구분.Cam04)]
+        [Result(검사그룹.SURFACE, 결과분류.Summary, 장치구분.Cam04)]
         하부표면검사 = 501,
     }
 
@@ -358,7 +360,7 @@ namespace SamhwaInspectionNeo.Schemas
         public 검사정보 GetItem(Flow구분 플로우, 지그위치 지그) => 검사내역.Where(e => e.플로우 == 플로우 && e.지그 == 지그).FirstOrDefault();
 
         public 검사정보 GetItem(검사항목 항목) => 검사내역.Where(e => e.검사항목 == 항목).FirstOrDefault();
-        
+
         public Boolean 표면검사강제OK(Flow구분 구분, 지그위치 지그) => SetResult(검사내역.Where(e => e.검사항목.ToString() == "상부표면검사").FirstOrDefault(), 0, 구분, 지그);
         public Boolean SetResult(Flow구분 구분, 지그위치 지그, String name, Single value) => SetResult(검사내역.Where(e => e.검사항목.ToString() == name).FirstOrDefault(), value, 구분, 지그);
         public Boolean SetResult(검사정보 검사, Single value, Flow구분 구분, 지그위치 지그)
@@ -390,12 +392,15 @@ namespace SamhwaInspectionNeo.Schemas
 
         public void MMC공차적용(검사정보 검사)
         {
-            if(검사.검사항목.ToString().Contains("거리") == false && 검사.검사항목.ToString().Contains("Slot") == false)
+            if (검사.검사항목.ToString().Contains("거리") == false && 검사.검사항목.ToString().Contains("Slot") == false)
             {
                 String 홀이름 = 검사.검사항목.ToString().Substring(0, 2);
-                검사정보 정보 =  this.검사내역.Where(e => e.검사항목.ToString() == $"{홀이름}홀경").FirstOrDefault();
+                검사정보 정보 = this.검사내역.Where(e => e.검사항목.ToString() == $"{홀이름}홀경").FirstOrDefault();
                 //Debug.WriteLine($"{홀이름} : {정보.결과값 - 정보.최소값}");
-                검사.최대값 += 정보.결과값 - 정보.최소값;
+
+                Decimal MMC공차 = 정보.결과값 - 정보.최소값 < 0 ? 0 : 정보.결과값 - 정보.최소값;
+                Common.DebugWriteLine(로그영역, 로그구분.정보, $"{검사.검사항목} MMC 공차 : {MMC공차}");
+                검사.최대값 += MMC공차;
             }
         }
 
@@ -429,18 +434,21 @@ namespace SamhwaInspectionNeo.Schemas
                 else if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.CTQ && e.측정결과 == 결과구분.NG)) this.CTQ결과 = 결과구분.NG;
                 else if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.CTQ && e.측정결과 == 결과구분.NO)) this.CTQ결과 = 결과구분.NO;
                 else this.CTQ결과 = 결과구분.OK;
-                //임시
-                //this.외관결과 = 결과구분.OK;
-                if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.Surface && e.측정결과 == 결과구분.ER)) this.외관결과 = 결과구분.ER;
-                else if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.Surface && e.측정결과 == 결과구분.NG)) this.외관결과 = 결과구분.NG;
-                else if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.Surface && e.측정결과 == 결과구분.NO)) this.외관결과 = 결과구분.NO;
+
+                if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.SURFACE && e.측정결과 == 결과구분.ER)) this.외관결과 = 결과구분.ER;
+                else if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.SURFACE && e.측정결과 == 결과구분.NG)) this.외관결과 = 결과구분.NG;
+                else if (this.검사내역.Any(e => e.검사그룹 == 검사그룹.SURFACE && e.측정결과 == 결과구분.NO)) this.외관결과 = 결과구분.NO;
                 else this.외관결과 = 결과구분.OK;
             }
 
-            List<String> 불량내역 = this.검사내역.Where(e => e.측정결과 == 결과구분.ER || e.측정결과 == 결과구분.NG).Select(e => e.검사항목.ToString()).ToList();
-            if (불량내역.Count > 0) this.불량정보 = String.Join(",", 불량내역);
+            if(this.측정결과 == 결과구분.NG)
+            {
+                List<String> 불량내역 = this.검사내역.Where(e => e.측정결과 == 결과구분.NG).Select(e => e.검사항목.ToString().Replace("_", "-")).ToList();
+                //List<String> 불량내역 = this.검사내역.Where(e => e.측정결과 == 결과구분.ER || e.측정결과 == 결과구분.NG).Select(e => e.검사그룹.ToString()).Distinct().ToList();
+                Common.DebugWriteLine(로그영역, 로그구분.정보, $"{불량정보}");
+                if (불량내역.Count > 0) this.불량정보 = String.Join(",", 불량내역);
+            }
 
-            //Global.정보로그(로그영역, "결과계산", $"[{(Int32)Global.환경설정.선택모델} - {this.검사코드}] : ${this.측정결과}", false);
             return this.측정결과;
         }
     }
