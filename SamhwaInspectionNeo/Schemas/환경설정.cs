@@ -54,8 +54,10 @@ namespace SamhwaInspectionNeo.Schemas
         public String 마스터사진 { get { return Path.Combine(기본경로, "Masters"); } }
         [Translation("Dimension Inspection Used", "치수검사 사용여부"), JsonProperty("DimensionInspectUsed")]
         public Boolean 치수검사사용여부 { get; set; } = false;
-        [Translation("Surface Inspection Used", "표면검사 사용여부"), JsonProperty("SurfaceInspectUsed")]
-        public Boolean 표면검사사용여부 { get; set; } = false;
+        [Translation("Top Surface Inspection Used", "상부표면검사 사용여부"), JsonProperty("TopSurfaceInspectUsed")]
+        public Boolean 상부표면검사사용여부 { get; set; } = false;
+        [Translation("Bottom Surface Inspection Used", "하부표면검사 사용여부"), JsonProperty("BottomSurfaceInspectUsed2")]
+        public Boolean 하부표면검사사용여부 { get; set; } = false;
         [JsonIgnore]
         public Boolean 강제배출 { get; set; } = true;
         [JsonIgnore]

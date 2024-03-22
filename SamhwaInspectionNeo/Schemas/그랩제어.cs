@@ -226,18 +226,28 @@ namespace SamhwaInspectionNeo.Schemas
                             this.검사스플생성(lop);
                             this.치수검사카메라.roi[lop] = new Rect(SplitPointX, SplitPointStart + (SplitPointY * lop), this.치수검사카메라.width, 18000);
                         }
+                        //for (int lop = 0; lop < this.치수검사카메라.roi.Length; lop++)
+                        //{
+                        //    this.치수검사카메라.splitImage[lop] = new Mat(this.치수검사카메라.mergedImage, this.치수검사카메라.roi[lop]);
+                        //    //this.검사스플생성(lop);
 
-                        for (int lop = 0; lop < this.치수검사카메라.roi.Length; lop++)
+                        //    if (Global.신호제어.마스터모드여부 && lop < 2) continue;
+
+                        //    Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop).Run(this.치수검사카메라.splitImage[lop], null);
+                        //    Common.DebugWriteLine(로그영역, 로그구분.정보, $"[ 상부치수검사 - {lop}] 검사완료 : {결과}.");
+                        //    this.ImageSave(this.치수검사카메라.splitImage[lop], 카메라구분.Cam01, lop, 결과);
+                        //}
+                        Parallel.For(0, this.치수검사카메라.roi.Length, lop =>
                         {
                             this.치수검사카메라.splitImage[lop] = new Mat(this.치수검사카메라.mergedImage, this.치수검사카메라.roi[lop]);
-                            //this.검사스플생성(lop);
 
-                            if (Global.신호제어.마스터모드여부 && lop < 2) continue;
+                            if (Global.신호제어.마스터모드여부 && lop < 2) return;
 
                             Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop).Run(this.치수검사카메라.splitImage[lop], null);
                             Common.DebugWriteLine(로그영역, 로그구분.정보, $"[ 상부치수검사 - {lop}] 검사완료 : {결과}.");
                             this.ImageSave(this.치수검사카메라.splitImage[lop], 카메라구분.Cam01, lop, 결과);
-                        }
+                        });
+
                         this.치수검사카메라.isCompleted_Camera1 = true;
                     }
                     if (this.치수검사카메라.isCompleted_Camera1)

@@ -170,6 +170,7 @@ namespace SamhwaInspectionNeo.Schemas
                 else if(Global.환경설정.강제NG배출) ok = false;
                 else
                 {
+                    Common.DebugWriteLine(로그영역, 로그구분.정보, $"[ 검사결과전송 - W000{결과.검사코드} ] : {ok}.");
                     Global.신호제어.SetDevice($"W000{결과.검사코드}", ok ? 1 : 2, out 오류);
                 }
             }
