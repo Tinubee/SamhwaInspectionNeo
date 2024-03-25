@@ -221,7 +221,8 @@ namespace SamhwaInspectionNeo.Schemas
                             this.검사스플생성(lop);
                             this.치수검사카메라.roi[lop] = new Rect(SplitPointX, SplitPointStart + (SplitPointY * lop), this.치수검사카메라.width, 18000);
                         }
-                    
+                        
+                        //병렬처리로 변경
                         Parallel.For(0, this.치수검사카메라.roi.Length, lop =>
                         {
                             this.치수검사카메라.splitImage[lop] = new Mat(this.치수검사카메라.mergedImage, this.치수검사카메라.roi[lop]);

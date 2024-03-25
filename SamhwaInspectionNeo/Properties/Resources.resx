@@ -133,6 +133,9 @@
   <data name="insertcombobox" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\insertcombobox.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
+  <data name="createfullstackedlinechart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\createfullstackedlinechart.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
   <data name="customizegrid" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\customizegrid.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
@@ -147,6 +150,9 @@
   </data>
   <data name="charttype_line2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\charttype_line2.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="ToolTip" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ToolTip.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="charttype_swiftplot" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\charttype_swiftplot.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
@@ -193,8 +199,8 @@
   <data name="enablesearch" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\enablesearch.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
-  <data name="createfullstackedlinechart" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\createfullstackedlinechart.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  <data name="appointmentchangedoccurrence" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\appointmentchangedoccurrence.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="appointmentoccurrence" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\appointmentoccurrence.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
@@ -205,7 +211,7 @@
   <data name="actions_rollback1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\actions_rollback1.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
-  <data name="appointmentchangedoccurrence" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\appointmentchangedoccurrence.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  <data name="Project" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Project.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
 </root>

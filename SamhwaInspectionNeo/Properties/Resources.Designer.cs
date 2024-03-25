@@ -303,6 +303,16 @@ namespace SamhwaInspectionNeo.Properties {
         /// <summary>
         ///   DevExpress.Utils.Svg.SvgImage 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static DevExpress.Utils.Svg.SvgImage Project {
+            get {
+                object obj = ResourceManager.GetObject("Project", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   DevExpress.Utils.Svg.SvgImage 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static DevExpress.Utils.Svg.SvgImage properties {
             get {
                 object obj = ResourceManager.GetObject("properties", resourceCulture);
@@ -346,6 +356,16 @@ namespace SamhwaInspectionNeo.Properties {
         internal static DevExpress.Utils.Svg.SvgImage saveas {
             get {
                 object obj = ResourceManager.GetObject("saveas", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   DevExpress.Utils.Svg.SvgImage 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static DevExpress.Utils.Svg.SvgImage ToolTip {
+            get {
+                object obj = ResourceManager.GetObject("ToolTip", resourceCulture);
                 return ((DevExpress.Utils.Svg.SvgImage)(obj));
             }
         }

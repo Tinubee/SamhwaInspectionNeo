@@ -553,6 +553,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\Project.svg" />
+    <None Include="Resources\ToolTip.svg" />
     <None Include="Resources\appointmentchangedoccurrence.svg" />
     <None Include="Resources\appointmentoccurrence.svg" />
     <None Include="Resources\charttype_line4.svg" />

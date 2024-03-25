@@ -97,7 +97,7 @@
             this.tabFormControl1.Pages.Add(this.p검사내역);
             this.tabFormControl1.Pages.Add(this.p마스터검사내역);
             this.tabFormControl1.Pages.Add(this.p로그내역);
-            this.tabFormControl1.SelectedPage = this.p검사하기;
+            this.tabFormControl1.SelectedPage = this.p환경설정;
             this.tabFormControl1.ShowAddPageButton = false;
             this.tabFormControl1.ShowTabCloseButtons = false;
             this.tabFormControl1.ShowTabsInTitleBar = DevExpress.XtraBars.ShowTabsInTitleBar.True;
@@ -122,7 +122,9 @@
             // 
             this.e프로젝트.Caption = "IVM : 23-1228-002";
             this.e프로젝트.Id = 1;
+            this.e프로젝트.ImageOptions.SvgImage = global::SamhwaInspectionNeo.Properties.Resources.Project;
             this.e프로젝트.Name = "e프로젝트";
+            this.e프로젝트.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             // 
             // skinPaletteDropDownButtonItem1
             // 
@@ -133,7 +135,9 @@
             // 
             this.e최근커밋.Caption = "Last Commit : 0000-00-00 00:00:00";
             this.e최근커밋.Id = 0;
+            this.e최근커밋.ImageOptions.SvgImage = global::SamhwaInspectionNeo.Properties.Resources.ToolTip;
             this.e최근커밋.Name = "e최근커밋";
+            this.e최근커밋.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             // 
             // p검사하기
             // 
@@ -160,6 +164,7 @@
             this.e결과뷰어.Name = "e결과뷰어";
             this.e결과뷰어.Size = new System.Drawing.Size(1920, 897);
             this.e결과뷰어.TabIndex = 1;
+            this.e결과뷰어.Load += new System.EventHandler(this.e결과뷰어_Load);
             // 
             // e상태뷰어
             // 
@@ -355,7 +360,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1920, 1040);
-            this.Controls.Add(this.tabFormContentContainer1);
+            this.Controls.Add(this.tabFormContentContainer2);
             this.Controls.Add(this.tabFormControl1);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);

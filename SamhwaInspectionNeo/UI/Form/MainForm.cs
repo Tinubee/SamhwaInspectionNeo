@@ -204,5 +204,10 @@ namespace SamhwaInspectionNeo
             public String 로그내역 { get { return GetString(Items.로그내역); } }
             public String 종료확인 { get { return GetString(Items.종료확인); } }
         }
+
+        private void e결과뷰어_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
