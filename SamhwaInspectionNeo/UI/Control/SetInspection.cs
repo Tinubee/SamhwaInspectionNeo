@@ -15,7 +15,6 @@ namespace SamhwaInspectionNeo.UI.Control
         public delegate void 검사항목선택(모델정보 모델, 검사정보 설정);
         public event 검사항목선택 검사항목변경;
         private readonly LocalizationInspection 번역 = new LocalizationInspection();
-        //private Boolean Loading = false;
         public SetInspection()
         {
             InitializeComponent();
@@ -23,7 +22,6 @@ namespace SamhwaInspectionNeo.UI.Control
 
         public void Init()
         {
-            //Loading = true;
             this.GridView1.Init(this.barManager1);
             this.GridView1.OptionsBehavior.Editable = true;
             this.GridView1.OptionsSelection.MultiSelect = true;
@@ -31,7 +29,6 @@ namespace SamhwaInspectionNeo.UI.Control
             this.GridView1.AddEditSelectionMenuItem();
             this.GridView1.AddSelectPopMenuItems();
             this.GridView1.AddDeleteMenuItem(DeleteClick);
-            this.GridView1.CellValueChanged += GridView1_CellValueChanged;
             this.GridControl1.DataSource = Global.모델자료.GetItem(Global.환경설정.선택모델)?.검사설정;
 
             this.col최소값.DisplayFormat.FormatString = Global.환경설정.결과표현;
@@ -54,7 +51,6 @@ namespace SamhwaInspectionNeo.UI.Control
             this.b설정저장.Text = 번역.설정저장;
             this.b도구설정.Click += B도구설정_Click;
             this.b수동검사.Click += B수동검사_Click;
-            //Loading = false;
         }
 
         private void B보정값설정_Click(object sender, EventArgs e)
@@ -79,30 +75,6 @@ namespace SamhwaInspectionNeo.UI.Control
             this.GridView1.RefreshData();
             if (Global.환경설정.동작구분 == 동작구분.Live)
                 Global.VM제어.GetItem(Flow구분.Flow1).imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceModuleCs.ImageSourceParam.ImageSourceTypeEnum.SDK;
-        }
-
-        private void GridView1_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
-        {
-            //int rowIndex = e.RowHandle;
-
-            //object 최소값 = GridView1.GetRowCellValue(rowIndex, "최소값");
-            //object 최대값 = GridView1.GetRowCellValue(rowIndex, "최대값");
-            //object 검사항목 = GridView1.GetRowCellValue(rowIndex, "검사항목");
-
-            //if (검사항목.ToString().Contains("Slot"))
-            //{
-            //    Global.VM제어.글로벌변수제어.SetValue("슬롯부최소값", $"{최소값}");
-            //    Global.VM제어.글로벌변수제어.SetValue("슬롯부최대값", $"{최대값}");
-            //}
-            //else if (검사항목.ToString().Contains("홀경"))
-            //{
-            //    Global.VM제어.글로벌변수제어.SetValue("홀경최소값", $"{최소값}");
-            //    Global.VM제어.글로벌변수제어.SetValue("홀경최대값", $"{최대값}");
-            //}
-
-            //Global.VM제어.Save();
-            //Global.VM제어.글로벌변수제어.Init();
-            //Global.MainForm.e변수설정.UpdateGridView();
         }
 
         public void Close() { }

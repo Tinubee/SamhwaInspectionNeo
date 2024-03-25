@@ -1,10 +1,7 @@
-﻿using MvUtils;
-using DevExpress.XtraEditors;
+﻿using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using System;
-using System.Windows.Forms;
 using SamhwaInspectionNeo.Schemas;
-using System.Diagnostics;
 
 namespace SamhwaInspectionNeo.UI.Controls
 {
@@ -105,8 +102,6 @@ namespace SamhwaInspectionNeo.UI.Controls
             public String 로그보관 { get { return Localization.GetString(typeof(환경설정).GetProperty(nameof(환경설정.로그보관))); } }
             public String 결과자릿수 { get { return Localization.GetString(typeof(환경설정).GetProperty(nameof(환경설정.결과자릿수))); } }
             public String 검사여부 { get { return Localization.GetString(typeof(환경설정).GetProperty(nameof(환경설정.검사여부))); } }
-            //public String 크롭여부 { get { return Localization.GetString(typeof(환경설정).GetProperty(nameof(환경설정.크롭여부))); } }
-
             public String 설정저장 { get { return Localization.GetString(Items.설정저장); } }
             public String 저장완료 { get { return Localization.GetString(Items.저장완료); } }
             public String 저장확인 { get { return Localization.GetString(Items.저장확인); } }

@@ -53,7 +53,6 @@ namespace SamhwaInspectionNeo.UI.Control
             Int32 검사코드 = 결과.검사코드 >= 100 ? 결과.검사코드 - 100 : 결과.검사코드;
 
             this.lb결과값[검사코드].Text = $"{결과.측정결과} {결과.불량정보}";
-            //this.결과값[검사코드].BackColor = Color.Transparent;
             this.lb결과값[검사코드].ForeColor = 환경설정.결과표현색상(결과.측정결과);
         }
     }

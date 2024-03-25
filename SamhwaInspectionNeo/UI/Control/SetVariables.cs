@@ -83,7 +83,6 @@ namespace SamhwaInspectionNeo.UI.Control
             info.strValue = (string)t.Value;
 
             return info;
-            //return view.GetRow(RowHandle) as GlobalVarInfo;
         }
 
         private class LocalizationInspection

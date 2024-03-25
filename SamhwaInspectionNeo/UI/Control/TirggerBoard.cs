@@ -98,11 +98,6 @@ namespace SamhwaInspectionNeo.UI.Control
             this.선택포트 = 포트;
         }
 
-        private void 연결가능한포트불러오기()
-        {
-            String[] portName = SerialPort.GetPortNames();
-        }
-
         private void B연결하기(object sender, EventArgs e)
         {
             Global.트리거보드제어.Init(this.선택포트);

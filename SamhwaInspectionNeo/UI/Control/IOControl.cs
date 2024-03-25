@@ -56,7 +56,6 @@ namespace SamhwaInspectionNeo.UI.Control
             public 신호제어.정보주소 구분 { get; set; }
             public Int32 번호 { get { return (Int32)구분; } }
             public String 주소 { get { return MvUtils.Utils.GetAttribute<AddressAttribute>(구분).Address; } }
-            //public String 명칭 { get { return Localization.GetString(this.구분); } }
             public String 여부 { get { return Global.신호제어.정보읽기(구분).ToString(); } }
         }
     }

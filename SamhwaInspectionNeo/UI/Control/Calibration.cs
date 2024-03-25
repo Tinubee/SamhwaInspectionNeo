@@ -1,19 +1,12 @@
-﻿using DevExpress.Data.Extensions;
-using DevExpress.XtraEditors;
+﻿using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using SamhwaInspectionNeo.Schemas;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using VM.PlatformSDKCS;
 
 namespace SamhwaInspectionNeo.UI.Control
 {
@@ -30,7 +23,6 @@ namespace SamhwaInspectionNeo.UI.Control
             Flow4Front,
             Flow4Rear,
         }
-
 
         String 로그영역 = "보정값설정";
         private 지그위치 위치 { get; set; } = 지그위치.Front;
@@ -50,7 +42,6 @@ namespace SamhwaInspectionNeo.UI.Control
             this.GridView1.OptionsSelection.MultiSelect = true;
             this.GridView1.OptionsView.NewItemRowPosition = NewItemRowPosition.Bottom;
             this.GridView1.AddEditSelectionMenuItem();
-            //this.GridView1.AddSelectPopMenuItems();
             this.GridView1.AddCalibrationPopMenuItems();
             this.GridView1.CellValueChanged += 교정값계산;
             this.col측정값.DisplayFormat.FormatString = Global.환경설정.결과표현;

@@ -1,5 +1,4 @@
-﻿using DevExpress.XtraPrinting;
-using Euresys.MultiCam;
+﻿using Euresys.MultiCam;
 using MvCamCtrl.NET;
 using MvCamCtrl.NET.CameraParams;
 using Newtonsoft.Json;
@@ -11,7 +10,6 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using static SamhwaInspectionNeo.Schemas.EuresysLink;
 
@@ -330,7 +328,19 @@ namespace SamhwaInspectionNeo.Schemas
                 });
             }
 
-            Global.조명제어?.TurnOff(카메라);
+            if (카메라 == 카메라구분.Cam05)
+            {
+                Task.Run(() =>
+                {
+                    Boolean 결과 = Global.VM제어.GetItem(Flow구분.모델감지및역투입).Run(이미지, null);
+                    if (이미지 != null)
+                        this.ImageSave(이미지, 카메라구분.Cam02, 0, 결과);
+                    Global.신호제어.SetDevice($"W0013", 결과 ? 1 : 2, out Int32 오류);
+                });
+            }
+
+
+            //Global.조명제어?.TurnOff(카메라);
             this.그랩완료보고?.Invoke(카메라, 이미지);
         }
 

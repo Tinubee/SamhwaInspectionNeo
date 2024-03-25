@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using static SamhwaInspectionNeo.Schemas.검사자료;
 
 namespace SamhwaInspectionNeo.Schemas
 {

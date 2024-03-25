@@ -12,7 +12,6 @@ using System.IO;
 using System.Runtime.InteropServices;
 using VM.Core;
 using VM.PlatformSDKCS;
-using static SamhwaInspectionNeo.Schemas.검사자료;
 
 namespace SamhwaInspectionNeo.Schemas
 {
@@ -31,6 +30,7 @@ namespace SamhwaInspectionNeo.Schemas
         하부표면검사2,
         하부표면검사3,
         하부표면검사4,
+        모델감지및역투입,
     }
 
     public enum 지그위치
@@ -208,7 +208,7 @@ namespace SamhwaInspectionNeo.Schemas
         {
             ShellModuleTool shell = Global.VM제어.GetItem(구분).shellModuleTool;
 
-            Int32 startIndex = 6;//= 구분 >= Flow구분.공트레이검사 ? 6 : 8;
+            Int32 startIndex = 6; //= 구분 >= Flow구분.공트레이검사 ? 6 : 8;
             for (int lop = startIndex; lop < shell.Outputs.Count; lop++)
             {
                 List<VmIO> t = shell.Outputs[lop].GetAllIO();

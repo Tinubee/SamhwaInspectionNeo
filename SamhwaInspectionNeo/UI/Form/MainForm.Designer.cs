@@ -164,7 +164,6 @@
             this.e결과뷰어.Name = "e결과뷰어";
             this.e결과뷰어.Size = new System.Drawing.Size(1920, 897);
             this.e결과뷰어.TabIndex = 1;
-            this.e결과뷰어.Load += new System.EventHandler(this.e결과뷰어_Load);
             // 
             // e상태뷰어
             // 
