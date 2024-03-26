@@ -228,7 +228,11 @@ namespace SamhwaInspectionNeo.Schemas
         public LCP24100Q 컨트롤러3;
 
         [JsonIgnore]
-        public Boolean 정상여부 { get { return this.컨트롤러1.IsOpen() && this.컨트롤러2.IsOpen() && this.컨트롤러3.IsOpen(); } }
+        public Boolean 조명컨트롤러1정상여부 { get { return this.컨트롤러1.IsOpen(); } }
+        [JsonIgnore]
+        public Boolean 조명컨트롤러2정상여부 { get { return this.컨트롤러2.IsOpen(); } }
+        [JsonIgnore]
+        public Boolean 조명컨트롤러3정상여부 { get { return this.컨트롤러3.IsOpen(); } }
 
         public void Init()
         {

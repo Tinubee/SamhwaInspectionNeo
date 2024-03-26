@@ -21,7 +21,9 @@ namespace SamhwaInspectionNeo.UI.Controls
         }
 
         private 장치상태 장치통신;
-        private 장치상태 조명장치;
+        private 장치상태 조명장치1;
+        private 장치상태 조명장치2;
+        private 장치상태 조명장치3;
         private 장치상태 카메라1;
         private 장치상태 카메라2;
         private 장치상태 카메라3;
@@ -32,7 +34,9 @@ namespace SamhwaInspectionNeo.UI.Controls
         public void Init()
         {
             this.장치통신 = new 장치상태(this.e장치통신, true);
-            this.조명장치 = new 장치상태(this.e조명장치);
+            this.조명장치1 = new 장치상태(this.e조명장치1);
+            this.조명장치2 = new 장치상태(this.e조명장치2);
+            this.조명장치3 = new 장치상태(this.e조명장치3);
             this.카메라1 = new 장치상태(this.e카메라1);
             this.카메라2 = new 장치상태(this.e카메라2);
             this.카메라3 = new 장치상태(this.e카메라3);
@@ -82,7 +86,9 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.카메라4.Set(Global.장치상태.카메라4);
             this.카메라5.Set(Global.장치상태.카메라5);
             this.장치통신.Set(Global.장치상태.장치통신);
-            this.조명장치.Set(Global.장치상태.조명장치);
+            this.조명장치1.Set(Global.장치상태.조명장치1);
+            this.조명장치2.Set(Global.장치상태.조명장치2);
+            this.조명장치3.Set(Global.장치상태.조명장치3);
             this.트리거보드.Set(Global.장치상태.트리거보드);
         }
 
