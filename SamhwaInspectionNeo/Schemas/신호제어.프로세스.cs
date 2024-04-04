@@ -157,7 +157,7 @@ namespace SamhwaInspectionNeo.Schemas
         {
             Common.DebugWriteLine(로그영역, 로그구분.정보, $"Front 지그 신호 : {Global.신호제어.Front지그}");
             Common.DebugWriteLine(로그영역, 로그구분.정보, $"Rear 지그 신호 : {Global.신호제어.Rear지그}");
- 
+
             if (Global.신호제어.Front지그)
             {
                 Global.환경설정.Front지그 = true;
@@ -238,7 +238,7 @@ namespace SamhwaInspectionNeo.Schemas
                 신호쓰기(정보주소.트레이확인카메라트리거, 0);
             }
 
-            if(this.역방향및모델확인촬영번호 > 0)
+            if (this.역방향및모델확인촬영번호 > 0)
             {
 
             }

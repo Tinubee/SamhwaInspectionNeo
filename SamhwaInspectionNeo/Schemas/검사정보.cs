@@ -211,6 +211,14 @@ namespace SamhwaInspectionNeo.Schemas
         Slot4_4 = 58,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
         Slot4_5 = 59,
+        [Result(검사그룹.SURFACE, 결과분류.Summary, 장치구분.Cam01)]
+        Slot1_Bur = 60,
+        [Result(검사그룹.SURFACE, 결과분류.Summary, 장치구분.Cam01)]
+        Slot2_Bur = 61,
+        [Result(검사그룹.SURFACE, 결과분류.Summary, 장치구분.Cam01)]
+        Slot3_Bur = 62,
+        [Result(검사그룹.SURFACE, 결과분류.Summary, 장치구분.Cam01)]
+        Slot4_Bur = 63,
         [Result(검사그룹.SURFACE, 결과분류.Summary, 장치구분.Cam03)]
         상부표면검사 = 500,
         [Result(검사그룹.SURFACE, 결과분류.Summary, 장치구분.Cam04)]
@@ -399,7 +407,7 @@ namespace SamhwaInspectionNeo.Schemas
                 //Debug.WriteLine($"{홀이름} : {정보.결과값 - 정보.최소값}");
 
                 Decimal MMC공차 = 정보.결과값 - 정보.최소값 < 0 ? 0 : 정보.결과값 - 정보.최소값;
-                Common.DebugWriteLine(로그영역, 로그구분.정보, $"{검사.검사항목} MMC 공차 : {MMC공차}");
+                //Common.DebugWriteLine(로그영역, 로그구분.정보, $"{검사.검사항목} MMC 공차 : {MMC공차}");
                 검사.최대값 += MMC공차;
             }
         }

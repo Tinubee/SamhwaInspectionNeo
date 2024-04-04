@@ -184,61 +184,51 @@ namespace SamhwaInspectionNeo.Schemas
         {
             try
             {
-                if (Data.BmpImage == null) return;
+                if (Data.MatImage == null)
+                    return;
 
-                if (Data.Camera == 카메라구분.Cam01)
+                if (Data.PageIndex == 1)
                 {
-                    if (Data.PageIndex == 1)
+                    for (int lop = 0; lop < this.치수검사카메라.roi.Length; lop++)
+                        this.검사스플생성(lop);
+
+                    this.치수검사카메라.Page1Image = Data.MatImage;
+                    this.치수검사카메라.isGrabCompleted_Page1 = true;
+                    Common.DebugWriteLine(로그영역, 로그구분.정보, $"LineCamera State page Index 1 : {this.치수검사카메라.CurrentState()}");
+                }
+                if (Data.PageIndex == 2)
+                {
+                    this.치수검사카메라.Page2Image = Data.MatImage;
+                    this.치수검사카메라.isGrabCompleted_Page2 = true;
+                    Common.DebugWriteLine(로그영역, 로그구분.정보, $"LineCamera State page Index 2 : {this.치수검사카메라.CurrentState()}");
+                }
+
+                if (this.치수검사카메라.isGrabCompleted_Page1 & this.치수검사카메라.isGrabCompleted_Page2)
+                {
+                    this.치수검사카메라.isGrabCompleted_Page1 = false;
+                    this.치수검사카메라.isGrabCompleted_Page2 = false;
+                    //조명 끔
+                    Global.조명제어.TurnOff(카메라구분.Cam01);
+                    // 이미지 연결
+                    Cv2.VConcat(this.치수검사카메라.Page1Image, this.치수검사카메라.Page2Image, this.치수검사카메라.mergedImage);
+                    //병렬처리로 변경
+                    Parallel.For(0, this.치수검사카메라.roi.Length, lop =>
                     {
-                        this.치수검사카메라.Page1Image = Data.MatImage;
-                        this.치수검사카메라.isGrabCompleted_Page1 = true;
-                        Common.DebugWriteLine(로그영역, 로그구분.정보, $"LineCamera State page Index 1 : {this.치수검사카메라.CurrentState()}");
-                    }
-                    if (Data.PageIndex == 2)
-                    {
-                        this.치수검사카메라.Page2Image = Data.MatImage;
-                        this.치수검사카메라.isGrabCompleted_Page2 = true;
-                        Common.DebugWriteLine(로그영역, 로그구분.정보, $"LineCamera State page Index 2 : {this.치수검사카메라.CurrentState()}");
-                    }
+                        this.치수검사카메라.splitImage[lop] = new Mat(this.치수검사카메라.mergedImage, this.치수검사카메라.roi[lop]);
 
-                    if (this.치수검사카메라.isGrabCompleted_Page1 & this.치수검사카메라.isGrabCompleted_Page2)
-                    {
-                        this.치수검사카메라.isGrabCompleted_Page1 = false;
-                        this.치수검사카메라.isGrabCompleted_Page2 = false;
-                        //조명 끔
-                        Global.조명제어.TurnOff(카메라구분.Cam01);
-                        // 이미지 연결
-                        Int32 SplitPointStart = Convert.ToInt32(Global.VM제어.글로벌변수제어.GetValue("SplitPointStart"));
-                        Int32 SplitPointX = Convert.ToInt32(Global.VM제어.글로벌변수제어.GetValue("SplitPointX"));
-                        Int32 SplitPointY = Convert.ToInt32(Global.VM제어.글로벌변수제어.GetValue("SplitPointY"));
+                        if (Global.신호제어.마스터모드여부 && lop < 2) return;
 
-                        Cv2.VConcat(this.치수검사카메라.Page1Image, this.치수검사카메라.Page2Image, this.치수검사카메라.mergedImage);
+                        Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop).Run(this.치수검사카메라.splitImage[lop], null);
 
-                        for (int lop = 0; lop < this.치수검사카메라.roi.Length; lop++)
-                        {
-                            this.검사스플생성(lop);
-                            this.치수검사카메라.roi[lop] = new Rect(SplitPointX, SplitPointStart + (SplitPointY * lop), this.치수검사카메라.width, 18000);
-                        }
-                        
-                        //병렬처리로 변경
-                        Parallel.For(0, this.치수검사카메라.roi.Length, lop =>
-                        {
-                            this.치수검사카메라.splitImage[lop] = new Mat(this.치수검사카메라.mergedImage, this.치수검사카메라.roi[lop]);
+                        this.ImageSave(this.치수검사카메라.splitImage[lop], 카메라구분.Cam01, lop, 결과);
+                    });
 
-                            if (Global.신호제어.마스터모드여부 && lop < 2) return;
-
-                            Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop).Run(this.치수검사카메라.splitImage[lop], null);
-
-                            this.ImageSave(this.치수검사카메라.splitImage[lop], 카메라구분.Cam01, lop, 결과);
-                        });
-
-                        this.치수검사카메라.isCompleted_Camera1 = true;
-                    }
-                    if (this.치수검사카메라.isCompleted_Camera1)
-                    {
-                        //GC.Collect();
-                        this.치수검사카메라.isCompleted_Camera1 = false;
-                    }
+                    this.치수검사카메라.isCompleted_Camera1 = true;
+                }
+                if (this.치수검사카메라.isCompleted_Camera1)
+                {
+                    //GC.Collect();
+                    this.치수검사카메라.isCompleted_Camera1 = false;
                 }
             }
             catch (Exception ex)
@@ -348,7 +338,7 @@ namespace SamhwaInspectionNeo.Schemas
         {
             if (!Global.환경설정.사진저장OK && !Global.환경설정.사진저장NG) return;
             List<String> paths = new List<String> { Global.환경설정.사진저장경로, MvUtils.Utils.FormatDate(DateTime.Now, "{0:yyyy-MM-dd}"), Global.환경설정.선택모델.ToString(), 카메라.ToString() };
-            String name = $"{검사번호.ToString("d4")}_{MvUtils.Utils.FormatDate(DateTime.Now, "{0:HHmmss}")}.png";//_{결과.ToString()}
+            String name = $"{MvUtils.Utils.FormatDate(DateTime.Now, "{0:HHmmss}")}_{검사번호.ToString("d4")}_{결과}.png";//_{결과.ToString()}
             String path = Common.CreateDirectory(paths);
             if (String.IsNullOrEmpty(path))
             {
@@ -448,8 +438,8 @@ namespace SamhwaInspectionNeo.Schemas
         public Mat Page1Image;
         public Mat Page2Image;
         public Mat mergedImage;
-        public Rect[] roi = new Rect[4];
-        public Rect roiAlign;
+        //public Rect[] roi = new Rect[4];
+        //public Rect roiAlign;
         public Mat[] splitImage = new Mat[4];
 
         public virtual void Set(카메라장치 장치)
@@ -666,7 +656,6 @@ namespace SamhwaInspectionNeo.Schemas
                     Common.DebugWriteLine(로그영역, 로그구분.정보, $"상부표면검사 이미지 [ {this.MatImage.Count} ]개 그랩완료.");
                     if (Global.그랩제어.상부표면검사카메라.MatImage.Count == this.ImageCount)
                     {
-                        //Common.DebugWriteLine(로그영역, 로그구분.정보, $"상부표면검사 이미지 [ {this.MatImage.Count} ]개 그랩완료.");
                         this.Stop();
                         Global.그랩제어.그랩완료(this.구분, this.MatImage);
                     }
@@ -676,7 +665,6 @@ namespace SamhwaInspectionNeo.Schemas
                     this.MatImage.Add(image);
                     if (Global.그랩제어.하부표면검사카메라.MatImage.Count == this.ImageCount)
                     {
-                        //Common.DebugWriteLine(로그영역, 로그구분.정보, $"하부표면검사 이미지 [ {this.MatImage.Count} ]개 그랩완료.");
                         this.Stop();
                         Global.그랩제어.그랩완료(this.구분, this.MatImage);
                     }
@@ -723,6 +711,11 @@ namespace SamhwaInspectionNeo.Schemas
 
         private UInt32 currentSurface;
 
+        public Int32 SplitPointStart { get; set; } = 0;
+        public Int32 SplitPointX { get; set; } = 0;
+        public Int32 SplitPointY { get; set; } = 0;
+        public Rect[] roi = new Rect[4];
+
         public EuresysLink(카메라구분 구분)
         {
             this.구분 = 구분;
@@ -759,6 +752,14 @@ namespace SamhwaInspectionNeo.Schemas
                 this.mergedImage = new Mat(height * 2, width, MatType.CV_8UC1);
 
                 Global.정보로그(로그영역, "카메라 연결", $"[{this.구분}] 카메라 연결 성공!", false);
+                this.SplitPointStart = Convert.ToInt32(Global.VM제어.글로벌변수제어.GetValue("SplitPointStart"));
+                this.SplitPointX = Convert.ToInt32(Global.VM제어.글로벌변수제어.GetValue("SplitPointX"));
+                this.SplitPointY = Convert.ToInt32(Global.VM제어.글로벌변수제어.GetValue("SplitPointY"));
+
+                for (int lop = 0; lop < this.roi.Length; lop++)
+                {
+                    this.roi[lop] = new Rect(SplitPointX, SplitPointStart + (SplitPointY * lop), this.width, 18000);
+                }
 
                 return true;
             }
