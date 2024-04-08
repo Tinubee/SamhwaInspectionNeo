@@ -139,13 +139,21 @@ namespace SamhwaInspectionNeo.UI.Controls
         private void E사진저장_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             if (this.d사진저장.ShowDialog() == DialogResult.OK)
+            {
+                Global.환경설정.사진저장경로 = this.d사진저장.SelectedPath;
                 this.e사진저장.Text = this.d사진저장.SelectedPath;
+            }
+               
         }
 
         private void E문서저장_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             if (this.d문서저장.ShowDialog() == DialogResult.OK)
+            {
+                Global.환경설정.문서저장경로 = this.d문서저장.SelectedPath;
                 this.e문서저장.Text = this.d문서저장.SelectedPath;
+            }
+               
         }
 
         private void E기본경로_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)

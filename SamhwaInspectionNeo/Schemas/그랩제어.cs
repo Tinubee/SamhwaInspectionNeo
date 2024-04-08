@@ -211,8 +211,8 @@ namespace SamhwaInspectionNeo.Schemas
                     Global.조명제어.TurnOff(카메라구분.Cam01);
                     // 이미지 연결
                     Cv2.VConcat(this.치수검사카메라.Page1Image, this.치수검사카메라.Page2Image, this.치수검사카메라.mergedImage);
-                    //병렬처리로 변경
-                    Parallel.For(0, this.치수검사카메라.roi.Length, lop =>
+
+                    for (int lop = 0; lop < this.치수검사카메라.roi.Length; lop++)
                     {
                         this.치수검사카메라.splitImage[lop] = new Mat(this.치수검사카메라.mergedImage, this.치수검사카메라.roi[lop]);
 
@@ -221,7 +221,19 @@ namespace SamhwaInspectionNeo.Schemas
                         Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop).Run(this.치수검사카메라.splitImage[lop], null);
 
                         this.ImageSave(this.치수검사카메라.splitImage[lop], 카메라구분.Cam01, lop, 결과);
-                    });
+                    }
+
+                    //병렬처리로 변경
+                    //Parallel.For(0, this.치수검사카메라.roi.Length, lop =>
+                    //{
+                    //    this.치수검사카메라.splitImage[lop] = new Mat(this.치수검사카메라.mergedImage, this.치수검사카메라.roi[lop]);
+
+                    //    if (Global.신호제어.마스터모드여부 && lop < 2) return;
+
+                    //    Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop).Run(this.치수검사카메라.splitImage[lop], null);
+
+                    //    this.ImageSave(this.치수검사카메라.splitImage[lop], 카메라구분.Cam01, lop, 결과);
+                    //});
 
                     this.치수검사카메라.isCompleted_Camera1 = true;
                 }
@@ -328,8 +340,6 @@ namespace SamhwaInspectionNeo.Schemas
                     Global.신호제어.SetDevice($"W0013", 결과 ? 1 : 2, out Int32 오류);
                 });
             }
-
-
             //Global.조명제어?.TurnOff(카메라);
             this.그랩완료보고?.Invoke(카메라, 이미지);
         }
@@ -338,7 +348,7 @@ namespace SamhwaInspectionNeo.Schemas
         {
             if (!Global.환경설정.사진저장OK && !Global.환경설정.사진저장NG) return;
             List<String> paths = new List<String> { Global.환경설정.사진저장경로, MvUtils.Utils.FormatDate(DateTime.Now, "{0:yyyy-MM-dd}"), Global.환경설정.선택모델.ToString(), 카메라.ToString() };
-            String name = $"{MvUtils.Utils.FormatDate(DateTime.Now, "{0:HHmmss}")}_{검사번호.ToString("d4")}_{결과}.png";//_{결과.ToString()}
+            String name = $"{MvUtils.Utils.FormatDate(DateTime.Now, "{0:HHmmss}")}_{검사번호.ToString("d4")}.png";//_{결과.ToString()}
             String path = Common.CreateDirectory(paths);
             if (String.IsNullOrEmpty(path))
             {
@@ -501,6 +511,7 @@ namespace SamhwaInspectionNeo.Schemas
                 this.주소 = $"{ip1}.{ip2}.{ip3}.{ip4}";
                 this.상태 = this.Init();
                 this.번호 = (int)this.구분;
+                Global.그랩제어.Ready(this.구분);
             }
             catch (Exception ex)
             {
@@ -605,6 +616,7 @@ namespace SamhwaInspectionNeo.Schemas
         public override Boolean ClearImage()
         {
             this.MatImage.Clear();
+            this.Camera.ClearImageBuffer();
             //GC.Collect();
             return true;
         }
@@ -656,7 +668,7 @@ namespace SamhwaInspectionNeo.Schemas
                     Common.DebugWriteLine(로그영역, 로그구분.정보, $"상부표면검사 이미지 [ {this.MatImage.Count} ]개 그랩완료.");
                     if (Global.그랩제어.상부표면검사카메라.MatImage.Count == this.ImageCount)
                     {
-                        this.Stop();
+                        //this.Stop();
                         Global.그랩제어.그랩완료(this.구분, this.MatImage);
                     }
                 }
@@ -665,7 +677,7 @@ namespace SamhwaInspectionNeo.Schemas
                     this.MatImage.Add(image);
                     if (Global.그랩제어.하부표면검사카메라.MatImage.Count == this.ImageCount)
                     {
-                        this.Stop();
+                        //this.Stop();
                         Global.그랩제어.그랩완료(this.구분, this.MatImage);
                     }
                 }

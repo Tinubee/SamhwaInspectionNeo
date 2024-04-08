@@ -84,7 +84,7 @@ namespace SamhwaInspectionNeo
         {
             this.BeginInvoke(new Action(() => GlobalInitialized(e)));
 
-            GetProgramGitDate();
+            //GetProgramGitDate();
         }
         private void GlobalInitialized(Boolean e)
         {

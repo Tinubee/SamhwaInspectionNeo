@@ -172,6 +172,13 @@ namespace SamhwaInspectionNeo.Schemas
                     this.imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;
             }
         }
+
+        private void GetRenderImage(Flow구분 구분)
+        {
+            GraphicsSetModuleTool tool = Global.VM제어.GetItem(구분).graphicsSetModuleTool;
+
+        }
+
         private String GetResultStr(Flow구분 구분)
         {
             ShellModuleTool shell = Global.VM제어.GetItem(구분).shellModuleTool;

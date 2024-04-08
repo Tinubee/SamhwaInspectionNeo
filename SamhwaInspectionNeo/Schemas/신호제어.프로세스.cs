@@ -208,7 +208,7 @@ namespace SamhwaInspectionNeo.Schemas
                 new Thread(() =>
                 {
                     Global.조명제어.TurnOn(카메라구분.Cam03);
-                    Global.그랩제어.Ready(카메라구분.Cam03);
+                    //Global.그랩제어.Ready(카메라구분.Cam03);
                 }).Start();
                 신호쓰기(정보주소.상부표면검사카메라트리거, 0);
             }
@@ -220,7 +220,7 @@ namespace SamhwaInspectionNeo.Schemas
                 new Thread(() =>
                 {
                     Global.조명제어.TurnOn(카메라구분.Cam04);
-                    Global.그랩제어.Ready(카메라구분.Cam04);
+                    //Global.그랩제어.Ready(카메라구분.Cam04);
                 }).Start();
                 Global.신호제어.신호쓰기(정보주소.하부조명상태, 1);
                 신호쓰기(정보주소.하부표면검사카메라트리거, 0);
