@@ -223,23 +223,10 @@ namespace SamhwaInspectionNeo.Schemas
                         this.ImageSave(this.치수검사카메라.splitImage[lop], 카메라구분.Cam01, lop, 결과);
                     }
 
-                    //병렬처리로 변경
-                    //Parallel.For(0, this.치수검사카메라.roi.Length, lop =>
-                    //{
-                    //    this.치수검사카메라.splitImage[lop] = new Mat(this.치수검사카메라.mergedImage, this.치수검사카메라.roi[lop]);
-
-                    //    if (Global.신호제어.마스터모드여부 && lop < 2) return;
-
-                    //    Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop).Run(this.치수검사카메라.splitImage[lop], null);
-
-                    //    this.ImageSave(this.치수검사카메라.splitImage[lop], 카메라구분.Cam01, lop, 결과);
-                    //});
-
                     this.치수검사카메라.isCompleted_Camera1 = true;
                 }
                 if (this.치수검사카메라.isCompleted_Camera1)
                 {
-                    //GC.Collect();
                     this.치수검사카메라.isCompleted_Camera1 = false;
                 }
             }
@@ -966,6 +953,14 @@ namespace SamhwaInspectionNeo.Schemas
         private void AcqFailureCallback(MC.SIGNALINFO signalInfo)
         {
             Global.오류로그(로그영역, "영상획득", $"[{this.구분}] 유레시스 영상획득 실패 : {signalInfo.Context} / {signalInfo.SignalContext} / {signalInfo.Instance} / {signalInfo.SignalInfo} / {signalInfo.Signal}", false);
+            this.PageIndex = 1;
+            this.Page1Image?.Dispose();
+            this.Page1Image = null;
+            this.Page2Image?.Dispose();
+            this.Page2Image = null;
+            this.isGrabCompleted_Page1 = false;
+            this.isGrabCompleted_Page2 = false;
+            Global.조명제어.TurnOff(카메라구분.Cam01);
             MvUtils.Utils.MessageBox("영상획득", $"{signalInfo.Context} : 유레시스영상획득 실패", 2000);
         }
     }
