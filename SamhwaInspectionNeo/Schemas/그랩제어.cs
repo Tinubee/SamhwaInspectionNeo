@@ -218,7 +218,7 @@ namespace SamhwaInspectionNeo.Schemas
 
                         if (Global.신호제어.마스터모드여부 && lop < 2) return;
 
-                        Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop).Run(this.치수검사카메라.splitImage[lop], null);
+                        Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop).Run(this.치수검사카메라.splitImage[lop], null, null);
 
                         this.ImageSave(this.치수검사카메라.splitImage[lop], 카메라구분.Cam01, lop, 결과);
                     }
@@ -271,11 +271,15 @@ namespace SamhwaInspectionNeo.Schemas
                     for (int lop = 0; lop < this.상부표면검사카메라.MatImage.Count; lop++)
                     {
                         this.검사스플생성(lop);
-                        Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop + 5).Run(이미지[lop], null);
+                        Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop + 5).Run(이미지[lop], null, null);
                         Common.DebugWriteLine(로그영역, 로그구분.정보, $"[ 상부표면검사 - {lop}] 검사완료 : {결과}.");
                         if (이미지[lop] != null)
                             this.ImageSave(이미지[lop], 카메라구분.Cam03, lop, 결과);
-                        if (lop == this.상부표면검사카메라.MatImage.Count - 1) this.상부표면검사카메라.MatImage.Clear();
+                        if (lop == this.상부표면검사카메라.MatImage.Count - 1)
+                        {
+                            this.상부표면검사카메라.ClearImage();
+                            //this.상부표면검사카메라.MatImage.Clear();
+                        }
                     }
                 });
             }
@@ -296,7 +300,7 @@ namespace SamhwaInspectionNeo.Schemas
 
                         if (이미지[lop] != null)
                             this.ImageSave(이미지[lop], 카메라구분.Cam04, lop, b결과);
-                        if (lop == this.하부표면검사카메라.MatImage.Count - 1) this.하부표면검사카메라.MatImage.Clear();
+                        if (lop == this.하부표면검사카메라.MatImage.Count - 1) this.하부표면검사카메라.ClearImage();
                     }
                 });
             }
@@ -310,7 +314,7 @@ namespace SamhwaInspectionNeo.Schemas
             {
                 Task.Run(() =>
                 {
-                    Boolean 결과 = Global.VM제어.GetItem(Flow구분.공트레이검사).Run(이미지, null);
+                    Boolean 결과 = Global.VM제어.GetItem(Flow구분.공트레이검사).Run(이미지, null, null);
                     if (이미지 != null)
                         this.ImageSave(이미지, 카메라구분.Cam02, 0, 결과);
                     Global.신호제어.SetDevice($"W0015", 결과 ? 1 : 2, out Int32 오류);
@@ -321,7 +325,7 @@ namespace SamhwaInspectionNeo.Schemas
             {
                 Task.Run(() =>
                 {
-                    Boolean 결과 = Global.VM제어.GetItem(Flow구분.모델감지및역투입).Run(이미지, null);
+                    Boolean 결과 = Global.VM제어.GetItem(Flow구분.모델감지및역투입).Run(이미지, null, null);
                     if (이미지 != null)
                         this.ImageSave(이미지, 카메라구분.Cam02, 0, 결과);
                     Global.신호제어.SetDevice($"W0013", 결과 ? 1 : 2, out Int32 오류);
@@ -335,7 +339,7 @@ namespace SamhwaInspectionNeo.Schemas
         {
             if (!Global.환경설정.사진저장OK && !Global.환경설정.사진저장NG) return;
             List<String> paths = new List<String> { Global.환경설정.사진저장경로, MvUtils.Utils.FormatDate(DateTime.Now, "{0:yyyy-MM-dd}"), Global.환경설정.선택모델.ToString(), 카메라.ToString() };
-            String name = $"{MvUtils.Utils.FormatDate(DateTime.Now, "{0:HHmmss}")}_{검사번호.ToString("d4")}.png";//_{결과.ToString()}
+            String name = $"{MvUtils.Utils.FormatDate(Global.VM제어.GetItem((Flow구분)검사번호).검사시간, "{0:HHmmss}")}_{검사번호.ToString("d4")}.png";//_{결과.ToString()}
             String path = Common.CreateDirectory(paths);
             if (String.IsNullOrEmpty(path))
             {

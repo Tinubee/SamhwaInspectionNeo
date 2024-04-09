@@ -351,8 +351,10 @@ namespace SamhwaInspectionNeo.Schemas
 
         public void Reset()
         {
-            this.검사일시 = DateTime.Now.AddSeconds(this.검사코드);
-            Debug.WriteLine($"{this.검사일시}");
+            this.검사일시 = DateTime.Now.AddMilliseconds(this.검사코드 * 10);
+            if (this.검사코드 < 4)
+                Global.VM제어.GetItem((Flow구분)this.검사코드).검사시간 = this.검사일시;
+            Debug.WriteLine($"{this.검사일시.ToString("HH:mm:ss.ffffff")}");
             this.모델구분 = Global.환경설정.선택모델;
             this.측정결과 = 결과구분.NO;
             this.CTQ결과 = 결과구분.NO;
@@ -450,7 +452,7 @@ namespace SamhwaInspectionNeo.Schemas
                 else this.외관결과 = 결과구분.OK;
             }
 
-            if(this.측정결과 == 결과구분.NG)
+            if (this.측정결과 == 결과구분.NG)
             {
                 List<String> 불량내역 = this.검사내역.Where(e => e.측정결과 == 결과구분.NG).Select(e => e.검사항목.ToString().Replace("_", "-")).ToList();
                 //List<String> 불량내역 = this.검사내역.Where(e => e.측정결과 == 결과구분.ER || e.측정결과 == 결과구분.NG).Select(e => e.검사그룹.ToString()).Distinct().ToList();

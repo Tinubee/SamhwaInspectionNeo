@@ -7,6 +7,12 @@ using System.Collections;
 using System.IO;
 using SamhwaInspectionNeo.Schemas;
 using DevExpress.Data.Filtering;
+using VM.PlatformSDKCS;
+using VM.Core;
+using SamhwaInspectionNeo.UI.Form;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using static Euresys.MultiCam.MC;
 
 namespace SamhwaInspectionNeo.UI.Controls
 {
@@ -34,12 +40,15 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.col결과값.DisplayFormat.FormatString = Global.환경설정.결과표현;
             this.GridView1.Init(this.barManager1);
             this.GridView1.AddRowSelectedEvent(new CustomView.RowSelectedEventHandler(검사내역펼치기));
+            this.GridView1.AddImageViewSelectedEvent(new CustomView.ImageViewEventHandler(이미지보기));
 
             if (Global.환경설정.권한여부(유저권한구분.관리자))
             {
                 this.GridView1.AddDeleteMenuItem(정보삭제);
                 this.GridView1.AddExpandMasterPopMenuItems();
                 this.GridView1.AddSelectPopMenuItems();
+                this.GridView1.AddImageViewMenu();
+                
             }
             else
             {
@@ -124,6 +133,31 @@ namespace SamhwaInspectionNeo.UI.Controls
 
             모델정보 모델 = Global.모델자료.GetItem(결과.모델구분);
             if (모델 == null) return;
+        }
+
+        public void 이미지보기(GridView gridView, Int32 RowHandle)
+        {
+            int index = gridView.FocusedRowHandle;
+            검사결과 정보 = gridView.GetRow(index) as 검사결과;
+
+            List<String> paths = new List<String> { Global.환경설정.사진저장경로, MvUtils.Utils.FormatDate(DateTime.Now, "{0:yyyy-MM-dd}"), Global.환경설정.선택모델.ToString(), 카메라구분.Cam01.ToString() };
+            String name = $"{MvUtils.Utils.FormatDate(정보.검사일시, "{0:HHmmss}")}_{정보.검사코드.ToString("d4")}.png";//_{결과.ToString()}
+            String path = Common.CreateDirectory(paths);
+            if (String.IsNullOrEmpty(path))
+            {
+                //Global.오류로그(로그영역, "이미지 저장", $"[{Path.Combine(paths.ToArray())}] 디렉토리를 만들 수 없습니다.", true);
+                //return;
+            }
+            String file = Path.Combine(path, name);
+
+            if(File.Exists(file) == false)
+            {
+                MvUtils.Utils.MessageBox("검사이미지보기", $"{정보.검사일시} [{정보.검사코드}]검사에 대한 이미지 파일이 없습니다.", 2000);
+                return;
+            }
+
+            NGViewer ngForm = new NGViewer(file, 정보.검사코드, 정보.검사내역[0].지그);
+            ngForm.Show();
         }
 
         public void 검사내역펼치기(GridView gridView, Int32 RowHandle)

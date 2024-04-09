@@ -64,12 +64,12 @@ namespace SamhwaInspectionNeo.UI.Control
 
         private void B수동검사_Click(object sender, EventArgs e)
         {
-            Int32 검사코드 = (int)Flow구분.Flow1;
+            //Int32 검사코드 = (int)Flow구분.Flow1;
 
-            검사코드 = Global.신호제어.마스터모드여부 ? 검사코드 + 100 : 검사코드;
-            검사결과 검사 = Global.검사자료.검사시작(검사코드);
-            Global.VM제어.GetItem(Flow구분.Flow1).Run(null, null);
-            this.GridView1.RefreshData();
+            //검사코드 = Global.신호제어.마스터모드여부 ? 검사코드 + 100 : 검사코드;
+            //검사결과 검사 = Global.검사자료.검사시작(검사코드);
+            //Global.VM제어.GetItem(Flow구분.Flow1).Run(null, null, null);
+            //this.GridView1.RefreshData();
         }
         public void Close() { }
 

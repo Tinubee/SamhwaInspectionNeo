@@ -31,6 +31,7 @@ namespace SamhwaInspectionNeo.Schemas
         하부표면검사3,
         하부표면검사4,
         모델감지및역투입,
+        NG = 99
     }
 
     public enum 지그위치
@@ -122,6 +123,7 @@ namespace SamhwaInspectionNeo.Schemas
     {
         public Flow구분 구분;
         public Boolean 결과;
+        public DateTime 검사시간;
         public String 로그영역 { get => $"비전도구({구분})"; }
 
         public VmProcedure Procedure;
@@ -133,11 +135,14 @@ namespace SamhwaInspectionNeo.Schemas
         public IMVSGroupTool slot2GroupTool;
         public ShellModuleTool slot2ShellModuleTool;
         public GlobalVariableModuleTool GlobalVariableModuleTool;
+        public ShellModuleTool indexShellModuleTool;
 
         public 비전마스터플로우(Flow구분 구분)
         {
+          
             this.구분 = 구분;
             this.결과 = false;
+            this.검사시간 = DateTime.Now;
             this.Init();
             if (this.graphicsSetModuleTool != null)
             {
@@ -159,6 +164,7 @@ namespace SamhwaInspectionNeo.Schemas
                 this.imageSourceModuleTool = this.Procedure["InputImage"] as ImageSourceModuleTool;
                 this.graphicsSetModuleTool = this.Procedure["OutputImage"] as GraphicsSetModuleTool;
                 this.shellModuleTool = this.Procedure["Resulte"] as ShellModuleTool;
+                this.indexShellModuleTool = this.Procedure["인덱스확인"] as ShellModuleTool;
 
                 this.slot1GroupTool = this.Procedure["Slot1"] as IMVSGroupTool;
                 if (this.slot1GroupTool != null)
@@ -255,6 +261,11 @@ namespace SamhwaInspectionNeo.Schemas
             return true;
         }
 
+        public void Shell입력값적용(InputStringData[] inputStringData, String setName)
+        {
+            this.indexShellModuleTool.ModuParams.SetInputString(setName, inputStringData);
+        }
+
         public String RunStr(Mat mat, ImageBaseData imageBaseData)
         {
             this.결과 = false;
@@ -290,7 +301,14 @@ namespace SamhwaInspectionNeo.Schemas
             }
         }
 
-        public Boolean Run(Mat mat, ImageBaseData imageBaseData)
+        public Boolean OnlyFlowRun()
+        {
+            this.Procedure.Run();
+            return true;
+        }
+
+
+        public Boolean Run(Mat mat, ImageBaseData imageBaseData, String imagePath)
         {
             this.결과 = false;
             //this.결과업데이트완료 = false;
@@ -303,9 +321,14 @@ namespace SamhwaInspectionNeo.Schemas
                 }
                 //Boolean Front = Global.신호제어.Front지그; //Global.VM제어.글로벌변수제어.GetValue("Front지그") == "1" ? true : false; 
 
-                imageBaseData = mat == null ? imageBaseData : MatToImageBaseData(mat);
-                if (imageBaseData != null)
-                    this.imageSourceModuleTool.SetImageData(imageBaseData);
+                if(mat == null && imageBaseData == null)
+                    this.imageSourceModuleTool.SetImagePath(imagePath);
+                else
+                {
+                    imageBaseData = mat == null ? imageBaseData : MatToImageBaseData(mat);
+                    if (imageBaseData != null)
+                        this.imageSourceModuleTool.SetImageData(imageBaseData);
+                }
 
                 this.Procedure.Run();
 

@@ -204,7 +204,7 @@ namespace SamhwaInspectionNeo.Schemas
             if (this.상부표면검사촬영번호 > 0)
             {
                 Common.DebugWriteLine(로그영역, 로그구분.정보, "상부표면검사 트리거 수신.");
-                Global.그랩제어.GetItem(카메라구분.Cam03).ClearImage();
+                //Global.그랩제어.GetItem(카메라구분.Cam03).ClearImage();
                 new Thread(() =>
                 {
                     Global.조명제어.TurnOn(카메라구분.Cam03);
@@ -216,7 +216,7 @@ namespace SamhwaInspectionNeo.Schemas
             if (this.하부표면검사촬영번호 > 0)
             {
                 Common.DebugWriteLine(로그영역, 로그구분.정보, "하부표면검사 트리거 수신.");
-                Global.그랩제어.GetItem(카메라구분.Cam04).ClearImage();
+                //Global.그랩제어.GetItem(카메라구분.Cam04).ClearImage();
                 new Thread(() =>
                 {
                     Global.조명제어.TurnOn(카메라구분.Cam04);

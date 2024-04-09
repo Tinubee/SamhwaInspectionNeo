@@ -28,13 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.ngImageViewer1 = new SamhwaInspectionNeo.UI.Control.NgImageViewer();
             this.SuspendLayout();
+            // 
+            // ngImageViewer1
+            // 
+            this.ngImageViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ngImageViewer1.Location = new System.Drawing.Point(0, 0);
+            this.ngImageViewer1.Name = "ngImageViewer1";
+            this.ngImageViewer1.Size = new System.Drawing.Size(741, 551);
+            this.ngImageViewer1.TabIndex = 0;
             // 
             // NGViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(741, 551);
+            this.Controls.Add(this.ngImageViewer1);
             this.Name = "NGViewer";
             this.Text = "NGViewer";
             this.ResumeLayout(false);
@@ -42,5 +52,7 @@
         }
 
         #endregion
+
+        private Control.NgImageViewer ngImageViewer1;
     }
 }

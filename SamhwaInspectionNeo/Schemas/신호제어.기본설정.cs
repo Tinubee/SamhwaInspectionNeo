@@ -3,7 +3,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -221,9 +223,21 @@ namespace SamhwaInspectionNeo.Schemas
         private void 장치통신작업()
         {
             Global.정보로그(로그영역, "PLC 통신", $"통신을 시작합니다.", false);
+            Int32 count = 1000;
+            List<Double> list = new List<double>();
+            DateTime current = DateTime.Now;
             while (this.작업여부)
             {
-                try { 입출자료분석(); }
+                try {
+                    current = DateTime.Now;
+                    입출자료분석();
+                    list.Add((DateTime.Now - current).TotalMilliseconds);
+                    if (list.Count >= count)
+                    {
+                        Debug.WriteLine($"MIN={list.Min()}, MAX={list.Max()}, AVG={list.Average()}");
+                        list.Clear();
+                    }
+                }
                 catch (Exception ex) { Debug.WriteLine(ex.Message, 로그영역); }
                 Thread.Sleep(입출체크간격);
             }

@@ -64,17 +64,16 @@ namespace SamhwaInspectionNeo.UI.Control
         private void B수동검사_Click(object sender, EventArgs e)
         {
             Int32 검사코드 = (int)Flow구분.Flow1;
-            Global.VM제어.GetItem(Flow구분.Flow1).imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceModuleCs.ImageSourceParam.ImageSourceTypeEnum.LocalImage;
+            Global.VM제어.GetItem((Flow구분)검사코드).imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceModuleCs.ImageSourceParam.ImageSourceTypeEnum.SDK;
             검사코드 = Global.신호제어.마스터모드여부 ? 검사코드 + 100 : 검사코드;
             Global.검사자료.검사시작(검사코드);
 
             Mat Image = Global.모델자료.GetItem(선택모델).마스터이미지();
 
-            Global.VM제어.GetItem(Flow구분.Flow1).Run(Image, null);
+            Global.VM제어.GetItem((Flow구분)검사코드).Run(Image, null, null);
 
+            Global.그랩제어.ImageSave(Image, 카메라구분.Cam01, 검사코드, true);
             this.GridView1.RefreshData();
-            if (Global.환경설정.동작구분 == 동작구분.Live)
-                Global.VM제어.GetItem(Flow구분.Flow1).imageSourceModuleTool.ModuParams.ImageSourceType = ImageSourceModuleCs.ImageSourceParam.ImageSourceTypeEnum.SDK;
         }
 
         public void Close() { }

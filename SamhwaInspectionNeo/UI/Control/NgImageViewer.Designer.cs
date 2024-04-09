@@ -35,13 +35,14 @@
             // 
             this.vmRenderControl1.BackColor = System.Drawing.Color.Black;
             this.vmRenderControl1.CoordinateInfoVisible = true;
+            this.vmRenderControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.vmRenderControl1.ImageSource = null;
             this.vmRenderControl1.IsShowCustomROIMenu = false;
-            this.vmRenderControl1.Location = new System.Drawing.Point(135, 131);
+            this.vmRenderControl1.Location = new System.Drawing.Point(0, 0);
             this.vmRenderControl1.Margin = new System.Windows.Forms.Padding(4);
             this.vmRenderControl1.ModuleSource = null;
             this.vmRenderControl1.Name = "vmRenderControl1";
-            this.vmRenderControl1.Size = new System.Drawing.Size(467, 300);
+            this.vmRenderControl1.Size = new System.Drawing.Size(777, 594);
             this.vmRenderControl1.TabIndex = 0;
             // 
             // NgImageViewer
