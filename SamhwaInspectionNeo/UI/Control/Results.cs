@@ -137,6 +137,12 @@ namespace SamhwaInspectionNeo.UI.Controls
 
         public void 이미지보기(GridView gridView, Int32 RowHandle)
         {
+            if (Global.신호제어.자동모드여부)
+            {
+                MvUtils.Utils.MessageBox("검사이미지보기", $"장비가 자동모드일때는 사용 할 수 없습니다.", 2000);
+                return;
+            }
+
             int index = gridView.FocusedRowHandle;
             검사결과 정보 = gridView.GetRow(index) as 검사결과;
 
@@ -150,7 +156,7 @@ namespace SamhwaInspectionNeo.UI.Controls
             }
             String file = Path.Combine(path, name);
 
-            if(File.Exists(file) == false)
+            if(!File.Exists(file))
             {
                 MvUtils.Utils.MessageBox("검사이미지보기", $"{정보.검사일시} [{정보.검사코드}]검사에 대한 이미지 파일이 없습니다.", 2000);
                 return;
