@@ -43,7 +43,7 @@ namespace SamhwaInspectionNeo.Schemas
         public Boolean Close()
         {
             if (this.테이블 == null) return true;
-            this.테이블.Save();
+            this.테이블.SaveAsync();
             this.테이블.자료정리(Global.환경설정.결과보관);
             return this.SaveJson();
         }
@@ -57,6 +57,8 @@ namespace SamhwaInspectionNeo.Schemas
 
         private String 저장파일(DateTime 날짜) => Path.Combine(Global.환경설정.문서저장경로, MvUtils.Utils.FormatDate(날짜, "{0:yyyyMMdd}") + ".json");
         public void Save() => this.테이블.Save();
+        public void SaveAsync() => this.테이블.SaveAsync();
+
         private Boolean SaveJson()
         {
             DateTime 날짜 = DateTime.Today;
@@ -81,13 +83,13 @@ namespace SamhwaInspectionNeo.Schemas
             this.RaiseListChangedEvents = false;
             List<검사결과> 자료 = this.테이블.Select(시작, 종료);
 
-            List<Int32> 대상 = Global.신호제어.검사중인항목();
+            //List<Int32> 대상 = Global.신호제어.검사중인항목();
             자료.ForEach(검사 =>
             {
                 this.Add(검사);
                 // 검사스플 생성
-                if (검사.측정결과 < 결과구분.ER && 대상.Contains(검사.검사코드) && !this.검사스플.ContainsKey(검사.검사코드))
-                    this.검사스플.Add(검사.검사코드, 검사);
+                //if (검사.측정결과 < 결과구분.ER && 대상.Contains(검사.검사코드) && !this.검사스플.ContainsKey(검사.검사코드))
+                //    this.검사스플.Add(검사.검사코드, 검사);
             });
             this.RaiseListChangedEvents = true;
             this.ResetBindings();
@@ -230,7 +232,10 @@ namespace SamhwaInspectionNeo.Schemas
 
         public void SaveAsync()
         {
-            try { this.SaveChangesAsync(); }
+            try {
+                Common.DebugWriteLine("자료저장", 로그구분.정보, "테이블 SaveAsync");
+                this.SaveChangesAsync();
+            }
             catch (Exception ex) { Debug.WriteLine(ex.ToString(), "자료저장"); }
         }
 

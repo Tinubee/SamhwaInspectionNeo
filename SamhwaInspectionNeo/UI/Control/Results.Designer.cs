@@ -273,8 +273,8 @@
             this.GridView1.FooterPanelHeight = 22;
             this.GridView1.GridControl = this.GridControl1;
             this.GridView1.GroupRowHeight = 22;
-            this.GridView1.IndicatorWidth = 44;
-            this.GridView1.MinColumnRowHeight = 24;
+            this.GridView1.IndicatorWidth = 60;
+            this.GridView1.MinColumnRowHeight = 20;
             this.GridView1.MinRowHeight = 16;
             this.GridView1.Name = "GridView1";
             this.GridView1.OptionsBehavior.Editable = false;
@@ -290,7 +290,7 @@
             this.GridView1.OptionsPrint.AutoWidth = false;
             this.GridView1.OptionsPrint.UsePrintStyles = false;
             this.GridView1.OptionsSelection.MultiSelect = true;
-            this.GridView1.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.False;
+            this.GridView1.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
             this.GridView1.OptionsView.ShowGroupPanel = false;
             this.GridView1.RowHeight = 21;
             // 
@@ -316,7 +316,7 @@
             this.col검사시간.AppearanceHeader.Options.UseTextOptions = true;
             this.col검사시간.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.col검사시간.Caption = "Time";
-            this.col검사시간.DisplayFormat.FormatString = "{0:HH:mm:ss}";
+            this.col검사시간.DisplayFormat.FormatString = "{0:HH:mm:ss.fff}";
             this.col검사시간.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.col검사시간.FieldName = "검사일시";
             this.col검사시간.Name = "col검사시간";

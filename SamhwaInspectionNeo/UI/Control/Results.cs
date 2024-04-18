@@ -137,9 +137,9 @@ namespace SamhwaInspectionNeo.UI.Controls
 
         public void 이미지보기(GridView gridView, Int32 RowHandle)
         {
-            if (Global.신호제어.자동모드여부)
+            if (Global.신호제어.운전시작여부)
             {
-                MvUtils.Utils.MessageBox("검사이미지보기", $"장비가 자동모드일때는 사용 할 수 없습니다.", 2000);
+                MvUtils.Utils.MessageBox("검사이미지보기", $"장비가 운전중일때는 사용 할 수 없습니다.", 2000);
                 return;
             }
 
@@ -147,7 +147,7 @@ namespace SamhwaInspectionNeo.UI.Controls
             검사결과 정보 = gridView.GetRow(index) as 검사결과;
 
             List<String> paths = new List<String> { Global.환경설정.사진저장경로, MvUtils.Utils.FormatDate(DateTime.Now, "{0:yyyy-MM-dd}"), Global.환경설정.선택모델.ToString(), 카메라구분.Cam01.ToString() };
-            String name = $"{MvUtils.Utils.FormatDate(정보.검사일시, "{0:HHmmss}")}_{정보.검사코드.ToString("d4")}.png";//_{결과.ToString()}
+            String name = $"{MvUtils.Utils.FormatDate(정보.검사일시, "{0:HHmmss}")}_{정보.검사코드.ToString("d4")}.jpg";//_{결과.ToString()}
             String path = Common.CreateDirectory(paths);
             if (String.IsNullOrEmpty(path))
             {

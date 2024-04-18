@@ -339,7 +339,7 @@ namespace SamhwaInspectionNeo.Schemas
         {
             if (!Global.환경설정.사진저장OK && !Global.환경설정.사진저장NG) return;
             List<String> paths = new List<String> { Global.환경설정.사진저장경로, MvUtils.Utils.FormatDate(DateTime.Now, "{0:yyyy-MM-dd}"), Global.환경설정.선택모델.ToString(), 카메라.ToString() };
-            String name = $"{MvUtils.Utils.FormatDate(Global.VM제어.GetItem((Flow구분)검사번호).검사시간, "{0:HHmmss}")}_{검사번호.ToString("d4")}.png";//_{결과.ToString()}
+            String name = $"{MvUtils.Utils.FormatDate(Global.VM제어.GetItem((Flow구분)검사번호).검사시간, "{0:HHmmss}")}_{검사번호.ToString("d4")}.jpg";//_{결과.ToString()}
             String path = Common.CreateDirectory(paths);
             if (String.IsNullOrEmpty(path))
             {
@@ -349,10 +349,15 @@ namespace SamhwaInspectionNeo.Schemas
             String file = Path.Combine(path, name);
             Task.Run(() =>
             {
-                Int32 level = 3; // 0에서 9까지의 값 중 선택
-                Int32[] @params = new[] { (Int32)ImwriteFlags.PngCompression, level };
-                Cv2.ImWrite(file, 이미지, @params);
-                이미지.Dispose();
+                ImageEncodingParam[] @params = new ImageEncodingParam[] {
+                    new ImageEncodingParam(ImwriteFlags.JpegQuality, 70),
+                    new ImageEncodingParam(ImwriteFlags.JpegOptimize, 1),
+                };
+                이미지.SaveImage(file, @params);
+                //Int32 level = 3; // 0에서 9까지의 값 중 선택
+                //Int32[] @params = new[] { (Int32)ImwriteFlags.PngCompression, level };
+                //Cv2.ImWrite(file, 이미지, @params);
+                //이미지.Dispose();
             });
         }
 
@@ -502,7 +507,8 @@ namespace SamhwaInspectionNeo.Schemas
                 this.주소 = $"{ip1}.{ip2}.{ip3}.{ip4}";
                 this.상태 = this.Init();
                 this.번호 = (int)this.구분;
-                Global.그랩제어.Ready(this.구분);
+                this.Ready();
+                //Global.그랩제어.Ready(this.구분);
             }
             catch (Exception ex)
             {
