@@ -341,8 +341,12 @@ namespace SamhwaInspectionNeo.Schemas
                 {
                     Int32 검사코드 = (Int32)구분 < (int)Flow구분.상부표면검사1 ? (Int32)구분 : (Int32)구분 - 5;
                     this.SetResult(this.구분, Global.환경설정.Front지그 ? 지그위치.Front : 지그위치.Rear);
-                    Global.검사자료.검사결과계산(검사코드);
-                    return true;
+                    검사결과 검사 = Global.검사자료.검사결과계산(검사코드);
+                    
+                    결과구분 e검사결과 = (Int32)구분 < (int)Flow구분.상부표면검사1 ? 검사.CTQ결과 : 검사.외관결과;
+                    Boolean b검사결과 = e검사결과 == 결과구분.OK ? true : false;
+
+                    return b검사결과;
                 }
             }
             catch (Exception ex)

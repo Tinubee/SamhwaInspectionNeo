@@ -45,7 +45,7 @@ namespace SamhwaInspectionNeo.UI.Controls
             if (Global.환경설정.권한여부(유저권한구분.관리자))
             {
                 this.GridView1.AddDeleteMenuItem(정보삭제);
-                this.GridView1.AddExpandMasterPopMenuItems();
+                //this.GridView1.AddExpandMasterPopMenuItems();
                 this.GridView1.AddSelectPopMenuItems();
                 this.GridView1.AddImageViewMenu();
                 

@@ -338,27 +338,31 @@ namespace SamhwaInspectionNeo.Schemas
         public void ImageSave(Mat 이미지, 카메라구분 카메라, Int32 검사번호, Boolean 결과)
         {
             if (!Global.환경설정.사진저장OK && !Global.환경설정.사진저장NG) return;
-            List<String> paths = new List<String> { Global.환경설정.사진저장경로, MvUtils.Utils.FormatDate(DateTime.Now, "{0:yyyy-MM-dd}"), Global.환경설정.선택모델.ToString(), 카메라.ToString() };
-            String name = $"{MvUtils.Utils.FormatDate(Global.VM제어.GetItem((Flow구분)검사번호).검사시간, "{0:HHmmss}")}_{검사번호.ToString("d4")}.jpg";//_{결과.ToString()}
-            String path = Common.CreateDirectory(paths);
-            if (String.IsNullOrEmpty(path))
+      
+            if ((Global.환경설정.사진저장OK && 결과) || (Global.환경설정.사진저장NG && !결과))
             {
-                Global.오류로그(로그영역, "이미지 저장", $"[{Path.Combine(paths.ToArray())}] 디렉토리를 만들 수 없습니다.", true);
-                return;
-            }
-            String file = Path.Combine(path, name);
-            Task.Run(() =>
-            {
-                ImageEncodingParam[] @params = new ImageEncodingParam[] {
+                List<String> paths = new List<String> { Global.환경설정.사진저장경로, MvUtils.Utils.FormatDate(DateTime.Now, "{0:yyyy-MM-dd}"), Global.환경설정.선택모델.ToString(), 카메라.ToString() };
+                String name = $"{MvUtils.Utils.FormatDate(Global.VM제어.GetItem((Flow구분)검사번호).검사시간, "{0:HHmmss}")}_{검사번호.ToString("d4")}.jpg";//_{결과.ToString()}
+                String path = Common.CreateDirectory(paths);
+                if (String.IsNullOrEmpty(path))
+                {
+                    Global.오류로그(로그영역, "이미지 저장", $"[{Path.Combine(paths.ToArray())}] 디렉토리를 만들 수 없습니다.", true);
+                    return;
+                }
+                String file = Path.Combine(path, name);
+                Task.Run(() =>
+                {
+                    ImageEncodingParam[] @params = new ImageEncodingParam[] {
                     new ImageEncodingParam(ImwriteFlags.JpegQuality, 70),
                     new ImageEncodingParam(ImwriteFlags.JpegOptimize, 1),
                 };
-                이미지.SaveImage(file, @params);
-                //Int32 level = 3; // 0에서 9까지의 값 중 선택
-                //Int32[] @params = new[] { (Int32)ImwriteFlags.PngCompression, level };
-                //Cv2.ImWrite(file, 이미지, @params);
-                //이미지.Dispose();
-            });
+                    이미지.SaveImage(file, @params);
+                    //Int32 level = 3; // 0에서 9까지의 값 중 선택
+                    //Int32[] @params = new[] { (Int32)ImwriteFlags.PngCompression, level };
+                    //Cv2.ImWrite(file, 이미지, @params);
+                    //이미지.Dispose();
+                });
+            }
         }
 
         public 카메라장치 GetItem(카메라구분 구분)
