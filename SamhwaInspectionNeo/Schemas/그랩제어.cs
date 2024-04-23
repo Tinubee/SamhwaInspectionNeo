@@ -216,7 +216,7 @@ namespace SamhwaInspectionNeo.Schemas
                     {
                         this.치수검사카메라.splitImage[lop] = new Mat(this.치수검사카메라.mergedImage, this.치수검사카메라.roi[lop]);
 
-                        if (Global.신호제어.마스터모드여부 && lop < 2) return;
+                        if (Global.신호제어.마스터모드여부 && lop < 2) continue;
 
                         Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop).Run(this.치수검사카메라.splitImage[lop], null, null);
 
