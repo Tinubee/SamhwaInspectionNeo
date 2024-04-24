@@ -1,6 +1,7 @@
 ﻿using DevExpress.XtraEditors;
 using SamhwaInspectionNeo.Schemas;
 using System;
+using System.Diagnostics;
 
 namespace SamhwaInspectionNeo.UI.Controls
 {
@@ -22,14 +23,15 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.e트리거보드.Init();
 
             Global.신호제어.원점복귀알림 += 원점복귀알림;
+            Global.신호제어.마스터모드상태알림 += 마스터모드상태알림;
         }
 
-        private void 원점복귀알림()
+        private void 상태초기화()
         {
             try
             {
                 Global.조명제어?.TurnOff();
-                for (int lop = 0; lop < 4; lop++)
+                for (int lop = 0; lop < Global.검사자료.Count; lop++)
                     Global.검사자료.검사스플제거(lop);
 
                 Global.그랩제어.상부표면검사카메라.ClearImage();
@@ -37,15 +39,19 @@ namespace SamhwaInspectionNeo.UI.Controls
                 Global.신호제어.출력자료리셋();
 
                 Global.신호제어.원점복귀완료 = false;
-               
-                Global.정보로그("원점복귀", "원점복귀완료", "초기화 작업 완료.", false);
+
+                Global.정보로그("상태초기화", "상태초기화", "초기화 작업 완료.", false);
             }
             catch (Exception ex)
             {
-                Global.오류로그("원점복귀", "원점복귀완료", $"원점복귀오류 {ex.Message}", true);
+                Global.오류로그("상태초기화", "상태초기화", $"상태초기화오류 {ex.Message}", true);
             }
-
         }
+
+        private void 마스터모드상태알림() => 상태초기화();
+
+        private void 원점복귀알림() => 상태초기화();
+
 
         private void SetLocalization()
         {

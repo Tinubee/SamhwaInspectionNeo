@@ -265,7 +265,9 @@ namespace SamhwaInspectionNeo.Schemas
             if (카메라 == 카메라구분.Cam03) //상부표면검사
             {
                 Global.조명제어.TurnOff(카메라);
-                if (Global.신호제어.마스터모드여부) return;
+                if (Global.신호제어.마스터모드여부)
+                    return;
+
                 Task.Run(() =>
                 {
                     for (int lop = 0; lop < this.상부표면검사카메라.MatImage.Count; lop++)
@@ -286,7 +288,9 @@ namespace SamhwaInspectionNeo.Schemas
             else if (카메라 == 카메라구분.Cam04) //하부표면검사
             {
                 Global.조명제어.TurnOff(카메라);
-                if (Global.신호제어.마스터모드여부) return;
+                if (Global.신호제어.마스터모드여부)
+                    return;
+
                 Task.Run(() =>
                 {
                     for (int lop = 0; lop < this.하부표면검사카메라.MatImage.Count; lop++)

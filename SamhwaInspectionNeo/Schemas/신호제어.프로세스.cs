@@ -46,9 +46,16 @@ namespace SamhwaInspectionNeo.Schemas
             장치상태확인();
             통신핑퐁수행();
             원점복귀확인();
+            마스터모드확인();
             if (!Global.신호제어.자동모드여부)
                 모델변경확인();
             return true;
+        }
+
+        private void 마스터모드확인()
+        {
+            if (this.입출자료.Changed(정보주소.마스터모드)  && this.입출자료.Get(정보주소.마스터모드) == 0)
+                this.마스터모드상태알림?.Invoke();
         }
 
         private void 원점복귀확인()
