@@ -15,7 +15,7 @@ using VM.PlatformSDKCS;
 
 namespace SamhwaInspectionNeo.UI.Control
 {
-    public partial class NgImageViewer : DevExpress.XtraEditors.XtraUserControl
+    public partial class NgImageViewer : XtraUserControl
     {
         public NgImageViewer()
         {

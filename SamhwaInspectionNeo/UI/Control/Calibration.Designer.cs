@@ -116,7 +116,6 @@
             this.b조회.Location = new System.Drawing.Point(980, 9);
             this.b조회.Name = "b조회";
             this.b조회.Size = new System.Drawing.Size(192, 24);
-            this.b조회.StyleController = this.layoutControl1;
             this.b조회.TabIndex = 5;
             this.b조회.Text = "조  회";
             // 
@@ -124,7 +123,6 @@
             // 
             this.e지그선택.Cursor = System.Windows.Forms.Cursors.Hand;
             this.e지그선택.Location = new System.Drawing.Point(207, 7);
-            this.e지그선택.MenuManager = this.barManager1;
             this.e지그선택.Name = "e지그선택";
             this.e지그선택.Properties.Appearance.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.e지그선택.Properties.Appearance.Options.UseFont = true;
@@ -132,7 +130,6 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.e지그선택.Properties.NullText = "[ 지그위치 선택 ]";
             this.e지그선택.Size = new System.Drawing.Size(203, 26);
-            this.e지그선택.StyleController = this.layoutControl1;
             this.e지그선택.TabIndex = 26;
             // 
             // barManager1
@@ -179,7 +176,6 @@
             // 
             this.e플로우선택.Cursor = System.Windows.Forms.Cursors.Hand;
             this.e플로우선택.Location = new System.Drawing.Point(7, 7);
-            this.e플로우선택.MenuManager = this.barManager1;
             this.e플로우선택.Name = "e플로우선택";
             this.e플로우선택.Properties.Appearance.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.e플로우선택.Properties.Appearance.Options.UseFont = true;
@@ -187,7 +183,6 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.e플로우선택.Properties.NullText = "[ 플로우 선택 ]";
             this.e플로우선택.Size = new System.Drawing.Size(196, 26);
-            this.e플로우선택.StyleController = this.layoutControl1;
             this.e플로우선택.TabIndex = 25;
             // 
             // Root

@@ -43,7 +43,7 @@ namespace SamhwaInspectionNeo.Schemas
         public Boolean Close()
         {
             if (this.테이블 == null) return true;
-            this.테이블.SaveAsync();
+            this.테이블.Save();
             this.테이블.자료정리(Global.환경설정.결과보관);
             return this.SaveJson();
         }
@@ -58,6 +58,14 @@ namespace SamhwaInspectionNeo.Schemas
         private String 저장파일(DateTime 날짜) => Path.Combine(Global.환경설정.문서저장경로, MvUtils.Utils.FormatDate(날짜, "{0:yyyyMMdd}") + ".json");
         public void Save() => this.테이블.Save();
         public void SaveAsync() => this.테이블.SaveAsync();
+
+        public void Save(검사결과 결과)
+        {
+            Common.DebugWriteLine("검사결과", 로그구분.정보, $"검사결과 DB 저장 검사일시 : {결과.검사일시}, 검사번호 : {결과.검사코드}");
+
+            this.테이블.Add(결과);
+            this.Save();
+        }
 
         private Boolean SaveJson()
         {
@@ -101,7 +109,7 @@ namespace SamhwaInspectionNeo.Schemas
         private void 자료추가(검사결과 결과)
         {
             this.Insert(0, 결과);
-            this.테이블.Add(결과);
+            //this.테이블.Add(결과);
         }
 
         public void 검사항목제거(List<검사정보> 자료) => this.테이블.Remove(자료);

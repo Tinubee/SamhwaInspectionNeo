@@ -230,14 +230,7 @@ namespace SamhwaInspectionNeo.Schemas
             while (this.작업여부)
             {
                 try {
-                    current = DateTime.Now;
                     입출자료분석();
-                    list.Add((DateTime.Now - current).TotalMilliseconds);
-                    if (list.Count >= count)
-                    {
-                        Debug.WriteLine($"MIN={list.Min()}, MAX={list.Max()}, AVG={list.Average()}");
-                        list.Clear();
-                    }
                 }
                 catch (Exception ex) { Debug.WriteLine(ex.Message, 로그영역); }
                 Thread.Sleep(입출체크간격);
