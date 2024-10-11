@@ -154,6 +154,8 @@ namespace SamhwaInspectionNeo.Schemas
 
             if (Global.신호제어.마스터모드여부) 검사.표면검사강제OK(구분, 지그);
 
+            //if (Global.환경설정.하부표면검사사용여부 == false) 검사.하부표면검사강제OK(구분, 지그);
+
             검사.SetResult(구분, 지그, name, value);
           
             return 검사;

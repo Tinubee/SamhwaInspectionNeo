@@ -74,155 +74,114 @@ namespace SamhwaInspectionNeo.Schemas
         [Result(), ListBindable(false)]
         None = 0,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot1상부 = 1,
+        Slot1_1 = 101,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot1중앙부 = 2,
+        Slot1_2 = 102,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot1하부 = 3,
+        Slot1_3 = 103,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot1위치도 = 4,
+        Slot1_4 = 104,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot1길이 = 5,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot2상부 = 6,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot2중앙부 = 7,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot2하부 = 8,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot2위치도 = 9,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot2길이 = 10,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot3상부 = 11,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot3중앙부 = 12,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot3하부 = 13,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot3위치도 = 14,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot3길이 = 15,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot4상부 = 16,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot4중앙부 = 17,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot4하부 = 18,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot4위치도 = 19,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot4길이 = 20,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        기준홀경 = 21,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        상측홀경 = 22,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌상홀경 = 23,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌하홀경 = 24,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        중앙홀경 = 25,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우상홀경 = 26,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우하홀경 = 27,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        상측위치도 = 28,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌상위치도 = 29,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌하위치도 = 30,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        중앙위치도 = 31,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우상위치도 = 32,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우하위치도 = 33,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        상측위치도X거리 = 128,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌상위치도X거리 = 129,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌하위치도X거리 = 130,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        중앙위치도X거리 = 131,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우상위치도X거리 = 132,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우하위치도X거리 = 133,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        상측위치도Y거리 = 228,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌상위치도Y거리 = 229,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        좌하위치도Y거리 = 230,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        중앙위치도Y거리 = 231,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우상위치도Y거리 = 232,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        우하위치도Y거리 = 233,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot1위치도거리 = 234,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot2위치도거리 = 235,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot3위치도거리 = 236,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot4위치도거리 = 237,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot1_1 = 40,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot1_2 = 41,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot1_3 = 42,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot1_4 = 43,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot1_5 = 44,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot2_1 = 45,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot2_2 = 46,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot2_3 = 47,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot2_4 = 48,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot2_5 = 49,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot3_1 = 50,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot3_2 = 51,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot3_3 = 52,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot3_4 = 53,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot3_5 = 54,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot4_1 = 55,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot4_2 = 56,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot4_3 = 57,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot4_4 = 58,
-        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
-        Slot4_5 = 59,
+        Slot1_5 = 105,
         [Result(검사그룹.SURFACE, 결과분류.Summary, 장치구분.Cam01)]
-        Slot1_Bur = 60,
+        Slot1_Bur = 120,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot1위치도 = 121,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot2_1 = 201,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot2_2 = 202,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot2_3 = 203,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot2_4 = 204,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot2_5 = 205,
         [Result(검사그룹.SURFACE, 결과분류.Summary, 장치구분.Cam01)]
-        Slot2_Bur = 61,
+        Slot2_Bur = 220,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot2위치도 = 221,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot3_1 = 301,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot3_2 = 302,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot3_3 = 303,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot3_4 = 304,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot3_5 = 305,
         [Result(검사그룹.SURFACE, 결과분류.Summary, 장치구분.Cam01)]
-        Slot3_Bur = 62,
+        Slot3_Bur = 320,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot3위치도 = 321,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot4_1 = 401,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot4_2 = 402,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot4_3 = 403,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot4_4 = 404,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot4_5 = 405,
         [Result(검사그룹.SURFACE, 결과분류.Summary, 장치구분.Cam01)]
-        Slot4_Bur = 63,
+        Slot4_Bur = 420,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        Slot4위치도 = 421,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        기준홀경 = 1001,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        상측홀경 = 1101,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        상측위치도X거리 = 1102,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        상측위치도Y거리 = 1103,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        상측위치도 = 1104,
+
+
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        좌상홀경 = 1201,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        좌상위치도X거리 = 1202,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        좌상위치도Y거리 = 1203,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        좌상위치도 = 1204,
+        //[Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        //좌하홀경 = 1301,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        중앙홀경 = 1401,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        중앙위치도X거리 = 1402,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        중앙위치도Y거리 = 1403,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        중앙위치도 = 1404,
+
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우상홀경 = 1501,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우상위치도X거리 = 1502,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우상위치도Y거리 = 1503,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우상위치도 = 1504,
+
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우하홀경 = 1601,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우하위치도X거리 = 1602,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우하위치도Y거리 = 1603,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우하위치도 = 1604,
+     
         [Result(검사그룹.SURFACE, 결과분류.Summary, 장치구분.Cam03)]
-        상부표면검사 = 500,
+        상부표면검사 = 5000,
         [Result(검사그룹.SURFACE, 결과분류.Summary, 장치구분.Cam04)]
-        하부표면검사 = 501,
+        하부표면검사 = 5100,
     }
 
     public enum 단위구분
@@ -373,10 +332,13 @@ namespace SamhwaInspectionNeo.Schemas
         public 검사정보 GetItem(검사항목 항목) => 검사내역.Where(e => e.검사항목 == 항목).FirstOrDefault();
 
         public Boolean 표면검사강제OK(Flow구분 구분, 지그위치 지그) => SetResult(검사내역.Where(e => e.검사항목.ToString() == "상부표면검사").FirstOrDefault(), 0, 구분, 지그);
+
+        public Boolean 하부표면검사강제OK(Flow구분 구분, 지그위치 지그) => SetResult(검사내역.Where(e => e.검사항목.ToString() == "하부표면검사").FirstOrDefault(), 0, 구분, 지그);
         public Boolean SetResult(Flow구분 구분, 지그위치 지그, String name, Single value) => SetResult(검사내역.Where(e => e.검사항목.ToString() == name).FirstOrDefault(), value, 구분, 지그);
         public Boolean SetResult(검사정보 검사, Single value, Flow구분 구분, 지그위치 지그)
         {
             if (검사 == null) return false;
+
             if (Single.IsNaN(value))
             {
                 검사.측정결과 = 결과구분.ER;

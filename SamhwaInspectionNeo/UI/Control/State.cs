@@ -109,7 +109,6 @@ namespace SamhwaInspectionNeo.UI.Controls
             if (this.InvokeRequired) { this.BeginInvoke((Action)(() => 검사완료알림(결과))); return; }
 
             // DB 저장
-
             Global.검사자료.Save(결과);
             //Global.검사자료.SaveAsync();
             this.검사상태표현(결과.측정결과);

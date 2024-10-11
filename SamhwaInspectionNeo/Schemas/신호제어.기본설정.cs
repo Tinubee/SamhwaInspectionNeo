@@ -224,9 +224,6 @@ namespace SamhwaInspectionNeo.Schemas
         private void 장치통신작업()
         {
             Global.정보로그(로그영역, "PLC 통신", $"통신을 시작합니다.", false);
-            Int32 count = 1000;
-            List<Double> list = new List<double>();
-            DateTime current = DateTime.Now;
             while (this.작업여부)
             {
                 try {

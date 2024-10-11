@@ -188,14 +188,14 @@ namespace SamhwaInspectionNeo.UI.Control
                     {
                         if (name.ToString().Contains("위치도"))
                         {
-                            if (name.ToString().Contains("거리") == false)
+                            if (name.ToString().Contains("거리") == false && name.ToString().Contains("Slot") == false)
                             {
                                 isCalculating = false;
                                 MvUtils.Utils.MessageBox("보정값계산", "위치도값은 보정할 수 없습니다. X,Y 거리를 보정해주세요.", 2000);
                                 return;
                             }
                         }
-
+                        //2P-B모델 좌상X좌표 0, 우하Y좌표 0
                         calvalue = (float)(cmmdvalue / measdvalue);
                     }
 
