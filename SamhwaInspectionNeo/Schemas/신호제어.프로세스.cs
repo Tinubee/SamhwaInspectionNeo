@@ -72,17 +72,17 @@ namespace SamhwaInspectionNeo.Schemas
 
         private void 모델변경확인()
         {
-            Int32 모델번호 = Global.신호제어.모델변경트리거;
-            모델구분 현재모델 = Global.환경설정.선택모델;
-            Int32 모델명 = 모델명변환(모델번호);
+            //Int32 모델번호 = Global.신호제어.모델변경트리거;
+            //모델구분 현재모델 = Global.환경설정.선택모델;
+            ////Int32 모델명 = 모델명변환(모델번호);
 
-            if ((모델구분)모델명 != 현재모델)
-            {
-                Task.Run(() =>
-                {
-                    Global.환경설정.모델변경요청((모델구분)모델명);
-                });
-            }
+            //if ((모델구분)모델번호 != 현재모델)
+            //{
+            //    Task.Run(() =>
+            //    {
+            //        Global.환경설정.모델변경요청((모델구분)모델번호);
+            //    });
+            //}
         }
 
         private Int32 모델명변환(Int32 모델번호) //PLC에서 받은 모델명 String으로 변환
@@ -182,11 +182,11 @@ namespace SamhwaInspectionNeo.Schemas
         public void 검사스플생성()
         {
             Int32 검사코드 = 0;
-            for (int lop = 0; lop < 4; lop++)
+            for (int lop = 0; lop < 6; lop++)
             {
                 검사코드 = Global.신호제어.마스터모드여부 ? Convert.ToInt32((Flow구분)lop + 100) : Convert.ToInt32((Flow구분)lop);
                 //마스터 모드일때 Flow1,2만 실행하도록
-                if (Global.신호제어.마스터모드여부 && lop < 2) continue;
+                if (Global.신호제어.마스터모드여부 && lop < 3) continue;
 
                 Global.검사자료.검사시작(검사코드);
             }

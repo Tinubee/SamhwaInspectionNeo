@@ -46,7 +46,7 @@ namespace SamhwaInspectionNeo.Schemas
         [JsonProperty("TriggerBoard"), Translation("TriggerBoard", "트리거보드")]
         public MVEnc852v3Comm 트리거보드 { get; set; }
         [JsonProperty("Port"), Translation("Port", "포트")]
-        public 조명포트 포트 { get; set; } = 조명포트.COM3;
+        public 조명포트 포트 { get; set; } = 조명포트.COM6;
         [JsonProperty("FirmWareVersion"), Translation("FirmWareVersion", "펌웨어버전")]
         public String 펌웨어버전 { get; set; }
         [JsonProperty("LogicVersion"), Translation("LogicVersion", "로직버전")]

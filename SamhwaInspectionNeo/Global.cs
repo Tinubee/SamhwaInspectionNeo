@@ -46,7 +46,7 @@ namespace SamhwaInspectionNeo
             public static Boolean 장치통신 { get { return 신호제어.정상여부; } }
             public static Boolean 조명장치1 { get { return (조명제어.컨트롤러1) != null && 조명제어.조명컨트롤러1정상여부; } }
             public static Boolean 조명장치2 { get { return (조명제어.컨트롤러2) != null && 조명제어.조명컨트롤러2정상여부; } }
-            public static Boolean 조명장치3 { get { return (조명제어.컨트롤러3) != null && 조명제어.조명컨트롤러3정상여부; } }
+            //public static Boolean 조명장치3 { get { return (조명제어.컨트롤러3) != null && 조명제어.조명컨트롤러3정상여부; } }
             public static Boolean 트리거보드 { get { return (트리거보드제어?.트리거보드) != null && 트리거보드제어.트리거보드.IsOpen; } }
         }
 

@@ -243,13 +243,15 @@ namespace SamhwaInspectionNeo.Schemas
         public Decimal 교정값 { get; set; } = 1m;
         [Column("idmes"), JsonProperty("idmes"), Translation("Measure", "측정값")]
         public Decimal 측정값 { get; set; } = 0m;
+        //[Column("idcmm"), JsonProperty("idcmm"), Translation("CMMData", "CMM측정값")]
+        //public Decimal CMM측정값 { get; set; } = 0m;
         [Column("idmaster"), JsonProperty("idmaster"), Translation("Master", "마스터값"), BatchEdit(true)]
         public Decimal 마스터값 { get; set; } = 0m;
         [Column("idmastertol"), JsonProperty("idmastertol"), Translation("MasterTol", "마스터공차"), BatchEdit(true)]
         public Decimal 마스터공차 { get; set; } = 0m;
         [Column("idval"), JsonProperty("idval"), Translation("Value", "결과값")]
         public Decimal 결과값 { get; set; } = 0m;
-        [Column("idres"), JsonProperty("idres"), Translation("Result", "판정")]
+        [Column("idres"), JsonProperty("idres"), Translation("Result", "판정")] 
         public 결과구분 측정결과 { get; set; } = 결과구분.NO;
         [NotMapped, JsonIgnore]
         public Double 검사시간 = 0;
@@ -311,7 +313,7 @@ namespace SamhwaInspectionNeo.Schemas
         public void Reset()
         {
             this.검사일시 = DateTime.Now.AddMilliseconds(this.검사코드 * 10);
-            if (this.검사코드 < 4)
+            if (this.검사코드 < 6)
                 Global.VM제어.GetItem((Flow구분)this.검사코드).검사시간 = this.검사일시;
             Debug.WriteLine($"{this.검사일시.ToString("HH:mm:ss.ffffff")}");
             this.모델구분 = Global.환경설정.선택모델;

@@ -18,19 +18,25 @@ namespace SamhwaInspectionNeo.Schemas
 {
     public enum Flow구분
     {
-        Flow1,
-        Flow2,
-        Flow3,
-        Flow4,
-        공트레이검사,
-        상부표면검사1,
-        상부표면검사2,
-        상부표면검사3,
-        상부표면검사4,
-        하부표면검사1,
-        하부표면검사2,
-        하부표면검사3,
-        하부표면검사4,
+        Flow1 = 0,
+        Flow2 = 1,
+        Flow3 = 2,
+        Flow4 = 3,
+        Flow5 = 4,
+        Flow6 = 5,
+        공트레이검사 = 7,
+        상부표면검사1 = 10,
+        상부표면검사2 = 11,
+        상부표면검사3 = 12,
+        상부표면검사4 = 13,
+        상부표면검사5 = 14,
+        상부표면검사6 = 15,
+        하부표면검사1 = 20,
+        하부표면검사2 = 21,
+        하부표면검사3 = 22,
+        하부표면검사4 = 23,
+        하부표면검사5 = 24,
+        하부표면검사6 = 25,
         모델감지및역투입,
         NG = 99
     }
@@ -140,7 +146,7 @@ namespace SamhwaInspectionNeo.Schemas
 
         public 비전마스터플로우(Flow구분 구분)
         {
-          
+
             this.구분 = 구분;
             this.결과 = false;
             this.검사시간 = DateTime.Now;
@@ -284,7 +290,7 @@ namespace SamhwaInspectionNeo.Schemas
                 imageBaseData = mat == null ? imageBaseData : MatToImageBaseData(mat);
                 if (imageBaseData != null)
                     this.imageSourceModuleTool.SetImageData(imageBaseData);
-                
+
                 this.Procedure.Run();
 
                 if (this.구분 >= Flow구분.하부표면검사1)
@@ -323,7 +329,7 @@ namespace SamhwaInspectionNeo.Schemas
                 }
                 //Boolean Front = Global.신호제어.Front지그; //Global.VM제어.글로벌변수제어.GetValue("Front지그") == "1" ? true : false; 
 
-                if(mat == null && imageBaseData == null)
+                if (mat == null && imageBaseData == null)
                     this.imageSourceModuleTool.SetImagePath(imagePath);
                 else
                 {
@@ -341,10 +347,10 @@ namespace SamhwaInspectionNeo.Schemas
                 }
                 else
                 {
-                    Int32 검사코드 = (Int32)구분 < (int)Flow구분.상부표면검사1 ? (Int32)구분 : (Int32)구분 - 5;
+                    Int32 검사코드 = (Int32)구분 < (int)Flow구분.상부표면검사1 ? (Int32)구분 : (Int32)구분 < (int)Flow구분.하부표면검사1 ? (Int32)구분 - 10 : (Int32)구분 - 20;
                     this.SetResult(this.구분, Global.환경설정.Front지그 ? 지그위치.Front : 지그위치.Rear);
                     검사결과 검사 = Global.검사자료.검사결과계산(검사코드);
-                    
+
                     결과구분 e검사결과 = (Int32)구분 < (int)Flow구분.상부표면검사1 ? 검사.CTQ결과 : 검사.외관결과;
                     Boolean b검사결과 = e검사결과 == 결과구분.OK ? true : false;
 

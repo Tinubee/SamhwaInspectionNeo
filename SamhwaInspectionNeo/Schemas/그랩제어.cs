@@ -273,7 +273,7 @@ namespace SamhwaInspectionNeo.Schemas
                     for (int lop = 0; lop < this.상부표면검사카메라.MatImage.Count; lop++)
                     {
                         this.검사스플생성(lop);
-                        Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop + 5).Run(이미지[lop], null, null);
+                        Boolean 결과 = Global.VM제어.GetItem((Flow구분)lop + 10).Run(이미지[lop], null, null);
                         Common.DebugWriteLine(로그영역, 로그구분.정보, $"[ 상부표면검사 - {lop}] 검사완료 : {결과}.");
                         if (이미지[lop] != null)
                             this.ImageSave(이미지[lop], 카메라구분.Cam03, lop, 결과);
@@ -295,7 +295,7 @@ namespace SamhwaInspectionNeo.Schemas
                 {
                     for (int lop = 0; lop < this.하부표면검사카메라.MatImage.Count; lop++)
                     {
-                        String 결과 = Global.VM제어.GetItem((Flow구분)lop + 9).RunStr(이미지[lop], null);
+                        String 결과 = Global.VM제어.GetItem((Flow구분)lop + 20).RunStr(이미지[lop], null);
                         Common.DebugWriteLine(로그영역, 로그구분.정보, $"[ 하부표면검사 - {lop}] 검사완료 : {결과}.");
                         Global.신호제어.SetDevice($"W008{lop}", 결과 == String.Empty ? 3 : Convert.ToInt32(결과) == 0 ? 1 : 2, out Int32 오류);
                         Boolean b결과 = 결과 != string.Empty && (Convert.ToInt32(결과) == 0);
@@ -325,16 +325,16 @@ namespace SamhwaInspectionNeo.Schemas
                 });
             }
 
-            if (카메라 == 카메라구분.Cam05)
-            {
-                Task.Run(() =>
-                {
-                    Boolean 결과 = Global.VM제어.GetItem(Flow구분.모델감지및역투입).Run(이미지, null, null);
-                    if (이미지 != null)
-                        this.ImageSave(이미지, 카메라구분.Cam02, 0, 결과);
-                    Global.신호제어.SetDevice($"W0013", 결과 ? 1 : 2, out Int32 오류);
-                });
-            }
+            //if (카메라 == 카메라구분.Cam05)
+            //{
+            //    Task.Run(() =>
+            //    {
+            //        Boolean 결과 = Global.VM제어.GetItem(Flow구분.모델감지및역투입).Run(이미지, null, null);
+            //        if (이미지 != null)
+            //            this.ImageSave(이미지, 카메라구분.Cam02, 0, 결과);
+            //        Global.신호제어.SetDevice($"W0013", 결과 ? 1 : 2, out Int32 오류);
+            //    });
+            //}
             //Global.조명제어?.TurnOff(카메라);
             this.그랩완료보고?.Invoke(카메라, 이미지);
         }
@@ -454,7 +454,7 @@ namespace SamhwaInspectionNeo.Schemas
         public Mat mergedImage;
         //public Rect[] roi = new Rect[4];
         //public Rect roiAlign;
-        public Mat[] splitImage = new Mat[4];
+        public Mat[] splitImage = new Mat[6];
 
         public virtual void Set(카메라장치 장치)
         {
@@ -492,7 +492,7 @@ namespace SamhwaInspectionNeo.Schemas
         //[JsonIgnore]
         //private Boolean IsGrabbing = false;
         [JsonIgnore]
-        public uint ImageCount = 4;
+        public uint ImageCount = 6;
         [JsonIgnore]
         public List<Mat> MatImage = new List<Mat>();
         [JsonIgnore, Description("Trig Mode")]
@@ -707,7 +707,7 @@ namespace SamhwaInspectionNeo.Schemas
         [JsonIgnore, Description("채널번호")]
         public UInt32 Channel;
         [JsonIgnore, Description("카메라 설정 파일")]
-        public string CamFile { get; set; } = "LineCameraConfig.cam";
+        public string CamFile { get; set; } = "LA-CM-16K05A_L16380SC.cam";
         [JsonIgnore, Description("그래버 보드 Index")]
         public UInt32 DriverIndex { get; set; } = 0;
         [JsonIgnore, Description("Connector")]
@@ -719,7 +719,7 @@ namespace SamhwaInspectionNeo.Schemas
         [JsonIgnore, Description("SeqLength_pg")]
         public Int32 SeqLength_pg { get; set; } = 2;
         [JsonIgnore, Description("Page Length")]
-        public Int32 PageLength_Ln { get; set; } = 40000;
+        public Int32 PageLength_Ln { get; set; } = 45000;
         [JsonIgnore]
         private MC.CALLBACK CamCallBack;
 
@@ -731,7 +731,7 @@ namespace SamhwaInspectionNeo.Schemas
         public Int32 SplitPointStart { get; set; } = 0;
         public Int32 SplitPointX { get; set; } = 0;
         public Int32 SplitPointY { get; set; } = 0;
-        public Rect[] roi = new Rect[4];
+        public Rect[] roi = new Rect[6];
 
         public EuresysLink(카메라구분 구분)
         {
@@ -773,10 +773,17 @@ namespace SamhwaInspectionNeo.Schemas
                 this.SplitPointX = Convert.ToInt32(Global.VM제어.글로벌변수제어.GetValue("SplitPointX"));
                 this.SplitPointY = Convert.ToInt32(Global.VM제어.글로벌변수제어.GetValue("SplitPointY"));
 
-                for (int lop = 0; lop < this.roi.Length; lop++)
-                {
-                    this.roi[lop] = new Rect(SplitPointX, SplitPointStart + (SplitPointY * lop), this.width, 18000);
-                }
+                //for (int lop = 0; lop < this.roi.Length; lop++)
+                //{
+                //    this.roi[lop] = new Rect(SplitPointX, SplitPointStart + (SplitPointY * lop), this.width, 13000);
+                //}
+
+                this.roi[0] = new Rect(0, 1919, this.width, 13000);
+                this.roi[1] = new Rect(0, 15520, this.width, 13000);
+                this.roi[2] = new Rect(0, 29118, this.width, 13000);
+                this.roi[3] = new Rect(0, 42732, this.width, 13000);
+                this.roi[4] = new Rect(0, 56267, this.width, 13000);
+                this.roi[5] = new Rect(0, 69909, this.width, 13000);
 
                 return true;
             }

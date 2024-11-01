@@ -58,6 +58,16 @@
             this.p트레이검사 = new DevExpress.XtraTab.XtraTabPage();
             this.tablePanel4 = new DevExpress.Utils.Layout.TablePanel();
             this.trayViewer = new VMControls.Winform.Release.VmRenderControl();
+            this.tablePanel9 = new DevExpress.Utils.Layout.TablePanel();
+            this.Flow5결과 = new DevExpress.XtraEditors.LabelControl();
+            this.Flow5Viewer = new VMControls.Winform.Release.VmRenderControl();
+            this.tablePanel10 = new DevExpress.Utils.Layout.TablePanel();
+            this.Flow6결과 = new DevExpress.XtraEditors.LabelControl();
+            this.Flow6Viewer = new VMControls.Winform.Release.VmRenderControl();
+            this.UpSurfaceViewer5 = new VMControls.Winform.Release.VmRenderControl();
+            this.UpSurfaceViewer6 = new VMControls.Winform.Release.VmRenderControl();
+            this.DownSurfaceViewer5 = new VMControls.Winform.Release.VmRenderControl();
+            this.DownSurfaceViewer6 = new VMControls.Winform.Release.VmRenderControl();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.p치수검사.SuspendLayout();
@@ -80,6 +90,10 @@
             this.p트레이검사.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel4)).BeginInit();
             this.tablePanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tablePanel9)).BeginInit();
+            this.tablePanel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tablePanel10)).BeginInit();
+            this.tablePanel10.SuspendLayout();
             this.SuspendLayout();
             // 
             // xtraTabControl1
@@ -108,7 +122,10 @@
             // 
             this.tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F),
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F)});
+            this.tablePanel1.Controls.Add(this.tablePanel10);
+            this.tablePanel1.Controls.Add(this.tablePanel9);
             this.tablePanel1.Controls.Add(this.tablePanel7);
             this.tablePanel1.Controls.Add(this.tablePanel6);
             this.tablePanel1.Controls.Add(this.tablePanel5);
@@ -127,20 +144,20 @@
             // tablePanel7
             // 
             this.tablePanel7.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.tablePanel1.SetColumn(this.tablePanel7, 1);
+            this.tablePanel1.SetColumn(this.tablePanel7, 0);
             this.tablePanel7.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F)});
             this.tablePanel7.Controls.Add(this.Flow4결과);
             this.tablePanel7.Controls.Add(this.Flow4Viewer);
             this.tablePanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tablePanel7.Location = new System.Drawing.Point(793, 500);
+            this.tablePanel7.Location = new System.Drawing.Point(11, 500);
             this.tablePanel7.Margin = new System.Windows.Forms.Padding(0);
             this.tablePanel7.Name = "tablePanel7";
             this.tablePanel1.SetRow(this.tablePanel7, 1);
             this.tablePanel7.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 5F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 95F)});
-            this.tablePanel7.Size = new System.Drawing.Size(782, 490);
+            this.tablePanel7.Size = new System.Drawing.Size(521, 490);
             this.tablePanel7.TabIndex = 6;
             this.tablePanel7.UseSkinIndents = true;
             // 
@@ -158,7 +175,7 @@
             this.Flow4결과.Location = new System.Drawing.Point(13, 12);
             this.Flow4결과.Name = "Flow4결과";
             this.tablePanel7.SetRow(this.Flow4결과, 0);
-            this.Flow4결과.Size = new System.Drawing.Size(756, 19);
+            this.Flow4결과.Size = new System.Drawing.Size(495, 19);
             this.Flow4결과.TabIndex = 4;
             this.Flow4결과.Text = "Flow4결과";
             // 
@@ -175,7 +192,7 @@
             this.Flow4Viewer.ModuleSource = null;
             this.Flow4Viewer.Name = "Flow4Viewer";
             this.tablePanel7.SetRow(this.Flow4Viewer, 1);
-            this.Flow4Viewer.Size = new System.Drawing.Size(752, 434);
+            this.Flow4Viewer.Size = new System.Drawing.Size(491, 434);
             this.Flow4Viewer.TabIndex = 3;
             // 
             // tablePanel6
@@ -187,14 +204,14 @@
             this.tablePanel6.Controls.Add(this.Flow2결과);
             this.tablePanel6.Controls.Add(this.Flow2Viewer);
             this.tablePanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tablePanel6.Location = new System.Drawing.Point(793, 10);
+            this.tablePanel6.Location = new System.Drawing.Point(532, 10);
             this.tablePanel6.Margin = new System.Windows.Forms.Padding(0);
             this.tablePanel6.Name = "tablePanel6";
             this.tablePanel1.SetRow(this.tablePanel6, 0);
             this.tablePanel6.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 5F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 95F)});
-            this.tablePanel6.Size = new System.Drawing.Size(782, 490);
+            this.tablePanel6.Size = new System.Drawing.Size(521, 490);
             this.tablePanel6.TabIndex = 6;
             this.tablePanel6.UseSkinIndents = true;
             // 
@@ -212,7 +229,7 @@
             this.Flow2결과.Location = new System.Drawing.Point(13, 12);
             this.Flow2결과.Name = "Flow2결과";
             this.tablePanel6.SetRow(this.Flow2결과, 0);
-            this.Flow2결과.Size = new System.Drawing.Size(756, 19);
+            this.Flow2결과.Size = new System.Drawing.Size(495, 19);
             this.Flow2결과.TabIndex = 4;
             this.Flow2결과.Text = "Flow2결과";
             // 
@@ -229,26 +246,26 @@
             this.Flow2Viewer.ModuleSource = null;
             this.Flow2Viewer.Name = "Flow2Viewer";
             this.tablePanel6.SetRow(this.Flow2Viewer, 1);
-            this.Flow2Viewer.Size = new System.Drawing.Size(752, 434);
+            this.Flow2Viewer.Size = new System.Drawing.Size(491, 434);
             this.Flow2Viewer.TabIndex = 3;
             // 
             // tablePanel5
             // 
             this.tablePanel5.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.tablePanel1.SetColumn(this.tablePanel5, 0);
+            this.tablePanel1.SetColumn(this.tablePanel5, 2);
             this.tablePanel5.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F)});
             this.tablePanel5.Controls.Add(this.Flow3결과);
             this.tablePanel5.Controls.Add(this.Flow3Viewer);
             this.tablePanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tablePanel5.Location = new System.Drawing.Point(11, 500);
+            this.tablePanel5.Location = new System.Drawing.Point(1053, 10);
             this.tablePanel5.Margin = new System.Windows.Forms.Padding(0);
             this.tablePanel5.Name = "tablePanel5";
-            this.tablePanel1.SetRow(this.tablePanel5, 1);
+            this.tablePanel1.SetRow(this.tablePanel5, 0);
             this.tablePanel5.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 5F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 95F)});
-            this.tablePanel5.Size = new System.Drawing.Size(782, 490);
+            this.tablePanel5.Size = new System.Drawing.Size(521, 490);
             this.tablePanel5.TabIndex = 5;
             this.tablePanel5.UseSkinIndents = true;
             // 
@@ -266,7 +283,7 @@
             this.Flow3결과.Location = new System.Drawing.Point(13, 12);
             this.Flow3결과.Name = "Flow3결과";
             this.tablePanel5.SetRow(this.Flow3결과, 0);
-            this.Flow3결과.Size = new System.Drawing.Size(756, 19);
+            this.Flow3결과.Size = new System.Drawing.Size(495, 19);
             this.Flow3결과.TabIndex = 4;
             this.Flow3결과.Text = "Flow3결과";
             // 
@@ -283,7 +300,7 @@
             this.Flow3Viewer.ModuleSource = null;
             this.Flow3Viewer.Name = "Flow3Viewer";
             this.tablePanel5.SetRow(this.Flow3Viewer, 1);
-            this.Flow3Viewer.Size = new System.Drawing.Size(752, 434);
+            this.Flow3Viewer.Size = new System.Drawing.Size(491, 434);
             this.Flow3Viewer.TabIndex = 3;
             // 
             // tablePanel3
@@ -302,7 +319,7 @@
             this.tablePanel3.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 5F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 95F)});
-            this.tablePanel3.Size = new System.Drawing.Size(782, 490);
+            this.tablePanel3.Size = new System.Drawing.Size(521, 490);
             this.tablePanel3.TabIndex = 4;
             this.tablePanel3.UseSkinIndents = true;
             // 
@@ -321,7 +338,7 @@
             this.Flow1결과.Location = new System.Drawing.Point(13, 12);
             this.Flow1결과.Name = "Flow1결과";
             this.tablePanel3.SetRow(this.Flow1결과, 0);
-            this.Flow1결과.Size = new System.Drawing.Size(756, 19);
+            this.Flow1결과.Size = new System.Drawing.Size(495, 19);
             this.Flow1결과.TabIndex = 4;
             this.Flow1결과.Text = "Flow1결과";
             // 
@@ -338,7 +355,7 @@
             this.Flow1Viewer.ModuleSource = null;
             this.Flow1Viewer.Name = "Flow1Viewer";
             this.tablePanel3.SetRow(this.Flow1Viewer, 1);
-            this.Flow1Viewer.Size = new System.Drawing.Size(752, 434);
+            this.Flow1Viewer.Size = new System.Drawing.Size(491, 434);
             this.Flow1Viewer.TabIndex = 3;
             // 
             // p상부표면검사
@@ -353,7 +370,10 @@
             // 
             this.tablePanel2.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F),
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F)});
+            this.tablePanel2.Controls.Add(this.UpSurfaceViewer6);
+            this.tablePanel2.Controls.Add(this.UpSurfaceViewer5);
             this.tablePanel2.Controls.Add(this.UpSurfaceViewer4);
             this.tablePanel2.Controls.Add(this.UpSurfaceViewer3);
             this.tablePanel2.Controls.Add(this.UpSurfaceViewer2);
@@ -372,33 +392,33 @@
             // UpSurfaceViewer4
             // 
             this.UpSurfaceViewer4.BackColor = System.Drawing.Color.Black;
-            this.tablePanel2.SetColumn(this.UpSurfaceViewer4, 1);
+            this.tablePanel2.SetColumn(this.UpSurfaceViewer4, 0);
             this.UpSurfaceViewer4.CoordinateInfoVisible = true;
             this.UpSurfaceViewer4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UpSurfaceViewer4.ImageSource = null;
             this.UpSurfaceViewer4.IsShowCustomROIMenu = false;
-            this.UpSurfaceViewer4.Location = new System.Drawing.Point(797, 505);
+            this.UpSurfaceViewer4.Location = new System.Drawing.Point(15, 505);
             this.UpSurfaceViewer4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.UpSurfaceViewer4.ModuleSource = null;
             this.UpSurfaceViewer4.Name = "UpSurfaceViewer4";
             this.tablePanel2.SetRow(this.UpSurfaceViewer4, 1);
-            this.UpSurfaceViewer4.Size = new System.Drawing.Size(774, 480);
+            this.UpSurfaceViewer4.Size = new System.Drawing.Size(513, 480);
             this.UpSurfaceViewer4.TabIndex = 3;
             // 
             // UpSurfaceViewer3
             // 
             this.UpSurfaceViewer3.BackColor = System.Drawing.Color.Black;
-            this.tablePanel2.SetColumn(this.UpSurfaceViewer3, 0);
+            this.tablePanel2.SetColumn(this.UpSurfaceViewer3, 2);
             this.UpSurfaceViewer3.CoordinateInfoVisible = true;
             this.UpSurfaceViewer3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UpSurfaceViewer3.ImageSource = null;
             this.UpSurfaceViewer3.IsShowCustomROIMenu = false;
-            this.UpSurfaceViewer3.Location = new System.Drawing.Point(15, 505);
+            this.UpSurfaceViewer3.Location = new System.Drawing.Point(1057, 15);
             this.UpSurfaceViewer3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.UpSurfaceViewer3.ModuleSource = null;
             this.UpSurfaceViewer3.Name = "UpSurfaceViewer3";
-            this.tablePanel2.SetRow(this.UpSurfaceViewer3, 1);
-            this.UpSurfaceViewer3.Size = new System.Drawing.Size(774, 480);
+            this.tablePanel2.SetRow(this.UpSurfaceViewer3, 0);
+            this.UpSurfaceViewer3.Size = new System.Drawing.Size(513, 480);
             this.UpSurfaceViewer3.TabIndex = 2;
             // 
             // UpSurfaceViewer2
@@ -409,12 +429,12 @@
             this.UpSurfaceViewer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UpSurfaceViewer2.ImageSource = null;
             this.UpSurfaceViewer2.IsShowCustomROIMenu = false;
-            this.UpSurfaceViewer2.Location = new System.Drawing.Point(797, 15);
+            this.UpSurfaceViewer2.Location = new System.Drawing.Point(536, 15);
             this.UpSurfaceViewer2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.UpSurfaceViewer2.ModuleSource = null;
             this.UpSurfaceViewer2.Name = "UpSurfaceViewer2";
             this.tablePanel2.SetRow(this.UpSurfaceViewer2, 0);
-            this.UpSurfaceViewer2.Size = new System.Drawing.Size(774, 480);
+            this.UpSurfaceViewer2.Size = new System.Drawing.Size(513, 480);
             this.UpSurfaceViewer2.TabIndex = 1;
             // 
             // UpSurfaceViewer1
@@ -430,7 +450,7 @@
             this.UpSurfaceViewer1.ModuleSource = null;
             this.UpSurfaceViewer1.Name = "UpSurfaceViewer1";
             this.tablePanel2.SetRow(this.UpSurfaceViewer1, 0);
-            this.UpSurfaceViewer1.Size = new System.Drawing.Size(774, 482);
+            this.UpSurfaceViewer1.Size = new System.Drawing.Size(513, 482);
             this.UpSurfaceViewer1.TabIndex = 0;
             // 
             // p하부표면검사
@@ -444,7 +464,10 @@
             // 
             this.tablePanel8.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F),
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F)});
+            this.tablePanel8.Controls.Add(this.DownSurfaceViewer6);
+            this.tablePanel8.Controls.Add(this.DownSurfaceViewer5);
             this.tablePanel8.Controls.Add(this.DownSurfaceViewer4);
             this.tablePanel8.Controls.Add(this.DownSurfaceViewer3);
             this.tablePanel8.Controls.Add(this.DownSurfaceViewer2);
@@ -463,33 +486,33 @@
             // DownSurfaceViewer4
             // 
             this.DownSurfaceViewer4.BackColor = System.Drawing.Color.Black;
-            this.tablePanel8.SetColumn(this.DownSurfaceViewer4, 1);
+            this.tablePanel8.SetColumn(this.DownSurfaceViewer4, 0);
             this.DownSurfaceViewer4.CoordinateInfoVisible = true;
             this.DownSurfaceViewer4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DownSurfaceViewer4.ImageSource = null;
             this.DownSurfaceViewer4.IsShowCustomROIMenu = false;
-            this.DownSurfaceViewer4.Location = new System.Drawing.Point(797, 505);
+            this.DownSurfaceViewer4.Location = new System.Drawing.Point(15, 505);
             this.DownSurfaceViewer4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.DownSurfaceViewer4.ModuleSource = null;
             this.DownSurfaceViewer4.Name = "DownSurfaceViewer4";
             this.tablePanel8.SetRow(this.DownSurfaceViewer4, 1);
-            this.DownSurfaceViewer4.Size = new System.Drawing.Size(774, 480);
+            this.DownSurfaceViewer4.Size = new System.Drawing.Size(513, 480);
             this.DownSurfaceViewer4.TabIndex = 3;
             // 
             // DownSurfaceViewer3
             // 
             this.DownSurfaceViewer3.BackColor = System.Drawing.Color.Black;
-            this.tablePanel8.SetColumn(this.DownSurfaceViewer3, 0);
+            this.tablePanel8.SetColumn(this.DownSurfaceViewer3, 2);
             this.DownSurfaceViewer3.CoordinateInfoVisible = true;
             this.DownSurfaceViewer3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DownSurfaceViewer3.ImageSource = null;
             this.DownSurfaceViewer3.IsShowCustomROIMenu = false;
-            this.DownSurfaceViewer3.Location = new System.Drawing.Point(15, 505);
+            this.DownSurfaceViewer3.Location = new System.Drawing.Point(1057, 15);
             this.DownSurfaceViewer3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.DownSurfaceViewer3.ModuleSource = null;
             this.DownSurfaceViewer3.Name = "DownSurfaceViewer3";
-            this.tablePanel8.SetRow(this.DownSurfaceViewer3, 1);
-            this.DownSurfaceViewer3.Size = new System.Drawing.Size(774, 480);
+            this.tablePanel8.SetRow(this.DownSurfaceViewer3, 0);
+            this.DownSurfaceViewer3.Size = new System.Drawing.Size(513, 480);
             this.DownSurfaceViewer3.TabIndex = 2;
             // 
             // DownSurfaceViewer2
@@ -500,12 +523,12 @@
             this.DownSurfaceViewer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DownSurfaceViewer2.ImageSource = null;
             this.DownSurfaceViewer2.IsShowCustomROIMenu = false;
-            this.DownSurfaceViewer2.Location = new System.Drawing.Point(797, 15);
+            this.DownSurfaceViewer2.Location = new System.Drawing.Point(536, 15);
             this.DownSurfaceViewer2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.DownSurfaceViewer2.ModuleSource = null;
             this.DownSurfaceViewer2.Name = "DownSurfaceViewer2";
             this.tablePanel8.SetRow(this.DownSurfaceViewer2, 0);
-            this.DownSurfaceViewer2.Size = new System.Drawing.Size(774, 480);
+            this.DownSurfaceViewer2.Size = new System.Drawing.Size(513, 480);
             this.DownSurfaceViewer2.TabIndex = 1;
             // 
             // DownSurfaceViewer1
@@ -521,7 +544,7 @@
             this.DownSurfaceViewer1.ModuleSource = null;
             this.DownSurfaceViewer1.Name = "DownSurfaceViewer1";
             this.tablePanel8.SetRow(this.DownSurfaceViewer1, 0);
-            this.DownSurfaceViewer1.Size = new System.Drawing.Size(774, 482);
+            this.DownSurfaceViewer1.Size = new System.Drawing.Size(513, 482);
             this.DownSurfaceViewer1.TabIndex = 0;
             // 
             // p트레이검사
@@ -563,6 +586,178 @@
             this.trayViewer.Size = new System.Drawing.Size(1555, 972);
             this.trayViewer.TabIndex = 0;
             // 
+            // tablePanel9
+            // 
+            this.tablePanel9.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            this.tablePanel1.SetColumn(this.tablePanel9, 1);
+            this.tablePanel9.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F)});
+            this.tablePanel9.Controls.Add(this.Flow5결과);
+            this.tablePanel9.Controls.Add(this.Flow5Viewer);
+            this.tablePanel9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tablePanel9.Location = new System.Drawing.Point(532, 500);
+            this.tablePanel9.Margin = new System.Windows.Forms.Padding(0);
+            this.tablePanel9.Name = "tablePanel9";
+            this.tablePanel1.SetRow(this.tablePanel9, 1);
+            this.tablePanel9.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 5F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 95F)});
+            this.tablePanel9.Size = new System.Drawing.Size(521, 490);
+            this.tablePanel9.TabIndex = 7;
+            this.tablePanel9.UseSkinIndents = true;
+            // 
+            // Flow5결과
+            // 
+            this.Flow5결과.Appearance.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Flow5결과.Appearance.ForeColor = System.Drawing.SystemColors.ActiveBorder;
+            this.Flow5결과.Appearance.Options.UseFont = true;
+            this.Flow5결과.Appearance.Options.UseForeColor = true;
+            this.Flow5결과.Appearance.Options.UseTextOptions = true;
+            this.Flow5결과.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.Flow5결과.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.tablePanel9.SetColumn(this.Flow5결과, 0);
+            this.Flow5결과.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Flow5결과.Location = new System.Drawing.Point(13, 12);
+            this.Flow5결과.Name = "Flow5결과";
+            this.tablePanel9.SetRow(this.Flow5결과, 0);
+            this.Flow5결과.Size = new System.Drawing.Size(495, 19);
+            this.Flow5결과.TabIndex = 4;
+            this.Flow5결과.Text = "Flow5결과";
+            // 
+            // Flow5Viewer
+            // 
+            this.Flow5Viewer.BackColor = System.Drawing.Color.Black;
+            this.tablePanel9.SetColumn(this.Flow5Viewer, 0);
+            this.Flow5Viewer.CoordinateInfoVisible = true;
+            this.Flow5Viewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Flow5Viewer.ImageSource = null;
+            this.Flow5Viewer.IsShowCustomROIMenu = false;
+            this.Flow5Viewer.Location = new System.Drawing.Point(15, 39);
+            this.Flow5Viewer.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.Flow5Viewer.ModuleSource = null;
+            this.Flow5Viewer.Name = "Flow5Viewer";
+            this.tablePanel9.SetRow(this.Flow5Viewer, 1);
+            this.Flow5Viewer.Size = new System.Drawing.Size(491, 434);
+            this.Flow5Viewer.TabIndex = 3;
+            // 
+            // tablePanel10
+            // 
+            this.tablePanel10.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            this.tablePanel1.SetColumn(this.tablePanel10, 2);
+            this.tablePanel10.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F)});
+            this.tablePanel10.Controls.Add(this.Flow6결과);
+            this.tablePanel10.Controls.Add(this.Flow6Viewer);
+            this.tablePanel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tablePanel10.Location = new System.Drawing.Point(1053, 500);
+            this.tablePanel10.Margin = new System.Windows.Forms.Padding(0);
+            this.tablePanel10.Name = "tablePanel10";
+            this.tablePanel1.SetRow(this.tablePanel10, 1);
+            this.tablePanel10.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 5F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 95F)});
+            this.tablePanel10.Size = new System.Drawing.Size(521, 490);
+            this.tablePanel10.TabIndex = 6;
+            this.tablePanel10.UseSkinIndents = true;
+            // 
+            // Flow6결과
+            // 
+            this.Flow6결과.Appearance.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Flow6결과.Appearance.ForeColor = System.Drawing.SystemColors.ActiveBorder;
+            this.Flow6결과.Appearance.Options.UseFont = true;
+            this.Flow6결과.Appearance.Options.UseForeColor = true;
+            this.Flow6결과.Appearance.Options.UseTextOptions = true;
+            this.Flow6결과.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.Flow6결과.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.tablePanel10.SetColumn(this.Flow6결과, 0);
+            this.Flow6결과.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Flow6결과.Location = new System.Drawing.Point(13, 12);
+            this.Flow6결과.Name = "Flow6결과";
+            this.tablePanel10.SetRow(this.Flow6결과, 0);
+            this.Flow6결과.Size = new System.Drawing.Size(495, 19);
+            this.Flow6결과.TabIndex = 4;
+            this.Flow6결과.Text = "Flow6결과";
+            // 
+            // Flow6Viewer
+            // 
+            this.Flow6Viewer.BackColor = System.Drawing.Color.Black;
+            this.tablePanel10.SetColumn(this.Flow6Viewer, 0);
+            this.Flow6Viewer.CoordinateInfoVisible = true;
+            this.Flow6Viewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Flow6Viewer.ImageSource = null;
+            this.Flow6Viewer.IsShowCustomROIMenu = false;
+            this.Flow6Viewer.Location = new System.Drawing.Point(15, 39);
+            this.Flow6Viewer.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.Flow6Viewer.ModuleSource = null;
+            this.Flow6Viewer.Name = "Flow6Viewer";
+            this.tablePanel10.SetRow(this.Flow6Viewer, 1);
+            this.Flow6Viewer.Size = new System.Drawing.Size(491, 434);
+            this.Flow6Viewer.TabIndex = 3;
+            // 
+            // UpSurfaceViewer5
+            // 
+            this.UpSurfaceViewer5.BackColor = System.Drawing.Color.Black;
+            this.tablePanel2.SetColumn(this.UpSurfaceViewer5, 1);
+            this.UpSurfaceViewer5.CoordinateInfoVisible = true;
+            this.UpSurfaceViewer5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.UpSurfaceViewer5.ImageSource = null;
+            this.UpSurfaceViewer5.IsShowCustomROIMenu = false;
+            this.UpSurfaceViewer5.Location = new System.Drawing.Point(536, 506);
+            this.UpSurfaceViewer5.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.UpSurfaceViewer5.ModuleSource = null;
+            this.UpSurfaceViewer5.Name = "UpSurfaceViewer5";
+            this.tablePanel2.SetRow(this.UpSurfaceViewer5, 1);
+            this.UpSurfaceViewer5.Size = new System.Drawing.Size(513, 478);
+            this.UpSurfaceViewer5.TabIndex = 4;
+            // 
+            // UpSurfaceViewer6
+            // 
+            this.UpSurfaceViewer6.BackColor = System.Drawing.Color.Black;
+            this.tablePanel2.SetColumn(this.UpSurfaceViewer6, 2);
+            this.UpSurfaceViewer6.CoordinateInfoVisible = true;
+            this.UpSurfaceViewer6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.UpSurfaceViewer6.ImageSource = null;
+            this.UpSurfaceViewer6.IsShowCustomROIMenu = false;
+            this.UpSurfaceViewer6.Location = new System.Drawing.Point(1057, 506);
+            this.UpSurfaceViewer6.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.UpSurfaceViewer6.ModuleSource = null;
+            this.UpSurfaceViewer6.Name = "UpSurfaceViewer6";
+            this.tablePanel2.SetRow(this.UpSurfaceViewer6, 1);
+            this.UpSurfaceViewer6.Size = new System.Drawing.Size(513, 478);
+            this.UpSurfaceViewer6.TabIndex = 5;
+            // 
+            // DownSurfaceViewer5
+            // 
+            this.DownSurfaceViewer5.BackColor = System.Drawing.Color.Black;
+            this.tablePanel8.SetColumn(this.DownSurfaceViewer5, 1);
+            this.DownSurfaceViewer5.CoordinateInfoVisible = true;
+            this.DownSurfaceViewer5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DownSurfaceViewer5.ImageSource = null;
+            this.DownSurfaceViewer5.IsShowCustomROIMenu = false;
+            this.DownSurfaceViewer5.Location = new System.Drawing.Point(536, 506);
+            this.DownSurfaceViewer5.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.DownSurfaceViewer5.ModuleSource = null;
+            this.DownSurfaceViewer5.Name = "DownSurfaceViewer5";
+            this.tablePanel8.SetRow(this.DownSurfaceViewer5, 1);
+            this.DownSurfaceViewer5.Size = new System.Drawing.Size(513, 478);
+            this.DownSurfaceViewer5.TabIndex = 4;
+            // 
+            // DownSurfaceViewer6
+            // 
+            this.DownSurfaceViewer6.BackColor = System.Drawing.Color.Black;
+            this.tablePanel8.SetColumn(this.DownSurfaceViewer6, 2);
+            this.DownSurfaceViewer6.CoordinateInfoVisible = true;
+            this.DownSurfaceViewer6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DownSurfaceViewer6.ImageSource = null;
+            this.DownSurfaceViewer6.IsShowCustomROIMenu = false;
+            this.DownSurfaceViewer6.Location = new System.Drawing.Point(1057, 506);
+            this.DownSurfaceViewer6.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.DownSurfaceViewer6.ModuleSource = null;
+            this.DownSurfaceViewer6.Name = "DownSurfaceViewer6";
+            this.tablePanel8.SetRow(this.DownSurfaceViewer6, 1);
+            this.DownSurfaceViewer6.Size = new System.Drawing.Size(513, 478);
+            this.DownSurfaceViewer6.TabIndex = 5;
+            // 
             // CamViewers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -597,6 +792,12 @@
             this.p트레이검사.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel4)).EndInit();
             this.tablePanel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tablePanel9)).EndInit();
+            this.tablePanel9.ResumeLayout(false);
+            this.tablePanel9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tablePanel10)).EndInit();
+            this.tablePanel10.ResumeLayout(false);
+            this.tablePanel10.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -633,5 +834,15 @@
         private VMControls.Winform.Release.VmRenderControl DownSurfaceViewer3;
         private VMControls.Winform.Release.VmRenderControl DownSurfaceViewer2;
         private VMControls.Winform.Release.VmRenderControl DownSurfaceViewer1;
+        private DevExpress.Utils.Layout.TablePanel tablePanel10;
+        private DevExpress.XtraEditors.LabelControl Flow6결과;
+        private VMControls.Winform.Release.VmRenderControl Flow6Viewer;
+        private DevExpress.Utils.Layout.TablePanel tablePanel9;
+        private DevExpress.XtraEditors.LabelControl Flow5결과;
+        private VMControls.Winform.Release.VmRenderControl Flow5Viewer;
+        private VMControls.Winform.Release.VmRenderControl UpSurfaceViewer6;
+        private VMControls.Winform.Release.VmRenderControl UpSurfaceViewer5;
+        private VMControls.Winform.Release.VmRenderControl DownSurfaceViewer6;
+        private VMControls.Winform.Release.VmRenderControl DownSurfaceViewer5;
     }
 }

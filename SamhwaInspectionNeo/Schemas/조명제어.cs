@@ -12,8 +12,8 @@ namespace SamhwaInspectionNeo.Schemas
     public enum 조명포트
     {
         None,
-        COM3, // 트리거보드에 연결되어있음.
-        COM4, // 트리거보드에 연결되어있음.
+        COM3, 
+        COM4, 
         COM5,
         COM6,
         COM7,
@@ -31,6 +31,9 @@ namespace SamhwaInspectionNeo.Schemas
         CH06 = 6,
         CH07 = 7,
         CH08 = 8,
+        CH09 = 9,
+        CH010 = 10,
+        CH011 = 11,
     }
 
     public abstract class 조명컨트롤러
@@ -224,37 +227,37 @@ namespace SamhwaInspectionNeo.Schemas
         public LCP100DC 컨트롤러1;
         [JsonIgnore]
         public LCP12150P 컨트롤러2;
-        [JsonIgnore]
-        public LCP24100Q 컨트롤러3;
+        //[JsonIgnore]
+        //public LCP24100Q 컨트롤러3;
 
         [JsonIgnore]
         public Boolean 조명컨트롤러1정상여부 { get { return this.컨트롤러1.IsOpen(); } }
         [JsonIgnore]
         public Boolean 조명컨트롤러2정상여부 { get { return this.컨트롤러2.IsOpen(); } }
-        [JsonIgnore]
-        public Boolean 조명컨트롤러3정상여부 { get { return this.컨트롤러3.IsOpen(); } }
+        //[JsonIgnore]
+        //public Boolean 조명컨트롤러3정상여부 { get { return this.컨트롤러3.IsOpen(); } }
 
         public void Init()
         {
-            this.컨트롤러1 = new LCP100DC() { 포트 = 조명포트.COM5 };   // 상부치수검사 LLXP조명
-            this.컨트롤러2 = new LCP12150P() { 포트 = 조명포트.COM6 };  // 표면검사 4개 Bar조명
-            this.컨트롤러3 = new LCP24100Q() { 포트 = 조명포트.COM7 }; // 공트레이 2개 Bar조명(사용안함)
+            this.컨트롤러1 = new LCP100DC() { 포트 = 조명포트.COM4 };   // 상부치수검사 LLXP조명
+            this.컨트롤러2 = new LCP12150P() { 포트 = 조명포트.COM3 };  // 표면검사 4개 Bar조명
+            //this.컨트롤러3 = new LCP24100Q() { 포트 = 조명포트.COM7 }; // 공트레이 2개 Bar조명(사용안함)
 
             this.컨트롤러1.Init();
             this.컨트롤러2.Init();
-            this.컨트롤러3.Init();
+            //this.컨트롤러3.Init();
             // 컨트롤러 당 카메라 1대씩 연결
-            this.Add(new 조명정보(카메라구분.Cam01, 컨트롤러1) { 채널 = 조명채널.CH01, 밝기 = 70 });
-            this.Add(new 조명정보(카메라구분.Cam02, 컨트롤러3) { 채널 = 조명채널.CH02, 밝기 = 70 });
-            this.Add(new 조명정보(카메라구분.Cam02, 컨트롤러3) { 채널 = 조명채널.CH02, 밝기 = 70 });
-            this.Add(new 조명정보(카메라구분.Cam03, 컨트롤러2) { 채널 = 조명채널.CH01, 밝기 = 90 });
-            this.Add(new 조명정보(카메라구분.Cam03, 컨트롤러2) { 채널 = 조명채널.CH02, 밝기 = 90 });
-            this.Add(new 조명정보(카메라구분.Cam03, 컨트롤러2) { 채널 = 조명채널.CH03, 밝기 = 90 });
-            this.Add(new 조명정보(카메라구분.Cam03, 컨트롤러2) { 채널 = 조명채널.CH04, 밝기 = 90 });
-            this.Add(new 조명정보(카메라구분.Cam04, 컨트롤러2) { 채널 = 조명채널.CH05, 밝기 = 90 });
-            this.Add(new 조명정보(카메라구분.Cam04, 컨트롤러2) { 채널 = 조명채널.CH06, 밝기 = 90 });
-            this.Add(new 조명정보(카메라구분.Cam04, 컨트롤러2) { 채널 = 조명채널.CH07, 밝기 = 90 });
-            this.Add(new 조명정보(카메라구분.Cam04, 컨트롤러2) { 채널 = 조명채널.CH08, 밝기 = 90 });
+            this.Add(new 조명정보(카메라구분.Cam01, 컨트롤러1) { 채널 = 조명채널.CH01, 밝기 = 100 });
+            //this.Add(new 조명정보(카메라구분.Cam02, 컨트롤러3) { 채널 = 조명채널.CH02, 밝기 = 100 });
+            //this.Add(new 조명정보(카메라구분.Cam02, 컨트롤러3) { 채널 = 조명채널.CH02, 밝기 = 100 });
+            this.Add(new 조명정보(카메라구분.Cam03, 컨트롤러2) { 채널 = 조명채널.CH06, 밝기 = 100 });
+            this.Add(new 조명정보(카메라구분.Cam03, 컨트롤러2) { 채널 = 조명채널.CH07, 밝기 = 100 });
+            this.Add(new 조명정보(카메라구분.Cam03, 컨트롤러2) { 채널 = 조명채널.CH08, 밝기 = 100 });
+            this.Add(new 조명정보(카메라구분.Cam03, 컨트롤러2) { 채널 = 조명채널.CH09, 밝기 = 100 });
+            this.Add(new 조명정보(카메라구분.Cam04, 컨트롤러2) { 채널 = 조명채널.CH02, 밝기 = 100 });
+            this.Add(new 조명정보(카메라구분.Cam04, 컨트롤러2) { 채널 = 조명채널.CH03, 밝기 = 100 });
+            this.Add(new 조명정보(카메라구분.Cam04, 컨트롤러2) { 채널 = 조명채널.CH04, 밝기 = 100 });
+            this.Add(new 조명정보(카메라구분.Cam04, 컨트롤러2) { 채널 = 조명채널.CH05, 밝기 = 100 });
 
             this.Load();
             this.Open();
@@ -314,11 +317,11 @@ namespace SamhwaInspectionNeo.Schemas
                 this.컨트롤러2.Close();
                 Global.오류로그(로그영역, "조명장치 연결", "조명 컨트롤러2에 연결할 수 없습니다.", true);
             }
-            if (!this.컨트롤러3.Open())
-            {
-                this.컨트롤러3.Close();
-                Global.오류로그(로그영역, "조명장치 연결", "조명 컨트롤러3에 연결할 수 없습니다.", true);
-            }
+            //if (!this.컨트롤러3.Open())
+            //{
+            //    this.컨트롤러3.Close();
+            //    Global.오류로그(로그영역, "조명장치 연결", "조명 컨트롤러3에 연결할 수 없습니다.", true);
+            //}
         }
 
         public void Close()
@@ -327,7 +330,7 @@ namespace SamhwaInspectionNeo.Schemas
             Task.Delay(100).Wait();
             this.컨트롤러1?.Close();
             this.컨트롤러2?.Close();
-            this.컨트롤러3?.Close();
+            //this.컨트롤러3?.Close();
         }
 
         public void Set()

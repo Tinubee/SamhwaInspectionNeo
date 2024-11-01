@@ -66,6 +66,7 @@
             this.ｅ교정계산 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.e마진값 = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             this.repositoryItemToggleSwitch1 = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
+            this.col마스터값 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.e모델선택.Properties)).BeginInit();
@@ -256,7 +257,8 @@
             this.col보정값,
             this.col교정값,
             this.col측정값,
-            this.col결과값});
+            this.col결과값,
+            this.col마스터값});
             this.GridView1.DetailHeight = 375;
             this.GridView1.FooterPanelHeight = 22;
             this.GridView1.GridControl = this.GridControl1;
@@ -421,6 +423,15 @@
             this.repositoryItemToggleSwitch1.OffText = "Off";
             this.repositoryItemToggleSwitch1.OnText = "On";
             // 
+            // col마스터값
+            // 
+            this.col마스터값.AppearanceHeader.Options.UseTextOptions = true;
+            this.col마스터값.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.col마스터값.FieldName = "마스터값";
+            this.col마스터값.Name = "col마스터값";
+            this.col마스터값.Visible = true;
+            this.col마스터값.VisibleIndex = 12;
+            // 
             // SetInspection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -482,5 +493,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn col측정값;
         private DevExpress.XtraGrid.Columns.GridColumn col결과값;
         private DevExpress.XtraEditors.SimpleButton b보정값설정;
+        private DevExpress.XtraGrid.Columns.GridColumn col마스터값;
     }
 }

@@ -143,7 +143,7 @@ namespace SamhwaInspectionNeo.Schemas
         }
         public 검사결과 항목검사(Flow구분 구분, 지그위치 지그, String name, Single value)
         {
-            Int32 검사코드 = (Int32)구분 < 5 ? (Int32)구분 : (Int32)구분 - 5;
+            Int32 검사코드 = (Int32)구분 < 6 ? (Int32)구분 : (Int32)구분 < 20 ? (Int32)구분 - 10 : (Int32)구분 - 20;
 
             검사코드 = Global.신호제어.마스터모드여부 ? 검사코드 + 100 : 검사코드;
 

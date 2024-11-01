@@ -88,7 +88,7 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.장치통신.Set(Global.장치상태.장치통신);
             this.조명장치1.Set(Global.장치상태.조명장치1);
             this.조명장치2.Set(Global.장치상태.조명장치2);
-            this.조명장치3.Set(Global.장치상태.조명장치3);
+            //this.조명장치3.Set(Global.장치상태.조명장치3);
             this.트리거보드.Set(Global.장치상태.트리거보드);
         }
 

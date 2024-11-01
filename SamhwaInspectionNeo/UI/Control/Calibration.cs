@@ -22,6 +22,10 @@ namespace SamhwaInspectionNeo.UI.Control
             Flow3Rear,
             Flow4Front,
             Flow4Rear,
+            Flow5Front,
+            Flow5Rear,
+            Flow6Front,
+            Flow6Rear,
         }
 
         String 로그영역 = "보정값설정";
@@ -79,7 +83,78 @@ namespace SamhwaInspectionNeo.UI.Control
             this.e지그선택.Properties.DataSource = Enum.GetValues(typeof(지그위치));
             this.e지그선택.EditValueChanging += 지그선택;
             this.e지그선택.CustomDisplayText += 선택지그표현;
+
+            this.b전체보정.Click += B전체보정_Click;
         }
+
+        private void B전체보정_Click(object sender, EventArgs e)
+        {
+            if (GridView1.RowCount == 1) return;
+
+            for (int lop = 0; lop < GridView1.RowCount; lop++)
+            {
+                if (isCalculating) return;
+
+                int rowIndex = lop;
+
+                object measvalue = GridView1.GetRowCellValue(rowIndex, "측정값");
+                object cmmvalue = GridView1.GetRowCellValue(rowIndex, "CMM측정값");
+                object name = GridView1.GetRowCellValue(rowIndex, "검사항목");
+                object calvalue = GridView1.GetRowCellValue(rowIndex, "교정값");
+
+                double measdvalue, cmmdvalue;
+
+                List<VmVariable> 보정값변수들 = Global.VM제어.글로벌변수제어.보정값불러오기();
+
+                if (measvalue != null && cmmvalue != null &&
+                   double.TryParse(measvalue.ToString(), out measdvalue) &&
+                       double.TryParse(cmmvalue.ToString(), out cmmdvalue))
+                {
+                    if (measdvalue != 0 )
+                    {
+                        isCalculating = true;
+                        if (cmmdvalue != 0)
+                        {
+                            if (name.ToString().Contains("위치도"))
+                            {
+                                if (name.ToString().Contains("거리") == false && name.ToString().Contains("Slot") == false)
+                                {
+                                    isCalculating = false;
+                                    MvUtils.Utils.MessageBox("보정값계산", "위치도값은 보정할 수 없습니다. X,Y 거리를 보정해주세요.", 2000);
+                                    return;
+                                }
+                            }
+                            //2P-B모델 좌상X좌표 0, 우하Y좌표 0
+                            calvalue = (float)(cmmdvalue / measdvalue);
+                        }
+
+                        GridView1.SetRowCellValue(rowIndex, "교정값", Math.Round(Convert.ToDouble(calvalue), 6));
+                        isCalculating = false;
+                    }
+
+                    if (cmmdvalue != 0)
+                    {
+                        Int32 index = 보정위치();
+
+                        if (index == -1) return;
+
+                        VmVariable 적용할변수 = 보정값변수들.Where(f => f.Name.Contains(name.ToString())).FirstOrDefault();
+
+                        if (적용할변수 == null) return;
+
+                        string value = 적용할변수.StringValue;
+                        string[] splitValue = value.Split(';');
+
+                        splitValue[index] = Math.Round(Convert.ToDouble(calvalue), 6).ToString();
+
+                        value = String.Join(";", splitValue);
+
+                        Global.VM제어.글로벌변수제어.SetValue(적용할변수.Name, value);
+                    }
+                }
+            }
+        }
+
         private void 선택지그표현(object sender, DevExpress.XtraEditors.Controls.CustomDisplayTextEventArgs e)
         {
             try
@@ -145,6 +220,7 @@ namespace SamhwaInspectionNeo.UI.Control
                 조회정보.검사장치 = 정보.검사장치;
                 조회정보.측정단위 = 정보.측정단위;
                 조회정보.교정값 = 보정값조회(정보.검사항목, calValue, index);
+                조회정보.CMM측정값 = 정보.마스터값;
                 this.결과정보리스트.Add(조회정보);
             }
             GridControl1.DataSource = this.결과정보리스트;
@@ -221,7 +297,6 @@ namespace SamhwaInspectionNeo.UI.Control
             value = String.Join(";", splitValue);
 
             Global.VM제어.글로벌변수제어.SetValue(적용할변수.Name, value);
-            //Global.VM제어.Save();
         }
 
         private Int32 보정위치()
