@@ -103,23 +103,20 @@ namespace SamhwaInspectionNeo.UI.Controls
             this.bind모델자료.ResetBindings(false);
         }
 
-        private Boolean 저장중 = false;
+        private Boolean[] 저장중 = new Boolean[6];
 
         private void 검사완료알림(검사결과 결과)
         {
             if (결과 == null) return;
             if (this.InvokeRequired) { this.BeginInvoke((Action)(() => 검사완료알림(결과))); return; }
 
-            // DB 저장
-            if (저장중 == false)
-            {
-                저장중 = true;
-                Global.검사자료.Save(결과);
-                //Global.검사자료.SaveAsync();
-                this.검사상태표현(결과.측정결과);
-                this.e저장용량.EditValue = Global.환경설정.저장비율;
-                저장중 = false;
-            }
+            //Int32 검사코드 = 결과.검사코드;
+            //저장중[검사코드] = true;
+
+            //Global.검사자료.Save(결과);
+            this.검사상태표현(결과.측정결과);
+            this.e저장용량.EditValue = Global.환경설정.저장비율;
+            GC.Collect();
         }
 
         //private void 측정시작보고() => this.검사상태표현(결과구분.IN);

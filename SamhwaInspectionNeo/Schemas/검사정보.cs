@@ -177,7 +177,20 @@ namespace SamhwaInspectionNeo.Schemas
         우하위치도Y거리 = 1603,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
         우하위치도 = 1604,
-     
+
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        좌상작은홀경 = 1701,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        중상작은홀경 = 1702,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우상작은홀경 = 1703,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        좌하작은홀경 = 1704,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        중하작은홀경 = 1705,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우하작은홀경 = 1706,
+
         [Result(검사그룹.SURFACE, 결과분류.Summary, 장치구분.Cam03)]
         상부표면검사 = 5000,
         [Result(검사그룹.SURFACE, 결과분류.Summary, 장치구분.Cam04)]
@@ -315,7 +328,7 @@ namespace SamhwaInspectionNeo.Schemas
             this.검사일시 = DateTime.Now.AddMilliseconds(this.검사코드 * 10);
             if (this.검사코드 < 6)
                 Global.VM제어.GetItem((Flow구분)this.검사코드).검사시간 = this.검사일시;
-            Debug.WriteLine($"{this.검사일시.ToString("HH:mm:ss.ffffff")}");
+            //Debug.WriteLine($"{this.검사일시.ToString("HH:mm:ss.ffffff")}");
             this.모델구분 = Global.환경설정.선택모델;
             this.측정결과 = 결과구분.NO;
             this.CTQ결과 = 결과구분.NO;

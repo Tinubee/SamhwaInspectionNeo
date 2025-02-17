@@ -10,6 +10,7 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using VM.PlatformSDKCS;
 
 namespace SamhwaInspectionNeo.Schemas
@@ -45,7 +46,7 @@ namespace SamhwaInspectionNeo.Schemas
             if (this.테이블 == null) return true;
             this.테이블.Save();
             this.테이블.자료정리(Global.환경설정.결과보관);
-            return this.SaveJson();
+            return true;
         }
 
         private void 수동검사초기화()
@@ -59,12 +60,20 @@ namespace SamhwaInspectionNeo.Schemas
         public void Save() => this.테이블.Save();
         public void SaveAsync() => this.테이블.SaveAsync();
 
-        public void Save(검사결과 결과)
-        {
-            Common.DebugWriteLine("검사결과", 로그구분.정보, $"검사결과 DB 저장 검사일시 : {결과.검사일시}, 검사번호 : {결과.검사코드}");
+        //public void Save(검사결과 결과)
+        //{
+        //    Common.DebugWriteLine("검사결과", 로그구분.정보, $"검사결과 DB 저장 검사일시 : {결과.검사일시}, 검사번호 : {결과.검사코드}");
+        //    //using (검사결과테이블 table = new 검사결과테이블())
+        //    //    return table.Save(결과);
+        //    this.테이블.Add(결과);
+        //    this.Save();
+        //}
 
-            this.테이블.Add(결과);
-            this.Save();
+        public Boolean Save(검사결과 결과)
+        {
+            Common.DebugWriteLine(로그영역.GetString(), 로그구분.정보, $"[검사코드 - {결과.검사코드}] Database Save.");
+            using (검사결과테이블 table = new 검사결과테이블())
+                return table.Save(결과);
         }
 
         private Boolean SaveJson()
@@ -87,21 +96,51 @@ namespace SamhwaInspectionNeo.Schemas
         public void Load() => this.Load(DateTime.Today, DateTime.Today);
         public void Load(DateTime 시작, DateTime 종료)
         {
-            this.Clear();
-            this.RaiseListChangedEvents = false;
-            List<검사결과> 자료 = this.테이블.Select(시작, 종료);
-
-            //List<Int32> 대상 = Global.신호제어.검사중인항목();
-            자료.ForEach(검사 =>
+            try
             {
-                this.Add(검사);
-                // 검사스플 생성
-                //if (검사.측정결과 < 결과구분.ER && 대상.Contains(검사.검사코드) && !this.검사스플.ContainsKey(검사.검사코드))
-                //    this.검사스플.Add(검사.검사코드, 검사);
-            });
-            this.RaiseListChangedEvents = true;
-            this.ResetBindings();
+                this.Clear();
+                List<검사결과> 자료 = this.테이블.Select(시작, 종료);
+                //List<Int32> 대상 = Global.신호제어.검사중인항목();
+                자료.ForEach(검사 => {
+                    this.Add(검사);
+                    // 검사스플 생성
+                    //if (검사.측정결과 < 결과구분.ER && 대상.Contains(검사.검사코드) && !this.검사스플.ContainsKey(검사.검사코드))
+                    //    this.검사스플.Add(검사.검사코드, 검사);
+                });
+            }
+            catch (Exception ex) { Global.오류로그(로그영역.GetString(), "Load", ex.Message, true); }
+            //this.Clear();
+            //this.RaiseListChangedEvents = false;
+            //List<검사결과> 자료 = this.테이블.Select(시작, 종료);
+
+            ////List<Int32> 대상 = Global.신호제어.검사중인항목();
+            //자료.ForEach(검사 =>
+            //{
+            //    this.Add(검사);
+            //    // 검사스플 생성
+            //    //if (검사.측정결과 < 결과구분.ER && 대상.Contains(검사.검사코드) && !this.검사스플.ContainsKey(검사.검사코드))
+            //    //    this.검사스플.Add(검사.검사코드, 검사);
+            //});
+            //this.RaiseListChangedEvents = true;
+            //this.ResetBindings();
         }
+
+        //public void LoadNewVer(DateTime 시작, DateTime 종료)
+        //{
+        //    try
+        //    {
+        //        this.Clear();
+        //        List<검사결과> 자료 = this.테이블.Select(new QueryPrms { 시작 = 시작, 종료 = 종료, 역순정렬 = false });
+        //        //List<Int32> 대상 = Global.장치통신.검사중인항목();
+        //        자료.ForEach(검사 => {
+        //            this.Add(검사);
+        //            // 검사스플 생성
+        //            //if (검사.측정결과 < 결과구분.ER && 대상.Contains(검사.검사코드) && !this.검사스플.ContainsKey(검사.검사코드))
+        //            //    this.검사스플.Add(검사.검사코드, 검사);
+        //        });
+        //    }
+        //    catch (Exception ex) { Global.오류로그(로그영역.GetString(), "Load", ex.Message, true); }
+        //}
 
         public List<검사결과> GetData(DateTime 시작, DateTime 종료, 모델구분 모델) => this.테이블.Select(시작, 종료, 모델);
         private void 모델변경알림(모델구분 모델코드) => this.수동검사초기화();
@@ -126,6 +165,7 @@ namespace SamhwaInspectionNeo.Schemas
         public 검사결과 결과조회(DateTime 일자, 모델구분 모델, Int32 코드) => this.테이블.Select(일자, 모델, 코드);
 
         #region 검사로직
+        private DateTime LastTime = DateTime.MinValue;
         public 검사결과 검사시작(Int32 검사코드)
         {
             검사결과 검사 = 검사항목찾기(검사코드, true);
@@ -133,12 +173,12 @@ namespace SamhwaInspectionNeo.Schemas
             {
                 검사 = new 검사결과() { 검사코드 = 검사코드 };
                 검사.Reset();
-                검사.측정결과 = 결과구분.IN; // 검사중으로 바꿈
+                검사.측정결과 = 결과구분.IN; 
                 this.자료추가(검사);
                 this.검사스플.Add(검사.검사코드, 검사);
                 Common.DebugWriteLine(로그영역.GetString(), 로그구분.정보, $"[{(Int32)Global.환경설정.선택모델} - {검사.검사코드}] 신규검사 시작.");
             }
-            //Common.DebugWriteLine(로그영역.GetString(), 로그구분.정보, $"[{(Int32)Global.환경설정.선택모델} - {검사.검사코드}] 검사코드 있음.");
+
             return 검사;
         }
         public 검사결과 항목검사(Flow구분 구분, 지그위치 지그, String name, Single value)
@@ -165,6 +205,7 @@ namespace SamhwaInspectionNeo.Schemas
         {
             검사코드 = Global.신호제어.마스터모드여부 ? 검사코드 + 100 : 검사코드;
             검사결과 검사 = this.검사항목찾기(검사코드);
+            
             if (검사 == null)
             {
                 Global.오류로그(로그영역.GetString(), "결과계산", $"[{(Int32)Global.환경설정.선택모델}.{검사코드}] 해당 검사가 없습니다.", false);
@@ -178,6 +219,7 @@ namespace SamhwaInspectionNeo.Schemas
                 Common.DebugWriteLine(로그영역.GetString(), 로그구분.정보, $"검사코드 [ {검사코드} - {검사.측정결과} ] 제거");
                 Global.모델자료.수량추가(검사.모델구분, 검사.측정결과);
                 this.검사스플제거(검사코드);
+                this.Save(검사);
                 this.검사완료알림?.Invoke(검사);
             }
 
@@ -239,7 +281,28 @@ namespace SamhwaInspectionNeo.Schemas
             try { this.SaveChanges(); }
             catch (Exception ex) { Debug.WriteLine(ex.ToString(), "자료저장"); }
         }
-
+        public Boolean Save(검사결과 정보)
+        {
+            this.Add(정보);
+            return this.Save2();
+        }
+        public Boolean Save2()
+        {
+            try
+            {
+                Int32 changes = this.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Global.오류로그(로그영역.GetString(), "Save", ex.Message, true);
+                return false;
+            }
+        }
         public void SaveAsync()
         {
             try {
