@@ -1,4 +1,4 @@
-﻿namespace SamhwaInspectionNeo.UI.Controls
+﻿namespace SamhwaInspectionNeo.UI.Control
 {
     partial class Results
     {

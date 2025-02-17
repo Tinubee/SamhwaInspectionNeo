@@ -260,6 +260,7 @@
     <Compile Include="Schemas\VisionMaster\VMGlobals.cs" />
     <Compile Include="Schemas\VisionMaster\VM제어.cs" />
     <Compile Include="Schemas\검사자료.cs" />
+    <Compile Include="Schemas\검사자료.Reports.cs" />
     <Compile Include="Schemas\검사정보.cs" />
     <Compile Include="Schemas\그랩제어.cs" />
     <Compile Include="Schemas\로그정보.cs" />
@@ -343,6 +344,12 @@
     </Compile>
     <Compile Include="UI\Control\NgImageViewer.Designer.cs">
       <DependentUpon>NgImageViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Control\ResultePivot.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Control\ResultePivot.Designer.cs">
+      <DependentUpon>ResultePivot.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Control\ResultsMaster.cs">
       <SubType>UserControl</SubType>
@@ -482,6 +489,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\NgImageViewer.resx">
       <DependentUpon>NgImageViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Control\ResultePivot.resx">
+      <DependentUpon>ResultePivot.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Control\ResultsMaster.resx">
       <DependentUpon>ResultsMaster.cs</DependentUpon>

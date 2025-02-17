@@ -52,14 +52,18 @@
             this.e장치설정 = new SamhwaInspectionNeo.UI.Controls.DeviceSettings();
             this.p검사내역 = new DevExpress.XtraBars.TabFormPage();
             this.tabFormContentContainer4 = new DevExpress.XtraBars.TabFormContentContainer();
-            this.e검사내역 = new SamhwaInspectionNeo.UI.Controls.Results();
+            this.e검사내역 = new SamhwaInspectionNeo.UI.Control.Results();
             this.p마스터검사내역 = new DevExpress.XtraBars.TabFormPage();
             this.tabFormContentContainer5 = new DevExpress.XtraBars.TabFormContentContainer();
-            this.e마스터검사내역 = new SamhwaInspectionNeo.UI.Controls.ResultsMaster();
+            this.e마스터검사내역 = new SamhwaInspectionNeo.UI.Control.ResultsMaster();
             this.p로그내역 = new DevExpress.XtraBars.TabFormPage();
             this.tabFormContentContainer3 = new DevExpress.XtraBars.TabFormContentContainer();
             this.e로그내역 = new SamhwaInspectionNeo.UI.Controls.LogViewer();
             this.setMasterInspection1 = new SamhwaInspectionNeo.UI.Control.SetMasterInspection();
+            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
+            this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
+            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
+            this.resultePivot1 = new SamhwaInspectionNeo.UI.Control.ResultePivot();
             ((System.ComponentModel.ISupportInitialize)(this.tabFormControl1)).BeginInit();
             this.tabFormContentContainer1.SuspendLayout();
             this.tabFormContentContainer2.SuspendLayout();
@@ -72,6 +76,10 @@
             this.tabFormContentContainer4.SuspendLayout();
             this.tabFormContentContainer5.SuspendLayout();
             this.tabFormContentContainer3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
+            this.xtraTabControl1.SuspendLayout();
+            this.xtraTabPage1.SuspendLayout();
+            this.xtraTabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabFormControl1
@@ -277,7 +285,7 @@
             // 
             // tabFormContentContainer4
             // 
-            this.tabFormContentContainer4.Controls.Add(this.e검사내역);
+            this.tabFormContentContainer4.Controls.Add(this.xtraTabControl1);
             this.tabFormContentContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabFormContentContainer4.Location = new System.Drawing.Point(0, 30);
             this.tabFormContentContainer4.Name = "tabFormContentContainer4";
@@ -289,7 +297,7 @@
             this.e검사내역.Dock = System.Windows.Forms.DockStyle.Fill;
             this.e검사내역.Location = new System.Drawing.Point(0, 0);
             this.e검사내역.Name = "e검사내역";
-            this.e검사내역.Size = new System.Drawing.Size(1920, 1010);
+            this.e검사내역.Size = new System.Drawing.Size(1918, 979);
             this.e검사내역.TabIndex = 0;
             // 
             // p마스터검사내역
@@ -349,6 +357,40 @@
             this.setMasterInspection1.Size = new System.Drawing.Size(1918, 980);
             this.setMasterInspection1.TabIndex = 0;
             // 
+            // xtraTabControl1
+            // 
+            this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
+            this.xtraTabControl1.Name = "xtraTabControl1";
+            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
+            this.xtraTabControl1.Size = new System.Drawing.Size(1920, 1010);
+            this.xtraTabControl1.TabIndex = 1;
+            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.xtraTabPage1,
+            this.xtraTabPage2});
+            // 
+            // xtraTabPage1
+            // 
+            this.xtraTabPage1.Controls.Add(this.e검사내역);
+            this.xtraTabPage1.Name = "xtraTabPage1";
+            this.xtraTabPage1.Size = new System.Drawing.Size(1918, 979);
+            this.xtraTabPage1.Text = "List";
+            // 
+            // xtraTabPage2
+            // 
+            this.xtraTabPage2.Controls.Add(this.resultePivot1);
+            this.xtraTabPage2.Name = "xtraTabPage2";
+            this.xtraTabPage2.Size = new System.Drawing.Size(1918, 979);
+            this.xtraTabPage2.Text = "Pivot";
+            // 
+            // resultePivot1
+            // 
+            this.resultePivot1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.resultePivot1.Location = new System.Drawing.Point(0, 0);
+            this.resultePivot1.Name = "resultePivot1";
+            this.resultePivot1.Size = new System.Drawing.Size(1918, 979);
+            this.resultePivot1.TabIndex = 0;
+            // 
             // MainForm
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
@@ -379,6 +421,10 @@
             this.tabFormContentContainer4.ResumeLayout(false);
             this.tabFormContentContainer5.ResumeLayout(false);
             this.tabFormContentContainer3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
+            this.xtraTabControl1.ResumeLayout(false);
+            this.xtraTabPage1.ResumeLayout(false);
+            this.xtraTabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -404,7 +450,7 @@
         private UI.Controls.DeviceSettings e장치설정;
         private DevExpress.XtraBars.TabFormPage p검사내역;
         private DevExpress.XtraBars.TabFormContentContainer tabFormContentContainer4;
-        private UI.Controls.Results e검사내역;
+        private UI.Control.Results e검사내역;
         public UI.Control.SetVariables e변수설정;
         public UI.Control.CamViewers e결과뷰어;
         private DevExpress.XtraTab.XtraTabPage t마스터설정;
@@ -413,8 +459,12 @@
         public UI.Control.SetInspection e검사설정;
         private UI.Control.SetMasterInspection e마스터설정;
         private UI.Control.SetMasterInspection setMasterInspection1;
-        private UI.Controls.ResultsMaster e마스터검사내역;
+        private UI.Control.ResultsMaster e마스터검사내역;
         public DevExpress.XtraBars.BarStaticItem e최근커밋;
+        private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
+        private UI.Control.ResultePivot resultePivot1;
     }
 }
 

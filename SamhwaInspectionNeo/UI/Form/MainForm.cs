@@ -107,6 +107,7 @@ namespace SamhwaInspectionNeo
             this.e마스터설정.Init();
             this.e장치설정.Init();
             this.e검사내역.Init();
+            this.resultePivot1.Init();
             this.e마스터검사내역.Init();
             this.e상태뷰어.Init();
             this.e로그내역.Init();
@@ -115,7 +116,7 @@ namespace SamhwaInspectionNeo
             this.TabFormControl.AllowMoveTabs = false;
             this.TabFormControl.AllowMoveTabsToOuterForm = false;
             this.e최근커밋.Caption = $"Last Commit : {Global.환경설정.마지막커밋시간}"; ;
-
+            
             if (Global.환경설정.동작구분 == 동작구분.Live)
                 this.WindowState = FormWindowState.Maximized;
 

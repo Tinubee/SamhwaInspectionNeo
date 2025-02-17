@@ -8,7 +8,7 @@ using System.IO;
 using SamhwaInspectionNeo.Schemas;
 using DevExpress.Data.Filtering;
 
-namespace SamhwaInspectionNeo.UI.Controls
+namespace SamhwaInspectionNeo.UI.Control
 {
     public partial class ResultsMaster : XtraUserControl
     {

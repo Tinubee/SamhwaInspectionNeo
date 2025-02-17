@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using static Euresys.MultiCam.MC;
 
-namespace SamhwaInspectionNeo.UI.Controls
+namespace SamhwaInspectionNeo.UI.Control
 {
     public partial class Results : XtraUserControl
     {
@@ -211,7 +211,7 @@ namespace SamhwaInspectionNeo.UI.Controls
             Global.검사자료.Load(this.e시작일자.DateTime, this.e종료일자.DateTime);
         }
 
-        private class LocalizationResults
+        public class LocalizationResults
         {
             private enum Items
             {
