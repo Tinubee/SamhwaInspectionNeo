@@ -100,7 +100,7 @@ namespace SamhwaInspectionNeo.UI.Control
             검사정보 정보 = this.선택검사정보(out 검사결과 결과);
             if (결과 == null || 정보 == null) return;
             if (!MvUtils.Utils.Confirm("선택한 검사결과를 삭제하시겠습니까?", Localization.확인.GetString())) return;
-            Global.검사자료.결과삭제(결과, 정보);
+            Global.검사자료.결과삭제(결과);
             (this.GridControl1.FocusedView as GridView).RefreshData();
         }
 

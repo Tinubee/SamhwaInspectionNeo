@@ -298,7 +298,7 @@ namespace SamhwaInspectionNeo.Schemas
         {
             return this.Where(e => e.검사항목 == 정보.검사항목).FirstOrDefault();
         }
-
+        public 검사정보 GetItem(검사항목 항목) => this.Where(e => e.검사항목 == 항목).FirstOrDefault();
         public void ResetItem(검사정보 설정) => this.ResetItem(this.IndexOf(설정));
       
     }

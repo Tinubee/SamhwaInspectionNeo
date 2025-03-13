@@ -264,5 +264,29 @@ namespace SamhwaInspectionNeo
             Debug.WriteLine($"{MvUtils.Utils.FormatDate(DateTime.Now, "{0:HH:mm:ss.fff}")}\t{구분}\t{영역}\t{내용}");
         }
 
+        public class SyncList<T> : List<T>
+        {
+            private readonly Object sync = new Object();
+            public new void Add(T item) { lock (sync) { base.Add(item); } }
+            public new void AddRange(IEnumerable<T> collection) { lock (sync) { base.AddRange(collection); } }
+            public new void Remove(T item) { lock (sync) { base.Remove(item); } }
+            public new void RemoveAt(Int32 index) { lock (sync) { base.RemoveAt(index); } }
+            public new void Clear() { lock (sync) { base.Clear(); } }
+        }
+
+        public class SyncQueue<T> : Queue<T>
+        {
+            private readonly Object sync = new Object();
+            public new void Enqueue(T item) { lock (sync) { base.Enqueue(item); } }
+            public new T Dequeue() { lock (sync) { return base.Dequeue(); } }
+        }
+
+        public class SyncDictionary<TKey, TValue> : Dictionary<TKey, TValue>
+        {
+            private readonly Object sync = new Object();
+            public new void Add(TKey key, TValue val) { lock (sync) { base.Add(key, val); } }
+            public new Boolean Remove(TKey key) { lock (sync) { return base.Remove(key); } }
+        }
+
     }
 }

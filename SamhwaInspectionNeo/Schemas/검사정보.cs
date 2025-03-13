@@ -294,6 +294,13 @@ namespace SamhwaInspectionNeo.Schemas
             this.결과값 = 0;
             this.측정결과 = 결과구분.NO;
         }
+
+        public 결과구분 결과계산()
+        {
+            Boolean ok = this.결과값 >= this.최소값 && this.결과값 <= this.최대값;
+            this.측정결과 = ok ? 결과구분.OK : 결과구분.NG;
+            return this.측정결과;
+        }
     }
 
     [Table("inspl")]

@@ -194,7 +194,7 @@ namespace SamhwaInspectionNeo.UI.Control
             this.결과정보리스트.Clear();
             GridControl1.DataSource = null;
             //현재날짜 데이터 가져와서 Flow / Jig Check후 가장 최신데이터 불러오기.
-            List<검사결과> 자료 = Global.검사자료.테이블.Select();
+            List<검사결과> 자료 = Global.검사자료.테이블.Select(new QueryPrms { 시작 = DateTime.Now, 종료 = DateTime.Now, 모델 = Global.환경설정.선택모델, 역순정렬 = false });
 
             if (자료.Count == 0) return;
 

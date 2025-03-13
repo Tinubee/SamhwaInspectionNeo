@@ -22,12 +22,12 @@ namespace SamhwaInspectionNeo
             Boolean createdNew = false;
             Mutex mtx = new Mutex(true, Global.GetGuid(), out createdNew);
             // 뮤텍스를 얻지 못하면 에러
-            if (!createdNew)
-            {
-                MvUtils.Utils.ErrorMsg("프로그램이 이미 실행중입니다.");
-                Application.Exit();
-                return;
-            }
+            //if (!createdNew)
+            //{
+            //    MvUtils.Utils.ErrorMsg("프로그램이 이미 실행중입니다.");
+            //    Application.Exit();
+            //    return;
+            //}
 
             DevExpress.Data.CurrencyDataController.DisableThreadingProblemsDetection = true;
             DevExpress.XtraEditors.WindowsFormsSettings.LoadApplicationSettings();

@@ -13,12 +13,15 @@ using SamhwaInspectionNeo.UI.Form;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using static Euresys.MultiCam.MC;
+using SqlKata;
+using System.Diagnostics;
 
 namespace SamhwaInspectionNeo.UI.Control
 {
     public partial class Results : XtraUserControl
     {
         private LocalizationResults 번역 = new LocalizationResults();
+        private 검사목록테이블 테이블 = null;
         public Results()
         {
             InitializeComponent();
@@ -26,6 +29,7 @@ namespace SamhwaInspectionNeo.UI.Control
 
         public void Init()
         {
+            this.테이블 = new 검사목록테이블();
             this.BindLocalization.DataSource = this.번역;
             this.e시작일자.DateTime = DateTime.Today;
             this.e종료일자.DateTime = DateTime.Today;
@@ -121,7 +125,7 @@ namespace SamhwaInspectionNeo.UI.Control
             검사정보 정보 = this.선택검사정보(out 검사결과 결과);
             if (결과 == null || 정보 == null) return;
             if (!MvUtils.Utils.Confirm("선택한 검사결과를 삭제하시겠습니까?", Localization.확인.GetString())) return;
-            Global.검사자료.결과삭제(결과, 정보);
+            Global.검사자료.결과삭제(결과);
             (this.GridControl1.FocusedView as GridView).RefreshData();
         }
 
@@ -207,8 +211,16 @@ namespace SamhwaInspectionNeo.UI.Control
 
         private void 자료조회(object sender, EventArgs e)
         {
+            //if (Global.장치상태.자동수동)
+            //{
+            //    Global.Notify("Can't do this during autorun.", "Search", AlertControl.AlertTypes.Warning);
+            //    return;
+            //}
+            DateTime s = DateTime.Now;
             Global.검사자료.Save();
             Global.검사자료.Load(this.e시작일자.DateTime, this.e종료일자.DateTime);
+            GridView1.RefreshData();
+            Debug.WriteLine((DateTime.Now - s).TotalMilliseconds, $"Load Time GridView {Global.검사자료.Count}");
         }
 
         public class LocalizationResults

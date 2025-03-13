@@ -63,7 +63,7 @@
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
-            this.resultePivot1 = new SamhwaInspectionNeo.UI.Control.ResultePivot();
+            this.resultePivot1 = new SamhwaInspectionNeo.UI.Control.ResultsPivot();
             ((System.ComponentModel.ISupportInitialize)(this.tabFormControl1)).BeginInit();
             this.tabFormContentContainer1.SuspendLayout();
             this.tabFormContentContainer2.SuspendLayout();
@@ -464,7 +464,7 @@
         private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
-        private UI.Control.ResultePivot resultePivot1;
+        private UI.Control.ResultsPivot resultePivot1;
     }
 }
 

@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Newtonsoft.Json;
 using Npgsql;
+using SqlKata.Compilers;
+using SqlKata;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +17,7 @@ using VM.PlatformSDKCS;
 
 namespace SamhwaInspectionNeo.Schemas
 {
-    public class 검사자료 : BindingList<검사결과>
+    public class 검사자료 : Common.SyncList<검사결과>
     {
         public delegate void 검사진행알림(검사결과 결과);
         public event 검사진행알림 검사완료알림;
@@ -27,14 +29,14 @@ namespace SamhwaInspectionNeo.Schemas
         [JsonIgnore]
         public 검사결과테이블 테이블 = null;
         [JsonIgnore]
-        private Dictionary<Int32, 검사결과> 검사스플 = new Dictionary<Int32, 검사결과>();
+        private Common.SyncDictionary<Int32, 검사결과> 검사스플 = new Common.SyncDictionary<Int32, 검사결과>();
         [JsonIgnore]
         public 검사결과 수동검사;
 
         public void Init()
         {
-            this.AllowEdit = true;
-            this.AllowRemove = true;
+            //this.AllowEdit = true;
+            //this.AllowRemove = true;
             this.테이블 = new 검사결과테이블();
             this.Load();
             this.수동검사초기화();
@@ -58,7 +60,7 @@ namespace SamhwaInspectionNeo.Schemas
 
         private String 저장파일(DateTime 날짜) => Path.Combine(Global.환경설정.문서저장경로, MvUtils.Utils.FormatDate(날짜, "{0:yyyyMMdd}") + ".json");
         public void Save() => this.테이블.Save();
-        public void SaveAsync() => this.테이블.SaveAsync();
+        //public void SaveAsync() => this.테이블.SaveAsync();
 
         //public void Save(검사결과 결과)
         //{
@@ -78,18 +80,18 @@ namespace SamhwaInspectionNeo.Schemas
 
         private Boolean SaveJson()
         {
-            DateTime 날짜 = DateTime.Today;
-            try
-            {
-                List<검사결과> 자료 = this.테이블.Select(날짜, 날짜);
-                if (자료.Count < 1) return true;
-                File.WriteAllText(this.저장파일(날짜), JsonConvert.SerializeObject(자료, Formatting.Indented));
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Global.오류로그(로그영역.GetString(), Localization.저장.GetString(), $"{저장오류.GetString()}\r\n{ex.Message}", true);
-            }
+            //DateTime 날짜 = DateTime.Today;
+            //try
+            //{
+            //    List<검사결과> 자료 = this.테이블.Select(날짜, 날짜);
+            //    if (자료.Count < 1) return true;
+            //    File.WriteAllText(this.저장파일(날짜), JsonConvert.SerializeObject(자료, Formatting.Indented));
+            //    return true;
+            //}
+            //catch (Exception ex)
+            //{
+            //    Global.오류로그(로그영역.GetString(), Localization.저장.GetString(), $"{저장오류.GetString()}\r\n{ex.Message}", true);
+            //}
             return false;
         }
 
@@ -99,7 +101,8 @@ namespace SamhwaInspectionNeo.Schemas
             try
             {
                 this.Clear();
-                List<검사결과> 자료 = this.테이블.Select(시작, 종료);
+                List<검사결과> 자료 = this.테이블.Select(new QueryPrms { 시작 = 시작, 종료 = 종료.AddDays(1), 역순정렬 = false });
+                //List<검사결과> 자료 = this.테이블.Select(시작, 종료);
                 //List<Int32> 대상 = Global.신호제어.검사중인항목();
                 자료.ForEach(검사 => {
                     this.Add(검사);
@@ -109,45 +112,16 @@ namespace SamhwaInspectionNeo.Schemas
                 });
             }
             catch (Exception ex) { Global.오류로그(로그영역.GetString(), "Load", ex.Message, true); }
-            //this.Clear();
-            //this.RaiseListChangedEvents = false;
-            //List<검사결과> 자료 = this.테이블.Select(시작, 종료);
-
-            ////List<Int32> 대상 = Global.신호제어.검사중인항목();
-            //자료.ForEach(검사 =>
-            //{
-            //    this.Add(검사);
-            //    // 검사스플 생성
-            //    //if (검사.측정결과 < 결과구분.ER && 대상.Contains(검사.검사코드) && !this.검사스플.ContainsKey(검사.검사코드))
-            //    //    this.검사스플.Add(검사.검사코드, 검사);
-            //});
-            //this.RaiseListChangedEvents = true;
-            //this.ResetBindings();
         }
 
-        //public void LoadNewVer(DateTime 시작, DateTime 종료)
-        //{
-        //    try
-        //    {
-        //        this.Clear();
-        //        List<검사결과> 자료 = this.테이블.Select(new QueryPrms { 시작 = 시작, 종료 = 종료, 역순정렬 = false });
-        //        //List<Int32> 대상 = Global.장치통신.검사중인항목();
-        //        자료.ForEach(검사 => {
-        //            this.Add(검사);
-        //            // 검사스플 생성
-        //            //if (검사.측정결과 < 결과구분.ER && 대상.Contains(검사.검사코드) && !this.검사스플.ContainsKey(검사.검사코드))
-        //            //    this.검사스플.Add(검사.검사코드, 검사);
-        //        });
-        //    }
-        //    catch (Exception ex) { Global.오류로그(로그영역.GetString(), "Load", ex.Message, true); }
-        //}
-
-        public List<검사결과> GetData(DateTime 시작, DateTime 종료, 모델구분 모델) => this.테이블.Select(시작, 종료, 모델);
+        public List<검사결과> GetData(DateTime 시작, DateTime 종료, 모델구분 모델) => this.테이블.Select(new QueryPrms { 시작 = 시작, 종료 = 종료, 모델 = 모델, 역순정렬 = false });
         private void 모델변경알림(모델구분 모델코드) => this.수동검사초기화();
 
         private void 자료추가(검사결과 결과)
         {
-            this.Insert(0, 결과);
+            this.Add(결과);
+            //this.검사시작알림?.Invoke(결과);
+            //this.Insert(0, 결과);
             //this.테이블.Add(결과);
         }
 
@@ -157,12 +131,12 @@ namespace SamhwaInspectionNeo.Schemas
             this.Remove(정보);
             return this.테이블.Delete(정보) > 0;
         }
-        public Boolean 결과삭제(검사결과 결과, 검사정보 정보)
-        {
-            결과.검사내역.Remove(정보);
-            return this.테이블.Delete(정보) > 0;
-        }
-        public 검사결과 결과조회(DateTime 일자, 모델구분 모델, Int32 코드) => this.테이블.Select(일자, 모델, 코드);
+        //public Boolean 결과삭제(검사결과 결과, 검사정보 정보)
+        //{
+        //    결과.검사내역.Remove(정보);
+        //    return this.테이블.Delete(정보) > 0;
+        //}
+        //public 검사결과 결과조회(DateTime 일자, 모델구분 모델, Int32 코드) => this.테이블.Select(일자, 모델, 코드);
 
         #region 검사로직
         private DateTime LastTime = DateTime.MinValue;
@@ -244,198 +218,11 @@ namespace SamhwaInspectionNeo.Schemas
             return 검사;
         }
 
-        public void ResetItem(검사결과 검사)
-        {
-            if (검사 == null) return;
-            this.ResetItem(this.IndexOf(검사));
-        }
+        //public void ResetItem(검사결과 검사)
+        //{
+        //    if (검사 == null) return;
+        //    this.ResetItem(this.IndexOf(검사));
+        //}
         #endregion
-    }
-
-
-    public class 검사결과테이블 : Data.BaseTable
-    {
-        private TranslationAttribute 로그영역 = new TranslationAttribute("Inspection Data", "검사자료");
-        private TranslationAttribute 삭제오류 = new TranslationAttribute("An error occurred while deleting data.", "자료 삭제중 오류가 발생하였습니다.");
-        private DbSet<검사결과> 검사결과 { get; set; }
-        private DbSet<검사정보> 검사정보 { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<검사결과>().Property(e => e.모델구분).HasConversion(new EnumToNumberConverter<모델구분, Int32>());
-            modelBuilder.Entity<검사결과>().Property(e => e.측정결과).HasConversion(new EnumToNumberConverter<결과구분, Int32>());
-            modelBuilder.Entity<검사결과>().Property(e => e.CTQ결과).HasConversion(new EnumToNumberConverter<결과구분, Int32>());
-            modelBuilder.Entity<검사결과>().Property(e => e.외관결과).HasConversion(new EnumToNumberConverter<결과구분, Int32>());
-            modelBuilder.Entity<검사정보>().HasKey(e => new { e.검사일시, e.검사항목 });
-            modelBuilder.Entity<검사정보>().Property(e => e.검사그룹).HasConversion(new EnumToNumberConverter<검사그룹, Int32>());
-            modelBuilder.Entity<검사정보>().Property(e => e.검사항목).HasConversion(new EnumToNumberConverter<검사항목, Int32>());
-            modelBuilder.Entity<검사정보>().Property(e => e.검사장치).HasConversion(new EnumToNumberConverter<장치구분, Int32>());
-            modelBuilder.Entity<검사정보>().Property(e => e.결과분류).HasConversion(new EnumToNumberConverter<결과분류, Int32>());
-            modelBuilder.Entity<검사정보>().Property(e => e.측정단위).HasConversion(new EnumToNumberConverter<단위구분, Int32>());
-            modelBuilder.Entity<검사정보>().Property(e => e.측정결과).HasConversion(new EnumToNumberConverter<결과구분, Int32>());
-            base.OnModelCreating(modelBuilder);
-        }
-
-        public void Save()
-        {
-            try { this.SaveChanges(); }
-            catch (Exception ex) { Debug.WriteLine(ex.ToString(), "자료저장"); }
-        }
-        public Boolean Save(검사결과 정보)
-        {
-            this.Add(정보);
-            return this.Save2();
-        }
-        public Boolean Save2()
-        {
-            try
-            {
-                Int32 changes = this.SaveChanges();
-                return true;
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Global.오류로그(로그영역.GetString(), "Save", ex.Message, true);
-                return false;
-            }
-        }
-        public void SaveAsync()
-        {
-            try {
-                Common.DebugWriteLine("자료저장", 로그구분.정보, "테이블 SaveAsync");
-                this.SaveChangesAsync();
-            }
-            catch (Exception ex) { Debug.WriteLine(ex.ToString(), "자료저장"); }
-        }
-
-        public void Add(검사결과 정보)
-        {
-            this.검사결과.Add(정보);
-            this.검사정보.AddRange(정보.검사내역);
-        }
-
-        public void Remove(List<검사정보> 자료)
-        {
-            this.검사정보.RemoveRange(자료);
-        }
-
-        public List<검사결과> Select()
-        {
-            return this.Select(DateTime.Today);
-        }
-        public List<검사결과> Select(DateTime 날짜)
-        {
-            DateTime 시작 = new DateTime(날짜.Year, 날짜.Month, 날짜.Day);
-            DateTime 종료 = new DateTime(날짜.Year, 날짜.Month, 날짜.Day + 1);
-            return this.Select(시작, 종료);
-        }
-        public List<검사결과> Select(DateTime 시작, DateTime 종료, 모델구분 모델 = 모델구분.None, Int32 코드 = 0)
-        {
-            IQueryable<검사결과> query1 = (
-                from l in 검사결과
-                where l.검사일시 >= 시작 && l.검사일시 < 종료.AddDays(1)
-                where (코드 <= 0 || l.검사코드 == 코드)
-                where (모델 == 모델구분.None || l.모델구분 == 모델)
-                orderby l.검사일시 descending
-                select l);
-            List<검사결과> 자료 = query1.AsNoTracking().ToList();
-
-            IQueryable<검사정보> query2 = (
-                from d in 검사정보
-                join l in 검사결과 on d.검사일시 equals l.검사일시
-                where l.검사일시 >= 시작 && l.검사일시 < 종료.AddDays(1)
-                where (코드 <= 0 || l.검사코드 == 코드)
-                where (모델 == 모델구분.None || l.모델구분 == 모델)
-                orderby d.검사일시 descending
-                orderby d.검사항목 ascending
-                select d);
-            List<검사정보> 정보 = query2.AsNoTracking().ToList();
-
-            자료.ForEach(l =>
-            {
-                l.AddRange(정보.Where(d => d.검사일시 == l.검사일시).ToList());
-            });
-
-            return 자료;
-        }
-
-        public 검사결과 Select(DateTime 일자, 모델구분 모델, Int32 코드)
-        {
-            return this.Select(일자, 일자, 모델, 코드).FirstOrDefault();
-        }
-
-        public Int32 Delete(검사결과 정보)
-        {
-            String Sql = $"DELETE FROM inspd WHERE idwdt = @idwdt;\nDELETE FROM inspl WHERE ilwdt = @ilwdt;";
-            try
-            {
-                int AffectedRows = 0;
-                using (NpgsqlCommand cmd = new NpgsqlCommand(Sql, this.DbConn))
-                {
-                    cmd.Parameters.Add(new NpgsqlParameter("@idwdt", 정보.검사일시));
-                    cmd.Parameters.Add(new NpgsqlParameter("@ilwdt", 정보.검사일시));
-                    if (cmd.Connection.State != ConnectionState.Open) cmd.Connection.Open();
-                    AffectedRows = cmd.ExecuteNonQuery();
-                    cmd.Connection.Close();
-                }
-                return AffectedRows;
-            }
-            catch (Exception ex)
-            {
-                Global.오류로그(로그영역.GetString(), Localization.삭제.GetString(), $"{삭제오류.GetString()}\r\n{ex.Message}", true);
-            }
-            return 0;
-        }
-
-        public Int32 Delete(검사정보 정보)
-        {
-            String Sql = $"DELETE FROM inspd WHERE idwdt = @idwdt AND idnum = @idnum";
-            try
-            {
-                int AffectedRows = 0;
-                using (NpgsqlCommand cmd = new NpgsqlCommand(Sql, this.DbConn))
-                {
-                    cmd.Parameters.Add(new NpgsqlParameter("@idwdt", 정보.검사일시));
-                    cmd.Parameters.Add(new NpgsqlParameter("@idnum", 정보.검사항목));
-                    if (cmd.Connection.State != ConnectionState.Open) cmd.Connection.Open();
-                    AffectedRows = cmd.ExecuteNonQuery();
-                    cmd.Connection.Close();
-                }
-                return AffectedRows;
-            }
-            catch (Exception ex)
-            {
-                Global.오류로그(로그영역.GetString(), Localization.삭제.GetString(), $"{삭제오류.GetString()}\r\n{ex.Message}", true);
-            }
-            return 0;
-        }
-
-        public Int32 자료정리(Int32 일수)
-        {
-            DateTime 일자 = DateTime.Today.AddDays(-일수);
-            String day = MvUtils.Utils.FormatDate(일자, "{0:yyyy-MM-dd}");
-            String sql = $"DELETE FROM inspd WHERE idwdt < DATE('{day}');\nDELETE FROM inspl WHERE ilwdt < DATE('{day}');";
-            try
-            {
-                int AffectedRows = 0;
-                using (NpgsqlCommand cmd = new NpgsqlCommand(sql, this.DbConn))
-                {
-                    if (cmd.Connection.State != ConnectionState.Open) cmd.Connection.Open();
-                    AffectedRows = cmd.ExecuteNonQuery();
-                    cmd.Connection.Close();
-                }
-                return AffectedRows;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-                Global.오류로그(로그영역.GetString(), "Remove Datas", ex.Message, false);
-            }
-            return -1;
-        }
     }
 }

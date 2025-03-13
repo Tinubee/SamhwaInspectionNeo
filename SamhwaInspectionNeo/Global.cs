@@ -22,6 +22,8 @@ namespace SamhwaInspectionNeo
         public static MainForm MainForm = null;
         public delegate void BaseEvent();
         public static event EventHandler<Boolean> Initialized;
+        public static Random Random = new Random();
+        public static Int32 RandomSign => Random.NextDouble() >= 0.5 ? 1 : -1;
 
         private const String 로그영역 = "프로그램";
         public static 환경설정 환경설정;
@@ -67,19 +69,19 @@ namespace SamhwaInspectionNeo
 
                 로그자료.Init();
                 환경설정.Init();
-                VM제어.Init();
+                //VM제어.Init();
                 유저자료.Init();
                 if (Global.환경설정.동작구분 == 동작구분.Live)
                 {
-                    조명제어.Init();
-                    신호제어.Init();
-                    그랩제어.Init();
-                    트리거보드제어.Init(조명포트.None);
+                    //조명제어.Init();
+                    //신호제어.Init();
+                    //그랩제어.Init();
+                    //트리거보드제어.Init(조명포트.None);
                 }
                 모델자료.Init();
                 검사자료.Init();
 
-                if (!신호제어.Open()) new Exception("PLC 서버에 연결할 수 없습니다.");
+                //if (!신호제어.Open()) new Exception("PLC 서버에 연결할 수 없습니다.");
 
                 Global.정보로그(로그영역, "초기화", "시스템을 초기화 합니다.", false);
                 Initialized?.Invoke(null, true);
@@ -120,8 +122,8 @@ namespace SamhwaInspectionNeo
 
         public static void Start()
         {
-            신호제어.Start();
-            트리거보드제어.Start();
+            //신호제어.Start();
+            //트리거보드제어.Start();
         }
 
         public static void DxLocalization()

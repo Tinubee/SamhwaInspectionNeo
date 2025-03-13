@@ -1,6 +1,6 @@
 ﻿namespace SamhwaInspectionNeo.UI.Control
 {
-    partial class ResultePivot
+    partial class ResultsPivot
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ResultePivot));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ResultsPivot));
             this.GridControl1 = new MvUtils.CustomGrid();
             this.GridView1 = new MvUtils.CustomBandedView();
+            this.gridBand2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.e종료일자 = new DevExpress.XtraEditors.DateEdit();
             this.b엑셀파일 = new DevExpress.XtraEditors.SimpleButton();
@@ -45,7 +46,7 @@
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.BindLocalization = new System.Windows.Forms.BindingSource(this.components);
-            this.gridBand2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.Bind피벗자료 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.GridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -62,6 +63,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BindLocalization)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Bind피벗자료)).BeginInit();
             this.SuspendLayout();
             // 
             // GridControl1
@@ -108,6 +110,16 @@
             this.GridView1.OptionsView.ShowFooter = true;
             this.GridView1.OptionsView.ShowGroupPanel = false;
             this.GridView1.RowHeight = 21;
+            // 
+            // gridBand2
+            // 
+            this.gridBand2.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridBand2.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridBand2.Caption = "Item";
+            this.gridBand2.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+            this.gridBand2.Name = "gridBand2";
+            this.gridBand2.VisibleIndex = 0;
+            this.gridBand2.Width = 252;
             // 
             // layoutControl1
             // 
@@ -265,15 +277,9 @@
             this.layoutControlItem5.Text = "End";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(25, 15);
             // 
-            // gridBand2
+            // Bind피벗자료
             // 
-            this.gridBand2.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridBand2.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridBand2.Caption = "Item";
-            this.gridBand2.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
-            this.gridBand2.Name = "gridBand2";
-            this.gridBand2.VisibleIndex = 0;
-            this.gridBand2.Width = 252;
+            this.Bind피벗자료.DataSource = typeof(SamhwaInspectionNeo.Schemas.피벗자료);
             // 
             // ResultePivot
             // 
@@ -299,6 +305,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BindLocalization)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Bind피벗자료)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -321,5 +328,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private System.Windows.Forms.BindingSource BindLocalization;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
+        private System.Windows.Forms.BindingSource Bind피벗자료;
     }
 }
