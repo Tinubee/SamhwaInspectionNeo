@@ -69,19 +69,19 @@ namespace SamhwaInspectionNeo
 
                 로그자료.Init();
                 환경설정.Init();
-                //VM제어.Init();
+                VM제어.Init();
                 유저자료.Init();
                 if (Global.환경설정.동작구분 == 동작구분.Live)
                 {
-                    //조명제어.Init();
-                    //신호제어.Init();
-                    //그랩제어.Init();
-                    //트리거보드제어.Init(조명포트.None);
+                    조명제어.Init();
+                    신호제어.Init();
+                    그랩제어.Init();
+                    트리거보드제어.Init(조명포트.None);
                 }
                 모델자료.Init();
                 검사자료.Init();
 
-                //if (!신호제어.Open()) new Exception("PLC 서버에 연결할 수 없습니다.");
+                if (!신호제어.Open()) new Exception("PLC 서버에 연결할 수 없습니다.");
 
                 Global.정보로그(로그영역, "초기화", "시스템을 초기화 합니다.", false);
                 Initialized?.Invoke(null, true);
@@ -122,8 +122,8 @@ namespace SamhwaInspectionNeo
 
         public static void Start()
         {
-            //신호제어.Start();
-            //트리거보드제어.Start();
+            신호제어.Start();
+            트리거보드제어.Start();
         }
 
         public static void DxLocalization()

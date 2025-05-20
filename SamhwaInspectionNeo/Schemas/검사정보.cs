@@ -190,6 +190,18 @@ namespace SamhwaInspectionNeo.Schemas
         중하작은홀경 = 1705,
         [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
         우하작은홀경 = 1706,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        좌상작은홀경Burr = 1711,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        중상작은홀경Burr = 1712,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우상작은홀경Burr = 1713,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        좌하작은홀경Burr = 1714,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        중하작은홀경Burr = 1715,
+        [Result(검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01)]
+        우하작은홀경Burr = 1716,
 
         [Result(검사그룹.SURFACE, 결과분류.Summary, 장치구분.Cam03)]
         상부표면검사 = 5000,
