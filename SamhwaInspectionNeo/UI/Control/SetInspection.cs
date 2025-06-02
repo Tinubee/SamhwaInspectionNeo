@@ -51,6 +51,12 @@ namespace SamhwaInspectionNeo.UI.Control
             this.b설정저장.Text = 번역.설정저장;
             this.b도구설정.Click += B도구설정_Click;
             this.b수동검사.Click += B수동검사_Click;
+            this.cb자동보정.EditValueChanged += Cb자동보정_EditValueChanged;
+        }
+
+        private void Cb자동보정_EditValueChanged(object sender, EventArgs e)
+        {
+            Global.환경설정.자동보정사용여부 = cb자동보정.Checked;
         }
 
         private void B보정값설정_Click(object sender, EventArgs e)

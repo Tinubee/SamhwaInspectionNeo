@@ -9,6 +9,8 @@ using System.Diagnostics;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
 using static DevExpress.XtraEditors.Mask.MaskSettings;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SamhwaInspectionNeo
 {
@@ -28,6 +30,37 @@ namespace SamhwaInspectionNeo
             this.p환경설정.Enabled = false;
             this.Shown += MainFormShown;
             this.FormClosing += MainFormClosing;
+            this.KeyDown += MainForm_KeyDown;
+        }
+
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.T)
+            {
+                Debug.WriteLine("t");
+                if (Global.환경설정.자동보정사용여부)
+                {
+                    //보정값 초기화 작업.
+                    List<VmVariable> 보정값변수들 = Global.VM제어.글로벌변수제어.보정값불러오기();
+
+                    //검사정보 정보 = Global.모델자료.선택모델.검사설정.GetItem(항목);
+                    foreach (검사정보 정보 in Global.모델자료.선택모델.검사설정)
+                    {
+                        if (정보.마스터값 != 0)
+                        {
+                            //마스터값이 있으면 보정값 초기화
+                            VmVariable 적용할변수 = 보정값변수들.Where(f => f.Name.Contains(정보.검사항목.ToString())).FirstOrDefault();
+
+                            string 초기값 = "1;1;1;1;1;1;1;1";
+
+                            Global.VM제어.글로벌변수제어.SetValue(적용할변수.Name, 초기값);
+                        }
+                    }
+
+                }
+
+            }
+          
         }
 
         public async void GetProgramGitDate()

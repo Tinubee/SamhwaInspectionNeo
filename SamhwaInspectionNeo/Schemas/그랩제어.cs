@@ -2,6 +2,7 @@
 using MvCamCtrl.NET;
 using MvCamCtrl.NET.CameraParams;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using OpenCvSharp;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using static SamhwaInspectionNeo.Schemas.EuresysLink;
 
 namespace SamhwaInspectionNeo.Schemas
@@ -176,6 +178,26 @@ namespace SamhwaInspectionNeo.Schemas
             Int32 검사코드 = Global.신호제어.마스터모드여부 ? Convert.ToInt32((Flow구분)번호 + 100) : Convert.ToInt32((Flow구분)번호);
             //마스터 모드일때 Flow3,4만 실행하도록
             if (Global.신호제어.마스터모드여부 && 번호 < 2) return;
+
+            if (Global.환경설정.자동보정사용여부) {
+                //보정값 초기화 작업.
+                List<VmVariable> 보정값변수들 = Global.VM제어.글로벌변수제어.보정값불러오기();
+
+                //검사정보 정보 = Global.모델자료.선택모델.검사설정.GetItem(항목);
+                foreach (검사정보 정보 in Global.모델자료.선택모델.검사설정)
+                {
+                    if(정보.마스터값 != 0)
+                    {
+                        //마스터값이 있으면 보정값 초기화
+                        VmVariable 적용할변수 = 보정값변수들.Where(f => f.Name.Contains(정보.검사항목.ToString())).FirstOrDefault();
+
+                        string 초기값 = "1;1;1;1;1;1;1;1";
+
+                        Global.VM제어.글로벌변수제어.SetValue(적용할변수.Name, 초기값);
+                    }
+                }
+
+            }
 
             Global.검사자료.검사시작(검사코드);
         }

@@ -82,6 +82,7 @@ namespace SamhwaInspectionNeo.Schemas
             SqlResult sql2 = p.CopyTo(Tables.inspd).QueryBuild();
             List<검사결과> 자료 = 검사결과.FromSqlRaw(sql1.ToString()).ToList();
             List<검사정보> 정보 = 검사정보.FromSqlRaw(sql2.ToString()).ToList();
+
             Debug.WriteLine((DateTime.Now - s).TotalMilliseconds, "Load Time Sql");
             if (자료 == null || 자료.Count < 1) return new List<검사결과>();
             if (정보 != null && 정보.Count > 0)

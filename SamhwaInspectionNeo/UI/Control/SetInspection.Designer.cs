@@ -63,10 +63,11 @@
             this.col교정값 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col측정값 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col결과값 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.col마스터값 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ｅ교정계산 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.e마진값 = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             this.repositoryItemToggleSwitch1 = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
-            this.col마스터값 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.cb자동보정 = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.e모델선택.Properties)).BeginInit();
@@ -78,10 +79,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.ｅ교정계산)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e마진값)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemToggleSwitch1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cb자동보정.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.cb자동보정);
             this.panelControl1.Controls.Add(this.b보정값설정);
             this.panelControl1.Controls.Add(this.b수동검사);
             this.panelControl1.Controls.Add(this.b도구설정);
@@ -397,6 +400,15 @@
             this.col결과값.Visible = true;
             this.col결과값.VisibleIndex = 11;
             // 
+            // col마스터값
+            // 
+            this.col마스터값.AppearanceHeader.Options.UseTextOptions = true;
+            this.col마스터값.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.col마스터값.FieldName = "마스터값";
+            this.col마스터값.Name = "col마스터값";
+            this.col마스터값.Visible = true;
+            this.col마스터값.VisibleIndex = 12;
+            // 
             // ｅ교정계산
             // 
             this.ｅ교정계산.AutoHeight = false;
@@ -423,14 +435,16 @@
             this.repositoryItemToggleSwitch1.OffText = "Off";
             this.repositoryItemToggleSwitch1.OnText = "On";
             // 
-            // col마스터값
+            // cb자동보정
             // 
-            this.col마스터값.AppearanceHeader.Options.UseTextOptions = true;
-            this.col마스터값.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.col마스터값.FieldName = "마스터값";
-            this.col마스터값.Name = "col마스터값";
-            this.col마스터값.Visible = true;
-            this.col마스터값.VisibleIndex = 12;
+            this.cb자동보정.Location = new System.Drawing.Point(1109, 11);
+            this.cb자동보정.MenuManager = this.barManager1;
+            this.cb자동보정.Name = "cb자동보정";
+            this.cb자동보정.Properties.Appearance.Font = new System.Drawing.Font("맑은 고딕", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.cb자동보정.Properties.Appearance.Options.UseFont = true;
+            this.cb자동보정.Properties.Caption = "자동보정";
+            this.cb자동보정.Size = new System.Drawing.Size(140, 34);
+            this.cb자동보정.TabIndex = 15;
             // 
             // SetInspection
             // 
@@ -455,6 +469,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ｅ교정계산)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e마진값)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemToggleSwitch1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cb자동보정.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -494,5 +509,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn col결과값;
         private DevExpress.XtraEditors.SimpleButton b보정값설정;
         private DevExpress.XtraGrid.Columns.GridColumn col마스터값;
+        private DevExpress.XtraEditors.CheckEdit cb자동보정;
     }
 }

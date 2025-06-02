@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 
@@ -90,7 +91,7 @@ namespace SamhwaInspectionNeo.UI.Control
         private void B전체보정_Click(object sender, EventArgs e)
         {
             if (GridView1.RowCount == 1) return;
-
+            List<VmVariable> 보정값변수들 = Global.VM제어.글로벌변수제어.보정값불러오기();
             for (int lop = 0; lop < GridView1.RowCount; lop++)
             {
                 if (isCalculating) return;
@@ -104,13 +105,13 @@ namespace SamhwaInspectionNeo.UI.Control
 
                 double measdvalue, cmmdvalue;
 
-                List<VmVariable> 보정값변수들 = Global.VM제어.글로벌변수제어.보정값불러오기();
+                Debug.WriteLine($"{name}");
 
                 if (measvalue != null && cmmvalue != null &&
                    double.TryParse(measvalue.ToString(), out measdvalue) &&
                        double.TryParse(cmmvalue.ToString(), out cmmdvalue))
                 {
-                    if (measdvalue != 0 )
+                    if (measdvalue != 0)
                     {
                         isCalculating = true;
                         if (cmmdvalue != 0)
@@ -121,8 +122,13 @@ namespace SamhwaInspectionNeo.UI.Control
                                 {
                                     isCalculating = false;
                                     MvUtils.Utils.MessageBox("보정값계산", "위치도값은 보정할 수 없습니다. X,Y 거리를 보정해주세요.", 2000);
-                                    return;
+                                    continue;
                                 }
+                            }
+                            if (name.ToString().Contains("Bur"))
+                            {
+                                isCalculating = false;
+                                continue;
                             }
                             //2P-B모델 좌상X좌표 0, 우하Y좌표 0
                             calvalue = (float)(cmmdvalue / measdvalue);
@@ -191,14 +197,15 @@ namespace SamhwaInspectionNeo.UI.Control
         public void Close() { }
         private void 자료조회(object sender, EventArgs e)
         {
+            Debug.WriteLine("1");
             this.결과정보리스트.Clear();
             GridControl1.DataSource = null;
-            //현재날짜 데이터 가져와서 Flow / Jig Check후 가장 최신데이터 불러오기.
-            List<검사결과> 자료 = Global.검사자료.테이블.Select(new QueryPrms { 시작 = DateTime.Now, 종료 = DateTime.Now, 모델 = Global.환경설정.선택모델, 역순정렬 = false });
+         
+            //List<검사결과> 자료 = Global.검사자료.테이블.Select(new QueryPrms { 시작 = DateTime.Today, 종료 = DateTime.Today.AddDays(1), 역순정렬 = false });
 
-            if (자료.Count == 0) return;
+            if (Global.검사자료.Count == 0) return;
 
-            검사결과 선택자료 = 자료.Where(w => w.검사코드 == (Int32)this.플로우 && w.검사내역[0].지그 == this.위치).FirstOrDefault();
+            검사결과 선택자료 = Global.검사자료.Where(w => w.검사코드 == (Int32)this.플로우 && w.검사내역[0].지그 == this.위치 &&  w.검사내역[0].결과값 != 0).LastOrDefault();
 
             if (선택자료 == null)
             {

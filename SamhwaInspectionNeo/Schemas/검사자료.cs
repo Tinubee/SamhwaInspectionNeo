@@ -102,13 +102,8 @@ namespace SamhwaInspectionNeo.Schemas
             {
                 this.Clear();
                 List<검사결과> 자료 = this.테이블.Select(new QueryPrms { 시작 = 시작, 종료 = 종료.AddDays(1), 역순정렬 = false });
-                //List<검사결과> 자료 = this.테이블.Select(시작, 종료);
-                //List<Int32> 대상 = Global.신호제어.검사중인항목();
                 자료.ForEach(검사 => {
                     this.Add(검사);
-                    // 검사스플 생성
-                    //if (검사.측정결과 < 결과구분.ER && 대상.Contains(검사.검사코드) && !this.검사스플.ContainsKey(검사.검사코드))
-                    //    this.검사스플.Add(검사.검사코드, 검사);
                 });
             }
             catch (Exception ex) { Global.오류로그(로그영역.GetString(), "Load", ex.Message, true); }
