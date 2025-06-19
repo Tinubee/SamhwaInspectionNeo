@@ -78,23 +78,6 @@ namespace SamhwaInspectionNeo.Schemas
                 return table.Save(결과);
         }
 
-        private Boolean SaveJson()
-        {
-            //DateTime 날짜 = DateTime.Today;
-            //try
-            //{
-            //    List<검사결과> 자료 = this.테이블.Select(날짜, 날짜);
-            //    if (자료.Count < 1) return true;
-            //    File.WriteAllText(this.저장파일(날짜), JsonConvert.SerializeObject(자료, Formatting.Indented));
-            //    return true;
-            //}
-            //catch (Exception ex)
-            //{
-            //    Global.오류로그(로그영역.GetString(), Localization.저장.GetString(), $"{저장오류.GetString()}\r\n{ex.Message}", true);
-            //}
-            return false;
-        }
-
         public void Load() => this.Load(DateTime.Today, DateTime.Today);
         public void Load(DateTime 시작, DateTime 종료)
         {

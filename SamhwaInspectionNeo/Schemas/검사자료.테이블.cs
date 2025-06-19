@@ -13,6 +13,9 @@ using System.Linq;
 using System.Reflection;
 using SamhwaInspectionNeo.Schemas;
 using SamhwaInspectionNeo;
+using DevExpress.ClipboardSource.SpreadsheetML;
+using System.IO;
+using ClosedXML.Excel;
 
 namespace SamhwaInspectionNeo.Schemas
 {
@@ -136,6 +139,164 @@ namespace SamhwaInspectionNeo.Schemas
                 Global.오류로그(로그영역.GetString(), "Remove Datas", ex.Message, false);
             }
             return -1;
+        }
+
+
+        public bool 검사자료추출_고객사확인용(DateTime startTime, DateTime endTime)
+        {
+            try
+            {
+                List<List<string>> result = new List<List<string>>();
+
+                var filteredResults = this.검사결과
+                   .Where(x => x.검사일시 >= startTime && x.검사일시 < endTime.AddDays(1))
+                   .OrderBy(x => x.검사일시)
+                   .ToList(); // 메모리로 로드하여 인덱스를 사용할 수 있도록 변환
+
+                //마지막검사데이터 불러옴
+                검사결과 LastInspectionData = filteredResults.Last();
+
+                //마지막 검사 데이터 없으면 return
+                if (LastInspectionData == null)
+                {
+                    Global.오류로그("검사자료", "데이터추출", "There is no inspection data.", true);
+                    return false;
+                }
+
+                // 결과 리스트 처음 정보는 변수명임
+                // 변수명에 메인정보 추가
+                var TitlesName = new List<string>
+    {
+        "Index",
+        "Time",
+        "Result",
+        "CTQ",
+        "Surface"
+};
+
+                // 변수명에 검사명칭 추가
+                var TitleDetail = this.검사정보
+                    .Where(x => x.검사일시 == LastInspectionData.검사일시)
+                    .OrderBy(x => x.검사항목)
+                    .ToList();
+                TitleDetail.ForEach(x => TitlesName.Add(x.검사항목.ToString()));
+
+                // 결과의 첫 리스트에 변수명 리스트 추가
+                result.Add(TitlesName);
+
+
+                //검사 일시 별로 검사 정보 및 검사결과 추출 후 데이터 추가
+                foreach (검사결과 결과 in filteredResults)
+                {
+                    var row = new List<string>
+    {
+        결과.검사코드.ToString(),
+        결과.검사일시.ToString("yy-MM-dd HH:mm:ss"),
+        //결과.큐알내용 ?? string.Empty,
+        //결과.큐알등급.ToString(),
+        결과.측정결과.ToString(),
+        결과.CTQ결과.ToString(),
+        결과.외관결과.ToString(),
+    };
+
+                    // 해당 검사일시에 대한 inspd 데이터 조회
+                    var inspdData = this.검사정보
+                        .Where(x => x.검사일시 == 결과.검사일시)
+                        .OrderBy(x => x.검사항목)
+                        .ToList();
+
+                    row.AddRange(inspdData.Select(x => x.결과값.ToString()));
+
+                    result.Add(row);
+                }
+
+                // 행과 열을 전치하여 새로운 데이터 구조 생성
+                var transposedResults = TransposeList(result);
+
+                // 파일 저장 경로 지정
+                string filePath = $@"{Global.환경설정.문서저장경로}\{DateTime.Now.ToString("yyMMdd_HHmmss")}.xlsx"; 
+
+                // 앞서 추출한 결과(result)를 Excel로 내보내기
+                ExportToExcel(transposedResults, filePath);
+            }
+            catch (Exception e)
+            {
+                Global.오류로그(this.로그영역.ToString(), "검사자료추출", e.Message, true);
+            }
+            return true;
+        }
+        public List<List<string>> TransposeList(List<List<string>> originalList)
+        {
+            if (originalList == null || originalList.Count == 0)
+                return new List<List<string>>();
+
+            // 열(Column) 개수만큼 새로운 리스트 생성
+            int columnCount = originalList.Max(row => row.Count);
+            List<List<string>> transposed = new List<List<string>>();
+
+            for (int i = 0; i < columnCount; i++)
+            {
+                transposed.Add(new List<string>());
+            }
+
+            // 데이터를 전치 (행 -> 열, 열 -> 행)
+            foreach (var row in originalList)
+            {
+                for (int colIndex = 0; colIndex < columnCount; colIndex++)
+                {
+                    if (colIndex < row.Count)
+                        transposed[colIndex].Add(row[colIndex]);
+                    else
+                        transposed[colIndex].Add(string.Empty); // 빈 값 채우기
+                }
+            }
+
+            return transposed;
+        }
+
+        public void ExportToExcel(List<List<string>> result, string filePath)
+        {
+            SaveExcelWithDirectory(filePath);
+
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("검사 결과");
+
+                for (int rowIndex = 0; rowIndex < result.Count; rowIndex++)
+                {
+                    List<string> rowData = result[rowIndex];
+
+                    for (int colIndex = 0; colIndex < rowData.Count; colIndex++)
+                    {
+                        // 🔹 [1] 현재 셀의 값
+                        string cellValue = rowData[colIndex];
+
+                        // 🔹 [2] 숫자 변환 시도
+                        if (decimal.TryParse(cellValue, out decimal numericValue))
+                        {
+                            // 숫자로 변환되면 숫자로 저장
+                            worksheet.Cell(rowIndex + 1, colIndex + 1).Value = numericValue;
+                        }
+                        else
+                        {
+                            // 변환이 안 되면 문자열로 저장
+                            worksheet.Cell(rowIndex + 1, colIndex + 1).Value = cellValue;
+                        }
+                    }
+                }
+                workbook.SaveAs(filePath);
+            }
+        }
+
+        public void SaveExcelWithDirectory(string filePath)
+        {
+            string directoryPath = Path.GetDirectoryName(filePath);
+
+            if (!string.IsNullOrEmpty(directoryPath))
+            {
+                //폴더가 존재하지 않으면 생성
+                Directory.CreateDirectory(directoryPath);
+            }
         }
         //public List<연속불량정보> 연속불량체크()
         //{
