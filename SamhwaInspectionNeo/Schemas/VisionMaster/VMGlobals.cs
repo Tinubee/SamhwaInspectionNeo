@@ -47,6 +47,22 @@ namespace SamhwaInspectionNeo.Schemas
             return calValueList;
         }
 
+        public List<VmVariable> 마진값불러오기()
+        {
+            //Slot4_5_MarginValue
+            List<GlobalVarInfo> lists = Variables.GetAllGlobalVar();
+            List<VmVariable> matginValueList = new List<VmVariable>();
+            foreach (GlobalVarInfo info in lists)
+            {
+                if (info.strValueType.ToLower() != typeof(String).Name.ToLower()) continue;
+
+                if (info.strValueName.Contains("MarginValue"))
+                    matginValueList.Add(new VmVariable(info));
+            }
+
+            return matginValueList;
+        }
+
         public List<VmVariable> 마스터셋팅값가져오기()
         {
             List<GlobalVarInfo> lists = Variables.GetAllGlobalVar();

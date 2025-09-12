@@ -266,6 +266,8 @@ namespace SamhwaInspectionNeo.Schemas
         public Decimal 보정값 { get; set; } = 0m;
         [Column("idcal"), JsonProperty("idcal"), Translation("Calib(µm)", "교정(µm)")]
         public Decimal 교정값 { get; set; } = 1m;
+        //[Column("idmar"),JsonProperty("idmar"), Translation("Margin(µm)", "마진(µm)")]
+        //public Decimal 마진값 { get; set; } = 1m;
         [Column("idmes"), JsonProperty("idmes"), Translation("Measure", "측정값")]
         public Decimal 측정값 { get; set; } = 0m;
         //[Column("idcmm"), JsonProperty("idcmm"), Translation("CMMData", "CMM측정값")]

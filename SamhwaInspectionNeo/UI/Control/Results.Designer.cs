@@ -68,6 +68,7 @@
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.Bind검사자료 = new System.Windows.Forms.BindingSource(this.components);
             this.BindLocalization = new System.Windows.Forms.BindingSource(this.components);
+            this.col마진값 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.GridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridView1)).BeginInit();
@@ -109,6 +110,7 @@
             this.col기준값,
             this.col최대값,
             this.col결과값,
+            this.col마진값,
             this.col검사결과});
             this.GridView2.DetailHeight = 375;
             this.GridView2.FooterPanelHeight = 22;
@@ -231,7 +233,7 @@
             this.col검사결과.FieldName = "측정결과";
             this.col검사결과.Name = "col검사결과";
             this.col검사결과.Visible = true;
-            this.col검사결과.VisibleIndex = 7;
+            this.col검사결과.VisibleIndex = 8;
             // 
             // GridControl1
             // 
@@ -596,6 +598,15 @@
             this.barManager1.DockingEnabled = false;
             this.barManager1.Form = this;
             // 
+            // col마진값
+            // 
+            this.col마진값.AppearanceHeader.Options.UseTextOptions = true;
+            this.col마진값.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.col마진값.Caption = "col마진값";
+            this.col마진값.Name = "col마진값";
+            this.col마진값.Visible = true;
+            this.col마진값.VisibleIndex = 7;
+            // 
             // Results
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -668,5 +679,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem3;
+        private DevExpress.XtraGrid.Columns.GridColumn col마진값;
     }
 }

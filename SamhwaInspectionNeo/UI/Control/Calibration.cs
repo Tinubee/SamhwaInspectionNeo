@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
+using DocumentFormat.OpenXml.Drawing.Charts;
 using SamhwaInspectionNeo.Schemas;
 using System;
 using System.Collections.Generic;
@@ -73,7 +74,13 @@ namespace SamhwaInspectionNeo.UI.Control
             this.col측정값.AppearanceCell.BackColor = Color.Gray;
             this.col측정값.AppearanceCell.ForeColor = Color.Black;
 
+
+            this.col마진값.OptionsColumn.AllowEdit = true;
+            //this.col마진값.AppearanceCell.BackColor = Color.Gray;
+            //this.col마진값.AppearanceCell.ForeColor = Color.Black;
+
             this.b조회.Click += 자료조회;
+            this.col마진값.DisplayFormat.FormatString = Global.환경설정.결과표현;
             this.col측정값.DisplayFormat.FormatString = Global.환경설정.결과표현;
             this.GridControl1.DataSource = this.결과정보리스트;
 
@@ -86,6 +93,93 @@ namespace SamhwaInspectionNeo.UI.Control
             this.e지그선택.CustomDisplayText += 선택지그표현;
 
             this.b전체보정.Click += B전체보정_Click;
+            this.b마진값설정.Click += B마진값설정_Click;
+        }
+
+        private void B마진값설정_Click(object sender, EventArgs e)
+        {
+            if (GridView1.RowCount == 1) return;
+            List<VmVariable> 마진값변수들 = Global.VM제어.글로벌변수제어.마진값불러오기();
+            for (int lop = 0; lop < GridView1.RowCount; lop++)
+            {
+                if (isCalculating) return;
+
+                int rowIndex = lop;
+
+                object measvalue = GridView1.GetRowCellValue(rowIndex, "측정값");
+                object cmmvalue = GridView1.GetRowCellValue(rowIndex, "CMM측정값");
+                object name = GridView1.GetRowCellValue(rowIndex, "검사항목");
+                object marginvalue = GridView1.GetRowCellValue(rowIndex, "마진값");
+
+                double measdvalue, cmmdvalue, margindvalue;
+
+                Debug.WriteLine($"{name} : {marginvalue}");
+
+                if (measvalue != null && cmmvalue != null &&
+                   double.TryParse(measvalue.ToString(), out measdvalue) &&
+                       double.TryParse(cmmvalue.ToString(), out cmmdvalue) &&
+                       double.TryParse(marginvalue.ToString(), out margindvalue))
+                {
+                    if (measdvalue != 0)
+                    {
+                        isCalculating = true;
+                        if (cmmdvalue != 0)
+                        {
+                            if (name.ToString().Contains("위치도"))
+                            {
+                                if (name.ToString().Contains("거리") == false && name.ToString().Contains("Slot") == false)
+                                {
+                                    isCalculating = false;
+                                    MvUtils.Utils.MessageBox("마진값계산", "위치도값은 마진값을 설정 할 수 없습니다.", 2000);
+                                    continue;
+                                }
+                            }
+                            if (name.ToString().Contains("Bur"))
+                            {
+                                isCalculating = false;
+                                continue;
+                            }
+                            //2P-B모델 좌상X좌표 0, 우하Y좌표 0
+                            //if(marginvalue == 0)
+                            //측정값(1) + 마진값(2) = cmm측정값(3).
+                            //2번째 돌렷을대
+
+                            //3 (3-2)
+
+
+                            //cmm측정값 - (측정값 - 마진값)
+
+                            if (measdvalue + margindvalue != cmmdvalue)
+                                marginvalue = (float)(cmmdvalue - (measdvalue - margindvalue));
+                            else
+                                marginvalue = margindvalue;
+                        }
+
+                        GridView1.SetRowCellValue(rowIndex, "마진값", Math.Round(Convert.ToDouble(marginvalue), 6));
+                        isCalculating = false;
+                    }
+
+                    if (cmmdvalue != 0)
+                    {
+                        Int32 index = 보정위치();
+
+                        if (index == -1) return;
+
+                        VmVariable 적용할변수 = 마진값변수들.Where(f => f.Name.Contains(name.ToString())).FirstOrDefault();
+
+                        if (적용할변수 == null) return;
+
+                        string value = 적용할변수.StringValue;
+                        string[] splitValue = value.Split(';');
+
+                        splitValue[index] = Math.Round(Convert.ToDouble(marginvalue), 6).ToString();
+
+                        value = String.Join(";", splitValue);
+
+                        Global.VM제어.글로벌변수제어.SetValue(적용할변수.Name, value);
+                    }
+                }
+            }
         }
 
         private void B전체보정_Click(object sender, EventArgs e)
@@ -200,12 +294,12 @@ namespace SamhwaInspectionNeo.UI.Control
             Debug.WriteLine("1");
             this.결과정보리스트.Clear();
             GridControl1.DataSource = null;
-         
+
             //List<검사결과> 자료 = Global.검사자료.테이블.Select(new QueryPrms { 시작 = DateTime.Today, 종료 = DateTime.Today.AddDays(1), 역순정렬 = false });
 
             if (Global.검사자료.Count == 0) return;
 
-            검사결과 선택자료 = Global.검사자료.Where(w => w.검사코드 == (Int32)this.플로우 && w.검사내역[0].지그 == this.위치 &&  w.검사내역[0].결과값 != 0).LastOrDefault();
+            검사결과 선택자료 = Global.검사자료.Where(w => w.검사코드 == (Int32)this.플로우 && w.검사내역[0].지그 == this.위치 && w.검사내역[0].결과값 != 0).LastOrDefault();
 
             if (선택자료 == null)
             {
@@ -214,6 +308,7 @@ namespace SamhwaInspectionNeo.UI.Control
             }
 
             List<VmVariable> calValue = Global.VM제어.글로벌변수제어.보정값불러오기();
+            List<VmVariable> marValue = Global.VM제어.글로벌변수제어.마진값불러오기();
             Int32 index = 보정위치();
 
             if (index == -1) return;
@@ -227,6 +322,7 @@ namespace SamhwaInspectionNeo.UI.Control
                 조회정보.검사장치 = 정보.검사장치;
                 조회정보.측정단위 = 정보.측정단위;
                 조회정보.교정값 = 보정값조회(정보.검사항목, calValue, index);
+                조회정보.마진값 = 마진값조회(정보.검사항목, marValue, index);
                 조회정보.CMM측정값 = 정보.마스터값;
                 this.결과정보리스트.Add(조회정보);
             }
@@ -244,7 +340,17 @@ namespace SamhwaInspectionNeo.UI.Control
 
             return Convert.ToDecimal(splitValue[보정값위치]);
         }
+        private Decimal 마진값조회(검사항목 항목, List<VmVariable> list, Int32 보정값위치)
+        {
+            //MarValue //Slot4_5_MarginValue
+            VmVariable 변수 = list.Where(e => e.Name == $"{항목}_MarginValue" || e.Name == $"{항목}MarginValue").FirstOrDefault();
+            if (변수 == null) return 1;
 
+            string value = 변수.StringValue;
+            string[] splitValue = value.Split(';');
+
+            return Convert.ToDecimal(splitValue[보정값위치]);
+        }
         private void 교정값계산(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
             if (isCalculating) return;
@@ -254,15 +360,16 @@ namespace SamhwaInspectionNeo.UI.Control
             object measvalue = GridView1.GetRowCellValue(rowIndex, "측정값");
             object cmmvalue = GridView1.GetRowCellValue(rowIndex, "CMM측정값");
             object name = GridView1.GetRowCellValue(rowIndex, "검사항목");
-            object calvalue = GridView1.GetRowCellValue(rowIndex, "교정값");
+            object marginvalue = GridView1.GetRowCellValue(rowIndex, "마진값");
 
-            double measdvalue, cmmdvalue;
+            double measdvalue, cmmdvalue, margindvalue;
 
-            List<VmVariable> 보정값변수들 = Global.VM제어.글로벌변수제어.보정값불러오기();
+            //Debug.WriteLine($"{name} : {marginvalue}");
 
             if (measvalue != null && cmmvalue != null &&
-                    double.TryParse(measvalue.ToString(), out measdvalue) &&
-                        double.TryParse(cmmvalue.ToString(), out cmmdvalue))
+               double.TryParse(measvalue.ToString(), out measdvalue) &&
+                   double.TryParse(cmmvalue.ToString(), out cmmdvalue) &&
+                   double.TryParse(marginvalue.ToString(), out margindvalue))
             {
                 if (measdvalue != 0)
                 {
@@ -274,36 +381,44 @@ namespace SamhwaInspectionNeo.UI.Control
                             if (name.ToString().Contains("거리") == false && name.ToString().Contains("Slot") == false)
                             {
                                 isCalculating = false;
-                                MvUtils.Utils.MessageBox("보정값계산", "위치도값은 보정할 수 없습니다. X,Y 거리를 보정해주세요.", 2000);
+                                MvUtils.Utils.MessageBox("마진값계산", "위치도값은 마진값을 설정 할 수 없습니다.", 2000);
                                 return;
                             }
                         }
-                        //2P-B모델 좌상X좌표 0, 우하Y좌표 0
-                        calvalue = (float)(cmmdvalue / measdvalue);
+                        if (name.ToString().Contains("Bur"))
+                        {
+                            isCalculating = false;
+                            return;
+                        }
                     }
 
-                    GridView1.SetRowCellValue(rowIndex, "교정값", Math.Round(Convert.ToDouble(calvalue), 6));
+                    //GridView1.SetRowCellValue(rowIndex, "마진값", Math.Round(Convert.ToDouble(marginvalue), 6));
                     isCalculating = false;
                 }
+
+                if (cmmdvalue != 0)
+                {
+                    Int32 index = 보정위치();
+                    List<VmVariable> 마진값변수들 = Global.VM제어.글로벌변수제어.마진값불러오기();
+                    if (index == -1) return;
+
+                    VmVariable 적용할변수 = 마진값변수들.Where(f => f.Name.Contains(name.ToString())).FirstOrDefault();
+
+                    if (적용할변수 == null) return;
+
+                    string value = 적용할변수.StringValue;
+                    string[] splitValue = value.Split(';');
+
+                    splitValue[index] = Math.Round(Convert.ToDouble(marginvalue), 6).ToString();
+
+                    Debug.WriteLine($"{name} : {marginvalue}");
+                    value = String.Join(";", splitValue);
+
+                    Debug.WriteLine($"{value}", 적용할변수.Name);
+
+                    Global.VM제어.글로벌변수제어.SetValue(적용할변수.Name, value);
+                }
             }
-
-
-            Int32 index = 보정위치();
-
-            if (index == -1) return;
-
-            VmVariable 적용할변수 = 보정값변수들.Where(f => f.Name.Contains(name.ToString())).FirstOrDefault();
-
-            if (적용할변수 == null) return;
-
-            string value = 적용할변수.StringValue;
-            string[] splitValue = value.Split(';');
-
-            splitValue[index] = Math.Round(Convert.ToDouble(calvalue), 6).ToString();
-
-            value = String.Join(";", splitValue);
-
-            Global.VM제어.글로벌변수제어.SetValue(적용할변수.Name, value);
         }
 
         private Int32 보정위치()
@@ -330,5 +445,7 @@ namespace SamhwaInspectionNeo.UI.Control
         public Decimal 측정값 { get; set; } = 0m;
         public Decimal CMM측정값 { get; set; } = 0m;
         public Decimal 교정값 { get; set; } = 1m;
+
+        public Decimal 마진값 { get; set; } = 1m;
     }
 }

@@ -85,12 +85,15 @@ namespace SamhwaInspectionNeo.Schemas
             {
                 this.Clear();
                 List<검사결과> 자료 = this.테이블.Select(new QueryPrms { 시작 = 시작, 종료 = 종료.AddDays(1), 역순정렬 = false });
-                자료.ForEach(검사 => {
+                자료.ForEach(검사 =>
+                {
                     this.Add(검사);
                 });
             }
             catch (Exception ex) { Global.오류로그(로그영역.GetString(), "Load", ex.Message, true); }
         }
+
+        public Boolean 자료저장로직변경테스트(DateTime st, DateTime et) => this.테이블.검사자료추출_고객사확인용(st, et);
 
         public List<검사결과> GetData(DateTime 시작, DateTime 종료, 모델구분 모델) => this.테이블.Select(new QueryPrms { 시작 = 시작, 종료 = 종료, 모델 = 모델, 역순정렬 = false });
         private void 모델변경알림(모델구분 모델코드) => this.수동검사초기화();
@@ -125,7 +128,7 @@ namespace SamhwaInspectionNeo.Schemas
             {
                 검사 = new 검사결과() { 검사코드 = 검사코드 };
                 검사.Reset();
-                검사.측정결과 = 결과구분.IN; 
+                검사.측정결과 = 결과구분.IN;
                 this.자료추가(검사);
                 this.검사스플.Add(검사.검사코드, 검사);
                 Common.DebugWriteLine(로그영역.GetString(), 로그구분.정보, $"[{(Int32)Global.환경설정.선택모델} - {검사.검사코드}] 신규검사 시작.");
@@ -149,7 +152,7 @@ namespace SamhwaInspectionNeo.Schemas
             //if (Global.환경설정.하부표면검사사용여부 == false) 검사.하부표면검사강제OK(구분, 지그);
 
             검사.SetResult(구분, 지그, name, value);
-          
+
             return 검사;
         }
 
@@ -157,7 +160,7 @@ namespace SamhwaInspectionNeo.Schemas
         {
             검사코드 = Global.신호제어.마스터모드여부 ? 검사코드 + 100 : 검사코드;
             검사결과 검사 = this.검사항목찾기(검사코드);
-            
+
             if (검사 == null)
             {
                 Global.오류로그(로그영역.GetString(), "결과계산", $"[{(Int32)Global.환경설정.선택모델}.{검사코드}] 해당 검사가 없습니다.", false);

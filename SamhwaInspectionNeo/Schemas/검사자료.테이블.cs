@@ -16,6 +16,7 @@ using SamhwaInspectionNeo;
 using DevExpress.ClipboardSource.SpreadsheetML;
 using System.IO;
 using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Math;
 
 namespace SamhwaInspectionNeo.Schemas
 {
@@ -149,81 +150,169 @@ namespace SamhwaInspectionNeo.Schemas
                 List<List<string>> result = new List<List<string>>();
 
                 var filteredResults = this.검사결과
-                   .Where(x => x.검사일시 >= startTime && x.검사일시 < endTime.AddDays(1))
-                   .OrderBy(x => x.검사일시)
-                   .ToList(); // 메모리로 로드하여 인덱스를 사용할 수 있도록 변환
+                    .Where(x => x.검사일시 >= startTime && x.검사일시 < endTime.AddDays(1))
+                    .OrderBy(x => x.검사일시)
+                    .ToList();
 
-                //마지막검사데이터 불러옴
-                검사결과 LastInspectionData = filteredResults.Last();
-
-                //마지막 검사 데이터 없으면 return
-                if (LastInspectionData == null)
+                if (filteredResults.Count == 0)
                 {
-                    Global.오류로그("검사자료", "데이터추출", "There is no inspection data.", true);
+                    Global.오류로그(this.로그영역.ToString(), "데이터추출", "There is no inspection data.", true);
                     return false;
                 }
 
-                // 결과 리스트 처음 정보는 변수명임
-                // 변수명에 메인정보 추가
+                검사결과 LastInspectionData = filteredResults.Last();
+                Debug.WriteLine("a");
+                // 🔥 검사정보를 미리 그룹핑
+                var 검사정보Map = this.검사정보
+                        .Where(x => x.검사일시 >= startTime && x.검사일시 < endTime.AddDays(1))
+                        .ToList() // 이 시점에서 데이터를 DB에서 가져옴
+                        .GroupBy(x => x.검사일시)
+                        .ToDictionary(g => g.Key, g => g.OrderBy(x => x.검사항목).ToList());
+               
+                Debug.WriteLine("b");
                 var TitlesName = new List<string>
-    {
-        "Index",
-        "Time",
-        "Result",
-        "CTQ",
-        "Surface"
-};
+        {
+            "Index",
+            "Time",
+            "Result",
+            "CTQ",
+            "Surface"
+        };
 
-                // 변수명에 검사명칭 추가
-                var TitleDetail = this.검사정보
-                    .Where(x => x.검사일시 == LastInspectionData.검사일시)
-                    .OrderBy(x => x.검사항목)
-                    .ToList();
-                TitleDetail.ForEach(x => TitlesName.Add(x.검사항목.ToString()));
+                if (검사정보Map.TryGetValue(LastInspectionData.검사일시, out var titleDetails))
+                {
+                    TitlesName.AddRange(titleDetails.Select(x => x.검사항목.ToString()));
+                }
 
-                // 결과의 첫 리스트에 변수명 리스트 추가
                 result.Add(TitlesName);
 
-
-                //검사 일시 별로 검사 정보 및 검사결과 추출 후 데이터 추가
-                foreach (검사결과 결과 in filteredResults)
+                // 결과 작성
+                foreach (var 결과 in filteredResults)
                 {
                     var row = new List<string>
-    {
-        결과.검사코드.ToString(),
-        결과.검사일시.ToString("yy-MM-dd HH:mm:ss"),
-        //결과.큐알내용 ?? string.Empty,
-        //결과.큐알등급.ToString(),
-        결과.측정결과.ToString(),
-        결과.CTQ결과.ToString(),
-        결과.외관결과.ToString(),
-    };
+            {
+                결과.검사코드.ToString(),
+                결과.검사일시.ToString("yy-MM-dd HH:mm:ss"),
+                결과.측정결과.ToString(),
+                결과.CTQ결과.ToString(),
+                결과.외관결과.ToString(),
+            };
 
-                    // 해당 검사일시에 대한 inspd 데이터 조회
-                    var inspdData = this.검사정보
-                        .Where(x => x.검사일시 == 결과.검사일시)
-                        .OrderBy(x => x.검사항목)
-                        .ToList();
-
-                    row.AddRange(inspdData.Select(x => x.결과값.ToString()));
+                    if (검사정보Map.TryGetValue(결과.검사일시, out var inspdData))
+                    {
+                        row.AddRange(inspdData.Select(x => x.결과값.ToString()));
+                    }
 
                     result.Add(row);
                 }
 
-                // 행과 열을 전치하여 새로운 데이터 구조 생성
                 var transposedResults = TransposeList(result);
+                string filePath = $@"{Global.환경설정.문서저장경로}\{DateTime.Now.ToString("yyyyMMdd_HHmmss")}.xlsx";
+                //string filePath = $@"C:\IVM\ProductionData\ProductionData_{DateTime.Now:yyMMdd_HHmmss}.xlsx";
 
-                // 파일 저장 경로 지정
-                string filePath = $@"{Global.환경설정.문서저장경로}\{DateTime.Now.ToString("yyMMdd_HHmmss")}.xlsx"; 
-
-                // 앞서 추출한 결과(result)를 Excel로 내보내기
                 ExportToExcel(transposedResults, filePath);
             }
             catch (Exception e)
             {
                 Global.오류로그(this.로그영역.ToString(), "검사자료추출", e.Message, true);
             }
+
             return true;
+
+
+
+            //            try
+            //            {
+            //                List<List<string>> result = new List<List<string>>();
+
+            //                var filteredResults = this.검사결과
+            //                   .Where(x => x.검사일시 >= startTime && x.검사일시 < endTime.AddDays(1))
+            //                   .OrderBy(x => x.검사일시)
+            //                   .ToList(); // 메모리로 로드하여 인덱스를 사용할 수 있도록 변환
+
+            //                //마지막검사데이터 불러옴
+            //                검사결과 LastInspectionData = filteredResults.Last();
+
+            //                Debug.WriteLine($"1");
+
+            //                //마지막 검사 데이터 없으면 return
+            //                if (LastInspectionData == null)
+            //                {
+            //                    Global.오류로그("검사자료", "데이터추출", "There is no inspection data.", true);
+            //                    return false;
+            //                }
+            //                Debug.WriteLine($"pp");
+            //                // 결과 리스트 처음 정보는 변수명임
+            //                // 변수명에 메인정보 추가
+            //                var TitlesName = new List<string>
+            //    {
+            //        "Index",
+            //        "Time",
+            //        "Result",
+            //        "CTQ",
+            //        "Surface"
+            //};
+
+            //                // 변수명에 검사명칭 추가
+            //                var TitleDetail = this.검사정보
+            //                    .Where(x => x.검사일시 == LastInspectionData.검사일시)
+            //                    .OrderBy(x => x.검사항목)
+            //                    .ToList();
+            //                TitleDetail.ForEach(x => TitlesName.Add(x.검사항목.ToString()));
+
+            //                // 결과의 첫 리스트에 변수명 리스트 추가
+            //                result.Add(TitlesName);
+
+
+
+
+            //                //검사 일시 별로 검사 정보 및 검사결과 추출 후 데이터 추가
+            //                foreach (검사결과 결과 in filteredResults)
+            //                {
+
+            //                    var row = new List<string>
+            //    {
+            //        결과.검사코드.ToString(),
+            //        결과.검사일시.ToString("yyyy-MM-dd HH:mm:ss"),
+            //        //결과.큐알내용 ?? string.Empty,
+            //        //결과.큐알등급.ToString(),
+            //        결과.측정결과.ToString(),
+            //        결과.CTQ결과.ToString(),
+            //        결과.외관결과.ToString(),
+            //    };
+
+
+            //                    Debug.WriteLine($"000");
+            //                    // 해당 검사일시에 대한 inspd 데이터 조회
+            //                    var inspdData = this.검사정보
+            //                        .Where(x => x.검사일시 == 결과.검사일시)
+            //                        .OrderBy(x => x.검사항목)
+            //                        .ToList();
+
+            //                    Debug.WriteLine($"111");
+            //                    row.AddRange(inspdData.Select(x => x.결과값.ToString()));
+            //                    Debug.WriteLine($"222");
+
+
+            //                    result.Add(row);
+            //                    Debug.WriteLine($"333");
+            //                }
+            //                Debug.WriteLine($"2");
+            //                // 행과 열을 전치하여 새로운 데이터 구조 생성
+            //                var transposedResults = TransposeList(result);
+
+            //                // 파일 저장 경로 지정
+            //                string filePath = $@"{Global.환경설정.문서저장경로}\{DateTime.Now.ToString("yyyyMMdd_HHmmss")}.xlsx";
+            //                Debug.WriteLine($"3");
+            //                // 앞서 추출한 결과(result)를 Excel로 내보내기
+            //                ExportToExcel(transposedResults, filePath);
+            //                Debug.WriteLine($"4");
+            //            }
+            //            catch (Exception e)
+            //            {
+            //                Global.오류로그(this.로그영역.ToString(), "검사자료추출", e.Message, true);
+            //            }
+            //            return true;
         }
         public List<List<string>> TransposeList(List<List<string>> originalList)
         {

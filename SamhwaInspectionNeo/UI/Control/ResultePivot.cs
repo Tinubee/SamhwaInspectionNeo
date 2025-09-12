@@ -2,14 +2,17 @@
 using DevExpress.Utils;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.BandedGrid;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraPrinting;
-using SamhwaInspectionNeo.Schemas;
-using SamhwaInspectionNeo.UI.Form;
 using MvUtils;
+using SamhwaInspectionNeo.Schemas;
+using SamhwaInspectionNeo.Schemas.Reports;
+using SamhwaInspectionNeo.UI.Form;
 using System;
 using System.Collections;
 using System.Data;
@@ -28,6 +31,7 @@ namespace SamhwaInspectionNeo.UI.Control
 
         private Results.LocalizationResults 번역 = new Results.LocalizationResults();
         private 피벗자료 피벗자료 = new 피벗자료();
+        private 검사내역 검사내역;
 
         public void Init()
         {
@@ -88,7 +92,7 @@ namespace SamhwaInspectionNeo.UI.Control
         }
 
         private void 자료조회(object sender, EventArgs e) => this.LoadData(this.e시작일자.DateTime, this.e종료일자.DateTime, false);
-        private void LoadData(DateTime 시작, DateTime 종료, Boolean useSummary) => LoadData(Global.환경설정.선택모델, 시작, 종료, useSummary);
+        private void LoadData(DateTime 시작, DateTime 종료, Boolean useSummary) => 데이터정리(Global.환경설정.선택모델, 시작, 종료, useSummary); //LoadData(Global.환경설정.선택모델, 시작, 종료, useSummary);
         private void LoadData(모델구분 모델, DateTime 시작, DateTime 종료, Boolean useSummary)
         {
             if (모델 == 모델구분.None) return;
@@ -99,6 +103,93 @@ namespace SamhwaInspectionNeo.UI.Control
             Debug.WriteLine((DateTime.Now - s).TotalMilliseconds, "Load Time");
             this.GridControl1.DataSource = 피벗자료;
             this.GridView1.BestFitColumns();
+        }
+
+        private void 데이터정리(모델구분 모델, DateTime 시작, DateTime 종료, Boolean useSummary)
+        {
+            this.GridControl1.DataSource = null;
+            this.GridView1.Columns.Clear();
+            this.GridView1.FormatRules.Clear();
+            if (모델 == 모델구분.None) return;
+
+            this.검사내역?.Dispose();
+            this.검사내역 = new 검사내역(모델);
+            this.검사내역.Load(Global.검사자료.GetData(시작, 종료, 모델));
+
+            this.GridControl1.DataSource = this.검사내역.검사자료;
+            foreach (BandedGridColumn gCol in this.GridView1.Columns)
+            {
+                if (!this.검사내역.검사자료.Columns.Contains(gCol.FieldName)) continue;
+                DataColumn dCol = this.검사내역.검사자료.Columns[gCol.FieldName];
+                gCol.Caption = dCol.Caption;
+                this.GetBand(this.검사내역.GetBand(dCol))?.Columns.Add(gCol);
+                gCol.Visible = this.검사내역.GetVisiable(dCol);
+                gCol.Fixed = this.검사내역.GetFixedStyle(dCol);
+                gCol.ToolTip = this.검사내역.GetToolTip(dCol);
+                FormatType FormatType = this.검사내역.GetFormatType(dCol);
+                if (FormatType != DevExpress.Utils.FormatType.None)
+                {
+                    gCol.DisplayFormat.FormatType = FormatType;
+                    gCol.DisplayFormat.FormatString = this.검사내역.GetFormatString(dCol);
+                    if (FormatType == DevExpress.Utils.FormatType.Numeric)
+                    {
+                        if (gCol.DisplayFormat.FormatString.Contains(",")) gCol.AppearanceCell.TextOptions.HAlignment = HorzAlignment.Default;
+                        else gCol.AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+                    }
+                    else if (FormatType == DevExpress.Utils.FormatType.DateTime)
+                        gCol.AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+
+                    Object sVal = this.검사내역.GetStandardValue(dCol);
+                    if (sVal != null)
+                    {
+                        gCol.SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Custom;
+                        gCol.SummaryItem.DisplayFormat = gCol.DisplayFormat.FormatString;
+                        gCol.SummaryItem.FieldName = gCol.FieldName;
+                        gCol.SummaryItem.Tag = sVal;
+                    }
+                }
+                else gCol.AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+            }
+
+            foreach (GridBand band in this.GridView1.Bands)
+                band.Visible = band.Columns.Count > 0;
+
+            foreach (검사정보 설정 in Global.모델자료.GetItem(모델).검사설정)
+                this.CreateFormatConditionRule(설정);
+
+            this.CreateFormatConditionRule(this.GridView1.Columns[nameof(검사결과.측정결과)], 결과구분.OK);
+            this.GridView1.BestFitColumns();
+        }
+        private void CreateFormatConditionRule(GridColumn tCol, Object value)
+        {
+            if (tCol == null) return;
+            GridFormatRule Rule = new GridFormatRule();
+            FormatConditionRuleValue Condition = new FormatConditionRuleValue();
+            Rule.Name = tCol.FieldName + "_Rule";
+            Condition.PredefinedName = "Red Text";
+            Condition.Condition = FormatCondition.NotEqual;
+            Condition.Value1 = value;
+            Rule.Rule = Condition;
+            Rule.Column = tCol;
+            Rule.ColumnApplyTo = tCol;
+            this.GridView1.FormatRules.Add(Rule);
+        }
+        private void CreateFormatConditionRule(검사정보 설정)
+        {
+            String name = $"C{설정.검사항목}";
+            BandedGridColumn tCol = this.GridView1.Columns[name];
+            BandedGridColumn rCol = this.GridView1.Columns[name + "R"];
+            if (tCol == null || rCol == null) return;
+            GridFormatRule Rule = new GridFormatRule();
+            FormatConditionRuleValue Condition = new FormatConditionRuleValue();
+            Rule.Name = name + "_Rule";
+            Condition.PredefinedName = "Red Text";
+            Condition.Condition = FormatCondition.NotEqual;
+            Condition.Value1 = true;
+            Rule.Rule = Condition;
+            Rule.Column = rCol;
+            Rule.ColumnApplyTo = tCol;
+            this.GridView1.FormatRules.Add(Rule);
         }
 
         private void 정보삭제(object sender, ItemClickEventArgs e)

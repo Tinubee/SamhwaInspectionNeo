@@ -39,10 +39,14 @@
             this.b조회 = new DevExpress.XtraEditors.SimpleButton();
             this.e지그선택 = new DevExpress.XtraEditors.LookUpEdit();
             this.e플로우선택 = new DevExpress.XtraEditors.LookUpEdit();
+            this.b전체보정 = new DevExpress.XtraEditors.SimpleButton();
+            this.b마진값설정 = new DevExpress.XtraEditors.SimpleButton();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.barDockControl1 = new DevExpress.XtraBars.BarDockControl();
@@ -69,12 +73,11 @@
             this.col교정값 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col측정값 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col결과값 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.col마진값 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colcmm측정값 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ｅ교정계산 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.e마진값 = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             this.repositoryItemToggleSwitch1 = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
-            this.b전체보정 = new DevExpress.XtraEditors.SimpleButton();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.e지그선택.Properties)).BeginInit();
@@ -83,6 +86,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Bind검사결과)).BeginInit();
@@ -91,7 +96,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ｅ교정계산)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e마진값)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemToggleSwitch1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -101,6 +105,7 @@
             this.layoutControl1.Controls.Add(this.e지그선택);
             this.layoutControl1.Controls.Add(this.e플로우선택);
             this.layoutControl1.Controls.Add(this.b전체보정);
+            this.layoutControl1.Controls.Add(this.b마진값설정);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
@@ -117,9 +122,9 @@
             this.b조회.Cursor = System.Windows.Forms.Cursors.Hand;
             this.b조회.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("b조회.ImageOptions.SvgImage")));
             this.b조회.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
-            this.b조회.Location = new System.Drawing.Point(982, 9);
+            this.b조회.Location = new System.Drawing.Point(985, 9);
             this.b조회.Name = "b조회";
-            this.b조회.Size = new System.Drawing.Size(190, 24);
+            this.b조회.Size = new System.Drawing.Size(187, 24);
             this.b조회.StyleController = this.layoutControl1;
             this.b조회.TabIndex = 5;
             this.b조회.Text = "조  회";
@@ -152,6 +157,28 @@
             this.e플로우선택.StyleController = this.layoutControl1;
             this.e플로우선택.TabIndex = 25;
             // 
+            // b전체보정
+            // 
+            this.b전체보정.Appearance.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.b전체보정.Appearance.Options.UseFont = true;
+            this.b전체보정.Location = new System.Drawing.Point(793, 7);
+            this.b전체보정.Name = "b전체보정";
+            this.b전체보정.Size = new System.Drawing.Size(186, 25);
+            this.b전체보정.StyleController = this.layoutControl1;
+            this.b전체보정.TabIndex = 27;
+            this.b전체보정.Text = "전체보정";
+            // 
+            // b마진값설정
+            // 
+            this.b마진값설정.Appearance.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.b마진값설정.Appearance.Options.UseFont = true;
+            this.b마진값설정.Location = new System.Drawing.Point(612, 7);
+            this.b마진값설정.Name = "b마진값설정";
+            this.b마진값설정.Size = new System.Drawing.Size(177, 26);
+            this.b마진값설정.StyleController = this.layoutControl1;
+            this.b마진값설정.TabIndex = 28;
+            this.b마진값설정.Text = "마진값적용";
+            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -161,6 +188,7 @@
             this.layoutControlItem1,
             this.layoutControlItem2,
             this.layoutControlItem4,
+            this.layoutControlItem5,
             this.emptySpaceItem1});
             this.Root.Name = "Root";
             this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
@@ -170,12 +198,12 @@
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.b조회;
-            this.layoutControlItem3.Location = new System.Drawing.Point(973, 0);
+            this.layoutControlItem3.Location = new System.Drawing.Point(976, 0);
             this.layoutControlItem3.MaxSize = new System.Drawing.Size(200, 32);
             this.layoutControlItem3.MinSize = new System.Drawing.Size(120, 32);
             this.layoutControlItem3.Name = "layoutControlItem3";
             this.layoutControlItem3.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 4, 4);
-            this.layoutControlItem3.Size = new System.Drawing.Size(198, 33);
+            this.layoutControlItem3.Size = new System.Drawing.Size(195, 33);
             this.layoutControlItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
@@ -200,13 +228,30 @@
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.Control = this.b전체보정;
+            this.layoutControlItem4.Location = new System.Drawing.Point(786, 0);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(190, 33);
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem4.TextVisible = false;
+            // 
+            // layoutControlItem5
+            // 
+            this.layoutControlItem5.Control = this.b마진값설정;
+            this.layoutControlItem5.Location = new System.Drawing.Point(605, 0);
+            this.layoutControlItem5.Name = "layoutControlItem5";
+            this.layoutControlItem5.Size = new System.Drawing.Size(181, 33);
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem5.TextVisible = false;
+            // 
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
             this.emptySpaceItem1.Location = new System.Drawing.Point(407, 0);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(374, 33);
-            this.emptySpaceItem1.Text = "emptySpaceItem1";
+            this.emptySpaceItem1.Size = new System.Drawing.Size(198, 33);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // barManager1
@@ -325,6 +370,7 @@
             this.col교정값,
             this.col측정값,
             this.col결과값,
+            this.col마진값,
             this.colcmm측정값});
             this.GridView1.DetailHeight = 375;
             this.GridView1.FooterPanelHeight = 22;
@@ -464,6 +510,15 @@
             this.col결과값.Name = "col결과값";
             this.col결과값.OptionsColumn.TabStop = false;
             // 
+            // col마진값
+            // 
+            this.col마진값.AppearanceHeader.Options.UseTextOptions = true;
+            this.col마진값.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.col마진값.FieldName = "마진값";
+            this.col마진값.Name = "col마진값";
+            this.col마진값.Visible = true;
+            this.col마진값.VisibleIndex = 5;
+            // 
             // colcmm측정값
             // 
             this.colcmm측정값.AppearanceHeader.Options.UseTextOptions = true;
@@ -471,7 +526,7 @@
             this.colcmm측정값.FieldName = "CMM측정값";
             this.colcmm측정값.Name = "colcmm측정값";
             this.colcmm측정값.Visible = true;
-            this.colcmm측정값.VisibleIndex = 5;
+            this.colcmm측정값.VisibleIndex = 6;
             // 
             // ｅ교정계산
             // 
@@ -499,26 +554,6 @@
             this.repositoryItemToggleSwitch1.OffText = "Off";
             this.repositoryItemToggleSwitch1.OnText = "On";
             // 
-            // b전체보정
-            // 
-            this.b전체보정.Appearance.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.b전체보정.Appearance.Options.UseFont = true;
-            this.b전체보정.Location = new System.Drawing.Point(788, 7);
-            this.b전체보정.Name = "b전체보정";
-            this.b전체보정.Size = new System.Drawing.Size(188, 25);
-            this.b전체보정.StyleController = this.layoutControl1;
-            this.b전체보정.TabIndex = 27;
-            this.b전체보정.Text = "전체보정";
-            // 
-            // layoutControlItem4
-            // 
-            this.layoutControlItem4.Control = this.b전체보정;
-            this.layoutControlItem4.Location = new System.Drawing.Point(781, 0);
-            this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(192, 33);
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem4.TextVisible = false;
-            // 
             // Calibration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -543,6 +578,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Bind검사결과)).EndInit();
@@ -551,7 +588,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ｅ교정계산)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e마진값)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemToggleSwitch1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -598,5 +634,8 @@
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private DevExpress.XtraEditors.SimpleButton b전체보정;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
+        private DevExpress.XtraGrid.Columns.GridColumn col마진값;
+        private DevExpress.XtraEditors.SimpleButton b마진값설정;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
     }
 }

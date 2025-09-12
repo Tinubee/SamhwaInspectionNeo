@@ -207,7 +207,11 @@ namespace SamhwaInspectionNeo.UI.Control
             if (e.Column.FieldName == this.col검사결과.FieldName) e.Appearance.ForeColor = 환경설정.결과표현색상(정보.측정결과);
         }
 
-        private void 엑셀파일(object sender, EventArgs e) => this.GridView1.BtnXlsExportViewClick(null, null);
+        private void 엑셀파일(object sender, EventArgs e)
+        {
+            Global.검사자료.자료저장로직변경테스트(this.e시작일자.DateTime, this.e종료일자.DateTime);
+            //this.GridView1.BtnXlsExportViewClick(null, null);
+        } //=> this.GridView1.BtnXlsExportViewClick(null, null);
 
         private void 자료조회(object sender, EventArgs e)
         {
