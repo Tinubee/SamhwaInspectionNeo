@@ -265,6 +265,7 @@
     <Compile Include="Schemas\검사자료.검사분류.cs" />
     <Compile Include="Schemas\검사자료.리포트.cs" />
     <Compile Include="Schemas\검사자료.테이블.cs" />
+    <Compile Include="Schemas\검사자료신규.cs" />
     <Compile Include="Schemas\검사정보.cs" />
     <Compile Include="Schemas\그랩제어.cs" />
     <Compile Include="Schemas\로그정보.cs" />
@@ -275,7 +276,6 @@
     <Compile Include="Schemas\유저정보.cs" />
     <Compile Include="Schemas\조명제어.cs" />
     <Compile Include="Schemas\트리거보드제어.cs" />
-    <Compile Include="Schemas\평탄도계산.cs" />
     <Compile Include="Schemas\환경설정.cs" />
     <Compile Include="UI\Control\Calibration.cs">
       <SubType>UserControl</SubType>
@@ -648,6 +648,9 @@
     </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL">
       <Version>3.1.18</Version>
+    </PackageReference>
+    <PackageReference Include="NPOI">
+      <Version>2.7.4</Version>
     </PackageReference>
     <PackageReference Include="OpenCvSharp4.Extensions">
       <Version>4.8.0.20230708</Version>

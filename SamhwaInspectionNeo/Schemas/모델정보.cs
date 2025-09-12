@@ -222,6 +222,20 @@ namespace SamhwaInspectionNeo.Schemas
         {
             정보?.검사설정?.Save();
         }
+
+        public String GetItemName(모델구분 모델, 검사항목 항목)
+        {
+            모델정보 정보 = this.GetItem(모델);
+            if (정보 == null || 정보.검사설정 == null) return String.Empty;
+            검사정보 검사 = 정보.검사설정.GetItem(항목);
+            if (검사 == null) return String.Empty;
+
+            //if (검사.검사명칭 == null)
+            //{
+            //    검사.검사명칭 = 검사.검사항목.ToString();
+            //}
+            return 검사.검사항목.ToString();
+        }
     }
     public class 검사설정자료 : BindingList<검사정보>
     {

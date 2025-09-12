@@ -1,4 +1,6 @@
-﻿using MvUtils;
+﻿using IVM.Schemas;
+using MvUtils;
+using Npgsql;
 using SamhwaInspectionNeo.Schemas;
 using System;
 using System.Collections.Generic;
@@ -36,6 +38,7 @@ namespace SamhwaInspectionNeo
         public static 모델자료 모델자료;
         public static 검사자료 검사자료;
         public static 트리거보드제어 트리거보드제어;
+        public static 검사자료신규 검사자료신규;
 
         public static class 장치상태
         {
@@ -66,6 +69,7 @@ namespace SamhwaInspectionNeo
                 모델자료 = new 모델자료();
                 검사자료 = new 검사자료();
                 트리거보드제어 = new 트리거보드제어();
+                검사자료신규 = new 검사자료신규(DBConnectionString);
 
                 로그자료.Init();
                 환경설정.Init();
@@ -80,7 +84,8 @@ namespace SamhwaInspectionNeo
                 }
                 모델자료.Init();
                 검사자료.Init();
-
+                검사자료신규.Init();
+                
                 if (!신호제어.Open()) new Exception("PLC 서버에 연결할 수 없습니다.");
 
                 Global.정보로그(로그영역, "초기화", "시스템을 초기화 합니다.", false);
@@ -205,6 +210,25 @@ namespace SamhwaInspectionNeo
             로그정보 로그 = 로그기록(영역, 로그구분.정보, 제목, 내용);
             if (로그 != null && Owner != null) ShowMessage(Owner, 로그);
             return 로그;
+        }
+        #endregion
+
+        #region Global DataBase Connection Data
+        /// 데이터베이스 연결 문자열
+        public static String DBConnectionString
+        {
+            get
+            {
+                NpgsqlConnectionStringBuilder builder = new NpgsqlConnectionStringBuilder
+                {
+                    Host = "localhost",
+                    Port = 5432,
+                    Username = "postgres",
+                    Password = "ivmadmin",
+                    Database = "Samhwa"
+                };
+                return builder.ConnectionString;
+            }
         }
         #endregion
     }
