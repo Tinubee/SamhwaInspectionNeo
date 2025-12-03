@@ -125,7 +125,7 @@ namespace SamhwaInspectionNeo.Schemas
                 catch (Exception ex) { Debug.WriteLine(ex.Message, 로그영역); }
                 Thread.Sleep(상태체크간격);
             }
-            Global.정보로그(로그영역, "트리거보드", "트리거보드 연결이 해제되었습니다..", false);
+            Global.정보로그(로그영역, "트리거보드", "트리거보드 연결이 해제되었습니다.", false);
         }
 
         public Boolean 트리거보드상태분석()
@@ -185,8 +185,11 @@ namespace SamhwaInspectionNeo.Schemas
 
         public void ClearAll()
         {
+            if (this.트리거보드 == null) return;
+
             this.트리거보드?.ClearTriggerCountAll();
             this.트리거보드?.ClearEncoderPositionAll();
+            Global.정보로그("트리거보드", "트리거보드", "트리거보드 초기화 작업 완료.", false);
         }
 
         public void ClearAllPosition() => this.트리거보드.ClearEncoderPositionAll();

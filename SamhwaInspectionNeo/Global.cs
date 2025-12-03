@@ -80,7 +80,7 @@ namespace SamhwaInspectionNeo
                     조명제어.Init();
                     신호제어.Init();
                     그랩제어.Init();
-                    트리거보드제어.Init(조명포트.None);
+                    트리거보드제어.Init(조명포트.COM6);
                 }
                 모델자료.Init();
                 검사자료.Init();

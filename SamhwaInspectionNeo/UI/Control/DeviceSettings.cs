@@ -37,6 +37,9 @@ namespace SamhwaInspectionNeo.UI.Controls
                 Global.그랩제어.상부표면검사카메라.ClearImage();
                 Global.그랩제어.하부표면검사카메라.ClearImage();
                 Global.신호제어.출력자료리셋();
+                //Global.트리거보드제어?.Init(조명포트.COM6);
+                Global.트리거보드제어?.ClearAll();
+                //Global.트리거보드제어?.Close();
 
                 Global.신호제어.원점복귀완료 = false;
 
